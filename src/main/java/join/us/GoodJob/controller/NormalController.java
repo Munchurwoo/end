@@ -24,7 +24,6 @@ public class NormalController {
 	 * 개인 회원가입 폼(NORMAL_MEMBER)
 	 * @return
 	 */
-
 	@RequestMapping("registerNormalMemberForm.do")
 	public String registerNormalMemberForm() {
 		return "normal/normal_register_form.tiles2";
