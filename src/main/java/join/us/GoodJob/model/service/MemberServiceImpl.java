@@ -16,7 +16,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public void registerNormalMember(NormalMemberVO normalMemberVO) {
 		memberMapper.insertMember(normalMemberVO);
-		//memberMapper.insertNormalMember(normalMemberVO);
+		memberMapper.insertNormalMember(normalMemberVO);
 	}
 
 	@Override

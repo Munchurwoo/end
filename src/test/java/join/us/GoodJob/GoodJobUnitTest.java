@@ -22,7 +22,8 @@ public class GoodJobUnitTest {
 	*/
 	@Test
 	public void test() {			
-		// 개인 회원가입 테스트
+		
+		/*개인 회원가입 테스트
 		MemberVO mvo=new MemberVO();		
 		mvo.setId("test");
 		mvo.setPassword("1234");
@@ -31,8 +32,10 @@ public class GoodJobUnitTest {
 		mvo.setTel("01044223318");
 		mvo.setType("1");
 		mvo.setAddress("test안양");
-		memberMapper.insertMember(mvo);
+		memberMapper.insertMember(mvo);*/
 		
+		/*노멀 멤버 insert 테스트
+		 */
 	}
 		
 }
