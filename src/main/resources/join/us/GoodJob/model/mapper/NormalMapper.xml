@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <mapper namespace="join.us.GoodJob.model.mapper.NormalMapper"> 
+	<insert id="insertMember" parameterType="memberVO">
+		insert into member(id,password,email,name,tel,member_type,address) 
+		values(#{id}, #{password}, #{email}, #{name}, #{tel}, #{type}, #{address})
+	</insert>
+	<insert id="insertNormalMember" parameterType="normalMemberVO"> 
+		insert into normal_member(normal_id,picturePath,careerStatus,gender) 
+		values(#{normalId}, #{picturePath}, #{careerStatus}, #{gender})
+	</insert>
+	
+ </mapper> 		
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
