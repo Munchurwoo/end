@@ -1,7 +1,6 @@
 package join.us.GoodJob.model.service;
 
 import join.us.GoodJob.model.vo.MemberVO;
-import join.us.GoodJob.model.vo.NormalMemberVO;
 
 public interface MemberService {
 	
