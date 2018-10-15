@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import join.us.GoodJob.model.service.MemberService;
 import join.us.GoodJob.model.service.NormalService;
 import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
@@ -18,17 +19,15 @@ import join.us.GoodJob.model.vo.PortfolioVO;
 public class NormalController {
 	@Resource
 	NormalService normalService;
+	@Resource
+	MemberService memberService;
 
-	@RequestMapping("PortfolioRegister.do")
-	public String PortfolioRegister(PortfolioVO vo) {
-		return "result";
-	}
 	/**
 	 * 181015 MIRI 개인 회원가입 폼(NORMAL_MEMBER)
 	 * 
 	 * @return
 	 */
-	@RequestMapping("registerNormalMemberForm.do")
+	@RequestMapping("user-registerNormalMemberForm.do")
 	public String registerNormalMemberForm() {
 		return "normal/normal_register_form.tiles2";
 	}
@@ -66,18 +65,43 @@ public class NormalController {
 	}
 
 	/**
-	 * 181015 SJ
+	 * 181015 SungJin
 	 * 개인 회원가입 (NORMAL_MEMBER)
 	 * @param normalMemberVO
-	 * @param gender
 	 * @return
 	 */
-	@RequestMapping("registerNormalMember.do")
-	public String registerNormalMember(NormalMemberVO normalMemberVO,String gender) {
-
+	@PostMapping("user-registerNormalMember.do")
+	public String registerNormalMember(NormalMemberVO normalMemberVO) {
 		normalService.registerNormalMember(normalMemberVO);
-		
-		return "normal/normal_register_portfolio.tiles2";
+		return "redirect:user-loginForm.do";
+	}
+
+	@RequestMapping("registerPortfolioForm.do")
+	public String registerPortfolioForm(Model model) {
+		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
+		model.addAttribute("devCatList", 	memberService.getDevCatVOListByrcNum("101"));
+		model.addAttribute("empTypeCatList", 	memberService.getEmpTypeCatVOList()); 
+		model.addAttribute("locCatList", memberService.getLocCatVOList());
+		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
+		return "normal/normal_register_portfolio_form.tiles2";
+	}
+	
+	@RequestMapping("registerPortfolio.do")
+	public String registerPortfolio(PortfolioVO portfolioVO) {
+		System.out.println(portfolioVO);
+		System.out.println("이력서 등록 성공");
+		return "redirect:home.do";
+	}
+
+	@RequestMapping("deleteNormalMember.do")
+	public String deleteNormalMember(HttpSession session) {
+		MemberVO mvo=(MemberVO) session.getAttribute("mvo");
+		String normalId=mvo.getId();
+		if(normalId!=null) {
+			normalService.deleteNormalMember(normalId);
+			session.invalidate();
+		}
+		return "home.tiles";
 	}
 }
 

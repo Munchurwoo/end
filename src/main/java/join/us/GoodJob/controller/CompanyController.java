@@ -17,6 +17,12 @@ public class CompanyController {
 	public String insertCompanyMemberForm() {
 		return "company/company_register_form.tiles2";
 	}
+	@RequestMapping("insertCompanyMember.do")
+	public String registerCompanyMember(CompanyMemberVO companyMemberVO) {
+		companyService.registerCompanyMember(companyMemberVO);
+		return "redirect:loginForm.do";
+		
+	}
 	
 	/**
 	 * 181015 MIRI
@@ -28,7 +34,6 @@ public class CompanyController {
 	public String updateCompanyMember(CompanyMemberVO companyMemberVO) {
 		return "company/company_update_form.tiles2";
 	}
-	
 	
 	/**
 	 * 181015 MIRI

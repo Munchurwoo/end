@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 -- 회원 ( ERD에서 기업/개인 구분하기위해 type 컬럼을 뒀으나 명령어라 사용불가함 따라서 member_type으로 변경
 create table member(
 	id varchar2(100) primary key,
@@ -52,7 +51,11 @@ insert into NORMAL_MEMBER(normal_id, gender, picture_path, career_status) values
 insert into NORMAL_MEMBER(normal_id, gender, picture_path, career_status) values('hsj', '황성진.png', 'Oracle DBA 6년', '남');
 insert into NORMAL_MEMBER(normal_id, gender, picture_path, career_status) values('MCW', '문철우.png', 'Python 개발 5년 (네이버)', '남');
 
-select * from normal_member;
+select * from normal_member where normal_id='miri';
+select * from member where id='miri';
+		select m.id, m.password, m.email, m.address, m.tel, nm.gender, nm.picture_path, nm.career_status 
+		from normal_member nm, member m
+		where nm.normal_id=m.id and m.id='miri'
 ---------------------------------------------------------------------
 
 -- 포트폴리오
@@ -995,5 +998,6 @@ select * from portfolio_academic;
 
 commit
 
-
->>>>>>> branch 'master' of https://github.com/Munchurwoo/goodjob.git
+select m.password, m.email, m.address, m.tel, nm.gender, nm.picture_path, nm.career_status 
+from normal_member nm, member m
+where nm.normal_id=m.id and m.id='miri'

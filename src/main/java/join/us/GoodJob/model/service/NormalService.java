@@ -1,5 +1,6 @@
 package join.us.GoodJob.model.service;
 
+import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 
 
@@ -14,5 +15,8 @@ public interface NormalService {
 	void deleteNormalMember(String normalId);
 	//개인 회원 검색
 	NormalMemberVO selectNormalMember(String id);
+
+	//개인 정보 조회
+	void getNormalMypageInfo(MemberVO memberVO);
 
 }
