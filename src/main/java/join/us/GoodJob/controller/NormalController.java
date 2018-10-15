@@ -57,7 +57,7 @@ public class NormalController {
 	 * @return
 	 */
 	@RequestMapping("registerNormalMember.do")
-	public String registerNormalMember(NormalMemberVO normalMemberVO,String gender) {
+	public String registerNormalMember(NormalMemberVO normalMemberVO) {
 
 		normalService.registerNormalMember(normalMemberVO);
 		
