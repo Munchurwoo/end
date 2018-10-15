@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 -- 회원 ( ERD에서 기업/개인 구분하기위해 type 컬럼을 뒀으나 명령어라 사용불가함 따라서 member_type으로 변경
 create table member(
 	id varchar2(100) primary key,
@@ -994,6 +994,3 @@ insert into PORTFOLIO_ACADEMIC(normal_id, academic_num) values('MCW', 404);
 select * from portfolio_academic;
 
 commit
-
-
->>>>>>> branch 'master' of https://github.com/Munchurwoo/goodjob.git

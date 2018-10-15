@@ -994,6 +994,3 @@ insert into PORTFOLIO_ACADEMIC(normal_id, academic_num) values('MCW', 404);
 select * from portfolio_academic;
 
 commit
-
-
->>>>>>> branch 'master' of https://github.com/Munchurwoo/goodjob.git
