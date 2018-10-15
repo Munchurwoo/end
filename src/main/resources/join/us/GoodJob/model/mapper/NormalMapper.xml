@@ -7,10 +7,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into member(id,password,email,name,tel,member_type,address) 
 		values(#{id}, #{password}, #{email}, #{name}, #{tel}, #{type}, #{address})
 	</insert>
+	
 	<insert id="insertNormalMember" parameterType="normalMemberVO"> 
 		insert into normal_member(normal_id,picturePath,careerStatus,gender) 
 		values(#{normalId}, #{picturePath}, #{careerStatus}, #{gender})
 	</insert>
+	
+	<update id="updateNormalMember" parameterType="normalMemberVO">
+		update normal_member set normal_id=#{normalId}, gender=#{gender}, picture_path=#{picturePath}, career_status=#{careerStatus}
+	</update>
 	
  </mapper> 		
  
