@@ -19,14 +19,22 @@ public class NormalController {
 		return "result";
 	}
 	
-	@RequestMapping("insertNormalMemberForm.do")
-	public String insertNormalMemberForm() {
+	@RequestMapping("registerNormalMemberForm.do")
+	public String registerNormalMemberForm() {
 		return "normal/normal_register_form.tiles2";
 	}
 	
 	@RequestMapping("registerNormalMember.do")
-	public String registerNormalMember(NormalMemberVO normalMemberVO) {
+	public String registerNormalMember(NormalMemberVO normalMemberVO,String gender) {
+		System.out.println(gender);
+		if(gender.equals("man")) {
+			System.out.println(gender);
 		normalService.registerNormalMember(normalMemberVO);
+		}
+		else {
+			System.out.println(gender);
+		normalService.registerNormalMember(normalMemberVO);
+		}
 		return "normal/normal_register_portfolio.tiles2";
 	}
 	
