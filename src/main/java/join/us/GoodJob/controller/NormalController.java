@@ -1,11 +1,14 @@
 package join.us.GoodJob.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import join.us.GoodJob.model.service.NormalService;
+import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PortfolioVO;
 
@@ -25,6 +28,7 @@ public class NormalController {
 	 */
 	@RequestMapping("registerNormalMemberForm.do")
 	public String registerNormalMemberForm() {
+		
 		return "normal/normal_register_form.tiles2";
 	}
 
@@ -56,12 +60,20 @@ public class NormalController {
 	 * @param gender
 	 * @return
 	 */
-	@RequestMapping("registerNormalMember.do")
+	@PostMapping("registerNormalMember.do")
 	public String registerNormalMember(NormalMemberVO normalMemberVO) {
-
 		normalService.registerNormalMember(normalMemberVO);
-		
 		return "normal/normal_register_portfolio.tiles2";
+	}
+	@RequestMapping("deleteNormalMember.do")
+	public String deleteNormalMember(HttpSession session) {
+		MemberVO mvo=(MemberVO) session.getAttribute("mvo");
+		String normalId=mvo.getId();
+		if(normalId!=null) {
+			normalService.deleteNormalMember(normalId);
+			session.invalidate();
+		}
+		return "home.tiles";
 	}
 }
 

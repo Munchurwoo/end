@@ -7,13 +7,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import join.us.GoodJob.model.mapper.NormalMapper;
+import join.us.GoodJob.model.vo.MemberVO;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring-model.xml"})
 public class GoodJobUnitTest {
 
 	@Autowired
-
-
 	NormalMapper normalMapper;
 
 	/*@Autowired
@@ -26,7 +25,8 @@ public class GoodJobUnitTest {
 	@Test
 	public void test() {				
 		
-		
+		String normalId="qqqq";
+		normalMapper.deleteNormalMember(normalId);
 	
 	}
 		

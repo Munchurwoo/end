@@ -37,6 +37,14 @@ class="org.springframework.web.servlet.view.InternalResourceViewResolver">
  		</list>
  	</property>
  </bean>
+<mvc:interceptors>
+	<mvc:interceptor>
+		<mvc:mapping path="/**/*.do"/>
+		<mvc:exclude-mapping path="/home.do"/>
+		<mvc:exclude-mapping path="/user-*.do"/>
+		<bean class="join.us.GoodJob.controller.CheckLoginInterceptor"/>
+	</mvc:interceptor>
+</mvc:interceptors>
 
 </beans>
 
