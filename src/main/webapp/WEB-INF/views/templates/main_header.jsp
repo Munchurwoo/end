@@ -9,8 +9,7 @@
 				<!-- Slider -->
 				<div id="main-slider" class="flexslider">
 					<ul class="slides">
-						<li><img
-							src="${pageContext.request.contextPath}/resources/img/slides/1.jpg"
+						<li><img src="${pageContext.request.contextPath}/resources/img/slides/1.jpg"
 							alt="" /> <!-- <div class="flex-caption">
 										<h3>Modern Design</h3>
 										<p>Duis fermentum auctor ligula ac malesuada. Mauris et metus odio, in pulvinar urna</p>
