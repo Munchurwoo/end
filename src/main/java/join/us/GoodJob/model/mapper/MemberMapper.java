@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package join.us.GoodJob.model.mapper;
 
 import java.util.HashMap;
@@ -55,3 +56,20 @@ public interface MemberMapper {
 	
 	//질의응답 질문등록
 }
+=======
+package join.us.GoodJob.model.mapper;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import join.us.GoodJob.model.vo.MemberVO;
+
+@Mapper
+public interface MemberMapper {	
+	//개인,기업 로그인(MEMBER)
+	MemberVO loginMember(MemberVO memberVO);
+
+	
+	
+	
+}
+>>>>>>> branch 'master' of https://github.com/Munchurwoo/goodjob.git
