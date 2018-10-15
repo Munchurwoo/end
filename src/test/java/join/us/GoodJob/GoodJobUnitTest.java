@@ -7,33 +7,16 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import join.us.GoodJob.model.mapper.CompanyMapper;
-<<<<<<< HEAD
 import join.us.GoodJob.model.mapper.ManagerMapper;
 import join.us.GoodJob.model.mapper.MemberMapper;
 import join.us.GoodJob.model.mapper.NormalMapper;
-=======
-import join.us.GoodJob.model.mapper.NormalMapper;
-import join.us.GoodJob.model.vo.MemberVO;
->>>>>>> branch 'master' of https://github.com/Munchurwoo/goodjob.git
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring-model.xml"})
 public class GoodJobUnitTest {
-<<<<<<< HEAD
 	@Autowired
 	NormalMapper normalMapper;
-=======
-
-	@Autowired
-
-
-	NormalMapper normalMapper;
-
-	/*@Autowired
-	NormalMapper normalMapper;*/
->>>>>>> branch 'master' of https://github.com/Munchurwoo/goodjob.git
 	@Autowired
 	CompanyMapper companyMapper;
-	
 	@Autowired
 	ManagerMapper managerMapper;
 	@Autowired
@@ -51,22 +34,14 @@ public class GoodJobUnitTest {
 		mvo.setAddress("test안양");
 		normalMapper.insertMember(mvo);*/
 		
-<<<<<<< HEAD
-		/*노멀 멤버 insert 테스트
-		NormalMemberVO nvo=new NormalMemberVO();
-=======
-	/*	노멀 멤버 insert 테스트
-		NormalMemberVO nvo=new NormalMemberVO();
 		/*노멀 멤버 insert 테스트*/
 		/*NormalMemberVO nvo=new NormalMemberVO();
->>>>>>> branch 'master' of https://github.com/Munchurwoo/goodjob.git
 		nvo.setCareerStatus("test1년");
 		nvo.setGender("test남자");
 		nvo.setNormalId("test");
 		nvo.setPicturePath("test경로");
 
 		normalMapper.insertNormalMember(nvo);*/
-		
 	}
 	
 }
