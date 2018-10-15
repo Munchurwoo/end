@@ -49,8 +49,8 @@
  <mybatis-spring:scan base-package="join.us.GoodJob.model.mapper"/>
 <bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
 	<property name="dataSource" ref="dbcp"/>
-	<!-- <property name="mapperLocations" value="classpath:/mybatis/config/*.xml"/> -->
-	<property name="typeAliasesPackage" value="join.us.GoodJob.model"/>
+<!-- 	<property name="mapperLocations" value="classpath:/mybatis/config/*.xml"/>
+ -->	<property name="typeAliasesPackage" value="join.us.GoodJob.model"/>
 	<property name="configuration">
 		<bean class="org.apache.ibatis.session.Configuration">
 			<property name="mapUnderscoreToCamelCase" value="true"/>

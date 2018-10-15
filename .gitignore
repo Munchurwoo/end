@@ -114,6 +114,10 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 .mvn/wrapper/maven-wrapper.jar
-
+*.MF
+MANIFEST
+/MANIFEST.MF
+**/MANIFEST.MF
+**/MANIFEST.*
 
 # End of https://www.gitignore.io/api/java,maven,eclipse,java-web,code-java
