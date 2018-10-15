@@ -12,15 +12,7 @@ import join.us.GoodJob.model.vo.PortfolioVO;
 public class MemberController {
 	@Resource
 	CompanyService companyService;
-<<<<<<< HEAD
 
-	@RequestMapping("PortfolioRegister.do")
-	public String PortfolioRegister(PortfolioVO vo) {
-
-		return "result";
-	}
-=======
-	
 	@RequestMapping("loginForm.do")
 	public String login() {
 		
@@ -36,10 +28,4 @@ public class MemberController {
 		return "member/login_form.tiles";
 		
 	}
-	
-	
-	
-	
-
->>>>>>> a49f7709ac9d61d93e2eab7108f453a708c65d6b
 }
