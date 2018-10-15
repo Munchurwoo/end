@@ -23,12 +23,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select academic_num, academic_name from academic_category
 	</select>
 	
-	
-	
-	
-	
->>>>>>> branch 'master' of https://github.com/Munchurwoo/goodjob.git
- </mapper>
+</mapper>
  
  
  
