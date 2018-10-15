@@ -18,23 +18,11 @@ public class NormalController {
 	public String PortfolioRegister(PortfolioVO vo) {
 		return "result";
 	}
-
 	/**
 	 * 181015 MIRI 개인 회원가입 폼(NORMAL_MEMBER)
 	 * 
 	 * @return
 	 */
-
-	@RequestMapping("registerNormalMember.do")
-	public String registerNormalMember(NormalMemberVO normalMemberVO) {
-
-		normalService.registerNormalMember(normalMemberVO);
-
-		return "normal/normal_register_portfolio.tiles2";
-	}
-
-
-
 	@RequestMapping("registerNormalMemberForm.do")
 	public String registerNormalMemberForm() {
 		return "normal/normal_register_form.tiles2";
@@ -70,15 +58,10 @@ public class NormalController {
 	 */
 	@RequestMapping("registerNormalMember.do")
 	public String registerNormalMember(NormalMemberVO normalMemberVO,String gender) {
-		System.out.println(gender);
-		if(gender.equals("man")) {
-			System.out.println(gender);
+
 		normalService.registerNormalMember(normalMemberVO);
-		}
-		else {
-			System.out.println(gender);
-		normalService.registerNormalMember(normalMemberVO);
-		}
+		
 		return "normal/normal_register_portfolio.tiles2";
 	}
+}
 
