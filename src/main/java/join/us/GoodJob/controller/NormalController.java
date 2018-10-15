@@ -47,16 +47,10 @@ public class NormalController {
 	 * @return
 	 */
 	@RequestMapping("registerNormalMember.do")
-	public String registerNormalMember(NormalMemberVO normalMemberVO,String gender) {
-		System.out.println(gender);
-		if(gender.equals("man")) {
-			System.out.println(gender);
+	public String registerNormalMember(NormalMemberVO normalMemberVO) {
+			
 		normalService.registerNormalMember(normalMemberVO);
-		}
-		else {
-			System.out.println(gender);
-		normalService.registerNormalMember(normalMemberVO);
-		}
+		
 		return "normal/normal_register_portfolio.tiles2";
 	}
 }
