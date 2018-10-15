@@ -13,15 +13,14 @@ import join.us.GoodJob.model.vo.PortfolioVO;
 public class NormalController {
 	@Resource
 	NormalService normalService;
-	
+
 	@RequestMapping("PortfolioRegister.do")
 	public String PortfolioRegister(PortfolioVO vo) {
 		return "result";
 	}
-	
 	/**
-	 * 181015 MIRI
-	 * 개인 회원가입 폼(NORMAL_MEMBER)
+	 * 181015 MIRI 개인 회원가입 폼(NORMAL_MEMBER)
+	 * 
 	 * @return
 	 */
 	@RequestMapping("registerNormalMemberForm.do")
@@ -30,8 +29,8 @@ public class NormalController {
 	}
 
 	/**
-	 * 181015 MIRI
-	 * 개인회원 마이페이지
+	 * 181015 MIRI 개인회원 마이페이지
+	 * 
 	 * @return
 	 */
 	@RequestMapping("normal_mypage.do")
@@ -40,8 +39,8 @@ public class NormalController {
 	}
 
 	/**
-	 * 181015 MIRI
-	 * 개인 회원정보 수정(NORMAL_MEMBER)
+	 * 181015 MIRI 개인 회원정보 수정(NORMAL_MEMBER)
+	 * 
 	 * @param normalMemberVO
 	 * @return
 	 */
@@ -49,7 +48,7 @@ public class NormalController {
 	public String updateNormalMember(NormalMemberVO normalMemberVO) {
 		return "normal/normal_update_form.tiles2";
 	}
-	
+
 	/**
 	 * 181015 SJ
 	 * 개인 회원가입 (NORMAL_MEMBER)
@@ -59,15 +58,10 @@ public class NormalController {
 	 */
 	@RequestMapping("registerNormalMember.do")
 	public String registerNormalMember(NormalMemberVO normalMemberVO,String gender) {
-		System.out.println(gender);
-		if(gender.equals("man")) {
-			System.out.println(gender);
+
 		normalService.registerNormalMember(normalMemberVO);
-		}
-		else {
-			System.out.println(gender);
-		normalService.registerNormalMember(normalMemberVO);
-		}
+		
 		return "normal/normal_register_portfolio.tiles2";
 	}
 }
+
