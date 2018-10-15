@@ -52,6 +52,21 @@
  		<put-attribute name="main"  value="/WEB-INF/views/{1}/{2}.jsp"/>
  		<put-attribute name="title"  value="{2}" />
  	</definition>
+ 	
+ 	
+ 	<definition name="*/*.tiles2" extends="home.tiles">
+ 		<put-attribute name="main_center" value=""></put-attribute>
+ 		<put-attribute name="main_footer" value=""></put-attribute>
+ 		<put-attribute name="main_header" value="/WEB-INF/views/{1}/{2}.jsp"></put-attribute>
+ 	</definition>
+ 	
+ 	<definition name="*.tiles2" extends="home.tiles">
+ 		<put-attribute name="main_center" value=""></put-attribute>
+ 		<put-attribute name="main_footer" value=""></put-attribute>
+ 		<put-attribute name="main_header" value="/WEB-INF/views/{1}.jsp"></put-attribute>
+ 	</definition>
+ 	
+ 	
  </tiles-definitions>
  
  

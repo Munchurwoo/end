@@ -2,7 +2,9 @@
 	pageEncoding="UTF-8"%>
 <%-- tiles framework 선언부 --%>
 <%@taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+
 <!DOCTYPE html>
+
 <html>
 <head>
 <meta charset="utf-8">
@@ -54,20 +56,19 @@
 
 </head>
 <body>
-
 	<div id="wrapper">
 		<!-- start header -->
 		<tiles:insertAttribute name="header" />
 		<!-- end header -->
 
 		<!-- main_header -->
-		<tiles:insertAttribute name="main_header" />
+		<tiles:insertAttribute name="main_header"  ignore="true"/>
 		<!-- end main_header -->
 
 		<section id="content">
 			<div class="container">
 				<!-- main_center 시작 (추천기업) -->
-				<tiles:insertAttribute name="main_center" />
+				<tiles:insertAttribute name="main_center" ignore="true"  />
 				<!-- end main_center 시작 (추천기업) -->
 
 				<!-- divider ( 기업 추천과 인재 추천 구분선 )-->
@@ -79,13 +80,13 @@
 				<!-- end divider -->
 
 				<!-- main_footer 시작 ( 인재추천 ) -->
-				<tiles:insertAttribute name="main_footer" />
+				<tiles:insertAttribute name="main_footer"  ignore="true" />
 				<!-- main_footer 종료 -->
 			</div>
 		</section>
 
 		<!-- footer 시작  -->
-		<tiles:insertAttribute name="footer" />
+		<tiles:insertAttribute name="footer" ignore="true" />
 		<!-- footer 종료 -->
 </body>
 </html>
