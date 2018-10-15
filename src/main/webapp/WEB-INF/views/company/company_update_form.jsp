@@ -2,16 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<!-- company_register_form -->
+<!-- company_update_member_form -->
 
-<h3 align="center">회원가입</h3><br><br>
+<h3 align="center">회원 정보 수정</h3><br><br>
 
-
-
-
-<form action="">
-	<input type="button" value="개인회원" onclick="javascript:location.href='registerNormalMemberForm.do'"> &nbsp; &nbsp;
-	<input type="button" value="기업회원" onclick="javascript:location.href='insertCompanyMemberForm.do'"><br><br>
+<form>
 	* 표시는 필수 입력사항<br><br>
 	아이디 * <input type="text" required="required">
 	<input type="button" value="중복체크"><br><br>
@@ -25,5 +20,7 @@
 	매출액 <input type="text" required="required"><br><br>
 	설립일 <input type="text" required="required"><br><br>
 	사원수 <input type="text" required="required"><br><br>
-	<input type="submit" value="회원가입">
+	<input type="submit" value="회원정보수정">
 </form>
+
+

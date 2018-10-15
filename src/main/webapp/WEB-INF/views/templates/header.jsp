@@ -32,12 +32,22 @@
 							<li><a href="registerNormalMemberForm.do">회원가입</a>						
 						</c:when>
 						<c:otherwise>
-							<li>${mvo.name}님 환영합니다</li>
+							<li>
+								<c:if test="${mvo.memberType == 1 }">
+									<a href="normal_mypage.do">마이페이지</a>
+								</c:if>
+								<c:if test="${mvo.memberType == 3 }">
+									<a href="company_mypage.do">마이페이지</a>
+								</c:if>
+							</li>
 							<li><a href="logout.do">로그아웃</a></li>							
 						</c:otherwise>
 					</c:choose>					
 				</ul>
 			</div>
+			<c:if test="${!empty sessionScope.mvo}">
+				<div align="right">${mvo.name}님 환영합니다</div>
+			</c:if>
 		</div>
 	</div>
 </header>
