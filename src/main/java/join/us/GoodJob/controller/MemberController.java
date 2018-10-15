@@ -18,7 +18,7 @@ public class MemberController {
 	public String loginForm() {
 		return "member/login_form.tiles2";
 	}
-	
+
 	@RequestMapping("login.do")
 	public String login(MemberVO memberVO, HttpSession session) {
 		MemberVO mvo = memberService.loginMember(memberVO);
@@ -35,5 +35,4 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:home.do";
 	}
-	
 }
