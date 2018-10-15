@@ -10,7 +10,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="insertNormalMember" parameterType="normalMemberVO"> 
 		insert into normal_member(normal_id,picture_path,career_status,gender) 
-		values(normal_id=#{Id}, #{picturePath}, #{careerStatus}, #{gender})
+		values(normal_id=#{id}, #{picturePath}, #{careerStatus}, #{gender})
 	</insert>
 
 	<update id="updateNormalMember" parameterType="normalMemberVO">
