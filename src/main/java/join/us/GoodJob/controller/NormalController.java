@@ -26,7 +26,7 @@ public class NormalController {
 	 * 
 	 * @return
 	 */
-	@RequestMapping("registerNormalMemberForm.do")
+	@RequestMapping("user-registerNormalMemberForm.do")
 	public String registerNormalMemberForm() {
 		
 		return "normal/normal_register_form.tiles2";
@@ -59,10 +59,10 @@ public class NormalController {
 	 * @param normalMemberVO
 	 * @return
 	 */
-	@PostMapping("registerNormalMember.do")
+	@PostMapping("user-registerNormalMember.do")
 	public String registerNormalMember(NormalMemberVO normalMemberVO) {
 		normalService.registerNormalMember(normalMemberVO);
-		return "normal/normal_register_portfolio.tiles2";
+		return "redirect:user-loginForm.do";
 	}
 
 	

@@ -6,10 +6,6 @@
 
 <h3 align="center">${sessionScope.mvo.name }님 마이페이지</h3><br><br>
 
-<a href="updateNormalMember.do">회원정보수정</a>
-<<<<<<< HEAD
-<a href="registerPortfolioForm.do">이력서 등록</a>
-=======
-<br>
+<a href="updateNormalMember.do">회원정보수정</a><br>
+<a href="registerPortfolioForm.do">이력서 등록</a><br>
 <a href="deleteNormalMember.do">회원탈퇴</a>
->>>>>>> branch 'master' of https://github.com/Munchurwoo/goodjob

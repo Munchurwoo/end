@@ -7,9 +7,9 @@
 <h3 align="center">회원가입</h3><br><br>
 
 
-<form action="insertCompanyMember.do">
-	<input type="button" value="개인회원" onclick="javascript:location.href='registerNormalMemberForm.do'"> &nbsp; &nbsp;
-	<input type="button" value="기업회원" onclick="javascript:location.href='insertCompanyMemberForm.do'"><br><br>
+<form action="user-insertCompanyMember.do">
+	<input type="button" value="개인회원" onclick="javascript:location.href='user-registerNormalMemberForm.do'"> &nbsp; &nbsp;
+	<input type="button" value="기업회원" onclick="javascript:location.href='user-insertCompanyMemberForm.do'"><br><br>
 	* 표시는 필수 입력사항<br><br>
 	아이디 * <input type="text" name="id" required="required">
 	<input type="button" value="중복체크"><br><br>

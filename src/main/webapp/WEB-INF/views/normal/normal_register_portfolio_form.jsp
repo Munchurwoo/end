@@ -44,28 +44,28 @@
 	제목 <input type="text" name="title" placeholder="제목을 입력하세요" required="required"><br>
 	내용<br>&nbsp;&nbsp;&nbsp;<textarea rows="10" cols="60" name="contents" placeholder="내용을 입력하세요" required="required"></textarea><br><br>
 		
-	지역<br>
+	<h5>지역</h5>
 	<c:forEach items="${requestScope.locCatList}" var="locCat" varStatus="i">
 		<input type="checkbox" name="empTypeCatNumList" value="${locCat.locNum}" >${locCat.locName}&nbsp;
 	</c:forEach> <br>
 	
-	학력<br>
+	<h5>학력</h5>
 	<c:forEach items="${requestScope.acaCatList}" var="acaCat" varStatus="i">	
 		<input type="radio" name="acaCatNumList" value="${acaCat.academicNum}" required="required">${acaCat.academicName}&nbsp;
 	</c:forEach> <br>
 	
-	고용형태<br>
+	<h5>고용형태</h5>
 	<c:forEach items="${requestScope.empTypeCatList}" var="empTypeCat" varStatus="i">
 		<input type="checkbox" name="empTypeCatNumList" value="${empTypeCat.empTypeNum}" >${empTypeCat.empTypeName}&nbsp;
 	</c:forEach> <br>
 	
-	모집직군<br>
+	<h5>모집직군</h5>
 	<c:forEach items="${requestScope.recruitCatList}" var="recruitCat" varStatus="i">
 		<input type="checkbox" class = "recruit" name="recruitCatNumList" value="${recruitCat.rcNum}" >${recruitCat.rcName}  &thinsp;&thinsp;
 		<c:if test="${(i.index+1)%3==0}"><br></c:if>
-	</c:forEach> <br><br>
+	</c:forEach>
 	
-	개발분야
+	<h5>개발분야</h5>
 	<div id="empTypeArea">
 		
 	</div>
