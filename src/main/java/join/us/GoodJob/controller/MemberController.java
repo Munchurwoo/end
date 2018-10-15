@@ -12,18 +12,10 @@ import join.us.GoodJob.model.vo.PortfolioVO;
 public class MemberController {
 	@Resource
 	CompanyService companyService;
-	
 
-	
 	@RequestMapping("PortfolioRegister.do")
 	public String PortfolioRegister(PortfolioVO vo) {
-		
-		
+
 		return "result";
 	}
-	
-	
-	
-	
-
 }
