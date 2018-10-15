@@ -1,5 +1,7 @@
 package join.us.GoodJob;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +26,11 @@ public class GoodJobUnitTest {
 	*/
 	@Test
 	public void test() {				
+		MemberVO mvo=new MemberVO();
+		mvo.setId("miri");
+		List<MemberVO> lvo=normalMapper.getNormalMypageInfo(mvo);
+		System.out.println(lvo);
 		
-		String normalId="qqqq";
-		normalMapper.deleteNormalMember(normalId);
 	
 	}
 		

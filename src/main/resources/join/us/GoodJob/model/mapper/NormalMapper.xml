@@ -19,5 +19,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteNormalMember" parameterType="string">
 		delete from member where id=#{id}
 	</delete>
+	<select id="getNormalMypageInfo" resultType="normalMemberVO" parameterType="memberVO">
+		select m.id,m.password,m.email,m.name,m.tel,m.address,m.member_type,nm.normal_id,nm.gender,nm.picture_path,nm.career_status
+		from member m,normal_member nm
+		where m.id=nm.normal_id
+		and m.id=#{id}
+		
+	</select>
  </mapper> 		
  
