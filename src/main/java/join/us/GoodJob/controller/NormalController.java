@@ -23,6 +23,32 @@ public class NormalController {
 	 * 개인 회원가입 폼(NORMAL_MEMBER)
 	 * @return
 	 */
+<<<<<<< HEAD
+	@RequestMapping("registerNormalMember.do")
+	public String registerNormalMember(NormalMemberVO normalMemberVO,String gender) {
+		System.out.println(gender);
+		if(gender.equals("man")) {
+			System.out.println(gender);
+		normalService.registerNormalMember(normalMemberVO);
+		}
+		else {
+			System.out.println(gender);
+		normalService.registerNormalMember(normalMemberVO);
+		}
+		return "normal/normal_register_portfolio.tiles2";
+	}
+	
+	/**
+	 * 181015 MIRI
+	 * 개인회원 마이페이지
+	 * @return
+	 */
+	@RequestMapping("normal_mypage.do")
+	public String companyMypage() {
+		return "normal/normal_mypage.tiles2";
+	}
+}
+=======
 
 	@RequestMapping("registerNormalMemberForm.do")
 	public String registerNormalMemberForm() {
@@ -59,14 +85,5 @@ public class NormalController {
 		}
 		return "normal/normal_register_portfolio.tiles2";
 	}
-	
-	/**
-	 * 181015 MIRI
-	 * 개인회원 마이페이지
-	 * @return
-	 */
-	@RequestMapping("normal_mypage.do")
-	public String companyMypage() {
-		return "normal/normal_mypage.tiles2";
-	}
 }
+>>>>>>> branch 'master' of https://github.com/Munchurwoo/goodjob.git
