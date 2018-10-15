@@ -4,3 +4,7 @@
 
 <!-- company_mypage -->
 
+<h3 align="center">${sessionScope.mvo.name }님 마이페이지</h3><br><br>
+
+<a href="updateCompanyMember.do">회원정보수정</a>
+

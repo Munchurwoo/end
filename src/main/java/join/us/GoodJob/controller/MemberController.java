@@ -35,4 +35,5 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:home.do";
 	}
+
 }
