@@ -45,11 +45,11 @@ create table normal_member(
 )
 drop table normal_member cascade constraint;
 
-insert into NORMAL_MEMBER(normal_id, gender, picture_path, career_status) values('qqqq', '이동규.png', 'Java 개발자로 LINE에서 3년 근무', '남');
-insert into NORMAL_MEMBER(normal_id, gender, picture_path, career_status) values('miri', '서미리.png', '.NET(C#) 개발 경력 2년 (마이다시아이티)', '여');
-insert into NORMAL_MEMBER(normal_id, gender, picture_path, career_status) values('yosep', '최요셉.png', '없음', '남');
-insert into NORMAL_MEMBER(normal_id, gender, picture_path, career_status) values('hsj', '황성진.png', 'Oracle DBA 6년', '남');
-insert into NORMAL_MEMBER(normal_id, gender, picture_path, career_status) values('MCW', '문철우.png', 'Python 개발 5년 (네이버)', '남');
+insert into NORMAL_MEMBER(normal_id, picture_path, career_status, gender) values('qqqq', '이동규.png', 'Java 개발자로 LINE에서 3년 근무', '남');
+insert into NORMAL_MEMBER(normal_id, picture_path, career_status, gender) values('miri', '서미리.png', '.NET(C#) 개발 경력 2년 (마이다시아이티)', '여');
+insert into NORMAL_MEMBER(normal_id, picture_path, career_status, gender) values('yosep', '최요셉.png', '없음', '남');
+insert into NORMAL_MEMBER(normal_id, picture_path, career_status, gender) values('hsj', '황성진.png', 'Oracle DBA 6년', '남');
+insert into NORMAL_MEMBER(normal_id, picture_path, career_status, gender) values('MCW', '문철우.png', 'Python 개발 5년 (네이버)', '남');
 
 select * from normal_member;
 ---------------------------------------------------------------------
