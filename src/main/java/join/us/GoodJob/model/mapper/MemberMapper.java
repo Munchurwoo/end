@@ -2,9 +2,12 @@ package join.us.GoodJob.model.mapper;
 
 import java.util.HashMap;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 
+@Mapper
 public interface MemberMapper {
 	
 	//개인 회원가입(NORMAL_MEMBER)

@@ -5,12 +5,12 @@ create table member(
 	email varchar2(100) not null,
 	name varchar2(100) not null,
 	tel varchar2(100) not null,
-	member_type number, --0은 관리자 / 1 은 개인회원 / 2 는 기업회원 승인 X / 3은 기업회원 승인 OK
+	member_type varchar2(100) not null, --0은 관리자 / 1 은 개인회원 / 2 는 기업회원 승인 X / 3은 기업회원 승인 OK
 	address varchar2(100) not null
 )
 drop table member;
 ---------------------------------------------------------------------
-
+select * from member;
 -- 관리자
 create table manager(
 	id varchar2(100) primary key,

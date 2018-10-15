@@ -5,9 +5,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
  <mapper namespace="join.us.GoodJob.model.mapper.MemberMapper"> 
 	<insert id="insertMember" parameterType="memberVO">
 		insert into member(id,password,email,name,tel,member_type,address) 
-		values(id= #{id} , password= #{password} , email= #{email} , 
-				name= #{name} , tel= #{tel} , member_type= #{type} ,
-				address= #{address})
+		values(#{id}, #{password},  #{email}, 
+				#{name}, #{tel},#{type},
+				#{address})
 	</insert>
  </mapper> 		
  
