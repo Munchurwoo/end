@@ -45,4 +45,14 @@ public class NormalController {
 		normalService.registerNormalMember(normalMemberVO);
 		return "normal/normal_register_portfolio.tiles2";
 	}
+	
+	/**
+	 * 181015 MIRI
+	 * 개인회원 마이페이지
+	 * @return
+	 */
+	@RequestMapping("normal_mypage.do")
+	public String companyMypage() {
+		return "normal/normal_mypage.tiles2";
+	}
 }
