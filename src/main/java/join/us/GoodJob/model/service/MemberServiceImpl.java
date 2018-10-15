@@ -16,4 +16,5 @@ public class MemberServiceImpl implements MemberService {
 	public MemberVO loginMember(MemberVO memberVO) {
 		return memberMapper.loginMember(memberVO);
 	}
+
 }

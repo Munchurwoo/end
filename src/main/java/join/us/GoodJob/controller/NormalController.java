@@ -1,11 +1,16 @@
 package join.us.GoodJob.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import join.us.GoodJob.model.service.NormalService;
+import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PortfolioVO;
 
@@ -44,9 +49,20 @@ public class NormalController {
 	 * @param normalMemberVO
 	 * @return
 	 */
-	@RequestMapping("updateNormalMember.do")
-	public String updateNormalMember(NormalMemberVO normalMemberVO) {
+	@RequestMapping("updateNormalMemberForm.do")
+	public String updateNormalMemberForm(HttpSession session, Model model) {
+		MemberVO mvo = (MemberVO)session.getAttribute("mvo");
+		if(mvo != null) {
+			NormalMemberVO nmvo = normalService.selectNormalMember(mvo.getId());
+			model.addAttribute("nmvo", nmvo);
+		}
 		return "normal/normal_update_form.tiles2";
+	}
+	
+	@PostMapping("updateNormalMember.do")
+	public String updateNormalMember(NormalMemberVO normalMemberVO) {
+		normalService.updateNormalMember(normalMemberVO);
+		return "redirect:home.do";
 	}
 
 	/**
