@@ -13,6 +13,12 @@ public class MemberController {
 	@Resource
 	CompanyService companyService;
 	
+	@RequestMapping("loginForm.do")
+	public String login() {
+		
+		return "member/login_form.tiles2";
+		
+	}
 
 	
 	@RequestMapping("PortfolioRegister.do")
