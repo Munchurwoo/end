@@ -25,7 +25,7 @@
 					<li><a href="portfolio.html">인재검색</a></li>
 					<li><a href="blog.html">기업정보</a></li>
 					<li><a href="contact.html">기업서비스</a></li>
-					<li><a href="contact.html">로그인/회원가입</a></li>
+					<li><a href="loginForm.do">로그인/회원가입</a></li>
 				</ul>
 			</div>
 		</div>
