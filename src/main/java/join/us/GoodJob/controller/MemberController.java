@@ -23,9 +23,4 @@ public class MemberController {
 	public String PortfolioRegister(PortfolioVO vo) {
 		return "result";
 	}
-	@RequestMapping("loginForm.do")
-	public String loginForm() {
-		return "member/login_form.tiles";
-		
-	}
 }
