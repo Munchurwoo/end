@@ -11,7 +11,7 @@ import join.us.GoodJob.model.mapper.MemberMapper;
 import join.us.GoodJob.model.mapper.NormalMapper;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring-model.xml"})
-public class GoodJobUnitTest {
+public class SungjinUnitTest {
 
 	@Autowired
 	NormalMapper normalMapper;

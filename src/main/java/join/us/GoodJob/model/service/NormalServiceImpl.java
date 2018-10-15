@@ -31,6 +31,12 @@ public class NormalServiceImpl implements NormalService {
 
 	@Override
 	public void deleteNormalMember(String normalId) {
+		normalMapper.deleteNormalMember(normalId);
+	}
+
+	@Override
+	public void getNormalMypageInfo(MemberVO memberVO) {
+		normalMapper.getNormalMypageInfo(memberVO);
 	}
 
 }

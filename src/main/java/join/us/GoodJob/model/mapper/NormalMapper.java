@@ -1,6 +1,7 @@
 package join.us.GoodJob.model.mapper;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -21,8 +22,9 @@ public interface NormalMapper {
 		
 	//개인 회원탈퇴(MEMBER) --> normal_member의 튜플은 cascade 자동삭제
 	void deleteNormalMember(String normalId);
-		
-		
+	
+	// 마이페이지 개인정보 조회(MEMBER)
+	List<MemberVO> getNormalMypageInfo(MemberVO memberVO);	
 	//포트폴리오 등록(PORTFOLIO)
 	void insertPortfolio(HashMap<String,String> map);				
 	//포트폴리오 파일등록(PORTFOLIO_FILE)

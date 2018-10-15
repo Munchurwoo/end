@@ -13,7 +13,7 @@ drop table portfolio_recruitment cascade constraint;
 drop table employment_type_category cascade constraint;
 drop table job_emp cascade constraint;
 drop table portfolio_emp cascade constraint;
-drop table location cascade constraint;
+drop table location_category cascade constraint;
 drop table job_loc cascade constraint;
 drop table portfolio_loc cascade constraint;
 drop table development_category cascade constraint;
@@ -30,7 +30,7 @@ drop sequence loc_num_seq;
 drop sequence emp_type_num_seq;
 drop sequence rc_num_seq;
 drop sequence qa_num_seq;
-
+drop sequence portfolio_file_seq;
 
 -- 회원 ( ERD에서 기업/개인 구분하기위해 type 컬럼을 뒀으나 명령어라 사용불가함 따라서 member_type으로 변경
 create table member(
@@ -42,6 +42,8 @@ create table member(
 	tel varchar2(100) not null,
 	member_type number --0은 관리자 / 1 은 개인회원 / 2 는 기업회원 승인 X / 3은 기업회원 승인 OK
 );
+
+delete from member where id='yosep';
 
 insert into MEMBER(id, password, email, name, address, tel, member_type) values('admin', 'admin', 'admin@kosta.or.kr', '관리자', '경기도 성남시 분당구 대왕판교로 670길 유스페이스2 B동 8층', '070-5039-5803, 5805', 0);
 insert into MEMBER(id, password, email, name, address, tel, member_type) values('NHNuser', '123', 'NHNuser@nhn.co.kr', 'NHNEntertainment', '경기도 성남시 분당구 대왕판교로 645번길 16 NHN엔터테인먼트 플레이뮤지엄', '031-8028-3221', 3);
@@ -75,6 +77,13 @@ create table normal_member(
 	career_status varchar2(100) not null,
 	constraint fk_normalandmember foreign key(normal_id) references member(id) on delete cascade
 );
+
+-- 멤버/노말멤버 조인 sql
+select m.id,m.password,m.email,m.name,m.tel,m.address,m.member_type,nm.normal_id,nm.gender,nm.picture_path,nm.career_status
+from member m,normal_member nm
+where m.id=nm.normal_id
+and m.id='miri';
+
 
 insert into NORMAL_MEMBER(normal_id, gender, picture_path, career_status) values('qqqq', '이동규.png', 'Java 개발자로 LINE에서 3년 근무', '남');
 insert into NORMAL_MEMBER(normal_id, gender, picture_path, career_status) values('miri', '서미리.png', '.NET(C#) 개발 경력 2년 (마이다시아이티)', '여');
@@ -334,7 +343,7 @@ create table job_loc(
 	job_posting_num number,
 	loc_num number,
 	constraint fk_job_posting_num4 foreign key(job_posting_num) references job_posting(job_posting_num) on delete cascade,
-	constraint fk_loc_job foreign key(loc_num) references location(loc_num) on delete cascade,
+	constraint fk_loc_job foreign key(loc_num) references location_category(loc_num) on delete cascade,
 	constraint pk_jobposting_jobloc primary key(loc_num,job_posting_num)
 );
 
@@ -349,7 +358,7 @@ create table portfolio_loc(
 	normal_id varchar2(100),
 	loc_num number,
 	constraint fk_id_loc foreign key(normal_id) references portfolio(normal_id) on delete cascade,
-	constraint fk_loc_pf foreign key(loc_num) references location(loc_num) on delete cascade,
+	constraint fk_loc_pf foreign key(loc_num) references location_category(loc_num) on delete cascade,
 	constraint pk_id_loc_pf primary key(loc_num,normal_id)
 );
 
@@ -505,3 +514,4 @@ insert into PORTFOLIO_ACADEMIC(normal_id, academic_num) values('MCW', 404);
 select * from portfolio_academic;
 
 commit
+

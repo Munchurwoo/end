@@ -6,7 +6,7 @@
 
 <h3 align="center">회원가입</h3><br><br>
 
-<form action="registerNormalMember.do">
+<form action="registerNormalMember.do" method="post">
 	<input type="button" value="개인회원" onclick="javascript:location.href='registerNormalMemberForm.do'"> &nbsp; &nbsp;
 	<input type="button" value="기업회원" onclick="javascript:location.href='insertCompanyMemberForm.do'"><br><br>
 	* 표시는 필수 입력사항<br><br>
