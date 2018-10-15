@@ -8,8 +8,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{id}, #{password}, #{email}, #{name}, #{tel}, #{type}, #{address})
 	</insert>
 	<insert id="insertNormalMember" parameterType="normalMemberVO"> 
-		insert into normal_member(normal_id,picturePath,careerStatus,gender,portfolio) 
-		values(#{normalId), #{picturePath}, #{careerStatus}, #{gender}, #{portfolio})
+		insert into normal_member(normal_id,picturePath,careerStatus,gender) 
+		values(#{normalId}, #{picturePath}, #{careerStatus}, #{gender})
 	</insert>
 	
  </mapper> 		

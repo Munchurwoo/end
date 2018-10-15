@@ -7,6 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import join.us.GoodJob.model.mapper.NormalMapper;
+import join.us.GoodJob.model.vo.NormalMemberVO;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring-model.xml"})
 public class GoodJobUnitTest {
@@ -31,8 +32,13 @@ public class GoodJobUnitTest {
 		mvo.setAddress("test안양");
 		normalMapper.insertMember(mvo);*/
 		
-		/*노멀 멤버 insert 테스트
-		 */
+		/*노멀 멤버 insert 테스트*/
+		NormalMemberVO nvo=new NormalMemberVO();
+		nvo.setCareerStatus("test1년");
+		nvo.setGender("test남자");
+		nvo.setNormalId("test");
+		nvo.setPicturePath("test경로");
+		normalMapper.insertNormalMember(nvo);
 	}
 		
 }
