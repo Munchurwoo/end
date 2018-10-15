@@ -23,8 +23,5 @@ public class MemberController {
 	public String PortfolioRegister(PortfolioVO vo) {
 		return "result";
 	}
-<<<<<<< HEAD
 
-=======
->>>>>>> branch 'master' of https://github.com/Munchurwoo/goodjob
 }
