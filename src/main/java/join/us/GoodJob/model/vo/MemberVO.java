@@ -6,19 +6,20 @@ public class MemberVO {
 	private String email;
 	private String name;
 	private String tel;
-	private String type;
+	private String memberType;
 	private String address;
 	public MemberVO() {
 		super();
 	}
-	public MemberVO(String id, String password, String email, String name, String tel, String type, String address) {
+	public MemberVO(String id, String password, String email, String name, String tel, String memberType,
+			String address) {
 		super();
 		this.id = id;
 		this.password = password;
 		this.email = email;
 		this.name = name;
 		this.tel = tel;
-		this.type = type;
+		this.memberType = memberType;
 		this.address = address;
 	}
 	public String getId() {
@@ -51,11 +52,11 @@ public class MemberVO {
 	public void setTel(String tel) {
 		this.tel = tel;
 	}
-	public String getType() {
-		return type;
+	public String getMemberType() {
+		return memberType;
 	}
-	public void setType(String type) {
-		this.type = type;
+	public void setMemberType(String memberType) {
+		this.memberType = memberType;
 	}
 	public String getAddress() {
 		return address;
@@ -65,9 +66,11 @@ public class MemberVO {
 	}
 	@Override
 	public String toString() {
-		return "memberVO [id=" + id + ", password=" + password + ", email=" + email + ", name=" + name + ", tel=" + tel
-				+ ", type=" + type + ", address=" + address + "]";
+		return "MemberVO [id=" + id + ", password=" + password + ", email=" + email + ", name=" + name + ", tel=" + tel
+				+ ", memberType=" + memberType + ", address=" + address + "]";
 	}
+	
+	
 	
 }
 

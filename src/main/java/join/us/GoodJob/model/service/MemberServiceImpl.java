@@ -16,8 +16,8 @@ public class MemberServiceImpl implements MemberService {
 
 	
 	@Override
-	public MemberVO loginNomalMember(MemberVO memberVO) {
-		return null;
+	public MemberVO loginMember(MemberVO memberVO) {
+		return memberMapper.loginMember(memberVO);
 	}
 	
 	

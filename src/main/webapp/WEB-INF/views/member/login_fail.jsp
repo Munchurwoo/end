@@ -5,6 +5,6 @@
 <!-- login_fail -->
 
 <script>
-	alert("로그인이 실패했습니다.홈페이지로 돌아갑니다.");
-	location.href="home.do";
+	alert("로그인이 실패했습니다! 다시 로그인하세요");
+	location.href="loginForm.do";
 </script>
