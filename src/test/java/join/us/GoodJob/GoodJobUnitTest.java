@@ -15,20 +15,20 @@ public class GoodJobUnitTest {
 	NormalMapper normalMapper;
 	/*@Autowired
 	CompanyMapper companyMapper;
+	
 	@Autowired
 	ManagerMapper managerMapper;
 	*/
 	@Test
 	public void test() {			
 		
-		/*개인 회원가입 테스트
-		MemberVO mvo=new MemberVO();		
+		//개인 회원가입 테스트
+		/*MemberVO mvo=new MemberVO();		
 		mvo.setId("test");
 		mvo.setPassword("1234");
 		mvo.setEmail("test@test.com");
 		mvo.setName("test성진");
 		mvo.setTel("01044223318");
-		mvo.setType("1");
 		mvo.setAddress("test안양");
 		normalMapper.insertMember(mvo);*/
 		
@@ -39,6 +39,7 @@ public class GoodJobUnitTest {
 		nvo.setNormalId("test");
 		nvo.setPicturePath("test경로");
 		normalMapper.insertNormalMember(nvo);
+		
 	}
 		
 }

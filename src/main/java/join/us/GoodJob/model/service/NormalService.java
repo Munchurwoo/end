@@ -1,7 +1,5 @@
 package join.us.GoodJob.model.service;
 
-import org.springframework.stereotype.Service;
-
 import join.us.GoodJob.model.vo.NormalMemberVO;
 
 
