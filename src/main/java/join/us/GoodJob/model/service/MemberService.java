@@ -7,7 +7,7 @@ public interface MemberService {
 	
 	
 	//개인, 기업 로그인
-	MemberVO loginNomalMember(MemberVO memberVO);
+	MemberVO loginMember(MemberVO memberVO);
 
 
 		

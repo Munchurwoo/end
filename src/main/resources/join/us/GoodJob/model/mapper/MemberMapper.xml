@@ -6,35 +6,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<update id="updateMember" parameterType="memberVO">
 		update member set id=#{id}, password=#{password}, email=#{email}, name=#{name}, address=#{address}, tel=#{tel}, member_type=#{memberType}
 	</update>	
- </mapper> 		
+
+	<select id="loginMember" parameterType="memberVO" resultType="memberVO">
+		select id, name, member_type from member where id=#{id} and password=#{password}
+	</select>
+ </mapper>
  
  
  
  
  
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

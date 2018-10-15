@@ -39,4 +39,10 @@ public class NormalController {
 	public String updateNormalMember(NormalMemberVO normalMemberVO) {
 		return "normal/normal_update_form.tiles2";
 	}
+	
+	@RequestMapping("registerNormalMember.do")
+	public String registerNormalMember(NormalMemberVO normalMemberVO) {
+		normalService.registerNormalMember(normalMemberVO);
+		return "normal/normal_register_portfolio.tiles2";
+	}
 }
