@@ -23,7 +23,6 @@ public class NormalController {
 
 	/**
 	 * 181015 MIRI 개인 회원가입 폼(NORMAL_MEMBER)
-	 * 
 	 * @return
 	 */
 	@RequestMapping("user-registerNormalMemberForm.do")
@@ -34,7 +33,6 @@ public class NormalController {
 
 	/**
 	 * 181015 MIRI 개인회원 마이페이지
-	 * 
 	 * @return
 	 */
 	@RequestMapping("normal_mypage.do")
@@ -42,6 +40,12 @@ public class NormalController {
 		return "normal/normal_mypage.tiles2";
 	}
 
+	/**
+	 * 181015 MIRI 개인회원 회원정보수정 폼
+	 * @param session
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("updateNormalMemberForm.do")
 	public String updateNormalMemberForm(HttpSession session, Model model) {
 		MemberVO mvo = (MemberVO)session.getAttribute("mvo");
@@ -52,6 +56,11 @@ public class NormalController {
 		return "normal/normal_update_form.tiles2";
 	}
 	
+	/**
+	 * 181015 MIRI 개인회원 회원정보수정
+	 * @param normalMemberVO
+	 * @return
+	 */
 	@PostMapping("updateNormalMember.do")
 	public String updateNormalMember(NormalMemberVO normalMemberVO) {
 		normalService.updateNormalMember(normalMemberVO);
