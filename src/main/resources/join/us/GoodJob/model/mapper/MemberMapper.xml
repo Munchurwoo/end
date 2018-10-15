@@ -6,28 +6,28 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="loginMember" parameterType="memberVO" resultType="memberVO">
 		select id, name, member_type from member where id=#{id} and password=#{password}
-	</select>
-	
+	</select>	
 	<select id="getRecruitCatVOList" resultType="recruitCatVO">
 		select rc_num, rc_name from recruitment_category
-	</select>
-		
+	</select>	
 	 <select id="getDevCatVOListByrcNum" resultType="devCatVO">
 		select dev_cat_num, dev_cat_name from development_category where rc_num=#{value}
 	</select>
-	
 	<select id="getEmpTypeCatVOList" resultType="empTypeCatVO">
 		select emp_type_num, emp_type_name from employment_type_category 
 	</select>
-	
 	<select id="getLocCatVOList" resultType="locCatVO">
 		select loc_num, loc_name from location_category
 	</select>
-	
 	<select id="getAcaCatVOList" resultType="acaCatVO">
 		select academic_num, academic_name from academic_category
 	</select>
-
+	
+	
+	
+	
+	
+>>>>>>> branch 'master' of https://github.com/Munchurwoo/goodjob.git
  </mapper>
  
  

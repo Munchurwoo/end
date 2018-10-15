@@ -28,6 +28,7 @@ public class NormalController {
 	 */
 	@RequestMapping("user-registerNormalMemberForm.do")
 	public String registerNormalMemberForm() {
+		
 		return "normal/normal_register_form.tiles2";
 	}
 
@@ -68,7 +69,7 @@ public class NormalController {
 		normalService.registerNormalMember(normalMemberVO);
 		return "redirect:user-loginForm.do";
 	}
-
+	
 	@RequestMapping("registerPortfolioForm.do")
 	public String registerPortfolioForm(Model model) {
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
