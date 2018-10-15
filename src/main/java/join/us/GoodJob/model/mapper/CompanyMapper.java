@@ -5,20 +5,29 @@ import java.util.List;
 
 import join.us.GoodJob.model.service.PagingBean;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
+import join.us.GoodJob.model.vo.MemberVO;
 
 public interface CompanyMapper {
 	
-	//기업 회원가입(COMPANY_MEMBER, MEMBER)
+	//기업 회원가입(COMPANY_MEMBER)
 	void insertCompanyMember(CompanyMemberVO companyMemberVO);
+	//기업 회원가입(MEMBER)
+	void insertMember(MemberVO memberVO);
 	
-	//기업 로그인(COMPANY_MEMBER, MEMBER)
-	CompanyMemberVO loginNormalMember(CompanyMemberVO companyMemberVO);
+	//기업 로그인(MEMBER)
+	MemberVO loginNormalMember(MemberVO memberVO);
 	
-	//기업 회원정보 수정(COMPANY_MEMBER, MEMBER)
-	void updateNormalMember(CompanyMemberVO companyMemberVO);
+	//기업 회원정보 수정(COMPANY_MEMBER,)
+	void updateCompanyMember(CompanyMemberVO companyMemberVO);
+	//기업 회원정보 수정(MEMBER)
+	void updateMember(MemberVO memberVO);
+		
+	//기업 회원탈퇴(MEMBER) ->company_member의 튜플은 CASCADE 삭제됨
+	void deleteCompanyMember(String companyId);
 	
-	//기업 회원탈퇴(MEMBER) ->다른테이블은 CASCADE 자동삭제
-	void deleteNormalMember(String companyId);
+	
+	
+	
 	
 	//기업 전체 리스트 개수 구하기(COMPANY_MEMBER)
 	int getAllCompanyMemberCount();
