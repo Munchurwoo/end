@@ -1,22 +1,14 @@
 package join.us.GoodJob.model.service;
 
 import join.us.GoodJob.model.vo.MemberVO;
-import join.us.GoodJob.model.vo.NormalMemberVO;
 
 public interface MemberService {
 	
-	//개인 회원 가입
-	void registerNormalMember(NormalMemberVO normalMemberVO);
 	
-	//개인 로그인
+	
+	//개인, 기업 로그인
 	MemberVO loginNomalMember(MemberVO memberVO);
 
-	
-	//개인 회원정보 수정
-	void updateNormalMember(NormalMemberVO normalMemberVO);
-
-	//개인 회원 탈퇴
-	void deleteNormalMember(String normalId);
 
 		
 

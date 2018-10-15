@@ -3,10 +3,13 @@ package join.us.GoodJob.model.mapper;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
+
 import join.us.GoodJob.model.service.PagingBean;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
 import join.us.GoodJob.model.vo.MemberVO;
 
+@Mapper
 public interface CompanyMapper {
 	
 	//기업 회원가입(COMPANY_MEMBER)

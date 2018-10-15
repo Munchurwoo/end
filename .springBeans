@@ -7,9 +7,9 @@
 	</configSuffixes>
 	<enableImports><![CDATA[true]]></enableImports>
 	<configs>
-		<config>src/main/webapp/WEB-INF/views/company/spring-web.xml</config>
 	</configs>
 	<autoconfigs>
+		<config>src/main/webapp/WEB-INF/spring-web.xml</config>
 		<config>src/main/webapp/WEB-INF/spring-model.xml</config>
 	</autoconfigs>
 	<configSets>
