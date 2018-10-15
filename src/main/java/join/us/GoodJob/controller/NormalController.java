@@ -14,15 +14,16 @@ public class NormalController {
 	@Resource
 	NormalService normalService;
 	
-	
 	@RequestMapping("PortfolioRegister.do")
 	public String PortfolioRegister(PortfolioVO vo) {
 		return "result";
 	}
+	
 	@RequestMapping("insertNormalMemberForm.do")
 	public String insertNormalMemberForm() {
 		return "normal/normal_register_form.tiles2";
 	}
+	
 	@RequestMapping("registerNormalMember.do")
 	public String registerNormalMember(NormalMemberVO normalMemberVO) {
 		normalService.registerNormalMember(normalMemberVO);

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <header>
 	<div class="navbar navbar-default navbar-static-top">
 		<div class="container">
@@ -25,7 +26,16 @@
 					<li><a href="portfolio.html">인재검색</a></li>
 					<li><a href="blog.html">기업정보</a></li>
 					<li><a href="contact.html">기업서비스</a></li>
-					<li><a href="loginForm.do">로그인/회원가입</a></li>
+					<c:choose>
+						<c:when test="${empty sessionScope.mvo}">
+							<li><a href="loginForm.do">로그인</a></li>
+							<li><a href="registerForm.do">회원가입</a>						
+						</c:when>
+						<c:otherwise>
+							<li>${mvo.name}님 환영합니다</li>
+							<li><a href="logout.do">로그아웃</a></li>							
+						</c:otherwise>
+					</c:choose>					
 				</ul>
 			</div>
 		</div>

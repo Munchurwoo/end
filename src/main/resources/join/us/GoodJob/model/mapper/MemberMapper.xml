@@ -4,8 +4,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  <mapper namespace="join.us.GoodJob.model.mapper.MemberMapper"> 
 
- </mapper> 		
- 
+	<select id="loginMember" parameterType="memberVO" resultType="memberVO">
+		select id, name, member_type from member where id=#{id} and password=#{password}
+	</select>
+	
+ </mapper>
+
  
  
  
