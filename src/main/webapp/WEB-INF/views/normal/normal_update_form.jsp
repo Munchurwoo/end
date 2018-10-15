@@ -5,6 +5,7 @@
 <!-- normal_update_form -->
 
 <h3 align="center">회원 정보 수정</h3><br><br>
+
 <script type="text/javascript">
 	$(document).ready(function () {
 		var gender = "${requestScope.nmvo.gender }";

@@ -13,15 +13,14 @@ public class CompanyController {
 	@Resource
 	CompanyService companyService;
 	
-	@RequestMapping("insertCompanyMemberForm.do")
+	@RequestMapping("user-insertCompanyMemberForm.do")
 	public String insertCompanyMemberForm() {
 		return "company/company_register_form.tiles2";
 	}
-	@RequestMapping("insertCompanyMember.do")
+	@RequestMapping("user-insertCompanyMember.do")
 	public String registerCompanyMember(CompanyMemberVO companyMemberVO) {
 		companyService.registerCompanyMember(companyMemberVO);
 		return "redirect:loginForm.do";
-		
 	}
 	
 	/**

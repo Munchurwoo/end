@@ -18,7 +18,6 @@ public class CheckLoginInterceptor extends HandlerInterceptorAdapter{
 			response.sendRedirect("home.do");
 			return false; // 해당 컨트롤러(Handler) 실행 안됨
 		}
-			
 		return true;
 	}
 }

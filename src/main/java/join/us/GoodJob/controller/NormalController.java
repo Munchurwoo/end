@@ -1,7 +1,6 @@
 package join.us.GoodJob.controller;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -42,12 +41,6 @@ public class NormalController {
 		return "normal/normal_mypage.tiles2";
 	}
 
-	/**
-	 * 181015 MIRI 개인 회원정보 수정(NORMAL_MEMBER)
-	 * 
-	 * @param normalMemberVO
-	 * @return
-	 */
 	@RequestMapping("updateNormalMemberForm.do")
 	public String updateNormalMemberForm(HttpSession session, Model model) {
 		MemberVO mvo = (MemberVO)session.getAttribute("mvo");

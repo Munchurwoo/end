@@ -6,5 +6,5 @@
 
 <script>
 	alert("로그인이 실패했습니다! 다시 로그인하세요");
-	location.href="loginForm.do";
+	location.href="user-loginForm.do";
 </script>

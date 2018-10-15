@@ -14,10 +14,8 @@ public interface NormalMapper {
 	void insertNormalMember(NormalMemberVO normalMemberVO);
 	//개인 회원가입(MEMBER)
 	void insertMember(MemberVO memberVO);
-	
-	//181015 MIRI 개인 회원정보 검색(NORMAL_MEMBER)
+	//개인 회원정보 검색(NORMAL_MEMBER)
 	NormalMemberVO selectNormalMember(String id);
-	
 	//개인 회원정보 수정(NORMAL_MEMBER)
 	void updateNormalMember(NormalMemberVO normalMemberVO);
 	//개인 회원정보 수정(MEMBER)
@@ -48,7 +46,6 @@ public interface NormalMapper {
 	//포트폴리오 상세보기
 	//포트폴리오 삭제
 	//포트폴리오 수정
-	
 	
 	//질의응답 질문등록
 }
