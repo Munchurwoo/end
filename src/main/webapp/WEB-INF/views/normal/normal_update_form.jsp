@@ -16,5 +16,10 @@
 	이름 * <input type="text" name="name" required="required"><br><br>
 	주소 * <input type="text" name="address" required="required"><br><br>
 	연락처 * <input type="text" name="tel" required="required"><br><br>
+	경력사항 * <input type="text" name="careerStatus" required="required"><br><br>
+	사진경로 * <input type="text" name="picturePath" required="required"><br><br>
+	성별 * &nbsp;<input type="radio" name="gender" value="man" required="required">남자 
+			    <input type="radio" name="gender" value="girl" required="required">여자 
+	<br><br>
 	<input type="submit" value="회원정보수정">
 </form>
