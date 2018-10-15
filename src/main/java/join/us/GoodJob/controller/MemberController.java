@@ -14,10 +14,6 @@ public class MemberController {
 
 	@RequestMapping("loginForm.do")
 	public String login() {
-		
 		return "member/login_form.tiles2";
-		
 	}
-	
-	
 }
