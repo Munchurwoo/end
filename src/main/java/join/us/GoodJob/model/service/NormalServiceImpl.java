@@ -31,6 +31,7 @@ public class NormalServiceImpl implements NormalService {
 
 	@Override
 	public void deleteNormalMember(String normalId) {
+		normalMapper.deleteNormalMember(normalId);
 	}
 
 }

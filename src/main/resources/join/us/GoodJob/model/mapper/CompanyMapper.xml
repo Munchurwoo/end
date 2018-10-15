@@ -6,7 +6,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   <insert id="insertCompanyMember" parameterType="companyMemberVO">
 		insert into
 		company_member(company_id,introduction,company_type,industry,sales,date_of_establishment,num_of_employees)
-		values(#{company_id},#{introduction},#{company_type},#{industry},#{sales},#{date_of_establishment},#{num_of_employees})
+		values(#{id}, #{introduction}, #{companyType}, #{industry}, #{sales}, #{dateOfEstablishment}, #{numOfEmployees})
 	</insert>
 <insert id="insertMember" parameterType="memberVO">
 		insert into member(id,password,email,name,tel,member_type,address) 

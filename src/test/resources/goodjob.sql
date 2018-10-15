@@ -11,6 +11,8 @@ create table member(
 )
 drop table member cascade constraint;
 
+delete from member where id='yosep';
+
 insert into MEMBER(id, password, email, name, address, tel, member_type) values('admin', 'admin', 'admin@kosta.or.kr', '관리자', '경기도 성남시 분당구 대왕판교로 670길 유스페이스2 B동 8층', '070-5039-5803, 5805', 0);
 insert into MEMBER(id, password, email, name, address, tel, member_type) values('NHNuser', '123', 'NHNuser@nhn.co.kr', 'NHNEntertainment', '경기도 성남시 분당구 대왕판교로 645번길 16 NHN엔터테인먼트 플레이뮤지엄', '031-8028-3221', 3);
 insert into MEMBER(id, password, email, name, address, tel, member_type) values('Tmaxuser', '123', 'Tmaxuser@tmax.com', 'TmaxSoft', '경기도 성남시 분당구 황새울로 258번길 29, BS타워 8-9층 티맥스소프트', '031-8018-1000', 3);
@@ -42,7 +44,7 @@ create table normal_member(
 	gender varchar2(100) not null,
 	picture_path varchar2(100) not null,
 	career_status varchar2(100) not null,
-	constraint fk_normalandmember foreign key(normal_id) references member(id)
+	constraint fk_normalandmember foreign key(normal_id) references member(id) on delete cascade
 )
 drop table normal_member cascade constraint;
 

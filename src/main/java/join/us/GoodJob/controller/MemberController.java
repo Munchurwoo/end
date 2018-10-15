@@ -14,12 +14,12 @@ public class MemberController {
 	@Resource
 	MemberService memberService;
 
-	@RequestMapping("loginForm.do")
+	@RequestMapping("user-loginForm.do")
 	public String loginForm() {
 		return "member/login_form.tiles2";
 	}
 
-	@RequestMapping("login.do")
+	@RequestMapping("user-login.do")
 	public String login(MemberVO memberVO, HttpSession session) {
 		MemberVO mvo = memberService.loginMember(memberVO);
 		if(mvo!=null) { //로그인 성공
@@ -35,4 +35,5 @@ public class MemberController {
 		session.invalidate();
 		return "redirect:home.do";
 	}
+
 }
