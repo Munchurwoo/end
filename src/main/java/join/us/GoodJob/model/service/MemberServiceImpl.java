@@ -11,14 +11,9 @@ import join.us.GoodJob.model.vo.MemberVO;
 public class MemberServiceImpl implements MemberService {
 	@Resource
 	MemberMapper memberMapper;
-
-
-
 	
 	@Override
 	public MemberVO loginMember(MemberVO memberVO) {
 		return memberMapper.loginMember(memberVO);
 	}
-	
-	
 }

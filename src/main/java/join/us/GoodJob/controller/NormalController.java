@@ -19,9 +19,25 @@ public class NormalController {
 		return "result";
 	}
 	
+	/**
+	 * 181015 MIRI
+	 * 개인 회원가입 폼(NORMAL_MEMBER)
+	 * @return
+	 */
 	@RequestMapping("insertNormalMemberForm.do")
 	public String insertNormalMemberForm() {
 		return "normal/normal_register_form.tiles2";
+	}
+	
+	/**
+	 * 181015 MIRI
+	 * 개인 회원정보 수정(NORMAL_MEMBER)
+	 * @param normalMemberVO
+	 * @return
+	 */
+	@RequestMapping("updateNormalMember.do")
+	public String updateNormalMember(NormalMemberVO normalMemberVO) {
+		return "normal/normal_update_form.tiles2";
 	}
 	
 	@RequestMapping("registerNormalMember.do")
@@ -29,5 +45,4 @@ public class NormalController {
 		normalService.registerNormalMember(normalMemberVO);
 		return "normal/normal_register_portfolio.tiles2";
 	}
-	
 }

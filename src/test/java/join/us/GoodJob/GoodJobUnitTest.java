@@ -15,7 +15,6 @@ public class GoodJobUnitTest {
 	NormalMapper normalMapper;*/
 	@Autowired
 	CompanyMapper companyMapper;
-	
 	/*@Autowired
 	ManagerMapper managerMapper;
 	*/
