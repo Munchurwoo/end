@@ -12,5 +12,7 @@ public interface NormalService {
 	
 	//개인 회원 탈퇴
 	void deleteNormalMember(String normalId);
+	
+	
 
 }

@@ -1,12 +1,16 @@
 package join.us.GoodJob.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import join.us.GoodJob.model.service.MemberService;
+import join.us.GoodJob.model.vo.DevCatVO;
 import join.us.GoodJob.model.vo.MemberVO;
 
 @Controller
@@ -34,6 +38,14 @@ public class MemberController {
 	public String logout(HttpSession session) {
 		session.invalidate();
 		return "redirect:home.do";
+	}
+	
+	@RequestMapping("getDevCatVOListAjax.do")
+	@ResponseBody
+	public List<DevCatVO> getDevCatVOListAjax(String rcNum) {
+		System.out.println("rcNum:"+rcNum);
+		System.out.println(memberService.getDevCatVOListByrcNum(rcNum));
+		return memberService.getDevCatVOListByrcNum(rcNum);				
 	}
 
 }
