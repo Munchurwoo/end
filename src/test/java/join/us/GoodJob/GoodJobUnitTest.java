@@ -15,10 +15,10 @@ import join.us.GoodJob.model.vo.MemberVO;
 public class GoodJobUnitTest {
 	@Autowired
 	MemberMapper memberMapper;
-	@Autowired
+	/*@Autowired
 	CompanyMapper companyMapper;
 	@Autowired
-	ManagerMapper managerMapper;
+	ManagerMapper managerMapper;*/
 	
 	@Test
 	public void test() {			
