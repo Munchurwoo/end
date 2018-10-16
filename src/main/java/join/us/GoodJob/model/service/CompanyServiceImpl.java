@@ -31,5 +31,11 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	public void deleteCompanyMember(String companyId) {
 	}
-
+	
+	@Override
+	public CompanyMemberVO myPageCompanyMember(String companyId) {
+		CompanyMemberVO companymemberVO=companyMapper.myPageCompanyMember(companyId);
+		return companymemberVO;
+		
+	}
 }

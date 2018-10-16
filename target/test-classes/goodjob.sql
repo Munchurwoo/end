@@ -98,6 +98,8 @@ create table company_member(
 	num_of_employees number not null,
 	constraint fk_member_company_member foreign key(company_id) references member(id)
 )
+
+
 drop table company_member cascade constraint;
 
 insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, sales, date_of_establishment, num_of_employees) values('NHNuser', '더 넓은 세상, 더 많은 사람들이 더 큰 재미를 우리와 함께 나눕니다.', '대기업', '솔루션', 1813, '2015-11-18', 664);
@@ -996,4 +998,3 @@ select * from portfolio_academic;
 commit
 
 
->>>>>>> branch 'master' of https://github.com/Munchurwoo/goodjob.git
