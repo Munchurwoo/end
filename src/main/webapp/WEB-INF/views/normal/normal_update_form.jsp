@@ -11,9 +11,9 @@
 		var gender = "${requestScope.nmvo.gender }";
 		var value;
 		if(gender == "여") {
-			val = "girl";
+			val = "female";
 		} else {
-			val = "man";
+			val = "male";
 		} 
 		$("input:radio[name='gender']:radio[value="+val+"]").prop("checked", true);
 	});
@@ -31,7 +31,7 @@
 	경력사항 * <input type="text" value="${requestScope.nmvo.careerStatus }" name="careerStatus" required="required"><br><br>
 	사진경로 * <input type="text" value="${requestScope.nmvo.picturePath }" name="picturePath" required="required"><br><br>
 	성별 * &nbsp;
-	<input type="radio" name="gender" value="man" disabled="disabled">남자 
-    <input type="radio" name="gender" value="girl" disabled="disabled">여자<br><br>
+	<input type="radio" name="gender" value="male" disabled="disabled">남자 
+    <input type="radio" name="gender" value="female" disabled="disabled">여자<br><br>
 	<input type="submit" value="회원정보수정">
 </form>
