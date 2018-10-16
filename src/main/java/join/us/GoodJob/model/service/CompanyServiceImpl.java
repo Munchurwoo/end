@@ -17,9 +17,16 @@ public class CompanyServiceImpl implements CompanyService {
 		companyMapper.registerMember(companyMemberVO);
 		companyMapper.registerCompanyMember(companyMemberVO);
 	}
+	
+	@Override
+	public CompanyMemberVO selectCompanyMember(String id) {
+		return companyMapper.selectCompanyMember(id);
+	}
 
 	@Override
 	public void updateCompanyMember(CompanyMemberVO companyMemberVO) {
+		companyMapper.updateCompanyMember(companyMemberVO);
+		companyMapper.updateMember(companyMemberVO);
 	}
 
 	@Override

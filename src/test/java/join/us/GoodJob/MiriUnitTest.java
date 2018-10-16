@@ -25,21 +25,6 @@ public class MiriUnitTest {
 	
 	@Test
 	public void test() {
-		NormalMemberVO nmvo = normalMapper.selectNormalMember("miri");
-		NormalMemberVO nmvo2 = new NormalMemberVO();
-		String id = nmvo.getId();
-		if(nmvo != null) {
-			nmvo2.setNormalId(id);
-			nmvo2.setCareerStatus(".NET(C#) 개발 경력 2년 (마이다시아이티)");
-			nmvo2.setPicturePath("서미리.png");
-			normalMapper.updateNormalMember(nmvo2);
-			
-			nmvo2.setId(id);
-			nmvo2.setAddress("경기도 성남시 중원구");
-			nmvo2.setEmail("miri@gmail.com");
-			nmvo2.setPassword("123");
-			nmvo2.setTel("010-2222-2222");
-			normalMapper.updateMember(nmvo2);
-		}
+
 	}
 }

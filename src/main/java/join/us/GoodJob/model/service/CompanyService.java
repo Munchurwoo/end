@@ -6,7 +6,11 @@ public interface CompanyService {
 	
 	//기업 회원 가입
 	void registerCompanyMember(CompanyMemberVO companyMemberVO);
+
+	//기업 검색
+	CompanyMemberVO selectCompanyMember(String id);
 	
+
 	//기업 회원정보 수정
 	void updateCompanyMember(CompanyMemberVO companyMemberVO);
 
