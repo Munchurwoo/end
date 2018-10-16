@@ -22,10 +22,6 @@ public class SungjinUnitTest {
 	
 	@Test
 	public void test() {
-		System.out.println(memberMapper.getRecruitCatVOList());
-		System.out.println(memberMapper.getDevCatVOListByrcNum("101"));
-		System.out.println(memberMapper.getEmpTypeCatVOList());
-		System.out.println(memberMapper.getLocCatVOList());
-		System.out.println(memberMapper.getAcaCatVOList());
+
 	}
 }

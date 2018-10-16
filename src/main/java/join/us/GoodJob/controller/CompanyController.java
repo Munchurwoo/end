@@ -71,4 +71,14 @@ public class CompanyController {
 		}
 		return "company/company_mypage.tiles2";
 	}
+	@RequestMapping("deleteCompanyMember.do")
+	public String deleteNormalMember(HttpSession session) {
+		MemberVO mvo=(MemberVO) session.getAttribute("mvo");
+		String companyId=mvo.getId();
+		if(companyId!=null) {
+			companyService.deleteCompanyMember(companyId);
+			session.invalidate();
+		}
+		return "home.tiles";
+	}
 }

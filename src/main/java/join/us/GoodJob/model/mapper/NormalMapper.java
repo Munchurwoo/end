@@ -1,7 +1,6 @@
 package join.us.GoodJob.model.mapper;
 
 import java.util.HashMap;
-import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -25,7 +24,7 @@ public interface NormalMapper {
 	void deleteNormalMember(String normalId);
 	
 	// 마이페이지 개인정보 조회(MEMBER)
-	List<MemberVO> getNormalMypageInfo(MemberVO memberVO);	
+	NormalMemberVO myPageNormalMember(String memberId);
 	//포트폴리오 등록(PORTFOLIO)
 	void insertPortfolio(HashMap<String,String> map);				
 	//포트폴리오 파일등록(PORTFOLIO_FILE)
@@ -40,6 +39,7 @@ public interface NormalMapper {
 	void insertPortfolioLoc(HashMap<String,String> map);	
 	//포트폴리오 학력 분류 등록(PORTFOLIO_ACADEMIC)
 	void insertPortfolioAcademic(HashMap<String,String> map);
+	
 			
 	//포트폴리오 전체보기
 	//포트폴리오 검색결과 보기
