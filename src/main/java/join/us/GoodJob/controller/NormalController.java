@@ -36,7 +36,12 @@ public class NormalController {
 	 * @return
 	 */
 	@RequestMapping("normal_mypage.do")
-	public String companyMypage() {
+	public String myPageNormalMember(String normalId,Model model,HttpSession session) {
+		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		if (mvo != null) {
+			NormalMemberVO nmvo= normalService.myPageNormalMember(mvo.getId());
+			model.addAttribute("nmvo", nmvo);
+		}
 		return "normal/normal_mypage.tiles2";
 	}
 

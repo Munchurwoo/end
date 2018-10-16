@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import join.us.GoodJob.model.mapper.CompanyMapper;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
-import join.us.GoodJob.model.vo.MemberVO;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
@@ -17,11 +16,6 @@ public class CompanyServiceImpl implements CompanyService {
 	public void registerCompanyMember(CompanyMemberVO companyMemberVO) {
 		companyMapper.registerMember(companyMemberVO);
 		companyMapper.registerCompanyMember(companyMemberVO);
-	}
-
-	@Override
-	public MemberVO loginCompanyMember(MemberVO memberVO) {
-		return null;
 	}
 	
 	@Override
