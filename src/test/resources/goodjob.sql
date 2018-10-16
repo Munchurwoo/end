@@ -123,7 +123,7 @@ create table company_member(
 	industry varchar2(100) not null,
 	sales number default 0,
 	date_of_establishment varchar2(100) default null,
-	num_of_employees number default null,
+	num_of_employees number default 0,
 	constraint fk_member_company_member foreign key(company_id) references member(id) on delete cascade
 );
 

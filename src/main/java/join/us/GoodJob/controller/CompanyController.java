@@ -24,7 +24,6 @@ public class CompanyController {
 
 	@PostMapping("user-registerCompanyMember.do")
 	public String registerCompanyMember(CompanyMemberVO companyMemberVO) {
-		System.out.println(companyMemberVO);
 		companyService.registerCompanyMember(companyMemberVO);
 		return "redirect:user-loginForm.do";		
 	}
