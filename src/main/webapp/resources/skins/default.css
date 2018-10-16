@@ -228,3 +228,34 @@ header{
 	background: #E8F8F5 ;
 }
 
+.resume_write .resume_photo .box_photo {
+    display: block;
+    width: 100px;
+    height: 140px;
+    box-sizing: border-box;
+    background: #fafafa url(//www.saraminimage.co.kr/sri/person/bg/bg_photo_add.png) 50% 50% no-repeat;
+}
+
+.resume_write .resume_photo .photo_delete {
+    display: inline-block;
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    width: 21px;
+    height: 21px;
+    background: url(//www.saraminimage.co.kr/sri/person/ico/ico_photo_close.png) 0 0 no-repeat;
+}
+
+
+.resume_write .resume_photo {
+    position: absolute;
+    top: 0;
+    left: 40px;
+    padding: 9px;
+    width: 120px;
+    height: 160px;
+    background-color: #fff;
+    border: 1px solid #e9e9e9;
+    box-sizing: border-box;
+    text-align: center;
+}

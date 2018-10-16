@@ -1,12 +1,18 @@
 package join.us.GoodJob.controller;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import join.us.GoodJob.model.service.MemberService;
 import join.us.GoodJob.model.service.NormalService;
@@ -20,6 +26,8 @@ public class NormalController {
 	NormalService normalService;
 	@Resource
 	MemberService memberService;
+	
+	private String uploadPath;
 
 	/**
 	 * 181015 MIRI 개인 회원가입 폼(NORMAL_MEMBER)
@@ -112,5 +120,33 @@ public class NormalController {
 		}
 		return "home.tiles";
 	}
+	
+	@PostMapping("normalPictureUpload.do")
+	@ResponseBody
+	public String uploadNormalPicture(MultipartFile uploadPicture,HttpServletRequest request){
+		System.out.println("uploadNormalPicture시작");
+		//실제 운영시에 사용할 서버 업로드 경로 
+		uploadPath
+		=request.getSession().getServletContext().getRealPath("/resources/upload/");
+		//개발시에는 워크스페이스 업로드 경로로 준다 
+		//uploadPath="C:\\java-kosta\\framework-workspace2\\springmvc21-fileupload-inst\\src\\main\\webapp\\resources\\upload\\";
+		System.out.println("업로드 경로:"+uploadPath);
+		System.out.println(uploadPicture);
+		if(uploadPicture.isEmpty()==false){
+			System.out.println(uploadPicture.getOriginalFilename());
+			File uploadFile=new File(uploadPath+uploadPicture.getOriginalFilename());
+			try {
+				uploadPicture.transferTo(uploadFile);
+				System.out.println("사진 업로드 완료!");
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+			}
+		}
+		/*ModelAndView mv=new ModelAndView("product/register_result.tiles");
+		mv.addObject("name", vo.getName());
+		mv.addObject("fileName", file.getOriginalFilename());*/
+		return "성공";
+	}
+	
 }
 
