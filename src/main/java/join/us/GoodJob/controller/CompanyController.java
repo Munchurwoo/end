@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import join.us.GoodJob.model.service.CompanyService;
+import join.us.GoodJob.model.service.MemberService;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
 import join.us.GoodJob.model.vo.MemberVO;
 
@@ -16,7 +17,8 @@ import join.us.GoodJob.model.vo.MemberVO;
 public class CompanyController {
 	@Resource
 	CompanyService companyService;
-
+	@Resource
+	MemberService memberService;
 	@RequestMapping("user-registerCompanyMemberForm.do")
 	public String registerCompanyMemberForm() {
 		return "company/company_register_form.tiles2";
@@ -81,4 +83,13 @@ public class CompanyController {
 		}
 		return "home.tiles";
 	}
+	@RequestMapping("registerJobPostingForm.do")
+	public String registerJobPostingForm(Model model) {
+		model.addAttribute("recruitCatList",memberService.getRecruitCatVOList());
+		model.addAttribute("devCatList",memberService.getDevCatVOListByrcNum("101"));
+		model.addAttribute("empTypeCatList",memberService.getEmpTypeCatVOList()); 
+		model.addAttribute("locCatList",memberService.getLocCatVOList());
+		model.addAttribute("acaCatList",memberService.getAcaCatVOList());	
+		return "company/job_posting_register_form.tiles2";
+}
 }

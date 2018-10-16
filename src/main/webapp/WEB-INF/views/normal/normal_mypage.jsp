@@ -5,7 +5,6 @@
 <!-- normal_mypage -->
 
 <h3 align="center">${sessionScope.mvo.name }님 마이페이지</h3><br><br>
-
 <a href="updateNormalMemberForm.do">회원정보수정</a><br>
 <a href="registerPortfolioForm.do">이력서 등록</a><br>
 <a href="deleteNormalMember.do">회원탈퇴</a><br>

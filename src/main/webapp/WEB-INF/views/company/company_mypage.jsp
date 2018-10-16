@@ -7,6 +7,7 @@
 <h3 align="center">${sessionScope.mvo.name }님 마이페이지</h3><br><br>
 
 <a href="updateCompanyMemberForm.do">회원정보수정</a><br><br>
+<a href="registerJobPostingForm.do">구인등록</a><br><br>
 <a href="deleteCompanyMember.do">회원탈퇴</a><br><br>
 	아이디   ${requestScope.cmvo.companyId }<br><br>
 	이메일 주소  ${requestScope.cmvo.email }"<br><br>
