@@ -75,6 +75,7 @@ public class NormalController {
 	 */
 	@PostMapping("user-registerNormalMember.do")
 	public String registerNormalMember(NormalMemberVO normalMemberVO) {
+		System.out.println(normalMemberVO);
 		normalService.registerNormalMember(normalMemberVO);
 		return "redirect:user-loginForm.do";
 	}

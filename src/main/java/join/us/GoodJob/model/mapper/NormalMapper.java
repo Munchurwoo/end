@@ -11,9 +11,9 @@ import join.us.GoodJob.model.vo.NormalMemberVO;
 @Mapper
 public interface NormalMapper {
 	//개인 회원가입(NORMAL_MEMBER)
-	void insertNormalMember(NormalMemberVO normalMemberVO);
+	void registerNormalMember(NormalMemberVO normalMemberVO);
 	//개인 회원가입(MEMBER)
-	void insertMember(MemberVO memberVO);
+	void registerMember(MemberVO memberVO);
 	//개인 회원정보 검색(NORMAL_MEMBER)
 	NormalMemberVO selectNormalMember(String id);
 	//개인 회원정보 수정(NORMAL_MEMBER)

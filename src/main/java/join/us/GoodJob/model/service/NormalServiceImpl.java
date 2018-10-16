@@ -15,8 +15,8 @@ public class NormalServiceImpl implements NormalService {
 
 	@Override
 	public void registerNormalMember(NormalMemberVO normalMemberVO) {
-		normalMapper.insertMember(normalMemberVO);
-		normalMapper.insertNormalMember(normalMemberVO);
+		normalMapper.registerMember(normalMemberVO);
+		normalMapper.registerNormalMember(normalMemberVO);
 	}
 	
 	@Override

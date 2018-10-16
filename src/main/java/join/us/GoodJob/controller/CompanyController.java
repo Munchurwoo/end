@@ -17,14 +17,14 @@ public class CompanyController {
 	@Resource
 	CompanyService companyService;
 	
-	@RequestMapping("user-insertCompanyMemberForm.do")
-	public String insertCompanyMemberForm() {
+	@RequestMapping("user-registerCompanyMemberForm.do")
+	public String registerCompanyMemberForm() {
 		return "company/company_register_form.tiles2";
 	}
-	@RequestMapping("user-insertCompanyMember.do")
+	@PostMapping("user-registerCompanyMember.do")
 	public String registerCompanyMember(CompanyMemberVO companyMemberVO) {
 		companyService.registerCompanyMember(companyMemberVO);
-		return "redirect:loginForm.do";
+		return "redirect:user-loginForm.do";
 	}
 	
 	/**
@@ -58,7 +58,7 @@ public class CompanyController {
 	 * @return
 	 */
 	@RequestMapping("company_mypage.do")
-	public String companyMypage() {
+	public String myPageCompanyMember(String companyId) {
 		return "company/company_mypage.tiles2";
 	}
 }
