@@ -21,15 +21,15 @@
 
 <form action="updateNormalMember.do" method="post">
 	* 표시는 필수 입력사항<br><br>
-	아이디 * <input type="text" value="${requestScope.nmvo.id }" name="id" disabled="disabled"><br><br>
+	아이디 * <input type="text" value="${requestScope.nmvo.id }" name="id" readonly="readonly"><br><br>
 	비밀번호 * <input type="password" name="password" required="required"><br><br>
 	비밀번호 확인 * <input type="password" name="checkPass" required="required"><br><br>
-	이메일 주소 * <input type="text" placeholder="${requestScope.nmvo.email }" name="email" required="required"><br><br>
-	이름 * <input type="text" value="${requestScope.nmvo.name }" name="name" disabled="disabled"><br><br>
-	주소 * <input type="text" placeholder="${requestScope.nmvo.address }" name="address" required="required"><br><br>
-	연락처 * <input type="text" placeholder="${requestScope.nmvo.tel }" name="tel" required="required"><br><br>
-	경력사항 * <input type="text" placeholder="${requestScope.nmvo.picturePath }" name="careerStatus" required="required"><br><br>
-	사진경로 * <input type="text" placeholder="${requestScope.nmvo.careerStatus }" name="picturePath" required="required"><br><br>
+	이메일 주소 * <input type="text" value="${requestScope.nmvo.email }" name="email" required="required"><br><br>
+	이름 * <input type="text" value="${requestScope.nmvo.name }" name="name" readonly="readonly"><br><br>
+	주소 * <input type="text" value="${requestScope.nmvo.address }" name="address" required="required"><br><br>
+	연락처 * <input type="text" value="${requestScope.nmvo.tel }" name="tel" required="required"><br><br>
+	경력사항 * <input type="text" value="${requestScope.nmvo.careerStatus }" name="careerStatus" required="required"><br><br>
+	사진경로 * <input type="text" value="${requestScope.nmvo.picturePath }" name="picturePath" required="required"><br><br>
 	성별 * &nbsp;
 	<input type="radio" name="gender" value="man" disabled="disabled">남자 
     <input type="radio" name="gender" value="girl" disabled="disabled">여자<br><br>

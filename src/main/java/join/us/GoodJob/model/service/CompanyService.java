@@ -11,6 +11,9 @@ public interface CompanyService {
 	//기업 로그인
 	MemberVO loginCompanyMember(MemberVO memberVO);
 	
+	//기업 검색
+	CompanyMemberVO selectCompanyMember(String id);
+	
 	//기업 회원정보 수정
 	void updateCompanyMember(CompanyMemberVO companyMemberVO);
 

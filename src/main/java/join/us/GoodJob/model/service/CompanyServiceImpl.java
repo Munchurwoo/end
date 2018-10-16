@@ -23,9 +23,16 @@ public class CompanyServiceImpl implements CompanyService {
 	public MemberVO loginCompanyMember(MemberVO memberVO) {
 		return null;
 	}
+	
+	@Override
+	public CompanyMemberVO selectCompanyMember(String id) {
+		return companyMapper.selectCompanyMember(id);
+	}
 
 	@Override
 	public void updateCompanyMember(CompanyMemberVO companyMemberVO) {
+		companyMapper.updateCompanyMember(companyMemberVO);
+		companyMapper.updateMember(companyMemberVO);
 	}
 
 	@Override

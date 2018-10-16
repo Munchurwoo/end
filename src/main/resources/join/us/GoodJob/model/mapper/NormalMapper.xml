@@ -24,7 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>	
 	
 	<update id="updateNormalMember" parameterType="normalMemberVO">
-		update normal_member set normal_id=#{normalId}, gender=#{gender}, picture_path=#{picturePath}, career_status=#{careerStatus}
+		update normal_member set picture_path=#{picturePath}, career_status=#{careerStatus}
 	</update>
 	
 	<delete id="deleteNormalMember" parameterType="string">

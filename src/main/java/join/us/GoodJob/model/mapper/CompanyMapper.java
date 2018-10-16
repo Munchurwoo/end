@@ -16,10 +16,11 @@ public interface CompanyMapper {
 	void insertCompanyMember(CompanyMemberVO companyMemberVO);
 	//기업 회원가입(MEMBER)
 	void insertMember(MemberVO memberVO);
-	
 	//기업 로그인(MEMBER)
 	MemberVO loginNormalMember(MemberVO memberVO);
 	
+	//기업 검색(COMPANy_MEMBER)
+	CompanyMemberVO selectCompanyMember(String id);
 	//기업 회원정보 수정(COMPANY_MEMBER,)
 	void updateCompanyMember(CompanyMemberVO companyMemberVO);
 	//기업 회원정보 수정(MEMBER)
