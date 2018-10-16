@@ -21,11 +21,6 @@ public class GoodJobUnitTest {
 	*/
 	@Test
 	public void test() {	
-		String id="asda";
-		CompanyMemberVO cvo=companyMapper.myPageCompanyMember(id);
-		System.out.println(cvo);
 		
-	
-			
 }
 }

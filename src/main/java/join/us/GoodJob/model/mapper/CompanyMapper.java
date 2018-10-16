@@ -13,9 +13,9 @@ import join.us.GoodJob.model.vo.MemberVO;
 public interface CompanyMapper {
 	
 	//기업 회원가입(COMPANY_MEMBER)
-	void insertCompanyMember(CompanyMemberVO companyMemberVO);
+	void registerCompanyMember(CompanyMemberVO companyMemberVO);
 	//기업 회원가입(MEMBER)
-	void insertMember(MemberVO memberVO);
+	void registerMember(MemberVO memberVO);
 	
 	//기업 로그인(MEMBER)
 	MemberVO loginNormalMember(MemberVO memberVO);

@@ -15,8 +15,8 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	public void registerCompanyMember(CompanyMemberVO companyMemberVO) {
-		companyMapper.insertCompanyMember(companyMemberVO);
-		companyMapper.insertMember(companyMemberVO);
+		companyMapper.registerMember(companyMemberVO);
+		companyMapper.registerCompanyMember(companyMemberVO);
 	}
 
 	@Override
@@ -34,8 +34,8 @@ public class CompanyServiceImpl implements CompanyService {
 	
 	@Override
 	public CompanyMemberVO myPageCompanyMember(String companyId) {
-		CompanyMemberVO companymemberVO=companyMapper.myPageCompanyMember(companyId);
-		return companymemberVO;
+		return companyMapper.myPageCompanyMember(companyId);
+	
 		
 	}
 }
