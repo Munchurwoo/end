@@ -1,8 +1,10 @@
 package join.us.GoodJob.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -21,6 +23,7 @@ public class CompanyController {
 	@PostMapping("user-registerCompanyMember.do")
 	public String registerCompanyMember(CompanyMemberVO companyMemberVO) {
 		companyService.registerCompanyMember(companyMemberVO);
+		System.out.println(companyMemberVO);
 		return "redirect:user-loginForm.do";
 	}
 	
@@ -41,7 +44,8 @@ public class CompanyController {
 	 * @return
 	 */
 	@RequestMapping("company_mypage.do")
-	public String myPageCompanyMember(String companyId) {
+	public String myPageCompanyMember(String companyId,Model model, HttpSession session) {
+		model.addAttribute("cmvo",companyService.myPageCompanyMember(companyId));
 		return "company/company_mypage.tiles2";
 	}
 }

@@ -16,10 +16,6 @@ public interface CompanyMapper {
 	void registerCompanyMember(CompanyMemberVO companyMemberVO);
 	//기업 회원가입(MEMBER)
 	void registerMember(MemberVO memberVO);
-	
-	//기업 로그인(MEMBER)
-	MemberVO loginNormalMember(MemberVO memberVO);
-	
 	//기업 회원정보 수정(COMPANY_MEMBER,)
 	void updateCompanyMember(CompanyMemberVO companyMemberVO);
 	//기업 회원정보 수정(MEMBER)
