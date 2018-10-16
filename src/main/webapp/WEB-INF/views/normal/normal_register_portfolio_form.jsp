@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <script type="text/javascript">	
 	$(document).ready(function(){				
 		$("input[name='recruitCatNumList']").change(function() {	
@@ -23,6 +25,29 @@
 				}//success					
 			});//ajax 			
 		});//change
+		
+		$("#pictureUploadBtn").change(function(){
+			var form = $("#pictureUploadForm")[0];	
+			var formData = new FormData(form);
+			$.ajax({
+				type:"post",
+				url:"normalPictureUpload.do",
+				data:formData,				
+				enctype: 'multipart/form-data',
+				processData: false,
+		        contentType: false,
+		        cache: false,
+				success:function(result){
+					alert(result);
+				/* 	$("#pictureList").append("<li>"+result.orgName+"<input type='hidden'name='pics'value="+result.fileName+
+					"><button class='deleteBtn'>x</button></li>");
+					$("#imgBtn").val("");
+					$("#picAlert").text("") */
+				}
+			});
+		});
+		
+		
 	});//ready
 </script>
 
@@ -57,7 +82,20 @@
 	<h5>개발분야</h5>
 	<div id="empTypeArea">		
 	</div>	
-	<button type="submit" >등록하기</button>
+	
 	<button type="reset">초기화</button>
-	<button type="reset" onclick="location.href='home.do'">홈으로</button>	
+	
+</form >
+<form enctype="multipart/form-data" action="" id="pictureUploadForm">
+<h5>사진등록</h5>
+ <div class="resume_photo">
+   <a href="##" class="box_photo" data-api_type="layer" data-api_id="basic_photo" >
+       <img src="" border="0" width="100" height="140" class="user_image" />s</a>
+   <a class="photo_delete" href="##" style=""><span class="blind">사진 삭제</span></a>
+</div>
+<input type="file" name="uploadPicture" id="pictureUploadBtn"><br>
 </form>
+
+
+<button type="submit" >등록하기</button>
+<button type="reset" onclick="location.href='home.do'">홈으로</button>	
