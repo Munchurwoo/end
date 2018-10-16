@@ -36,8 +36,19 @@ public class NormalController {
 	 */
 	@RequestMapping("user-registerNormalMemberForm.do")
 	public String registerNormalMemberForm() {
-		
 		return "normal/normal_register_form.tiles2";
+	}
+	
+	/**
+	 * 181015 SungJin
+	 * 개인 회원가입 (NORMAL_MEMBER)
+	 * @param normalMemberVO
+	 * @return
+	 */
+	@PostMapping("user-registerNormalMember.do")
+	public String registerNormalMember(NormalMemberVO normalMemberVO) {
+		normalService.registerNormalMember(normalMemberVO);
+		return "redirect:user-loginForm.do";
 	}
 
 	/**
@@ -79,19 +90,6 @@ public class NormalController {
 	public String updateNormalMember(NormalMemberVO normalMemberVO) {
 		normalService.updateNormalMember(normalMemberVO);
 		return "redirect:home.do";
-	}
-
-	/**
-	 * 181015 SungJin
-	 * 개인 회원가입 (NORMAL_MEMBER)
-	 * @param normalMemberVO
-	 * @return
-	 */
-	@PostMapping("user-registerNormalMember.do")
-	public String registerNormalMember(NormalMemberVO normalMemberVO) {
-		System.out.println(normalMemberVO);
-		normalService.registerNormalMember(normalMemberVO);
-		return "redirect:user-loginForm.do";
 	}
 	
 	@RequestMapping("registerPortfolioForm.do")
