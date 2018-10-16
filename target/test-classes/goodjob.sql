@@ -43,8 +43,6 @@ create table member(
 	member_type number --0은 관리자 / 1 은 개인회원 / 2 는 기업회원 승인 X / 3은 기업회원 승인 OK
 );
 
-delete from member where id='yosep';
-
 insert into MEMBER(id, password, email, name, address, tel, member_type) values('admin', 'admin', 'admin@kosta.or.kr', '관리자', '경기도 성남시 분당구 대왕판교로 670길 유스페이스2 B동 8층', '070-5039-5803, 5805', 0);
 insert into MEMBER(id, password, email, name, address, tel, member_type) values('NHNuser', '123', 'NHNuser@nhn.co.kr', 'NHNEntertainment', '경기도 성남시 분당구 대왕판교로 645번길 16 NHN엔터테인먼트 플레이뮤지엄', '031-8028-3221', 3);
 insert into MEMBER(id, password, email, name, address, tel, member_type) values('Tmaxuser', '123', 'Tmaxuser@tmax.com', 'TmaxSoft', '경기도 성남시 분당구 황새울로 258번길 29, BS타워 8-9층 티맥스소프트', '031-8018-1000', 3);
@@ -77,13 +75,6 @@ create table normal_member(
 	career_status varchar2(100) not null,
 	constraint fk_normalandmember foreign key(normal_id) references member(id) on delete cascade
 );
-
--- 멤버/노말멤버 조인 sql
-select m.id,m.password,m.email,m.name,m.tel,m.address,m.member_type,nm.normal_id,nm.gender,nm.picture_path,nm.career_status
-from member m,normal_member nm
-where m.id=nm.normal_id
-and m.id='miri';
-
 
 insert into NORMAL_MEMBER(normal_id, gender, picture_path, career_status) values('qqqq', '이동규.png', 'Java 개발자로 LINE에서 3년 근무', '남');
 insert into NORMAL_MEMBER(normal_id, gender, picture_path, career_status) values('miri', '서미리.png', '.NET(C#) 개발 경력 2년 (마이다시아이티)', '여');
@@ -131,13 +122,13 @@ create table company_member(
 	company_type varchar2(100) not null,
 	industry varchar2(100) not null,
 	sales number default 0,
-	date_of_establishment varchar2(100) not null,
-	num_of_employees number not null,
+	date_of_establishment varchar2(100) default null,
+	num_of_employees number default null,
 	constraint fk_member_company_member foreign key(company_id) references member(id) on delete cascade
 );
 
 insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, sales, date_of_establishment, num_of_employees) values('NHNuser', '더 넓은 세상, 더 많은 사람들이 더 큰 재미를 우리와 함께 나눕니다.', '대기업', '솔루션', 1813, '2015-11-18', 664);
-insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, sales, date_of_establishment, num_of_employees) values('Tmaxuser', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 710, '1997-06-04', 358);
+insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees) values('Tmaxuser', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358);
 
 select * from company_member;
 ---------------------------------------------------------------------
@@ -152,8 +143,6 @@ create table job_posting(
 	constraint fk_company_member_job_posting foreign key(company_id) references company_member(company_id) on delete cascade
 );
 create sequence job_posting_num_seq start with 1001;
-
-
 
 insert into JOB_POSTING(job_posting_num, company_id, career_status, title, content) values(job_posting_num_seq.nextval, 'NHNuser', '경력 3년', 'NHN엔터테인먼트에서 Java 신입, 프리랜서 개발자 모집', 'Java 어플리케이션 개발 경험자, WAS 이해도가 높은 경험자 우대합니다.');
 insert into JOB_POSTING(job_posting_num, company_id, career_status, title, content) values(job_posting_num_seq.nextval, 'Tmaxuser', '경력 무관', '티맥스소프트 DBA 2018 하반기 공개채용', 'MS-SQL 서버 모니터링 및 트러블 슈팅경험 있으신 분, OLTP 업무 경험 있으신 분');
@@ -220,8 +209,6 @@ create table recruitment_category(
 );
 create sequence rc_num_seq start with 101;
 
-
-
 insert into RECRUITMENT_CATEGORY(rc_num, rc_name) values(rc_num_seq.nextval, '웹 프로그래머');
 insert into RECRUITMENT_CATEGORY(rc_num, rc_name) values(rc_num_seq.nextval, '응용 프로그래머');
 insert into RECRUITMENT_CATEGORY(rc_num, rc_name) values(rc_num_seq.nextval, '시스템 프로그래머');
@@ -243,7 +230,6 @@ create table job_recruitment(
 	constraint fk_rc foreign key(rc_num) references recruitment_category(rc_num) on delete cascade,
 	constraint pk_jobpostingnum_rcnum primary key (rc_num,job_posting_num)
 );
-
 
 insert into JOB_RECRUITMENT(job_posting_num, rc_num) values(1001, 101);
 insert into JOB_RECRUITMENT(job_posting_num, rc_num) values(1001, 105);
@@ -277,8 +263,6 @@ create table employment_type_category(
 
 create sequence emp_type_num_seq start with 301;
 
-
-
 insert into EMPLOYMENT_TYPE_CATEGORY(emp_type_num, emp_type_name) values(emp_type_num_seq.nextval, '인턴');
 insert into EMPLOYMENT_TYPE_CATEGORY(emp_type_num, emp_type_name) values(emp_type_num_seq.nextval, '신입');
 insert into EMPLOYMENT_TYPE_CATEGORY(emp_type_num, emp_type_name) values(emp_type_num_seq.nextval, '경력');
@@ -295,7 +279,6 @@ create table job_emp(
 	constraint fk_emp_job foreign key(emp_type_num) references employment_type_category(emp_type_num) on delete cascade,
 	constraint pk_jobposting_jobemp primary key(emp_type_num,job_posting_num)
 );
-
 
 insert into JOB_EMP(job_posting_num, emp_type_num) values(1001, 302);
 insert into JOB_EMP(job_posting_num, emp_type_num) values(1001, 304);
@@ -328,8 +311,6 @@ create table location_category(
 	loc_name varchar2(100) not null
 );
 create sequence loc_num_seq start with 501;
-
-
 
 insert into location_category(loc_num, loc_name) values(loc_num_seq.nextval, '서울');
 insert into location_category(loc_num, loc_name) values(loc_num_seq.nextval, '경기');
@@ -379,8 +360,6 @@ create table development_category(
 );
 
 create sequence dev_cat_num_seq start with 201;
-
-
 
 insert into DEVELOPMENT_CATEGORY(dev_cat_num, rc_num, dev_cat_name) values(dev_cat_num_seq.nextval, 101, 'Java');
 insert into DEVELOPMENT_CATEGORY(dev_cat_num, rc_num, dev_cat_name) values(dev_cat_num_seq.nextval, 101, 'jsp');
@@ -434,8 +413,6 @@ create table job_dev(
 	constraint pk_jobposting_jobdev primary key(dev_cat_num,job_posting_num)
 );
 
-
-
 insert into JOB_DEV(job_posting_num, dev_cat_num) values(1001, 201);
 insert into JOB_DEV(job_posting_num, dev_cat_num) values(1001, 202);
 insert into JOB_DEV(job_posting_num, dev_cat_num) values(1001, 204);
@@ -472,7 +449,6 @@ create table academic_category(
 );
 create sequence academic_num_seq start with 401;
 
-
 insert into ACADEMIC_CATEGORY(academic_num, academic_name) values(academic_num_seq.nextval, '고졸');
 insert into ACADEMIC_CATEGORY(academic_num, academic_name) values(academic_num_seq.nextval, '초대졸');
 insert into ACADEMIC_CATEGORY(academic_num, academic_name) values(academic_num_seq.nextval, '대졸');
@@ -491,7 +467,6 @@ create table job_academic(
 	constraint pk_jobposting_jobacademic primary key(academic_num,job_posting_num)
 );
 
-
 insert into JOB_ACADEMIC(job_posting_num, academic_num) values(1001, 402);
 insert into JOB_ACADEMIC(job_posting_num, academic_num) values(1002, 403);
 
@@ -507,11 +482,9 @@ create table portfolio_academic(
 	constraint pk_id_aca_pf primary key(academic_num,normal_id)
 );
 
-
 insert into PORTFOLIO_ACADEMIC(normal_id, academic_num) values('yosep', 403);
 insert into PORTFOLIO_ACADEMIC(normal_id, academic_num) values('MCW', 404);
 
 select * from portfolio_academic;
 
 commit
-

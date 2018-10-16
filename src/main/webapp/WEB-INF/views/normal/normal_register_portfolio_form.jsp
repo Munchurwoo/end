@@ -26,7 +26,6 @@
 	});//ready
 </script>
 
-
 <!-- normal_register_portfolio -->
 <h3>이력서 작성</h3>
 <form action="registerPortfolio.do" method="get" id="master">

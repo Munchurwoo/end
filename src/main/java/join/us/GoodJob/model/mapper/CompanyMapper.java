@@ -13,13 +13,14 @@ import join.us.GoodJob.model.vo.MemberVO;
 public interface CompanyMapper {
 	
 	//기업 회원가입(COMPANY_MEMBER)
-	void insertCompanyMember(CompanyMemberVO companyMemberVO);
+	void registerCompanyMember(CompanyMemberVO companyMemberVO);
 	//기업 회원가입(MEMBER)
-	void insertMember(MemberVO memberVO);
-	
+	void registerMember(MemberVO memberVO);
 	//기업 로그인(MEMBER)
 	MemberVO loginNormalMember(MemberVO memberVO);
 	
+	//기업 검색(COMPANy_MEMBER)
+	CompanyMemberVO selectCompanyMember(String id);
 	//기업 회원정보 수정(COMPANY_MEMBER,)
 	void updateCompanyMember(CompanyMemberVO companyMemberVO);
 	//기업 회원정보 수정(MEMBER)
@@ -27,6 +28,9 @@ public interface CompanyMapper {
 		
 	//기업 회원탈퇴(MEMBER) ->company_member의 튜플은 CASCADE 삭제됨
 	void deleteCompanyMember(String companyId);
+	
+	//기업 마이페이지 상세보기
+	CompanyMemberVO myPageCompanyMember(String companyId);
 	
 	
 	

@@ -1,6 +1,5 @@
 package join.us.GoodJob.model.mapper;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -10,7 +9,6 @@ import join.us.GoodJob.model.vo.DevCatVO;
 import join.us.GoodJob.model.vo.EmpTypeCatVO;
 import join.us.GoodJob.model.vo.LocCatVO;
 import join.us.GoodJob.model.vo.MemberVO;
-import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.RecruitCatVO;
 
 @Mapper

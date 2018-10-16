@@ -2,17 +2,42 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- <mapper namespace="join.us.GoodJob.model.mapper.CompanyMapper">
-  <insert id="insertCompanyMember" parameterType="companyMemberVO">
+<mapper namespace="join.us.GoodJob.model.mapper.CompanyMapper">
+	<insert id="registerCompanyMember" parameterType="companyMemberVO">
 		insert into
 		company_member(company_id,introduction,company_type,industry,sales,date_of_establishment,num_of_employees)
-		values(#{id}, #{introduction}, #{companyType}, #{industry}, #{sales}, #{dateOfEstablishment}, #{numOfEmployees})
+		values(#{companyId}, #{introduction}, #{companyType}, #{industry}, #{sales},
+		#{dateOfEstablishment}, #{numOfEmployees})
 	</insert>
-<insert id="insertMember" parameterType="memberVO">
-		insert into member(id,password,email,name,tel,member_type,address) 
-		values(#{id}, #{password}, #{email}, #{name}, #{tel}, 3, #{address})
+	<insert id="registerMember" parameterType="memberVO">
+		insert into
+		member(id,password,email,name,tel,member_type,address)
+		values(#{companyId}, #{password}, #{email}, #{name}, #{tel}, 3, #{address})
 	</insert>
- </mapper> 		
+	<select id="selectCompanyMember" parameterType="string" resultType="companyMemberVO">
+		select m.id, m.email, m.name, m.address, m.tel, cm.introduction, cm.company_type, cm.industry, cm.sales, cm.date_of_establishment, cm.num_of_employees
+		from company_member cm, member m
+		where m.id=cm.company_id and m.id=#{value}
+	</select>
+	<update id="updateCompanyMember" parameterType="companyMemberVO">
+		update company_member set introduction=#{introduction}, company_type=#{companyType}, industry=#{industry}, sales=#{sales}, date_of_establishment=#{dateOfEstablishment}, num_of_employees=#{numOfEmployees}
+		where company_id=#{id}
+	</update>
+	<update id="updateMember" parameterType="companyMemberVO">
+		update member set password=#{password}, email=#{email}, address=#{address}, tel=#{tel} where id=#{id}
+	</update>
+	<select id="myPageCompanyMember" resultType="companyMemberVO" parameterType="memberVO">
+		select
+		cm.company_id,m.password,m.name,m.address,m.tel,m.email,cm.introduction,
+		cm.company_type,cm.industry,cm.sales,cm.date_of_establishment,cm.num_of_employees
+		from member m , company_member cm
+		where m.id=cm.company_id
+		and m.id=#{id}
+	</select>
+	<delete id="deleteCompanyMember" parameterType="string">
+		delete from member where id=#{id}
+	</delete>
+</mapper> 		
  
  
  

@@ -1,48 +1,84 @@
 package join.us.GoodJob.controller;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import join.us.GoodJob.model.service.CompanyService;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
+import join.us.GoodJob.model.vo.MemberVO;
 
 @Controller
 public class CompanyController {
 	@Resource
 	CompanyService companyService;
-	
-	@RequestMapping("user-insertCompanyMemberForm.do")
-	public String insertCompanyMemberForm() {
+
+	@RequestMapping("user-registerCompanyMemberForm.do")
+	public String registerCompanyMemberForm() {
 		return "company/company_register_form.tiles2";
 	}
-	@RequestMapping("user-insertCompanyMember.do")
+
+	@PostMapping("user-registerCompanyMember.do")
 	public String registerCompanyMember(CompanyMemberVO companyMemberVO) {
 		System.out.println(companyMemberVO);
 		companyService.registerCompanyMember(companyMemberVO);
 		return "redirect:user-loginForm.do";		
 	}
-	
+
 	/**
-	 * 181015 MIRI
-	 * 기업 회원정보 수정(COMPANY_MEMBER)
+	 * 181015 MIRI 기업 회원정보폼 (NORMAL_MEMBER)
+	 * 
 	 * @param companyMemberVO
 	 * @return
 	 */
-	@RequestMapping("updateCompanyMember.do")
-	public String updateCompanyMember(CompanyMemberVO companyMemberVO) {
+	@RequestMapping("updateCompanyMemberForm.do")
+	public String updateCompanyMemberForm(HttpSession session, Model model) {
+		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		if (mvo != null) {
+			CompanyMemberVO cmvo = companyService.selectCompanyMember(mvo.getId());
+			model.addAttribute("cmvo", cmvo);
+		}
 		return "company/company_update_form.tiles2";
 	}
-	
-	
+
 	/**
-	 * 181015 MIRI
-	 * 기업회원 마이페이지
+	 * 181016 MIRI 기업 회원정보 수정
+	 * 
+	 * @param companyMemberVO
+	 * @return
+	 */
+	@PostMapping("updateCompanyMember.do")
+	public String updateCompanyMember(CompanyMemberVO companyMemberVO) {
+		companyService.updateCompanyMember(companyMemberVO);
+		return "redirect:home.do";
+	}
+
+	/**
+	 * 181015 MIRI 기업회원 마이페이지
+	 * 
 	 * @return
 	 */
 	@RequestMapping("company_mypage.do")
-	public String companyMypage() {
+	public String myPageCompanyMember(String companyId, Model model, HttpSession session) {
+		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		if (mvo != null) {
+			CompanyMemberVO cmvo = companyService.myPageCompanyMember(mvo.getId());
+			model.addAttribute("cmvo", cmvo);
+		}
 		return "company/company_mypage.tiles2";
+	}
+	@RequestMapping("deleteCompanyMember.do")
+	public String deleteNormalMember(HttpSession session) {
+		MemberVO mvo=(MemberVO) session.getAttribute("mvo");
+		String companyId=mvo.getId();
+		if(companyId!=null) {
+			companyService.deleteCompanyMember(companyId);
+			session.invalidate();
+		}
+		return "home.tiles";
 	}
 }

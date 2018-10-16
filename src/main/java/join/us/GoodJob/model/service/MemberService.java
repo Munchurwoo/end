@@ -1,6 +1,5 @@
 package join.us.GoodJob.model.service;
 
-import java.util.HashMap;
 import java.util.List;
 
 import join.us.GoodJob.model.vo.AcaCatVO;

@@ -11,6 +11,7 @@ public class MemberVO {
 	public MemberVO() {
 		super();
 	}
+	
 	public MemberVO(String id, String password, String email, String name, String tel, String memberType,
 			String address) {
 		super();
