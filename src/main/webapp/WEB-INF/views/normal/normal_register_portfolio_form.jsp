@@ -12,7 +12,7 @@
 				type:"get",
 				url:"getDevCatVOListAjax.do",
 				dataType:"json",
-				data:$("#master").serialize(),
+				data:$("#registerForm").serialize(),
 				success:function(catList){		
 					var catListString='';
 					for(var i=0; i<catList.length; i++){			
@@ -37,14 +37,17 @@
 				processData: false,
 		        contentType: false,
 		        cache: false,
-				success:function(result){
-					alert(result);
-				/* 	$("#pictureList").append("<li>"+result.orgName+"<input type='hidden'name='pics'value="+result.fileName+
-					"><button class='deleteBtn'>x</button></li>");
-					$("#imgBtn").val("");
-					$("#picAlert").text("") */
+				success:function(path){
+					$("#normal-picture").attr('src', "/GoodJob/resources/upload/"+path);
+					//$("#pictureInput").val(path);
+					alert(path);
+					$("#aaa").append("<input type='hidden' name='fileList' value='"+path+"'>");	
 				}
 			});
+		});
+		
+		$("#registerBtn").click(function() {
+			$("#registerForm").submit();
 		});
 		
 		
@@ -53,13 +56,13 @@
 
 <!-- normal_register_portfolio -->
 <h3>이력서 작성</h3>
-<form action="registerPortfolio.do" method="get" id="master">
+<form action="registerPortfolio.do" method="get" id="registerForm">
 	제목 <input type="text" name="title" placeholder="제목을 입력하세요" required="required"><br>
 	내용<br>&nbsp;&nbsp;&nbsp;<textarea rows="10" cols="60" name="contents" placeholder="내용을 입력하세요" required="required"></textarea><br><br>
 		
 	<h5>지역</h5>
 	<c:forEach items="${requestScope.locCatList}" var="locCat" varStatus="i">
-		<input type="checkbox" name="empTypeCatNumList" value="${locCat.locNum}" >${locCat.locName}&nbsp;
+		<input type="checkbox" name="locCatNumList" value="${locCat.locNum}" >${locCat.locName}&nbsp;
 	</c:forEach> <br>
 	
 	<h5>학력</h5>
@@ -82,20 +85,21 @@
 	<h5>개발분야</h5>
 	<div id="empTypeArea">		
 	</div>	
+	<span id="aaa"></span>
 	
-	<button type="reset">초기화</button>
-	
+	<button type="reset">초기화</button>	
 </form >
-<form enctype="multipart/form-data" action="" id="pictureUploadForm">
 <h5>사진등록</h5>
+<form enctype="multipart/form-data" action="" id="pictureUploadForm">
  <div class="resume_photo">
    <a href="##" class="box_photo" data-api_type="layer" data-api_id="basic_photo" >
-       <img src="" border="0" width="100" height="140" class="user_image" />s</a>
-   <a class="photo_delete" href="##" style=""><span class="blind">사진 삭제</span></a>
+       <img id="normal-picture" src="" border="0" width="100" height="140" class="user_image" />s</a>
+  <!--  <a class="photo_delete" href="##" style=""><span class="blind">사진 삭제</span></a> -->
 </div>
 <input type="file" name="uploadPicture" id="pictureUploadBtn"><br>
+
 </form>
 
 
-<button type="submit" >등록하기</button>
+<button type="submit"  id="registerBtn">등록하기</button>
 <button type="reset" onclick="location.href='home.do'">홈으로</button>	
