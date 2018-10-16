@@ -28,7 +28,7 @@ public class CompanyController {
 	}
 	
 	/**
-	 * 181015 MIRI 기업 회원정보 수정(COMPANY_MEMBER)
+	 * 181015 MIRI 기업 회원정보폼 (NORMAL_MEMBER)
 	 * @param companyMemberVO
 	 * @return
 	 */
@@ -41,6 +41,11 @@ public class CompanyController {
 		}
 		return "company/company_update_form.tiles2";
 	}
+	/**
+	 * 181016 MIRI 기업 회원정보 수정
+	 * @param companyMemberVO
+	 * @return
+	 */
 	@PostMapping("updateCompanyMember.do")
 	public String updateCompanyMember(CompanyMemberVO companyMemberVO) {
 		companyService.updateCompanyMember(companyMemberVO);

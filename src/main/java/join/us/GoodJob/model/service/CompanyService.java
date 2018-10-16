@@ -19,5 +19,7 @@ public interface CompanyService {
 
 	//기업 회원 탈퇴
 	void deleteCompanyMember(String companyId);
+	//기업 마이페이지 상세
+	CompanyMemberVO myPageCompanyMember(String companyId);
 
 }
