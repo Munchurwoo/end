@@ -19,9 +19,9 @@ public class CompanyController {
 	}
 	@RequestMapping("user-insertCompanyMember.do")
 	public String registerCompanyMember(CompanyMemberVO companyMemberVO) {
+		System.out.println(companyMemberVO);
 		companyService.registerCompanyMember(companyMemberVO);
-		return "redirect:loginForm.do";
-		
+		return "redirect:user-loginForm.do";		
 	}
 	
 	/**

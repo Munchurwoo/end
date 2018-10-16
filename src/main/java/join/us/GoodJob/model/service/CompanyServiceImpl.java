@@ -15,8 +15,8 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	public void registerCompanyMember(CompanyMemberVO companyMemberVO) {
-		companyMapper.insertCompanyMember(companyMemberVO);
 		companyMapper.insertMember(companyMemberVO);
+		companyMapper.insertCompanyMember(companyMemberVO);
 	}
 
 	@Override
