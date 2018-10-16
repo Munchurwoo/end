@@ -11,5 +11,5 @@
 	패스워드 <input type="password"  name="password" required="required"><br><br>
 	<input type="submit" value="로그인"><br><br>
 </form>
-	<a href="registerNormalMemberForm.do">회원가입</a> &nbsp; &nbsp;
+	<a href="user-registerNormalMemberForm.do">회원가입</a> &nbsp; &nbsp;
 	<a href="#">비밀번호를 잊으셨나요?</a><br>

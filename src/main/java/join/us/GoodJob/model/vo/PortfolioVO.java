@@ -5,6 +5,7 @@ import java.util.List;
 public class PortfolioVO {
 	private String contents;
 	private String fileList;
+	private String title;
 	private List<LocCatVO> locCatVOList;
 	private List<RecruitCatVO> recruitCatVOList;
 	private List<EmpTypeCatVO> empTypeCatVOList;
@@ -21,7 +22,8 @@ public class PortfolioVO {
 	}
 	/**
 	 * PortfolioVO
-	 * @param contents 포트폴리오 내용
+	 * @param contents 이력서 내용
+	 * @param title 이력서 제목
 	 * @param fileList 여러개의 파일을 등록( 파일경로를 String으로 저장)   ex) 성적증명서.pdf / Semi-project.doc
 	 * @param locCatVOList 지역분류 리스트(VO,출력용)
 	 * @param recruitCatVOList 모집직군 분류 리스트(VO, 출력용)
@@ -33,14 +35,15 @@ public class PortfolioVO {
 	 * @param empTypeCatNumList 고용형태 번호 리스트(String, 입력용, 포트폴리오 등록시 고용형태명을 복수 선택(체크박스) 후 등록버튼을 누르면 PortfolioVO.empTypeCatNumList에 고용형태 번호가 순서대로 저장)
 	 * @param devCatNumList 개발분야 번호 리스트(String, 입력용, 포트폴리오 등록시 개발분야명을 복수 선택(체크박스) 후 등록버튼을 누르면 PortfolioVO.devCatNumList에 개발분야 번호가 순서대로 저장)
 	 * @param acaCatNumList 학력 번호 리스트(String, 입력용, 포트폴리오 등록시 학력명을 복수 선택(체크박스) 후 등록버튼을 누르면 PortfolioVO.acaCatNumList에 학력 번호가 순서대로 저장)
-	 */
-	public PortfolioVO(String contents, String fileList, List<LocCatVO> locCatVOList,
+	 */	
+	public PortfolioVO(String contents, String fileList, String title, List<LocCatVO> locCatVOList,
 			List<RecruitCatVO> recruitCatVOList, List<EmpTypeCatVO> empTypeCatVOList, List<DevCatVO> devCatVOList,
 			List<AcaCatVO> acaCatVOList, List<String> locCatNumList, List<String> recruitCatNumList,
 			List<String> empTypeCatNumList, List<String> devCatNumList, List<String> acaCatNumList) {
 		super();
 		this.contents = contents;
 		this.fileList = fileList;
+		this.title = title;
 		this.locCatVOList = locCatVOList;
 		this.recruitCatVOList = recruitCatVOList;
 		this.empTypeCatVOList = empTypeCatVOList;
@@ -51,10 +54,10 @@ public class PortfolioVO {
 		this.empTypeCatNumList = empTypeCatNumList;
 		this.devCatNumList = devCatNumList;
 		this.acaCatNumList = acaCatNumList;
-	}
+	}	
 	public String getContents() {
 		return contents;
-	}
+	}	
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
@@ -124,12 +127,21 @@ public class PortfolioVO {
 	public void setAcaCatNumList(List<String> acaCatNumList) {
 		this.acaCatNumList = acaCatNumList;
 	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
 	@Override
 	public String toString() {
-		return "PortfolioVO [contents=" + contents + ", fileList=" + fileList + ", locCatVOList=" + locCatVOList
-				+ ", recruitCatVOList=" + recruitCatVOList + ", empTypeCatVOList=" + empTypeCatVOList
+		return "PortfolioVO [contents=" + contents + ", fileList=" + fileList + ", title=" + title + ", locCatVOList="
+				+ locCatVOList + ", recruitCatVOList=" + recruitCatVOList + ", empTypeCatVOList=" + empTypeCatVOList
 				+ ", devCatVOList=" + devCatVOList + ", acaCatVOList=" + acaCatVOList + ", locCatNumList="
 				+ locCatNumList + ", recruitCatNumList=" + recruitCatNumList + ", empTypeCatNumList="
 				+ empTypeCatNumList + ", devCatNumList=" + devCatNumList + ", acaCatNumList=" + acaCatNumList + "]";
 	}
+	
+	
+	
 }

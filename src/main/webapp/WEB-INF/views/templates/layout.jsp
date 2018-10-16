@@ -15,23 +15,23 @@
 <meta name="description" content="" />
 <!-- css -->
 <link
-	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css"
+	href="${pageContext.request.contextPath}/resources/css/bootstrap.min.css?ver=1"
 	rel="stylesheet" />
 <link
-	href="${pageContext.request.contextPath}/resources/css/fancybox/jquery.fancybox.css"
+	href="${pageContext.request.contextPath}/resources/css/fancybox/jquery.fancybox.css?ver=1"
 	rel="stylesheet">
 <link
-	href="${pageContext.request.contextPath}/resources/css/jcarousel.css"
+	href="${pageContext.request.contextPath}/resources/css/jcarousel.css?ver=1"
 	rel="stylesheet" />
 <link
-	href="${pageContext.request.contextPath}/resources/css/flexslider.css"
+	href="${pageContext.request.contextPath}/resources/css/flexslider.css?ver=1"
 	rel="stylesheet" />
-<link href="${pageContext.request.contextPath}/resources/css/style.css"
+<link href="${pageContext.request.contextPath}/resources/css/style.css?ver=1"
 	rel="stylesheet" />
 
 <!-- Theme skin -->
 <link
-	href="${pageContext.request.contextPath}/resources/skins/default.css"
+	href="${pageContext.request.contextPath}/resources/skins/default.css?ver=1"
 	rel="stylesheet" />
 <script src="${pageContext.request.contextPath}/resources/js/jquery.js"></script>
 <script
