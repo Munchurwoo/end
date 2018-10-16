@@ -128,7 +128,7 @@ create table company_member(
 );
 
 insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, sales, date_of_establishment, num_of_employees) values('NHNuser', '더 넓은 세상, 더 많은 사람들이 더 큰 재미를 우리와 함께 나눕니다.', '대기업', '솔루션', 1813, '2015-11-18', 664);
-insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, date_of_establishment) values('Tmaxuser', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', '1997-06-04');
+insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees) values('Tmaxuser', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358);
 
 select * from company_member;
 ---------------------------------------------------------------------
