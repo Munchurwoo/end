@@ -21,16 +21,23 @@ public class NormalServiceImpl implements NormalService {
 	
 	@Override
 	public void updateNormalMember(NormalMemberVO normalMemberVO) {
-		//updateMember(memberVO);
 		normalMapper.updateNormalMember(normalMemberVO);
+		normalMapper.updateMember(normalMemberVO);
 	}
 	
-	public void updateMember(MemberVO memberVO) {
-		normalMapper.updateMember(memberVO);
+	@Override
+	public NormalMemberVO selectNormalMember(String id) {
+		return normalMapper.selectNormalMember(id);
 	}
 
 	@Override
 	public void deleteNormalMember(String normalId) {
+		normalMapper.deleteNormalMember(normalId);
+	}
+
+	@Override
+	public void getNormalMypageInfo(MemberVO memberVO) {
+		normalMapper.getNormalMypageInfo(memberVO);
 	}
 
 }

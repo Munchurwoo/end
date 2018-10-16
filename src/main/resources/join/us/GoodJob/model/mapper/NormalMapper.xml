@@ -12,10 +12,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into normal_member(normal_id,picture_path,career_status,gender) 
 		values(#{id}, #{picturePath}, #{careerStatus}, #{gender})
 	</insert>
-
+		
+	<select id="selectNormalMember" parameterType="string" resultType="normalMemberVO">
+		select m.id, m.password, m.email, m.name, m.address, m.tel, nm.gender, nm.picture_path, nm.career_status 
+		from normal_member nm, member m
+		where nm.normal_id=m.id and m.id=#{value}
+	</select>
+	
+	<update id="updateMember" parameterType="memberVO">
+		update member set password=#{password}, email=#{email}, address=#{address}, tel=#{tel} where id=#{id} and password=#{password}
+	</update>	
+	
 	<update id="updateNormalMember" parameterType="normalMemberVO">
 		update normal_member set normal_id=#{normalId}, gender=#{gender}, picture_path=#{picturePath}, career_status=#{careerStatus}
 	</update>
 	
+	<delete id="deleteNormalMember" parameterType="string">
+		delete from member where id=#{id}
+	</delete>
+	
+	<select id="getNormalMypageInfo" resultType="normalMemberVO" parameterType="memberVO">
+		select m.id,m.password,m.email,m.name,m.tel,m.address,m.member_type,nm.normal_id,nm.gender,nm.picture_path,nm.career_status
+		from member m,normal_member nm
+		where m.id=nm.normal_id
+		and m.id=#{id}
+	</select>
  </mapper> 		
  

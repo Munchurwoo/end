@@ -28,8 +28,8 @@
 					<li><a href="contact.html">기업서비스</a></li>
 					<c:choose>
 						<c:when test="${empty sessionScope.mvo}">
-							<li><a href="loginForm.do">로그인</a></li>
-							<li><a href="registerNormalMemberForm.do">회원가입</a>						
+							<li><a href="user-loginForm.do">로그인</a></li>
+							<li><a href="user-registerNormalMemberForm.do">회원가입</a>						
 						</c:when>
 						<c:otherwise>
 							<li>

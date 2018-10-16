@@ -1,3 +1,4 @@
+
 package join.us.GoodJob;
 
 import org.junit.Test;
@@ -25,6 +26,6 @@ public class GoodJobUnitTest {
 		System.out.println(cvo);
 		
 	
-	}
-		
+			
+}
 }
