@@ -13,7 +13,7 @@ public class CompanyMemberVO extends MemberVO {
 	private String industry;
 	private String sales;
 	private String dateOfEstablishment;
-	private String numOfEmployees;	//181016 MIRI 기존 int type일 떄에 공백으로 가입하면 400Error뜸 -> String type으로 수정하였더니 정상 동작.
+	private String numOfEmployees;	//181016 MIRI 기존 int type일 때에 공백으로 가입하면 400Error뜸 -> String type으로 수정하였더니 정상 동작.
 	private List<JobPostingVO> jobPostingVOList;
 	public CompanyMemberVO() {
 		super();

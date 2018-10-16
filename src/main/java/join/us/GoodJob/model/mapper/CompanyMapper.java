@@ -51,7 +51,6 @@ public interface CompanyMapper {
 	
 	
 	
-	
 	//구인공고 등록
 	//구인공고 키워드 등록	
 	//구인공고 개발분야 분류 등록	
