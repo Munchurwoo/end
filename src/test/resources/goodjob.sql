@@ -123,7 +123,7 @@ create table company_member(
 	industry varchar2(100) not null,
 	sales number default 0,
 	date_of_establishment varchar2(100) default null,
-	num_of_employees number default null,
+	num_of_employees number default 0,
 	constraint fk_member_company_member foreign key(company_id) references member(id) on delete cascade
 );
 
@@ -488,3 +488,33 @@ insert into PORTFOLIO_ACADEMIC(normal_id, academic_num) values('MCW', 404);
 select * from portfolio_academic;
 
 commit
+
+
+--SQL 테스트 
+
+select normal_id
+from( 
+	select pd.normal_id, pd.dev_cat_num, pr.rc_num, pe.emp_type_num
+	from portfolio_dev pd, portfolio_recruitment pr, portfolio_emp pe
+	where pd.normal_id=pr.normal_id 
+	and pr.normal_id=pe.normal_id 
+)--분류 테이블 세 개를 동등 조인한 결과에서 검색 시작
+where dev_cat_num =201 and rc_num =101 and emp_type_num =304 
+-- 개발분야에서 java 선택  -- 모집직군에서 웹프로그래머선택 --고용형태에서 프리랜서 선택
+
+select distinct normal_id  
+from( 
+	select pd.normal_id, pd.dev_cat_num, pr.rc_num, pe.emp_type_num
+	from portfolio_dev pd, portfolio_recruitment pr, portfolio_emp pe
+	where pd.normal_id=pr.normal_id 
+	and pr.normal_id=pe.normal_id 
+)--분류 테이블 세 개를 동등 조인한 결과에서 검색 시작
+where dev_cat_num in (201,202) and rc_num in(101,106) and emp_type_num in (301,302) 
+-- 개발분야에서 java, jsp 선택 
+-- 모집직군에서 웹프로그래머, DBA/데이터베이스 선택 
+-- 고용형태에서 인턴, 신입 선택
+
+
+
+
+
