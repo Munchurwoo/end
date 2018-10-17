@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.HttpSessionRequiredException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import join.us.GoodJob.model.service.MemberService;
 import join.us.GoodJob.model.service.NormalService;
+import join.us.GoodJob.model.vo.CompanyMemberVO;
 import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PortfolioVO;
@@ -159,6 +161,23 @@ public class NormalController {
 		}
 		return uploadPicture.getOriginalFilename();
 	}
-	
+	//나중에 "yosep"->normalId
+	@RequestMapping("normalDetailPortfolio.do")
+	public String normalDetailPortfolio(String normalId,Model model,HttpSession session) {
+		model.addAttribute("devCatList",memberService.getDevCatVOListByNormalId("yosep"));
+		model.addAttribute("empTypeCatList",memberService.getEmpCatVOListByNormalId("yosep"));
+		model.addAttribute("locCatList",memberService.getLocCatVOListByNormalId("yosep"));
+		model.addAttribute("acaCatList",memberService.getAcaCatVOListByNormalId("yosep"));
+		model.addAttribute("recruitCatList",memberService.getRecruitCatVOListByNormalId("yosep"));
+		model.addAttribute("povo",normalService.normalDetailPortfolio("yosep"));
+		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		if (mvo != null) {
+			NormalMemberVO nmvo = normalService.myPageNormalMember(mvo.getId());
+			model.addAttribute("nmvo", nmvo);
+		}
+		return "normal/normal_detail_portfolio.tiles2";
+		
+	}
 }
+
 

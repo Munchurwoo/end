@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
+import join.us.GoodJob.model.vo.PortfolioVO;
 
 @Mapper
 public interface NormalMapper {
@@ -46,6 +47,7 @@ public interface NormalMapper {
 	//포트폴리오 전체보기
 	//포트폴리오 검색결과 보기
 	//포트폴리오 상세보기
+	PortfolioVO normalDetailPortfolio(String normalId);	
 	//포트폴리오 삭제
 	//포트폴리오 수정
 	

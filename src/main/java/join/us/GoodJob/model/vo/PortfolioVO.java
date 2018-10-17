@@ -3,7 +3,7 @@ package join.us.GoodJob.model.vo;
 import java.util.List;
 
 public class PortfolioVO {
-	private String contents;
+	private String content;
 	private String fileList;
 	private String title;
 	private List<LocCatVO> locCatVOList;
@@ -22,7 +22,7 @@ public class PortfolioVO {
 	}
 	/**
 	 * PortfolioVO
-	 * @param contents 이력서 내용
+	 * @param content 이력서 내용
 	 * @param title 이력서 제목
 	 * @param fileList 여러개의 파일을 등록( 파일경로를 String으로 저장)   ex) 성적증명서.pdf / Semi-project.doc
 	 * @param locCatVOList 지역분류 리스트(VO,출력용)
@@ -36,12 +36,12 @@ public class PortfolioVO {
 	 * @param devCatNumList 개발분야 번호 리스트(String, 입력용, 포트폴리오 등록시 개발분야명을 복수 선택(체크박스) 후 등록버튼을 누르면 PortfolioVO.devCatNumList에 개발분야 번호가 순서대로 저장)
 	 * @param acaCatNumList 학력 번호 리스트(String, 입력용, 포트폴리오 등록시 학력명을 복수 선택(체크박스) 후 등록버튼을 누르면 PortfolioVO.acaCatNumList에 학력 번호가 순서대로 저장)
 	 */	
-	public PortfolioVO(String contents, String fileList, String title, List<LocCatVO> locCatVOList,
+	public PortfolioVO(String content, String fileList, String title, List<LocCatVO> locCatVOList,
 			List<RecruitCatVO> recruitCatVOList, List<EmpTypeCatVO> empTypeCatVOList, List<DevCatVO> devCatVOList,
 			List<AcaCatVO> acaCatVOList, List<String> locCatNumList, List<String> recruitCatNumList,
 			List<String> empTypeCatNumList, List<String> devCatNumList, List<String> acaCatNumList) {
 		super();
-		this.contents = contents;
+		this.content = content;
 		this.fileList = fileList;
 		this.title = title;
 		this.locCatVOList = locCatVOList;
@@ -55,11 +55,11 @@ public class PortfolioVO {
 		this.devCatNumList = devCatNumList;
 		this.acaCatNumList = acaCatNumList;
 	}	
-	public String getContents() {
-		return contents;
+	public String getContent() {
+		return content;
 	}	
-	public void setContents(String contents) {
-		this.contents = contents;
+	public void setContent(String content) {
+		this.content = content;
 	}
 	public String getFileList() {
 		return fileList;
@@ -135,7 +135,7 @@ public class PortfolioVO {
 	}
 	@Override
 	public String toString() {
-		return "PortfolioVO [contents=" + contents + ", fileList=" + fileList + ", title=" + title + ", locCatVOList="
+		return "PortfolioVO [content=" + content + ", fileList=" + fileList + ", title=" + title + ", locCatVOList="
 				+ locCatVOList + ", recruitCatVOList=" + recruitCatVOList + ", empTypeCatVOList=" + empTypeCatVOList
 				+ ", devCatVOList=" + devCatVOList + ", acaCatVOList=" + acaCatVOList + ", locCatNumList="
 				+ locCatNumList + ", recruitCatNumList=" + recruitCatNumList + ", empTypeCatNumList="

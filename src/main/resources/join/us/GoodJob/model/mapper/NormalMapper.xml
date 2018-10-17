@@ -41,5 +41,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where m.id=nm.normal_id
 		and m.id=#{id}
 	</select>
+	<select id="normalDetailPortfolio" resultType="portfolioVO" parameterType="string">
+		select title,content
+		from portfolio
+		where normal_id=#{normalId}
+	</select>
  </mapper> 		
  

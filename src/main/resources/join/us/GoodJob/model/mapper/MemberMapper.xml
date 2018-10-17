@@ -54,6 +54,37 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and je.job_posting_num=#{jobPostingNum}
 	</select>
 	
+	<!-- 아이디로 조회 -->
+	<select id="getDevCatVOListByNormalId" resultType="devCatVO">
+		select dc.dev_cat_name
+		from development_category dc, portfolio_dev pd
+		where dc.dev_cat_num=pd.dev_cat_num 
+		and pd.normal_id=#{normalId}
+	</select>
+	<select id="getRecruitCatVOListByNormalId" resultType="recruitCatVO">
+		select rc.rc_name
+		from recruitment_category rc , portfolio_recruitment pr
+		where rc.rc_num=pr.rc_num 
+		and pr.normal_id=#{normalId}
+	</select>
+	<select id="getEmpCatVOListByNormalId" resultType="empTypeCatVO">
+		select etc.emp_type_name
+		from employment_type_category etc , portfolio_emp pe
+		where etc.emp_type_num=pe.emp_type_num
+		and pe.normal_id=#{normalId}
+	</select>
+	<select id="getLocCatVOListByNormalId" resultType="locCatVO">
+		select lc.loc_name
+		from location_category lc , portfolio_loc pl
+		where lc.loc_num=pl.loc_num
+		and pl.normal_id=#{normalId}
+	</select>
+	<select id="getAcaCatVOListByNormalId" resultType="acaCatVO">
+		select ac.academic_name
+		from academic_category ac , portfolio_academic pa
+		where ac.academic_num=pa.academic_num
+		and pa.normal_id=#{normalId}
+	</select>
 </mapper>
  
  

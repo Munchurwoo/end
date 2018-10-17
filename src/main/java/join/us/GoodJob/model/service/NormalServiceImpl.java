@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import join.us.GoodJob.model.mapper.NormalMapper;
 import join.us.GoodJob.model.vo.NormalMemberVO;
+import join.us.GoodJob.model.vo.PortfolioVO;
 
 @Service
 public class NormalServiceImpl implements NormalService {
@@ -42,6 +43,11 @@ public class NormalServiceImpl implements NormalService {
 	@Override
 	public NormalMemberVO myPageNormalMember(String memberId) {
 		return normalMapper.myPageNormalMember(memberId);
+	}
+
+	@Override
+	public PortfolioVO normalDetailPortfolio(String normalId) {
+		return normalMapper.normalDetailPortfolio(normalId);
 	}
 
 }
