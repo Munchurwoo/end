@@ -24,6 +24,6 @@ public class MiriUnitTest {
 	
 	@Test
 	public void test() {
-
+		System.out.println(memberMapper.checkMemberId("miri"));
 	}
 }

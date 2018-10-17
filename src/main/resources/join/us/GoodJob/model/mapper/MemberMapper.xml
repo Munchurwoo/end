@@ -7,6 +7,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="loginMember" parameterType="memberVO" resultType="memberVO">
 		select id, name, member_type from member where id=#{id} and password=#{password}
 	</select>	
+	<select id="checkMemberId" parameterType="string" resultType="int">
+		select count(*) from member where id=#{value}
+	</select>
 	<select id="getRecruitCatVOList" resultType="recruitCatVO">
 		select rc_num, rc_name from recruitment_category
 	</select>	

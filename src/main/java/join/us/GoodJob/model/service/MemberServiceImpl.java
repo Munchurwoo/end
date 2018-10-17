@@ -25,6 +25,11 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+	public int checkMemberId(String id) {
+		return memberMapper.checkMemberId(id);
+	}
+
+	@Override
 	public List<RecruitCatVO> getRecruitCatVOList() {
 		return memberMapper.getRecruitCatVOList();
 	}

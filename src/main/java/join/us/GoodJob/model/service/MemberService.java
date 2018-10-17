@@ -13,7 +13,14 @@ public interface MemberService {
 	// 개인, 기업 로그인
 	MemberVO loginMember(MemberVO memberVO);
 
+
 	// 모집직군 분류 리스트 받아오기
+
+	//개인, 기업 아이디 중복 검사
+	int checkMemberId(String id);
+	
+	//모집직군 분류 리스트 받아오기
+
 	List<RecruitCatVO> getRecruitCatVOList();
 
 	// 개발분야 분류 리스트 받아오기(모집직군 번호로)

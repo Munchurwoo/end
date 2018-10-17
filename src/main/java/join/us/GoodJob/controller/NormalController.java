@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.HttpSessionRequiredException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -17,7 +16,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import join.us.GoodJob.model.service.MemberService;
 import join.us.GoodJob.model.service.NormalService;
-import join.us.GoodJob.model.vo.CompanyMemberVO;
 import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PortfolioVO;
@@ -93,20 +91,7 @@ public class NormalController {
 		normalService.updateNormalMember(normalMemberVO);
 		return "redirect:home.do";
 	}
-	
-	/**
-	 * 181016 MIRI 개인회원 아이디 중복 검사
-	 * @param id
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping("checkNormalMemberId.do")
-	public String checkNormalMemberId(String id) {
-		int checkedId = normalService.checkNormalMemberId(id);
-		if(checkedId == 0) return "ok";
-		else return "fail";
-	}
-	
+
 	@RequestMapping("registerPortfolioForm.do")
 	public String registerPortfolioForm(Model model) {
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());

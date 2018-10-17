@@ -15,6 +15,8 @@ import join.us.GoodJob.model.vo.RecruitCatVO;
 public interface MemberMapper {
 	// 개인,기업 로그인(MEMBER)
 	MemberVO loginMember(MemberVO memberVO);
+	//개인,기업 아이디 중복 검사(MEMBER)
+	int checkMemberId(String id);
 
 	List<RecruitCatVO> getRecruitCatVOList();
 
