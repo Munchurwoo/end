@@ -7,10 +7,12 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import join.us.GoodJob.model.mapper.CompanyMapper;
-import join.us.GoodJob.model.vo.CompanyMemberVO;
+import join.us.GoodJob.model.service.CompanyService;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring-model.xml"})
 public class SungjinUnitTest {
+	@Autowired
+	CompanyService companyService;
 
 	/*@Autowired
 	NormalMapper normalMapper;
@@ -22,7 +24,8 @@ public class SungjinUnitTest {
 	CompanyMapper companyMapper;
 	@Test
 	public void test() {
-		String companyId="NHNuser";
-		System.out.println(companyMapper.companyJobPostingList(companyId));
+		String jobPostingNum="1001";
+		//System.out.println(companyMapper.jobPostringDetail(jobPostingNum));
+		System.out.println(companyService.jobPostingDetail(jobPostingNum));
 	}
 }
