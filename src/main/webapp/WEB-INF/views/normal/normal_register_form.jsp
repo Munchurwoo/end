@@ -72,6 +72,21 @@
 				return false;
 			}
 		});
+		
+		$("#checkId").click(function() {
+			$.ajax({
+				type:"get",
+				url:"checkNormalMemberId.do",
+				data:"id="+$("#id").val(),
+				success:function(result) {
+					if(result == "ok") {
+						$("#idView").text("이미 사용중인 아이디 입니다.").css("color", "red").css("font-weight", "bold");;
+					} else {
+						$("#idView").text("사용 가능합니다.").css("color", "blue").css("font-weight", "bold");;
+					}
+				}
+			});
+		});
 	});
 </script>
 
@@ -79,8 +94,9 @@
 	<input type="button" value="개인회원" onclick="javascript:location.href='user-registerNormalMemberForm.do'"> &nbsp; &nbsp;
 	<input type="button" value="기업회원" onclick="javascript:location.href='user-registerCompanyMemberForm.do'"><br><br>
 	* 표시는 필수 입력사항<br><br>
-	아이디 * <input type="text" name="id" required="required">
-	<input type="button" value="중복체크"><br><br>
+	아이디 * <input type="text" id="id" name="id" required="required">
+	<input type="button" id="checkId" value="중복체크">
+	<span id="idView"> </span><br><br>
 	비밀번호 * <input type="password" id="password" name="password" required="required">
 	<span id="passwordView"> </span><br><br>
 	비밀번호 확인 * <input type="password" id="checkPass" name="checkPass" required="required">

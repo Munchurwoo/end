@@ -9,6 +9,7 @@
 <a href="updateCompanyMemberForm.do">회원정보수정</a><br><br>
 <a href="registerJobPostingForm.do">구인등록</a><br><br>
 <a href="deleteCompanyMember.do">회원탈퇴</a><br><br>
+<a href="job_posting_detail.do">구인등록상세보기 임시로만듬-동규</a>
 	아이디   ${requestScope.cmvo.companyId }<br><br>
 	이메일 주소  ${requestScope.cmvo.email }"<br><br>
 	회사 명   ${requestScope.cmvo.name }<br><br>

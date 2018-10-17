@@ -48,4 +48,29 @@ public class MemberServiceImpl implements MemberService {
 	public List<AcaCatVO> getAcaCatVOList() {
 		return memberMapper.getAcaCatVOList();
 	}
+
+	@Override
+	public List<DevCatVO> getDevCatVOListByNum(String jobPostingNum) {	
+		return memberMapper.getDevCatVOListByNum(jobPostingNum);
+	}
+
+	@Override
+	public List<LocCatVO> getLocCatVOListByNum(String jobPostingNum) {
+		return memberMapper.getLocCatVOListByNum(jobPostingNum);
+	}
+
+	@Override
+	public List<RecruitCatVO> getRecruitCatVOListByNum(String jobPostingNum) {		
+		return memberMapper.getRecruitCatVOListByNum(jobPostingNum);
+	}
+
+	@Override
+	public List<AcaCatVO> getAcaCatVOListByNum(String jobPostingNum) {		
+		return memberMapper.getAcaCatVOListByNum(jobPostingNum);
+	}
+
+	@Override
+	public List<EmpTypeCatVO> getEmpCatVOListByNum(String jobPostingNum) {	
+		return memberMapper.getEmpCatVOListByNum(jobPostingNum);
+	}
 }

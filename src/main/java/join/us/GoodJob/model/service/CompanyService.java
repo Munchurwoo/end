@@ -1,6 +1,7 @@
 package join.us.GoodJob.model.service;
 
 import join.us.GoodJob.model.vo.CompanyMemberVO;
+import join.us.GoodJob.model.vo.JobPostingVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 
 public interface CompanyService {
@@ -23,4 +24,7 @@ public interface CompanyService {
 	//인재검색 서비스 
 	NormalMemberVO memberSearch();
 	
+
+	//구인 상세 
+	JobPostingVO jobPostingDetail(String companyNum);
 }

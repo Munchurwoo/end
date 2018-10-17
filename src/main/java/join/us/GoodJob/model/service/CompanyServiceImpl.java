@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import join.us.GoodJob.model.mapper.CompanyMapper;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
+import join.us.GoodJob.model.vo.JobPostingVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 
 @Service
@@ -44,6 +45,9 @@ public class CompanyServiceImpl implements CompanyService {
 	public NormalMemberVO memberSearch() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	public JobPostingVO jobPostingDetail(String companyNum) {	
+		return companyMapper.jobPostringDetail(companyNum);
 	}
 
 }
