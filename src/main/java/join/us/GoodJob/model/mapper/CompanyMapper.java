@@ -58,7 +58,7 @@ public interface CompanyMapper {
 	// 기업정보 상세보기 후 해당기업 구인공고 리스트 바로가기
 	List<JobPostingVO> companyJobPostingList(String companyId);
 	//구인공고 상세보기
-	JobPostingVO jobPostringDetail(String companyId);
+	CompanyMemberVO jobPostringDetail(String jobPostingNum);
 	
 	//구인공고 등록
 	//구인공고 키워드 등록	

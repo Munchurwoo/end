@@ -40,5 +40,5 @@ public interface CompanyService {
 	List<JobPostingVO> companyJobPostingList(String companyId);
 	
 	// 구인 상세
-	JobPostingVO jobPostingDetail(String companyNum);
+	CompanyMemberVO jobPostingDetail(String jobPostingNum);
 }

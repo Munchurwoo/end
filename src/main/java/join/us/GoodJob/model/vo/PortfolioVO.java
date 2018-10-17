@@ -159,9 +159,4 @@ public class PortfolioVO {
             + recruitCatNumList + ", empTypeCatNumList=" + empTypeCatNumList + ", devCatNumList=" + devCatNumList
             + ", acaCatNumList=" + acaCatNumList + "]";
    }   
-   
-   
-   
-   
-   
 }

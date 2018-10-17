@@ -68,8 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into portfolio_dev(normal_id, dev_cat_num)
 		values(#{normalId}, #{devCatNum})
 	</insert>
-	<!--  -->
-	
+
 	<insert id="insertPortfolioEmp" parameterType="map">
 		insert into portfolio_emp(normal_id, emp_type_num)
 		values(#{normalId}, #{empTypeNum})

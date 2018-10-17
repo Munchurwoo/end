@@ -69,19 +69,10 @@ select * from manager;
 
 -- 개인회원 
 create table normal_member(
-<<<<<<< HEAD
    normal_id varchar2(100) primary key,
    gender varchar2(100) not null,
    career_status varchar2(100) not null,
    constraint fk_normalandmember foreign key(normal_id) references member(id) on delete cascade
-=======
-	normal_id varchar2(100) primary key,
-	gender varchar2(100) not null,
-	career_status varchar2(100) not null,
-	gender varchar2(100) not null,
-
-	constraint fk_normalandmember foreign key(normal_id) references member(id) on delete cascade
->>>>>>> branch 'master' of https://github.com/Munchurwoo/goodjob.git
 );
 
 insert into NORMAL_MEMBER(normal_id,  career_status, gender) values('qqqq', 'Java 개발자로 LINE에서 3년 근무', '남');
@@ -95,19 +86,11 @@ select * from normal_member;
 
 -- 포트폴리오
 create table portfolio(
-<<<<<<< HEAD
    normal_id varchar2(100) primary key,
    title varchar2(100) not null,
    content varchar2(1000) not null,
    picture_path varchar2(100) not null,
    constraint fk_member_portfolio foreign key(normal_id) references normal_member(normal_id) on delete cascade
-=======
-	normal_id varchar2(100) primary key,
-	title varchar2(100) not null,
-	content varchar2(1000) not null,
-	picture_path varchar2(100) not null,
-	constraint fk_member_portfolio foreign key(normal_id) references normal_member(normal_id) on delete cascade
->>>>>>> branch 'master' of https://github.com/Munchurwoo/goodjob.git
 );
 
 insert into PORTFOLIO(normal_id, title, content, picture_path) values('yosep', 'Coder가 아닌 Developer가 되겠습니다.', '항상 배움의 자세로 새로운 분야에 도전하고 있으며, 매사에 도전하고 노력하는 인재입니다.', '최요셉.png');
@@ -161,14 +144,7 @@ create table job_posting(
 );
 create sequence job_posting_num_seq start with 1001;
 
-select 
-cm.company_id, cm.introduction, cm.company_type, cm.industry, cm.sales, cm.date_of_establishment, cm.num_of_employees,
-j.company_id, j.job_posting_num, j.career_status, j.title, j.content 
-from company_member cm , job_posting j
-where cm.company_id = j.company_id
-
 insert into JOB_POSTING(job_posting_num, company_id, career_status, title, content) values(job_posting_num_seq.nextval, 'NHNuser', '경력 3년', 'NHN엔터테인먼트에서 Java 신입, 프리랜서 개발자 모집', 'Java 어플리케이션 개발 경험자, WAS 이해도가 높은 경험자 우대합니다.');
-insert into JOB_POSTING(job_posting_num, company_id, career_status, title, content) values(job_posting_num_seq.nextval, 'NHNuser', '경력 무관', 'NHN엔터테인먼트에서 css/html 신입, 프리랜서 개발자 모집', '웹퍼블리셔를 모십니다');
 insert into JOB_POSTING(job_posting_num, company_id, career_status, title, content) values(job_posting_num_seq.nextval, 'Tmaxuser', '경력 무관', '티맥스소프트 DBA 2018 하반기 공개채용', 'MS-SQL 서버 모니터링 및 트러블 슈팅경험 있으신 분, OLTP 업무 경험 있으신 분');
 
 select * from job_posting;
@@ -537,7 +513,6 @@ where dev_cat_num in (201,202) and rc_num in(101,106) and emp_type_num in (301,3
 -- 개발분야에서 java, jsp 선택 
 -- 모집직군에서 웹프로그래머, DBA/데이터베이스 선택 
 -- 고용형태에서 인턴, 신입 선택
-
 
 
 

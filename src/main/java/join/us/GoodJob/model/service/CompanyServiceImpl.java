@@ -48,13 +48,11 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	public NormalMemberVO memberSearch() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	public List<MemberVO> getAllCompanyList() {
 		return companyMapper.getAllCompanyList();
-		
 	}
 
 	@Override
@@ -62,8 +60,8 @@ public class CompanyServiceImpl implements CompanyService {
 		return companyMapper.detailCompanyInfo(companyId);
 	}
 
-	public JobPostingVO jobPostingDetail(String companyNum) {	
-		return companyMapper.jobPostringDetail(companyNum);
+	public CompanyMemberVO jobPostingDetail(String jobPostingNum) {	
+		return companyMapper.jobPostringDetail(jobPostingNum);
 	}
 
 	@Override
