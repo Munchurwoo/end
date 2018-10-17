@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import join.us.GoodJob.model.service.PagingBean;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
+import join.us.GoodJob.model.vo.JobPostingVO;
 import join.us.GoodJob.model.vo.MemberVO;
 
 @Mapper
@@ -49,6 +50,9 @@ public interface CompanyMapper {
 	//기업 상세보기(COMPANY_MEMBER, MEMBER)	
 	CompanyMemberVO getDetailCompanyMember(String companyId);
 	
+	//구인공고 상세보기
+	JobPostingVO jobPostringDetail(String companyId);
+	
 	
 	
 	//구인공고 등록
@@ -62,7 +66,7 @@ public interface CompanyMapper {
 		
 	//구인공고 전체보기
 	//구인공고 검색결과 보기
-	//구인공고 상세보기
+	
 	
 	
 	//질의응답 답변 등록

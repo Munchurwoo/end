@@ -25,4 +25,15 @@ public interface MemberService {
 	List<LocCatVO> getLocCatVOList();
 	//학력 분류 리스트 받아오기
 	List<AcaCatVO> getAcaCatVOList();
+	
+	//구인공고 번호로 개발 분야 분류 리스트 받아오기
+	List<DevCatVO> getDevCatVOListByNum(String jobPostingNum);
+	//구인공고 번호로 지역 분류 리스트 받아오기
+	List<LocCatVO> getLocCatVOListByNum(String jobPostingNum);
+	//구인공고 번호로 모집직군 분류 리스트 받아오기
+	List<RecruitCatVO> getRecruitCatVOListByNum(String jobPostingNum);
+	//구인공고 번호로 학력 분류 리스트 받아오기
+	List<AcaCatVO> getAcaCatVOListByNum(String jobPostingNum);
+	//구인공고 번호로 고용형태 분류 리스트 받아오기
+	List<EmpTypeCatVO> getEmpCatVOListByNum(String jobPostingNum);
 }
