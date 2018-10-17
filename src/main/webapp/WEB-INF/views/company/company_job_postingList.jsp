@@ -25,7 +25,7 @@
 
 					</div>
 					<div class="box-bottom">
-						<a href="job_posting_detail.do?jobPostingNum=${jobList.jobPostingNum}">더보기</a>
+						<a href="job_posting_detail.do?jobPostingNum=${jobList.jobPostingNum}">채용정보 확인하기</a>
 					</div>
 				</div>
 			</div>

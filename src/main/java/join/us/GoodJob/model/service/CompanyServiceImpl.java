@@ -60,8 +60,8 @@ public class CompanyServiceImpl implements CompanyService {
 		return companyMapper.detailCompanyInfo(companyId);
 	}
 
-	public JobPostingVO jobPostingDetail(String companyNum) {	
-		return companyMapper.jobPostringDetail(companyNum);
+	public CompanyMemberVO jobPostingDetail(String jobPostingNum) {	
+		return companyMapper.jobPostringDetail(jobPostingNum);
 	}
 
 	@Override

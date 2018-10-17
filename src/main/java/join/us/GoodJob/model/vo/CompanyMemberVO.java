@@ -15,6 +15,7 @@ public class CompanyMemberVO extends MemberVO {
 	private String dateOfEstablishment;
 	private String numOfEmployees;	//181016 MIRI 기존 int type일 때에 공백으로 가입하면 400Error뜸 -> String type으로 수정하였더니 정상 동작.
 	private List<JobPostingVO> jobPostingVOList;
+	private JobPostingVO jobPostingVO;
 	public CompanyMemberVO() {
 		super();
 	}
@@ -30,7 +31,8 @@ public class CompanyMemberVO extends MemberVO {
 	 * @param jobPostingVOList 구인공고 리스트 (기업이 구인공고글을 여러개 등록)
 	 */
 	public CompanyMemberVO(String companyId, String introduction, String companyType, String industry, String sales,
-			String dateOfEstablishment, String numOfEmployees, List<JobPostingVO> jobPostingVOList) {
+			String dateOfEstablishment, String numOfEmployees, List<JobPostingVO> jobPostingVOList,
+			JobPostingVO jobPostingVO) {
 		super();
 		this.companyId = companyId;
 		this.introduction = introduction;
@@ -40,6 +42,7 @@ public class CompanyMemberVO extends MemberVO {
 		this.dateOfEstablishment = dateOfEstablishment;
 		this.numOfEmployees = numOfEmployees;
 		this.jobPostingVOList = jobPostingVOList;
+		this.jobPostingVO = jobPostingVO;
 	}
 	public String getCompanyId() {
 		return companyId;
@@ -89,12 +92,19 @@ public class CompanyMemberVO extends MemberVO {
 	public void setJobPostingVOList(List<JobPostingVO> jobPostingVOList) {
 		this.jobPostingVOList = jobPostingVOList;
 	}
+	public JobPostingVO getJobPostingVO() {
+		return jobPostingVO;
+	}
+	public void setJobPostingVO(JobPostingVO jobPostingVO) {
+		this.jobPostingVO = jobPostingVO;
+	}
 	@Override
 	public String toString() {
 		return super.toString()+"CompanyMemberVO [companyId=" + companyId + ", introduction=" + introduction + ", companyType="
 				+ companyType + ", industry=" + industry + ", sales=" + sales + ", dateOfEstablishment="
 				+ dateOfEstablishment + ", numOfEmployees=" + numOfEmployees + ", jobPostingVOList=" + jobPostingVOList
-				+ "]";
+				+ ", jobPostingVO=" + jobPostingVO + "]";
 	}
+	
 	
 }
