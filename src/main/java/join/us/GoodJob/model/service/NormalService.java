@@ -32,5 +32,5 @@ public interface NormalService {
 	List<NormalMemberVO> idName();
 	
 	//개인회원  id 를 활용하여 포트폴리오 모든 정보 출력 
-	List<PortfolioVO> portFolioVOList(String nomalId); 
+	PortfolioVO portFolioVOById(String nomalId); 
 }
