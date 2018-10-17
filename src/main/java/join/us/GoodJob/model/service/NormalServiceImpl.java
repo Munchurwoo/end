@@ -28,11 +28,6 @@ public class NormalServiceImpl implements NormalService {
 	public NormalMemberVO selectNormalMember(String id) {
 		return normalMapper.selectNormalMember(id);
 	}
-	
-	@Override
-	public int checkNormalMemberId(String id) {
-		return normalMapper.checkNormalMemberId(id);
-	}
 
 	@Override
 	public void deleteNormalMember(String normalId) {

@@ -91,20 +91,7 @@ public class NormalController {
 		normalService.updateNormalMember(normalMemberVO);
 		return "redirect:home.do";
 	}
-	
-	/**
-	 * 181016 MIRI 개인회원 아이디 중복 검사
-	 * @param id
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping("checkNormalMemberId.do")
-	public String checkNormalMemberId(String id) {
-		int checkedId = normalService.checkNormalMemberId(id);
-		if(checkedId == 0) return "ok";
-		else return "fail";
-	}
-	
+
 	@RequestMapping("registerPortfolioForm.do")
 	public String registerPortfolioForm(Model model) {
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());

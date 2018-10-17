@@ -15,8 +15,6 @@ public interface NormalMapper {
 	void registerMember(MemberVO memberVO);
 	//개인 회원정보 검색(NORMAL_MEMBER)
 	NormalMemberVO selectNormalMember(String id);
-	//개인 회원 아이디 중복 검사(MEMBER)
-	int checkNormalMemberId(String id);
 	//개인 회원정보 수정(NORMAL_MEMBER)
 	void updateNormalMember(NormalMemberVO normalMemberVO);
 	//개인 회원정보 수정(MEMBER)
