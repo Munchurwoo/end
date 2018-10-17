@@ -2,44 +2,62 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
- <mapper namespace="join.us.GoodJob.model.mapper.NormalMapper"> 
+<mapper namespace="join.us.GoodJob.model.mapper.NormalMapper">
 	<insert id="registerMember" parameterType="normalMemberVO">
-		insert into member(id,password,email,name,tel,member_type,address) 
+		insert into
+		member(id,password,email,name,tel,member_type,address)
 		values(#{id}, #{password}, #{email}, #{name}, #{tel}, 1, #{address})
 	</insert>
-	
-	<insert id="registerNormalMember" parameterType="normalMemberVO"> 
-		insert into normal_member(normal_id,picture_path,career_status,gender) 
+
+	<insert id="registerNormalMember" parameterType="normalMemberVO">
+		insert into normal_member(normal_id,picture_path,career_status,gender)
 		values(#{id}, #{picturePath}, #{careerStatus}, #{gender})
 	</insert>
-	
-	<select id="checkNormalMemberId" parameterType="string" resultType="int">
-		select count(*) from member where id=#{value}
-	</select>
-		
-	<select id="selectNormalMember" parameterType="string" resultType="normalMemberVO">
-		select m.id, m.password, m.email, m.name, m.address, m.tel, nm.gender, nm.picture_path, nm.career_status 
+
+	<select id="selectNormalMember" parameterType="string"
+		resultType="normalMemberVO">
+		select m.id, m.password, m.email, m.name, m.address, m.tel,
+		nm.gender, nm.picture_path, nm.career_status
 		from normal_member nm, member m
 		where nm.normal_id=m.id and m.id=#{value}
 	</select>
-	
+
 	<update id="updateMember" parameterType="normalMemberVO">
-		update member set password=#{password}, email=#{email}, address=#{address}, tel=#{tel} where id=#{id}
-	</update>	
-	
-	<update id="updateNormalMember" parameterType="normalMemberVO">
-		update normal_member set picture_path=#{picturePath}, career_status=#{careerStatus} where normal_id=#{id}
+		update member set
+		password=#{password}, email=#{email}, address=#{address}, tel=#{tel}
+		where id=#{id}
 	</update>
-	
+
+	<update id="updateNormalMember" parameterType="normalMemberVO">
+		update
+		normal_member set picture_path=#{picturePath},
+		career_status=#{careerStatus} where normal_id=#{id}
+	</update>
+
 	<delete id="deleteNormalMember" parameterType="string">
-		delete from member where id=#{id}
+		delete from member
+		where id=#{id}
 	</delete>
-	
-	<select id="myPageNormalMember" resultType="normalMemberVO" parameterType="memberVO">
-		select m.id,m.password,m.email,m.name,m.tel,m.address,m.member_type,nm.normal_id,nm.gender,nm.picture_path,nm.career_status
+
+	<select id="myPageNormalMember" resultType="normalMemberVO"
+		parameterType="memberVO">
+		select
+		m.id,m.password,m.email,m.name,m.tel,m.address,m.member_type,nm.normal_id,nm.gender,nm.picture_path,nm.career_status
 		from member m,normal_member nm
 		where m.id=nm.normal_id
 		and m.id=#{id}
 	</select>
- </mapper> 		
+
+	<select id="normalDetailPortfolio" resultType="portfolioVO"
+		parameterType="string">
+		select title,content
+		from portfolio
+		where
+		normal_id=#{normalId}
+	</select>
+	<select id="getAllPortfolioList" resultType="portfolioVO">
+
+
+	</select>
+</mapper> 		
  

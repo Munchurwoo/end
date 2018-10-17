@@ -90,20 +90,7 @@ public class NormalController {
 		normalService.updateNormalMember(normalMemberVO);
 		return "redirect:home.do";
 	}
-	
-	/**
-	 * 181016 MIRI 개인회원 아이디 중복 검사
-	 * @param id
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping("checkNormalMemberId.do")
-	public String checkNormalMemberId(String id) {
-		int checkedId = normalService.checkNormalMemberId(id);
-		if(checkedId == 0) return "ok";
-		else return "fail";
-	}
-	
+
 	@RequestMapping("registerPortfolioForm.do")
 	public String registerPortfolioForm(Model model) {
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
@@ -159,6 +146,23 @@ public class NormalController {
 		mv.addObject("fileName", file.getOriginalFilename());*/
 		return "성공";
 	}
-	
+	//나중에 "yosep"->normalId
+	@RequestMapping("normalDetailPortfolio.do")
+	public String normalDetailPortfolio(String normalId,Model model,HttpSession session) {
+		model.addAttribute("devCatList",memberService.getDevCatVOListByNormalId("yosep"));
+		model.addAttribute("empTypeCatList",memberService.getEmpCatVOListByNormalId("yosep"));
+		model.addAttribute("locCatList",memberService.getLocCatVOListByNormalId("yosep"));
+		model.addAttribute("acaCatList",memberService.getAcaCatVOListByNormalId("yosep"));
+		model.addAttribute("recruitCatList",memberService.getRecruitCatVOListByNormalId("yosep"));
+		model.addAttribute("povo",normalService.normalDetailPortfolio("yosep"));
+		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		if (mvo != null) {
+			NormalMemberVO nmvo = normalService.myPageNormalMember(mvo.getId());
+			model.addAttribute("nmvo", nmvo);
+		}
+		return "normal/normal_detail_portfolio.tiles2";
+		
+	}
 }
+
 

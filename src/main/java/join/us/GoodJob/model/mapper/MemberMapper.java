@@ -15,6 +15,8 @@ import join.us.GoodJob.model.vo.RecruitCatVO;
 public interface MemberMapper {
 	// 개인,기업 로그인(MEMBER)
 	MemberVO loginMember(MemberVO memberVO);
+	//개인,기업 아이디 중복 검사(MEMBER)
+	int checkMemberId(String id);
 
 	List<RecruitCatVO> getRecruitCatVOList();
 
@@ -40,4 +42,19 @@ public interface MemberMapper {
 
 	// 구인공고 번호로 고용형태 분류 리스트 받아오기
 	List<EmpTypeCatVO> getEmpCatVOListByNum(String jobPostingNum);
+
+	// 포트폴리오 노말아이디로 개발 분야 분류 리스트 받아오기
+	List<DevCatVO> getDevCatVOListByNormalId(String normalId);
+
+	// 포트폴리오 노말아이디로 지역 분류 리스트 받아오기
+	List<LocCatVO> getLocCatVOListByNormalId(String normalId);
+
+	// 포트폴리오 노말아이디로 모집직군 분류 리스트 받아오기
+	List<RecruitCatVO> getRecruitCatVOListByNormalId(String normalId);
+
+	// 포트폴리오 노말아이디로 학력 분류 리스트 받아오기
+	List<AcaCatVO> getAcaCatVOListByNormalId(String normalId);
+
+	// 포트폴리오 노말아이디로 고용형태 분류 리스트 받아오기
+	List<EmpTypeCatVO> getEmpCatVOListByNormalId(String normalId);
 }

@@ -50,10 +50,14 @@ public interface CompanyMapper {
 	//기업 상세보기(COMPANY_MEMBER, MEMBER)	
 	CompanyMemberVO getDetailCompanyMember(String companyId);
 	
+
+	//header부분 기업정보리스트 보기
+	List<MemberVO> getAllCompanyList(MemberVO memberVO);
+	// 기업정보 상세보기
+	CompanyMemberVO detailCompanyInfo(String companyId);
+
 	//구인공고 상세보기
 	JobPostingVO jobPostringDetail(String companyId);
-	
-	
 	
 	//구인공고 등록
 	//구인공고 키워드 등록	

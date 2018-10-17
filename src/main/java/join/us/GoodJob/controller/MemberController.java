@@ -75,4 +75,18 @@ public class MemberController {
 		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
 		return "member/portfolio_all_list.tiles2";
 	}
+
+	/**
+	 * 181016 MIRI 회원 아이디 중복 검사
+	 * @param id
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("checkMemberId.do")
+	public String checkMemberId(String id) {
+		int checkedId = memberService.checkMemberId(id);
+		if(checkedId == 0) return "ok";
+		else return "fail";
+	}
+	
 }

@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
+import join.us.GoodJob.model.vo.PortfolioVO;
 
 @Mapper
 public interface NormalMapper {
@@ -15,8 +16,6 @@ public interface NormalMapper {
 	void registerMember(MemberVO memberVO);
 	//개인 회원정보 검색(NORMAL_MEMBER)
 	NormalMemberVO selectNormalMember(String id);
-	//개인 회원 아이디 중복 검사(MEMBER)
-	int checkNormalMemberId(String id);
 	//개인 회원정보 수정(NORMAL_MEMBER)
 	void updateNormalMember(NormalMemberVO normalMemberVO);
 	//개인 회원정보 수정(MEMBER)
@@ -42,10 +41,10 @@ public interface NormalMapper {
 	//포트폴리오 학력 분류 등록(PORTFOLIO_ACADEMIC)
 	void insertPortfolioAcademic(HashMap<String,String> map);
 	
-			
 	//포트폴리오 전체보기
 	//포트폴리오 검색결과 보기
 	//포트폴리오 상세보기
+	PortfolioVO normalDetailPortfolio(String normalId);	
 	//포트폴리오 삭제
 	//포트폴리오 수정
 	
