@@ -4,7 +4,53 @@
 
 <!-- company_register_form -->
 
-<h3 align="center">회원가입</h3><br><br>
+<style>
+.container {
+  padding: 2px;
+}
+button,
+button::after {
+  -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+  -o-transition: all 0.3s;
+    transition: all 0.3s;
+}
+button {
+  background: #81BEF7;
+  border: 3px solid #fff;
+  border-radius: 5px;
+  font-size: 40px;
+  font-weight: bold;
+  ;
+  position: relative;
+  text-transform: uppercase;
+}
+button:hover {
+  color: white;
+}
+/* BUTTON 1 */
+.btn-1::after {
+  height: 0;
+  left: 0;
+  top: 0;
+  width: 100%;
+}
+.btn-1:hover:after {
+  height: 100%;
+}
+.btn-2::after {
+  height: 100%;
+  left: 0;
+  top: 0;
+  width: 0;
+}
+.btn-2:hover:after {
+  width: 100%;
+}
+
+
+</style>
+
 
 <script type="text/javascript">
 	$(document).ready(function () {
@@ -113,25 +159,39 @@
 </script>
 
 <form id="companyRegisterForm" action="user-registerCompanyMember.do" method="post">
-	<input type="button" value="개인회원" onclick="javascript:location.href='user-registerNormalMemberForm.do'"> &nbsp; &nbsp;
-	<input type="button" value="기업회원" onclick="javascript:location.href='user-registerCompanyMemberForm.do'"><br><br>
-	* 표시는 필수 입력사항<br><br>
-	아이디 * <input type="text" id="id" name="id" required="required">
-	<input type="button" id="checkId" value="중복체크">
+	<div class="container">
+	<div class="col-md-2"></div>
+<div class="col-md-8" style="text-align: center">
+  <button class="btn-1" onclick="javascript:location.href='user-registerNormalMemberForm.do'" style="height:80px; width:300px;">개인회원</button>
+  <button class="btn-2" onclick="javascript:location.href='user-registerCompanyMemberForm.do'" style="height:80px; width:300px;">기업회원</button><br><br>	
+	<div class="col-md-2"></div>
+	</div>
+	</div>
+	<div class="container">
+	<div class="col-md-3"></div>
+	<div class="col-md-6" style="text-align: left; font-size: 20px; font-weight: bold; " >
+	아이디 <br><input type="text" id="id" name="id" required="required"style="height:40px; width:400px;">
+	<input type="button" id="checkId" value="중복체크" style="height:40px; width:100px;"><br>
 	<span id="idView"> </span><br><br>
-	비밀번호 * <input type="password" id="password" name="password" required="required">
+	비밀번호 <br> <input type="password" id="password" name="password" required="required"style="height:40px; width:500px;"><br>dsa
 	<span id="passwordView"> </span><br><br>
-	비밀번호 확인 * <input type="password" id="checkPass" name="checkPass" required="required">
+	비밀번호 확인 <br> <input type="password" id="checkPass" name="checkPass" required="required"style="height:40px; width:500px;"><br>
 	<span id="checkPassView"> </span><br><br>
-	이메일 주소 * <input type="text" name="email" required="required"><br><br>
-	기업 명 * <input type="text" name="name" required="required"><br><br>
-	주소 * <input type="text" name="address" required="required"><br><br>
-	연락처 * <input type="text" name="tel" required="required"><br><br>
-	기업 소개 * <input type="text" name="introduction" required="required"><br><br>
-	기업 형태 * <input type="text" name="companyType" required="required"><br><br>
-	업종 * <input type="text" name="industry" required="required"><br><br>
-	매출액 <input type="number" name="sales"><br><br>
-	설립일 <input type="text" name="dateOfEstablishment"><br><br>
-	사원수 <input type="number" name="numOfEmployees"><br><br>
-	<input type="submit" value="회원가입">
+	이메일 주소 <br> <input type="text" name="email" required="required"style="height:40px; width:500px;"><br><br>
+	기업 명 <br><input type="text" name="name" required="required"style="height:40px; width:500px;"><br><br>
+	주소 <br> <input type="text" name="address" required="required"style="height:40px; width:500px;"><br><br>
+	연락처 <br> <input type="text" name="tel" required="required"style="height:40px; width:500px;"><br><br>
+	기업 소개 <br><input type="text" name="introduction" required="required"style="height:40px; width:500px;"><br><br>
+	기업 형태 <br> <input type="text" name="companyType" required="required"style="height:40px; width:500px;"><br><br>
+	업종 <br> <input type="text" name="industry" required="required"style="height:40px; width:500px;"><br><br>
+	매출액  <br><input type="number" name="sales"style="height:40px; width:500px;"><br><br>
+	설립일 <br><input type="text" name="dateOfEstablishment"style="height:40px; width:500px;"><br><br>
+	사원수 <br><input type="number" name="numOfEmployees"style="height:40px; width:500px;"><br><br>
+	</div>	
+	  <div class="col-md-3"></div>
+	  </div>
+	<div class="container" style="text-align: center">
+	<input type="submit" value="회원가입" style="height:50px; width:150px;background: #81BEF7;font-size: 20px">
+	</div>
 </form>
+
