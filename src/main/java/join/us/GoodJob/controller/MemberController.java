@@ -14,7 +14,6 @@ import join.us.GoodJob.model.service.MemberService;
 import join.us.GoodJob.model.vo.CatNumParamVO;
 import join.us.GoodJob.model.vo.DevCatVO;
 import join.us.GoodJob.model.vo.MemberVO;
-import join.us.GoodJob.model.vo.PortfolioVO;
 
 @Controller
 public class MemberController {
@@ -54,4 +53,17 @@ public class MemberController {
 		return list;				
 	}
 
+	/**
+	 * 181016 MIRI 회원 아이디 중복 검사
+	 * @param id
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("checkMemberId.do")
+	public String checkMemberId(String id) {
+		int checkedId = memberService.checkMemberId(id);
+		if(checkedId == 0) return "ok";
+		else return "fail";
+	}
+	
 }

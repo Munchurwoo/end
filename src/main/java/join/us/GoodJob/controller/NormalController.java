@@ -91,7 +91,7 @@ public class NormalController {
 		normalService.updateNormalMember(normalMemberVO);
 		return "redirect:home.do";
 	}
-	
+
 	@RequestMapping("registerPortfolioForm.do")
 	public String registerPortfolioForm(Model model) {
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());

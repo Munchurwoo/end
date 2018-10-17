@@ -42,6 +42,7 @@ class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<mvc:mapping path="/**/*.do"/>
 		<mvc:exclude-mapping path="/home.do"/>
 		<mvc:exclude-mapping path="/user-*.do"/>
+		<mvc:exclude-mapping path="/checkMemberId.do"/>	<!-- 181017 MIRI 회원가입시 인터셉터 적용 해제 -->
 		<bean class="join.us.GoodJob.controller.CheckLoginInterceptor"/>
 	</mvc:interceptor>
 </mvc:interceptors>

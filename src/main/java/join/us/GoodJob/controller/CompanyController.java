@@ -96,6 +96,7 @@ public class CompanyController {
 		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
 		return "company/job_posting_register_form.tiles2";
 	}
+
 	@RequestMapping("user-companyInfo.do")
 	public String allConmapnyInfo(MemberVO memberVO,Model model) {
 		List<MemberVO> cmvoList=companyService.getAllCompanyList(memberVO);
@@ -106,6 +107,24 @@ public class CompanyController {
 	public String detailCompanyInfo(String companyId,Model model) {
 		model.addAttribute("cmvo", companyService.detailCompanyInfo(companyId));
 		return "company/company_detailInfo.tiles";
+	}
+
+	//나중에 "1001"->jobPostingNum
+	@RequestMapping("job_posting_detail.do")
+	public String job_posting_detail(String jobPostingNum, Model model, HttpSession session) {
+		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNum("1001"));
+		model.addAttribute("devCatList", memberService.getDevCatVOListByNum("1001"));
+		model.addAttribute("empTypeCatList", memberService.getEmpCatVOListByNum("1001"));
+		model.addAttribute("locCatList", memberService.getLocCatVOListByNum("1001"));
+		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNum("1001"));
+		model.addAttribute("jpvo", companyService.jobPostingDetail("1001"));
+		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		if (mvo != null) {
+			CompanyMemberVO cmvo = companyService.myPageCompanyMember(mvo.getId());
+			model.addAttribute("cmvo", cmvo);
+		}
+		return "company/job_posting_detail.tiles2";
+
 	}
 
 }

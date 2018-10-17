@@ -17,6 +17,9 @@
 		var retFirVal = false;
 		var retSecVal = false;
 		
+		var idCheckFlag = "";
+		var idCheckBtnFlag = false;
+		
 		if($("#password").val() == "") {
 			$("#passwordView").text("비밀번호는 8~10자로 입력하세요.").css("color", "red").css("font-weight", "bold");
 			retFirVal = false;
@@ -62,6 +65,29 @@
 			}
 		});
 		
+		$("#id").keyup(function() {
+			idCheckBtnFlag = false;
+		});
+		
+		$("#checkId").click(function() {
+			$.ajax({
+				type:"get",
+				url:"checkMemberId.do",
+				data:"id="+$("#id").val(),
+				success:function(result) {
+					if(result == "ok") {
+						idCheckFlag = "ok";
+						$("#idView").text("사용 가능합니다.").css("color", "blue").css("font-weight", "bold");
+					} else {
+						idCheckFlag = "fail";
+						$("#idView").text("이미 사용중인 아이디 입니다.").css("color", "red").css("font-weight", "bold");
+						$("#id").focus();
+					}
+				}
+			});
+			idCheckBtnFlag = true;
+		});
+		
 		$("#normalRegisterForm").submit(function() {
 			if(retFirVal == false || retSecVal == false) {
 				$("#checkPass").val("");
@@ -69,6 +95,23 @@
 				$("#password").focus();
 				$("#passwordView").text("비밀번호는 8~10자로 입력하세요.").css("color", "red").css("font-weight", "bold");
 				$("#checkPassView").text(" ");
+				return false;
+			}
+			
+			if(idCheckFlag == "") {
+				alert("아이디 중복체크를 해주시기 바랍니다.");
+				$("#id").focus();
+				return false;
+			} else if(idCheckFlag == "fail") {
+				alert("이미 사용중인 아이디입니다.");
+				$("#id").val("");
+				$("#id").focus();
+				return false;
+			} else if(idCheckBtnFlag == false) {
+				alert("아이디를 다시 한 번 확인해 주세요.");
+				$("#id").val("");
+				$("#id").focus();
+				$("#idView").text("아이디 중복체크를 해주시기 바랍니다.").css("color", "red").css("font-weight", "bold");
 				return false;
 			}
 		});
@@ -79,8 +122,9 @@
 	<input type="button" value="개인회원" onclick="javascript:location.href='user-registerNormalMemberForm.do'"> &nbsp; &nbsp;
 	<input type="button" value="기업회원" onclick="javascript:location.href='user-registerCompanyMemberForm.do'"><br><br>
 	* 표시는 필수 입력사항<br><br>
-	아이디 * <input type="text" name="id" required="required">
-	<input type="button" value="중복체크"><br><br>
+	아이디 * <input type="text" id="id" name="id" required="required">
+	<input type="button" id="checkId" value="중복체크">
+	<span id="idView"> </span><br><br>
 	비밀번호 * <input type="password" id="password" name="password" required="required">
 	<span id="passwordView"> </span><br><br>
 	비밀번호 확인 * <input type="password" id="checkPass" name="checkPass" required="required">
