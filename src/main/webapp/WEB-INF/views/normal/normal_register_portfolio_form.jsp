@@ -41,7 +41,7 @@
 					$("#normal-picture").attr('src', "/GoodJob/resources/upload/"+path);
 					//$("#pictureInput").val(path);
 					alert(path);
-					$("#aaa").append("<input type='hidden' name='fileList' value='"+path+"'>");	
+					$("#aaa").append("<input type='hidden' name='picturePath' value='"+path+"'>");	
 				}
 			});
 		});
@@ -58,7 +58,7 @@
 <h3>이력서 작성</h3>
 <form action="registerPortfolio.do" method="get" id="registerForm">
 	제목 <input type="text" name="title" placeholder="제목을 입력하세요" required="required"><br>
-	내용<br>&nbsp;&nbsp;&nbsp;<textarea rows="10" cols="60" name="contents" placeholder="내용을 입력하세요" required="required"></textarea><br><br>
+	내용<br>&nbsp;&nbsp;&nbsp;<textarea rows="10" cols="60" name="content" placeholder="내용을 입력하세요" required="required"></textarea><br><br>
 		
 	<h5>지역</h5>
 	<c:forEach items="${requestScope.locCatList}" var="locCat" varStatus="i">

@@ -3,9 +3,11 @@ package join.us.GoodJob.model.vo;
 import java.util.List;
 
 public class PortfolioVO {
-	private String contents;
-	private String fileList;
+	private String normalId;
+	private String content;
 	private String title;
+	private String picturePath;
+	private List<String> fileList;
 	private List<LocCatVO> locCatVOList;
 	private List<RecruitCatVO> recruitCatVOList;
 	private List<EmpTypeCatVO> empTypeCatVOList;
@@ -35,15 +37,18 @@ public class PortfolioVO {
 	 * @param empTypeCatNumList 고용형태 번호 리스트(String, 입력용, 포트폴리오 등록시 고용형태명을 복수 선택(체크박스) 후 등록버튼을 누르면 PortfolioVO.empTypeCatNumList에 고용형태 번호가 순서대로 저장)
 	 * @param devCatNumList 개발분야 번호 리스트(String, 입력용, 포트폴리오 등록시 개발분야명을 복수 선택(체크박스) 후 등록버튼을 누르면 PortfolioVO.devCatNumList에 개발분야 번호가 순서대로 저장)
 	 * @param acaCatNumList 학력 번호 리스트(String, 입력용, 포트폴리오 등록시 학력명을 복수 선택(체크박스) 후 등록버튼을 누르면 PortfolioVO.acaCatNumList에 학력 번호가 순서대로 저장)
-	 */	
-	public PortfolioVO(String contents, String fileList, String title, List<LocCatVO> locCatVOList,
-			List<RecruitCatVO> recruitCatVOList, List<EmpTypeCatVO> empTypeCatVOList, List<DevCatVO> devCatVOList,
-			List<AcaCatVO> acaCatVOList, List<String> locCatNumList, List<String> recruitCatNumList,
-			List<String> empTypeCatNumList, List<String> devCatNumList, List<String> acaCatNumList) {
+	 */
+	public PortfolioVO(String normalId, String content, String title, String picturePath, List<String> fileList,
+			List<LocCatVO> locCatVOList, List<RecruitCatVO> recruitCatVOList, List<EmpTypeCatVO> empTypeCatVOList,
+			List<DevCatVO> devCatVOList, List<AcaCatVO> acaCatVOList, List<String> locCatNumList,
+			List<String> recruitCatNumList, List<String> empTypeCatNumList, List<String> devCatNumList,
+			List<String> acaCatNumList) {
 		super();
-		this.contents = contents;
-		this.fileList = fileList;
+		this.normalId = normalId;
+		this.content = content;
 		this.title = title;
+		this.picturePath = picturePath;
+		this.fileList = fileList;
 		this.locCatVOList = locCatVOList;
 		this.recruitCatVOList = recruitCatVOList;
 		this.empTypeCatVOList = empTypeCatVOList;
@@ -54,17 +59,35 @@ public class PortfolioVO {
 		this.empTypeCatNumList = empTypeCatNumList;
 		this.devCatNumList = devCatNumList;
 		this.acaCatNumList = acaCatNumList;
-	}	
-	public String getContents() {
-		return contents;
-	}	
-	public void setContents(String contents) {
-		this.contents = contents;
 	}
-	public String getFileList() {
+	public String getNormalId() {
+		return normalId;
+	}
+	public void setNormalId(String normalId) {
+		this.normalId = normalId;
+	}
+	public String getContent() {
+		return content;
+	}
+	public void setContent(String content) {
+		this.content = content;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getPicturePath() {
+		return picturePath;
+	}
+	public void setPicturePath(String picturePath) {
+		this.picturePath = picturePath;
+	}
+	public List<String> getFileList() {
 		return fileList;
 	}
-	public void setFileList(String fileList) {
+	public void setFileList(List<String> fileList) {
 		this.fileList = fileList;
 	}
 	public List<LocCatVO> getLocCatVOList() {
@@ -127,20 +150,17 @@ public class PortfolioVO {
 	public void setAcaCatNumList(List<String> acaCatNumList) {
 		this.acaCatNumList = acaCatNumList;
 	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
 	@Override
 	public String toString() {
-		return "PortfolioVO [contents=" + contents + ", fileList=" + fileList + ", title=" + title + ", locCatVOList="
-				+ locCatVOList + ", recruitCatVOList=" + recruitCatVOList + ", empTypeCatVOList=" + empTypeCatVOList
-				+ ", devCatVOList=" + devCatVOList + ", acaCatVOList=" + acaCatVOList + ", locCatNumList="
-				+ locCatNumList + ", recruitCatNumList=" + recruitCatNumList + ", empTypeCatNumList="
-				+ empTypeCatNumList + ", devCatNumList=" + devCatNumList + ", acaCatNumList=" + acaCatNumList + "]";
-	}
+		return "PortfolioVO [normalId=" + normalId + ", content=" + content + ", title=" + title + ", picturePath="
+				+ picturePath + ", fileList=" + fileList + ", locCatVOList=" + locCatVOList + ", recruitCatVOList="
+				+ recruitCatVOList + ", empTypeCatVOList=" + empTypeCatVOList + ", devCatVOList=" + devCatVOList
+				+ ", acaCatVOList=" + acaCatVOList + ", locCatNumList=" + locCatNumList + ", recruitCatNumList="
+				+ recruitCatNumList + ", empTypeCatNumList=" + empTypeCatNumList + ", devCatNumList=" + devCatNumList
+				+ ", acaCatNumList=" + acaCatNumList + "]";
+	}	
+	
+	
 	
 	
 	

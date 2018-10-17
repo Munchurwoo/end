@@ -14,5 +14,6 @@
 	주소 ${requestScope.nmvo.address }<br><br>
 	연락처 ${requestScope.nmvo.tel }<br><br>
 	경력사항 ${requestScope.nmvo.careerStatus }<br><br>
-	사진경로 ${requestScope.nmvo.picturePath }<br><br>
+<%--  181017 요셉 주석 처리 
+사진경로 ${requestScope.nmvo.picturePath }<br><br> --%>
 	성별  ${requestScope.nmvo.gender}<br><br>

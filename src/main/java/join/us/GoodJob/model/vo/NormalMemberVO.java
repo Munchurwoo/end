@@ -4,8 +4,7 @@ import java.util.List;
 
 public class NormalMemberVO extends MemberVO {
 	
-	private String normalId;	
-	private String picturePath;	
+	private String normalId;
 	private String careerStatus;	
 	private String gender;	
 	private PortfolioVO portfolio;
@@ -23,11 +22,14 @@ public class NormalMemberVO extends MemberVO {
 	 * @param portfolio 개인 포트폴리오 하나
 	 * @param questionAnswerVOList 개인이 질문을 여러 개 등록
 	 */
-	public NormalMemberVO(String normalId, String picturePath, String careerStatus, String gender,
-			PortfolioVO portfolio, List<QuestionAnswerVO> questionAnswerVOList) {
+	public NormalMemberVO(String id, String password, String email, String name, String tel, String memberType,
+			String address) {
+		super(id, password, email, name, tel, memberType, address);
+	}
+	public NormalMemberVO(String normalId, String careerStatus, String gender, PortfolioVO portfolio,
+			List<QuestionAnswerVO> questionAnswerVOList) {
 		super();
 		this.normalId = normalId;
-		this.picturePath = picturePath;
 		this.careerStatus = careerStatus;
 		this.gender = gender;
 		this.portfolio = portfolio;
@@ -38,12 +40,6 @@ public class NormalMemberVO extends MemberVO {
 	}
 	public void setNormalId(String normalId) {
 		this.normalId = normalId;
-	}
-	public String getPicturePath() {
-		return picturePath;
-	}
-	public void setPicturePath(String picturePath) {
-		this.picturePath = picturePath;
 	}
 	public String getCareerStatus() {
 		return careerStatus;
@@ -71,9 +67,9 @@ public class NormalMemberVO extends MemberVO {
 	}
 	@Override
 	public String toString() {
-		return super.toString()+"NormalMemberVO [normalId=" + normalId + ", picturePath=" + picturePath + ", careerStatus="
-				+ careerStatus + ", gender=" + gender + ", portfolio=" + portfolio + ", questionAnswerVOList="
-				+ questionAnswerVOList + "]";
+		return "NormalMemberVO [normalId=" + normalId + ", careerStatus=" + careerStatus + ", gender=" + gender
+				+ ", portfolio=" + portfolio + ", questionAnswerVOList=" + questionAnswerVOList + "]";
 	}
+	
 	
 }

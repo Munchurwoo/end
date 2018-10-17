@@ -71,16 +71,15 @@ select * from manager;
 create table normal_member(
 	normal_id varchar2(100) primary key,
 	gender varchar2(100) not null,
-	picture_path varchar2(100) not null,
 	career_status varchar2(100) not null,
 	constraint fk_normalandmember foreign key(normal_id) references member(id) on delete cascade
 );
 
-insert into NORMAL_MEMBER(normal_id, picture_path, career_status, gender) values('qqqq', '이동규.png', 'Java 개발자로 LINE에서 3년 근무', '남');
-insert into NORMAL_MEMBER(normal_id, picture_path, career_status, gender) values('miri', '서미리.png', '.NET(C#) 개발 경력 2년 (마이다시아이티)', '여');
-insert into NORMAL_MEMBER(normal_id, picture_path, career_status, gender) values('yosep', '최요셉.png', '없음', '남');
-insert into NORMAL_MEMBER(normal_id, picture_path, career_status, gender) values('hsj', '황성진.png', 'Oracle DBA 6년', '남');
-insert into NORMAL_MEMBER(normal_id, picture_path, career_status, gender) values('MCW', '문철우.png', 'Python 개발 5년 (네이버)', '남');
+insert into NORMAL_MEMBER(normal_id,  career_status, gender) values('qqqq', 'Java 개발자로 LINE에서 3년 근무', '남');
+insert into NORMAL_MEMBER(normal_id,  career_status, gender) values('miri',  '.NET(C#) 개발 경력 2년 (마이다시아이티)', '여');
+insert into NORMAL_MEMBER(normal_id, career_status, gender) values('yosep',  '없음', '남');
+insert into NORMAL_MEMBER(normal_id,  career_status, gender) values('hsj',  'Oracle DBA 6년', '남');
+insert into NORMAL_MEMBER(normal_id,  career_status, gender) values('MCW', 'Python 개발 5년 (네이버)', '남');
 
 select * from normal_member;
 ---------------------------------------------------------------------
@@ -90,11 +89,12 @@ create table portfolio(
 	normal_id varchar2(100) primary key,
 	title varchar2(100) not null,
 	content varchar2(1000) not null,
+	picture_path varchar2(100) not null,
 	constraint fk_member_portfolio foreign key(normal_id) references normal_member(normal_id) on delete cascade
 );
 
-insert into PORTFOLIO(normal_id, title, content) values('yosep', 'Coder가 아닌 Developer가 되겠습니다.', '항상 배움의 자세로 새로운 분야에 도전하고 있으며, 매사에 도전하고 노력하는 인재입니다.');
-insert into PORTFOLIO(normal_id, title, content) values('MCW', '인재를 싸게 팝니다.', '주변 사람과 소통하며 혁신을 이뤄내는 사원이 되겠습니다.');
+insert into PORTFOLIO(normal_id, title, content, picture_path) values('yosep', 'Coder가 아닌 Developer가 되겠습니다.', '항상 배움의 자세로 새로운 분야에 도전하고 있으며, 매사에 도전하고 노력하는 인재입니다.', '최요셉.png');
+insert into PORTFOLIO(normal_id, title, content, picture_path) values('MCW', '인재를 싸게 팝니다.', '주변 사람과 소통하며 혁신을 이뤄내는 사원이 되겠습니다.', '문철우.png');
 
 select * from portfolio;
 ---------------------------------------------------------------------
