@@ -19,6 +19,7 @@ public class CompanyController {
 	CompanyService companyService;
 	@Resource
 	MemberService memberService;
+
 	@RequestMapping("user-registerCompanyMemberForm.do")
 	public String registerCompanyMemberForm() {
 		return "company/company_register_form.tiles2";
@@ -28,7 +29,7 @@ public class CompanyController {
 	public String registerCompanyMember(CompanyMemberVO companyMemberVO) {
 		System.out.println(companyMemberVO);
 		companyService.registerCompanyMember(companyMemberVO);
-		return "redirect:user-loginForm.do";		
+		return "redirect:user-loginForm.do";
 	}
 
 	/**
@@ -73,23 +74,42 @@ public class CompanyController {
 		}
 		return "company/company_mypage.tiles2";
 	}
+
 	@RequestMapping("deleteCompanyMember.do")
 	public String deleteNormalMember(HttpSession session) {
-		MemberVO mvo=(MemberVO) session.getAttribute("mvo");
-		String companyId=mvo.getId();
-		if(companyId!=null) {
+		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		String companyId = mvo.getId();
+		if (companyId != null) {
 			companyService.deleteCompanyMember(companyId);
 			session.invalidate();
 		}
 		return "home.tiles";
 	}
+
 	@RequestMapping("registerJobPostingForm.do")
 	public String registerJobPostingForm(Model model) {
-		model.addAttribute("recruitCatList",memberService.getRecruitCatVOList());
-		model.addAttribute("devCatList",memberService.getDevCatVOListByrcNum("101"));
-		model.addAttribute("empTypeCatList",memberService.getEmpTypeCatVOList()); 
-		model.addAttribute("locCatList",memberService.getLocCatVOList());
-		model.addAttribute("acaCatList",memberService.getAcaCatVOList());	
+		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
+		model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));
+		model.addAttribute("empTypeCatList", memberService.getEmpTypeCatVOList());
+		model.addAttribute("locCatList", memberService.getLocCatVOList());
+		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
 		return "company/job_posting_register_form.tiles2";
-}
+	}
+	//나중에 "1001"->jobPostingNum
+	@RequestMapping("job_posting_detail.do")
+	public String job_posting_detail(String jobPostingNum, Model model, HttpSession session) {
+		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNum("1001"));
+		model.addAttribute("devCatList", memberService.getDevCatVOListByNum("1001"));
+		model.addAttribute("empTypeCatList", memberService.getEmpCatVOListByNum("1001"));
+		model.addAttribute("locCatList", memberService.getLocCatVOListByNum("1001"));
+		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNum("1001"));
+		model.addAttribute("jpvo", companyService.jobPostingDetail("1001"));
+		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		if (mvo != null) {
+			CompanyMemberVO cmvo = companyService.myPageCompanyMember(mvo.getId());
+			model.addAttribute("cmvo", cmvo);
+		}
+		return "company/job_posting_detail.tiles2";
+
+	}
 }

@@ -24,6 +24,7 @@ public class DonggyuUnitTest {
 	CompanyMapper companyMapper;
 	@Test
 	public void test() {
-
+		System.out.println(companyMapper.jobPostringDetail("1001"));
+		System.out.println(memberMapper.getDevCatVOListByNum("1001"));
 	}
 }

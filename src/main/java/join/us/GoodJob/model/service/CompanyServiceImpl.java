@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import join.us.GoodJob.model.mapper.CompanyMapper;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
+import join.us.GoodJob.model.vo.JobPostingVO;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
@@ -37,6 +38,11 @@ public class CompanyServiceImpl implements CompanyService {
 	public CompanyMemberVO myPageCompanyMember(String companyId) {
 		return companyMapper.myPageCompanyMember(companyId);
 		
+	}
+
+	@Override
+	public JobPostingVO jobPostingDetail(String companyNum) {	
+		return companyMapper.jobPostringDetail(companyNum);
 	}
 
 }
