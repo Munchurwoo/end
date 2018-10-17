@@ -1,5 +1,7 @@
 package join.us.GoodJob.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
@@ -19,6 +21,7 @@ public class CompanyController {
 	CompanyService companyService;
 	@Resource
 	MemberService memberService;
+
 	@RequestMapping("user-registerCompanyMemberForm.do")
 	public String registerCompanyMemberForm() {
 		return "company/company_register_form.tiles2";
@@ -27,7 +30,7 @@ public class CompanyController {
 	@PostMapping("user-registerCompanyMember.do")
 	public String registerCompanyMember(CompanyMemberVO companyMemberVO) {
 		companyService.registerCompanyMember(companyMemberVO);
-		return "redirect:user-loginForm.do";		
+		return "redirect:user-loginForm.do";
 	}
 
 	/**
@@ -72,23 +75,37 @@ public class CompanyController {
 		}
 		return "company/company_mypage.tiles2";
 	}
+
 	@RequestMapping("deleteCompanyMember.do")
 	public String deleteNormalMember(HttpSession session) {
-		MemberVO mvo=(MemberVO) session.getAttribute("mvo");
-		String companyId=mvo.getId();
-		if(companyId!=null) {
+		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		String companyId = mvo.getId();
+		if (companyId != null) {
 			companyService.deleteCompanyMember(companyId);
 			session.invalidate();
 		}
 		return "home.tiles";
 	}
+
 	@RequestMapping("registerJobPostingForm.do")
 	public String registerJobPostingForm(Model model) {
-		model.addAttribute("recruitCatList",memberService.getRecruitCatVOList());
-		model.addAttribute("devCatList",memberService.getDevCatVOListByrcNum("101"));
-		model.addAttribute("empTypeCatList",memberService.getEmpTypeCatVOList()); 
-		model.addAttribute("locCatList",memberService.getLocCatVOList());
-		model.addAttribute("acaCatList",memberService.getAcaCatVOList());	
+		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
+		model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));
+		model.addAttribute("empTypeCatList", memberService.getEmpTypeCatVOList());
+		model.addAttribute("locCatList", memberService.getLocCatVOList());
+		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
 		return "company/job_posting_register_form.tiles2";
-}
+	}
+	@RequestMapping("user-companyInfo.do")
+	public String allConmapnyInfo(MemberVO memberVO,Model model) {
+		List<MemberVO> cmvoList=companyService.getAllCompanyList(memberVO);
+		model.addAttribute("cmvoList", cmvoList);
+		return "company/company_info.tiles";
+	}
+	@RequestMapping("user-detailCompanyInfo.do")
+	public String detailCompanyInfo(String companyId,Model model) {
+		model.addAttribute("cmvo", companyService.detailCompanyInfo(companyId));
+		return "company/company_detailInfo.tiles";
+	}
+
 }

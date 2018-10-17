@@ -37,5 +37,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where m.id=nm.normal_id
 		and m.id=#{id}
 	</select>
+	<select id="getAllPortfolioList" resultType="portfolioVO">
+		
+	</select>
  </mapper> 		
  

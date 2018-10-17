@@ -1,11 +1,14 @@
 package join.us.GoodJob.model.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
 import join.us.GoodJob.model.mapper.CompanyMapper;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
+import join.us.GoodJob.model.vo.MemberVO;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
@@ -37,6 +40,17 @@ public class CompanyServiceImpl implements CompanyService {
 	public CompanyMemberVO myPageCompanyMember(String companyId) {
 		return companyMapper.myPageCompanyMember(companyId);
 		
+	}
+
+	@Override
+	public List<MemberVO> getAllCompanyList(MemberVO memberVO) {
+		return companyMapper.getAllCompanyList(memberVO);
+		
+	}
+
+	@Override
+	public CompanyMemberVO detailCompanyInfo(String companyId) {
+		return companyMapper.detailCompanyInfo(companyId);
 	}
 
 }

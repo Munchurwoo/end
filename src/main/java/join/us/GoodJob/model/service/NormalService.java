@@ -14,5 +14,4 @@ public interface NormalService {
 	NormalMemberVO selectNormalMember(String id);
 	//개인 정보 조회
 	NormalMemberVO myPageNormalMember(String memberId);
-
 }

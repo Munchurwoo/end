@@ -42,6 +42,12 @@
  		<put-attribute name="main"  value="/WEB-INF/views/{1}.jsp"/>
  		<put-attribute name="title"  value="{1}" />
  	</definition>
+ 	
+ 	<definition name="*/*.tiles" extends="home.tiles">
+ 		<put-attribute name="main_center" value="/WEB-INF/views/{1}/{2}.jsp"></put-attribute>
+ 		<put-attribute name="main_footer" value=""></put-attribute>
+ 		<put-attribute name="main_header" value=""></put-attribute>
+ 	</definition>
  	<!-- 	첫번째 *  {1}  디렉토리명 
  			두번째 *  {2}  파일명 
  				WEB-INF/views/member/findbyid_form.jsp
