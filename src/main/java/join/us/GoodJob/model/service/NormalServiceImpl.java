@@ -32,11 +32,6 @@ public class NormalServiceImpl implements NormalService {
 	public NormalMemberVO selectNormalMember(String id) {
 		return normalMapper.selectNormalMember(id);
 	}
-	
-	@Override
-	public int checkNormalMemberId(String id) {
-		return normalMapper.checkNormalMemberId(id);
-	}
 
 	@Override
 	public void deleteNormalMember(String normalId) {
@@ -89,9 +84,11 @@ public class NormalServiceImpl implements NormalService {
 		for(String rcNum :portfolioVO.getRecruitCatNumList()) {
 			map.put("rcNum", rcNum);
 			normalMapper.insertPortfolioRecuitment(map);	
-		}
+		}		
+	}
 		
-		
+	public PortfolioVO normalDetailPortfolio(String normalId) {
+		return normalMapper.normalDetailPortfolio(normalId);
 	}
 
 }

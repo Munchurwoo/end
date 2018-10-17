@@ -13,12 +13,14 @@ public interface NormalService {
 	void deleteNormalMember(String normalId);
 	//개인 회원 검색
 	NormalMemberVO selectNormalMember(String id);
-	//개인 회원 아이디 중복 검사
-	int checkNormalMemberId(String id);
 	//개인 정보 조회
 	NormalMemberVO myPageNormalMember(String memberId);
 	
 	void registerPortfolio(PortfolioVO portfolioVO);
 	
+
+	//포트폴리오등록 상세
+	PortfolioVO normalDetailPortfolio(String normalId);
+
 
 }

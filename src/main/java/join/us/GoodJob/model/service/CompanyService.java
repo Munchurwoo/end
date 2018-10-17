@@ -1,7 +1,13 @@
 package join.us.GoodJob.model.service;
 
+import java.util.List;
+
 import join.us.GoodJob.model.vo.CompanyMemberVO;
+
+import join.us.GoodJob.model.vo.MemberVO;
+
 import join.us.GoodJob.model.vo.JobPostingVO;
+import join.us.GoodJob.model.vo.NormalMemberVO;
 
 public interface CompanyService {
 
@@ -19,7 +25,17 @@ public interface CompanyService {
 
 	// 기업 마이페이지 상세
 	CompanyMemberVO myPageCompanyMember(String companyId);
+	
+	//인재검색 서비스 
+	NormalMemberVO memberSearch();
+	
 
-	//구인 상세 
+	// 기업정보 전체조회
+	List<MemberVO> getAllCompanyList(MemberVO memberVO);
+
+	// 기업정보 상세보기
+	CompanyMemberVO detailCompanyInfo(String companyId);
+
+	// 구인 상세
 	JobPostingVO jobPostingDetail(String companyNum);
 }

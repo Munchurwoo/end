@@ -8,7 +8,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import join.us.GoodJob.model.mapper.CompanyMapper;
-import join.us.GoodJob.model.vo.CompanyMemberVO;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring-model.xml"})
 public class GoodJobUnitTest {

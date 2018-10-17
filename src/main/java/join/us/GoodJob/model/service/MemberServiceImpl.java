@@ -18,10 +18,15 @@ import join.us.GoodJob.model.vo.RecruitCatVO;
 public class MemberServiceImpl implements MemberService {
 	@Resource
 	MemberMapper memberMapper;
-	
+
 	@Override
 	public MemberVO loginMember(MemberVO memberVO) {
 		return memberMapper.loginMember(memberVO);
+	}
+
+	@Override
+	public int checkMemberId(String id) {
+		return memberMapper.checkMemberId(id);
 	}
 
 	@Override
@@ -50,7 +55,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<DevCatVO> getDevCatVOListByNum(String jobPostingNum) {	
+	public List<DevCatVO> getDevCatVOListByNum(String jobPostingNum) {
 		return memberMapper.getDevCatVOListByNum(jobPostingNum);
 	}
 
@@ -60,17 +65,42 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public List<RecruitCatVO> getRecruitCatVOListByNum(String jobPostingNum) {		
+	public List<RecruitCatVO> getRecruitCatVOListByNum(String jobPostingNum) {
 		return memberMapper.getRecruitCatVOListByNum(jobPostingNum);
 	}
 
 	@Override
-	public List<AcaCatVO> getAcaCatVOListByNum(String jobPostingNum) {		
+	public List<AcaCatVO> getAcaCatVOListByNum(String jobPostingNum) {
 		return memberMapper.getAcaCatVOListByNum(jobPostingNum);
 	}
 
 	@Override
-	public List<EmpTypeCatVO> getEmpCatVOListByNum(String jobPostingNum) {	
+	public List<EmpTypeCatVO> getEmpCatVOListByNum(String jobPostingNum) {
 		return memberMapper.getEmpCatVOListByNum(jobPostingNum);
+	}
+
+	@Override
+	public List<DevCatVO> getDevCatVOListByNormalId(String normalId) {
+		return memberMapper.getDevCatVOListByNormalId(normalId);
+	}
+
+	@Override
+	public List<LocCatVO> getLocCatVOListByNormalId(String normalId) {
+		return memberMapper.getLocCatVOListByNormalId(normalId);
+	}
+
+	@Override
+	public List<RecruitCatVO> getRecruitCatVOListByNormalId(String normalId) {
+		return memberMapper.getRecruitCatVOListByNormalId(normalId);
+	}
+
+	@Override
+	public List<AcaCatVO> getAcaCatVOListByNormalId(String normalId) {
+		return memberMapper.getAcaCatVOListByNormalId(normalId);
+	}
+
+	@Override
+	public List<EmpTypeCatVO> getEmpCatVOListByNormalId(String normalId) {
+		return memberMapper.getEmpCatVOListByNormalId(normalId);
 	}
 }

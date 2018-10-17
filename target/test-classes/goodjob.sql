@@ -51,6 +51,8 @@ insert into MEMBER(id, password, email, name, address, tel, member_type) values(
 insert into MEMBER(id, password, email, name, address, tel, member_type) values('yosep', '123', 'yosep@gmail.com', '최요셉', '경기도 수원시', '010-3333-3333', 1);
 insert into MEMBER(id, password, email, name, address, tel, member_type) values('hsj', '123', 'hsj@gmail.com', '황성진', '경기도 안양시', '010-4444-4444', 1);
 insert into MEMBER(id, password, email, name, address, tel, member_type) values('MCW', '123', 'MCW@gmail.com', '문철우', '서울특별시 중랑구', '010-5555-5555', 1);
+insert into MEMBER(id, password, email, name, address, tel, member_type) values('B', '123', 'MCW@gmail.com', '김형석', '서울특별시 구리', '010-3213-2345', 1);
+insert into MEMBER(id, password, email, name, address, tel, member_type) values('C', '123', 'MCW@gmail.com', '조민정', '경기도 시흥시', '010-5555-1542', 1);
 
 select * from member;
 ---------------------------------------------------------------------
@@ -72,6 +74,8 @@ create table normal_member(
 	normal_id varchar2(100) primary key,
 	gender varchar2(100) not null,
 	career_status varchar2(100) not null,
+	gender varchar2(100) not null,
+
 	constraint fk_normalandmember foreign key(normal_id) references member(id) on delete cascade
 );
 
