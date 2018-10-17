@@ -12,7 +12,6 @@ import join.us.GoodJob.model.vo.DevCatVO;
 import join.us.GoodJob.model.vo.EmpTypeCatVO;
 import join.us.GoodJob.model.vo.LocCatVO;
 import join.us.GoodJob.model.vo.MemberVO;
-import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.RecruitCatVO;
 
 @Service

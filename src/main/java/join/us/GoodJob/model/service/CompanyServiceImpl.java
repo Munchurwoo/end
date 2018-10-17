@@ -53,7 +53,6 @@ public class CompanyServiceImpl implements CompanyService {
 
 	public List<MemberVO> getAllCompanyList() {
 		return companyMapper.getAllCompanyList();
-		
 	}
 
 	@Override

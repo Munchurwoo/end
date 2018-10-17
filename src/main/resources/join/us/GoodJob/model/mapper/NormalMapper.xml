@@ -6,11 +6,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="registerMember" parameterType="normalMemberVO">
 		insert into
 		member(id,password,email,name,tel,member_type,address)
-		values(#{id}, #{password}, #{email}, #{name}, #{tel}, 1, #{address})
+		values(#{id},
+		#{password}, #{email}, #{name}, #{tel}, 1, #{address})
 	</insert>
 
 	<insert id="registerNormalMember" parameterType="normalMemberVO">
-		insert into normal_member(normal_id,picture_path,career_status,gender)
+		insert into
+		normal_member(normal_id,picture_path,career_status,gender)
 		values(#{id}, #{picturePath}, #{careerStatus}, #{gender})
 	</insert>
 
@@ -18,7 +20,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		resultType="normalMemberVO">
 		select m.id, m.password, m.email, m.name, m.address, m.tel,
 		nm.gender, nm.picture_path, nm.career_status
-		from normal_member nm, member m
+		from normal_member nm,
+		member m
 		where nm.normal_id=m.id and m.id=#{value}
 	</select>
 
@@ -65,7 +68,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into portfolio_dev(normal_id, dev_cat_num)
 		values(#{normalId}, #{devCatNum})
 	</insert>
-	
+
 	<insert id="insertPortfolioEmp" parameterType="map">
 		insert into portfolio_emp(normal_id, emp_type_num)
 		values(#{normalId}, #{empTypeNum})

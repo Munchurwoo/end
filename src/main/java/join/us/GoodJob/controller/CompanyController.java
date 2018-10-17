@@ -126,7 +126,7 @@ public class CompanyController {
 		}
 		return "company/job_posting_detail.tiles2";
 	}
-	
+
 	@RequestMapping("companyJobPostingList.do")
 	public String companyJobPostingList(String companyId,Model model) {
 		model.addAttribute("jobPostingList", companyService.companyJobPostingList(companyId));

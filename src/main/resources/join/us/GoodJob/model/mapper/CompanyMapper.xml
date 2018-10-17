@@ -38,7 +38,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 
 	<select id="getAllCompanyList" resultType="companyMemberVO">
-		select
+		select 
 		cm.company_id,m.password,m.name,m.address,m.tel,m.email,cm.introduction,
 		cm.company_type,cm.industry,cm.sales,cm.date_of_establishment,cm.num_of_employees
 		from member m , company_member cm
@@ -57,8 +57,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from job_posting
 		where job_posting_num=#{jobPostingNum}
 	</select>
-
-
 	<select id="companyJobPostingList" resultType="jobPostingVO" parameterType="companyMemberVO">
 		select 
 		cm.company_id, cm.introduction, cm.company_type, cm.industry, cm.sales, cm.date_of_establishment, cm.num_of_employees,
@@ -70,32 +68,3 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </mapper> 		
  
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

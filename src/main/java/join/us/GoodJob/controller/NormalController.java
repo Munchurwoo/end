@@ -101,6 +101,7 @@ public class NormalController {
 		return "normal/normal_register_portfolio_form.tiles2";
 	}
 	
+	
 	@RequestMapping("registerPortfolio.do")
 	public String registerPortfolio(PortfolioVO portfolioVO, HttpSession session) {
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");		
