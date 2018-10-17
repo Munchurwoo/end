@@ -95,9 +95,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getAllPortfolioList" resultType="portfolioVO">
 
 	</select>
+	
 	<select id="idName" resultType="normalMemberVO">
 		select m.id , m.name
 		from member m, normal_member nm
 		where m.id=nm.normal_id
 	</select>
+	
+	<select id="portFolioVOById" resultType="PortfolioVO" parameterType="" >
+		select * 
+		from portfolio
+	</select>
+	
 </mapper>

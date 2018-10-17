@@ -2,6 +2,8 @@ package join.us.GoodJob.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -26,21 +28,22 @@ public class NormalController {
 	NormalService normalService;
 	@Resource
 	MemberService memberService;
-	
+
 	private String uploadPath;
 
 	/**
 	 * 181015 MIRI 개인 회원가입 폼(NORMAL_MEMBER)
+	 * 
 	 * @return
 	 */
 	@RequestMapping("user-registerNormalMemberForm.do")
 	public String registerNormalMemberForm() {
 		return "normal/normal_register_form.tiles2";
 	}
-	
+
 	/**
-	 * 181015 SungJin
-	 * 개인 회원가입 (NORMAL_MEMBER)
+	 * 181015 SungJin 개인 회원가입 (NORMAL_MEMBER)
+	 * 
 	 * @param normalMemberVO
 	 * @return
 	 */
@@ -52,13 +55,14 @@ public class NormalController {
 
 	/**
 	 * 181015 MIRI 개인회원 마이페이지
+	 * 
 	 * @return
 	 */
 	@RequestMapping("normal_mypage.do")
-	public String myPageNormalMember(String normalId,Model model,HttpSession session) {
+	public String myPageNormalMember(String normalId, Model model, HttpSession session) {
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		if (mvo != null) {
-			NormalMemberVO nmvo= normalService.myPageNormalMember(mvo.getId());
+			NormalMemberVO nmvo = normalService.myPageNormalMember(mvo.getId());
 			model.addAttribute("nmvo", nmvo);
 		}
 		return "normal/normal_mypage.tiles2";
@@ -66,22 +70,24 @@ public class NormalController {
 
 	/**
 	 * 181015 MIRI 개인회원 회원정보수정 폼
+	 * 
 	 * @param session
 	 * @param model
 	 * @return
 	 */
 	@RequestMapping("updateNormalMemberForm.do")
 	public String updateNormalMemberForm(HttpSession session, Model model) {
-		MemberVO mvo = (MemberVO)session.getAttribute("mvo");
-		if(mvo != null) {
+		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		if (mvo != null) {
 			NormalMemberVO nmvo = normalService.selectNormalMember(mvo.getId());
 			model.addAttribute("nmvo", nmvo);
 		}
 		return "normal/normal_update_form.tiles2";
 	}
-	
+
 	/**
 	 * 181015 MIRI 개인회원 회원정보수정
+	 * 
 	 * @param normalMemberVO
 	 * @return
 	 */
@@ -94,49 +100,47 @@ public class NormalController {
 	@RequestMapping("registerPortfolioForm.do")
 	public String registerPortfolioForm(Model model) {
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
-		model.addAttribute("devCatList", 	memberService.getDevCatVOListByrcNum("101"));
-		model.addAttribute("empTypeCatList", 	memberService.getEmpTypeCatVOList()); 
+		model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));
+		model.addAttribute("empTypeCatList", memberService.getEmpTypeCatVOList());
 		model.addAttribute("locCatList", memberService.getLocCatVOList());
 		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
 		return "normal/normal_register_portfolio_form.tiles2";
 	}
-	
-	
+
 	@RequestMapping("registerPortfolio.do")
 	public String registerPortfolio(PortfolioVO portfolioVO, HttpSession session) {
-		MemberVO mvo = (MemberVO) session.getAttribute("mvo");		
-		portfolioVO.setNormalId(mvo.getId());		
+		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		portfolioVO.setNormalId(mvo.getId());
 		System.out.println("이력서 등록 시작");
-		normalService.registerPortfolio(portfolioVO);		
+		normalService.registerPortfolio(portfolioVO);
 		System.out.println("이력서 등록 성공");
 		return "redirect:home.do";
 	}
 
 	@RequestMapping("deleteNormalMember.do")
 	public String deleteNormalMember(HttpSession session) {
-		MemberVO mvo=(MemberVO) session.getAttribute("mvo");
-		String normalId=mvo.getId();
-		if(normalId!=null) {
+		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		String normalId = mvo.getId();
+		if (normalId != null) {
 			normalService.deleteNormalMember(normalId);
 			session.invalidate();
 		}
 		return "home.tiles";
 	}
-	
+
 	@PostMapping("normalPictureUpload.do")
 	@ResponseBody
-	public String uploadNormalPicture(MultipartFile uploadPicture,HttpServletRequest request){
+	public String uploadNormalPicture(MultipartFile uploadPicture, HttpServletRequest request) {
 		System.out.println("uploadNormalPicture시작");
-		//실제 운영시에 사용할 서버 업로드 경로 
-		uploadPath
-		=request.getSession().getServletContext().getRealPath("/resources/upload/");
-		//개발시에는 워크스페이스 업로드 경로로 준다 
-		//uploadPath="C:\\java-kosta\\framework-workspace2\\springmvc21-fileupload-inst\\src\\main\\webapp\\resources\\upload\\";
-		System.out.println("업로드 경로:"+uploadPath);
+		// 실제 운영시에 사용할 서버 업로드 경로
+		uploadPath = request.getSession().getServletContext().getRealPath("/resources/upload/");
+		// 개발시에는 워크스페이스 업로드 경로로 준다
+		// uploadPath="C:\\java-kosta\\framework-workspace2\\springmvc21-fileupload-inst\\src\\main\\webapp\\resources\\upload\\";
+		System.out.println("업로드 경로:" + uploadPath);
 		System.out.println(uploadPicture);
-		if(uploadPicture.isEmpty()==false){
+		if (uploadPicture.isEmpty() == false) {
 			System.out.println(uploadPicture.getOriginalFilename());
-			File uploadFile=new File(uploadPath+uploadPicture.getOriginalFilename());
+			File uploadFile = new File(uploadPath + uploadPicture.getOriginalFilename());
 			try {
 				uploadPicture.transferTo(uploadFile);
 				System.out.println("사진 업로드 완료!");
@@ -144,28 +148,51 @@ public class NormalController {
 				e.printStackTrace();
 			}
 		}
-		/*ModelAndView mv=new ModelAndView("product/register_result.tiles");
-		mv.addObject("name", vo.getName());
-		mv.addObject("fileName", file.getOriginalFilename());*/
+		/*
+		 * ModelAndView mv=new ModelAndView("product/register_result.tiles");
+		 * mv.addObject("name", vo.getName()); mv.addObject("fileName",
+		 * file.getOriginalFilename());
+		 */
 		return "성공";
 	}
-	//나중에 "yosep"->normalId
+
+	// 나중에 "yosep"->normalId
 	@RequestMapping("normalDetailPortfolio.do")
-	public String normalDetailPortfolio(String normalId,Model model,HttpSession session) {
-		model.addAttribute("devCatList",memberService.getDevCatVOListByNormalId("yosep"));
-		model.addAttribute("empTypeCatList",memberService.getEmpCatVOListByNormalId("yosep"));
-		model.addAttribute("locCatList",memberService.getLocCatVOListByNormalId("yosep"));
-		model.addAttribute("acaCatList",memberService.getAcaCatVOListByNormalId("yosep"));
-		model.addAttribute("recruitCatList",memberService.getRecruitCatVOListByNormalId("yosep"));
-		model.addAttribute("povo",normalService.normalDetailPortfolio("yosep"));
+	public String normalDetailPortfolio(String normalId, Model model, HttpSession session) {
+		model.addAttribute("devCatList", memberService.getDevCatVOListByNormalId("yosep"));
+		model.addAttribute("empTypeCatList", memberService.getEmpCatVOListByNormalId("yosep"));
+		model.addAttribute("locCatList", memberService.getLocCatVOListByNormalId("yosep"));
+		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNormalId("yosep"));
+		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNormalId("yosep"));
+		model.addAttribute("povo", normalService.normalDetailPortfolio("yosep"));
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		if (mvo != null) {
 			NormalMemberVO nmvo = normalService.myPageNormalMember(mvo.getId());
 			model.addAttribute("nmvo", nmvo);
 		}
 		return "normal/normal_detail_portfolio.tiles2";
+
+	}
+
+	// 인재검색 header 클릭시 이동
+	@RequestMapping("user-portfolioAllList.do")
+	public String portfolioAllList(Model model) {
+		// 인재검색 list 출력
+		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
+		model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));
+		model.addAttribute("empTypeCatList", memberService.getEmpTypeCatVOList());
+		model.addAttribute("locCatList", memberService.getLocCatVOList());
+		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
 		
+		// String normalName = memberService.get
+		List<NormalMemberVO> list = normalService.idName();
+		//포트폴리오 list
+		List<PortfolioVO> plist = new ArrayList<PortfolioVO>();
+		//meber 와 normalmember join 을 활용하여 normalmember 정보 id만 정보저장
+		ArrayList<String> id = new ArrayList<String>();
+		for (int i = 0; i < list.size(); i++) {
+			plist.add( normalService.portFolioVOById(list.get(i).getId()));
+		}
+		return "member/portfolio_all_list.tiles2";
 	}
 }
-
-
