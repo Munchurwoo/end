@@ -52,7 +52,7 @@ public interface CompanyMapper {
 	
 
 	//header부분 기업정보리스트 보기
-	List<MemberVO> getAllCompanyList(MemberVO memberVO);
+	List<MemberVO> getAllCompanyList();
 	// 기업정보 상세보기
 	CompanyMemberVO detailCompanyInfo(String companyId);
 

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import join.us.GoodJob.model.service.CompanyService;
 import join.us.GoodJob.model.service.MemberService;
@@ -98,11 +99,12 @@ public class CompanyController {
 	}
 
 	@RequestMapping("user-companyInfo.do")
-	public String allConmapnyInfo(MemberVO memberVO,Model model) {
-		List<MemberVO> cmvoList=companyService.getAllCompanyList(memberVO);
+	public String allConmapnyInfo(Model model) {
+		List<MemberVO> cmvoList=companyService.getAllCompanyList();
 		model.addAttribute("cmvoList", cmvoList);
 		return "company/company_info.tiles";
 	}
+
 	@RequestMapping("user-detailCompanyInfo.do")
 	public String detailCompanyInfo(String companyId,Model model) {
 		model.addAttribute("cmvo", companyService.detailCompanyInfo(companyId));

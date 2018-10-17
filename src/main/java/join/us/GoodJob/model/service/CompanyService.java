@@ -26,7 +26,7 @@ public interface CompanyService {
 	CompanyMemberVO myPageCompanyMember(String companyId);
 
 	// 기업정보 전체조회
-	List<MemberVO> getAllCompanyList(MemberVO memberVO);
+	List<MemberVO> getAllCompanyList();
 
 	// 기업정보 상세보기
 	CompanyMemberVO detailCompanyInfo(String companyId);

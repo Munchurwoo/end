@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <div class="row">
 	<div class="col-lg-12">
 		<div class="row">
@@ -10,71 +12,22 @@
 					</h2>
 				</div>
 			</h4>
-			<div class="col-lg-3">
-
-				<div class="box">
-					<div class="box-gray aligncenter">
-						<h4>Kakao</h4>
-						<div class="icon">
-							<i class="fa fa-desktop fa-3x"></i>
+			<c:forEach items="${requestScope.cmvoList }" var="cmvo" begin="0" end="3">
+				<div class="col-lg-3">
+					<div class="box">
+						<div class="box-gray aligncenter">
+							<h4>${cmvo.companyId } 채용</h4>
+								<div class="icon">
+									<i class="fa fa-pagelines fa-3x"></i>
+								</div>
+								${cmvo.introduction }
 						</div>
-						<p>Voluptatem accusantium doloremque laudantium sprea totam
-							rem aperiam.</p>
-
-					</div>
-					<div class="box-bottom">
-						<a href="#">Learn more</a>
+						<div class="box-bottom">
+							<a href="user-detailCompanyInfo.do?companyId=${cmvo.companyId}">Learn more</a>
+						</div>
 					</div>
 				</div>
-			</div>
-			<div class="col-lg-3">
-				<div class="box">
-					<div class="box-gray aligncenter">
-						<h4>넥슨 채용</h4>
-						<div class="icon">
-							<i class="fa fa-pagelines fa-3x"></i>
-						</div>
-						<p>Voluptatem accusantium doloremque laudantium sprea totam
-							rem aperiam.</p>
-
-					</div>
-					<div class="box-bottom">
-						<a href="#">Learn more</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-3">
-				<div class="box">
-					<div class="box-gray aligncenter">
-						<h4>NaverLine 채용</h4>
-						<div class="icon">
-							<i class="fa fa-edit fa-3x"></i>
-						</div>
-						<p>Voluptatem accusantium doloremque laudantium sprea totam
-							rem aperiam.</p>
-
-					</div>
-					<div class="box-bottom">
-						<a href="#">Learn more</a>
-					</div>
-				</div>
-			</div>
-			<div class="col-lg-3">
-				<div class="box">
-					<div class="box-gray aligncenter">
-						<h4>티맥스소프트 채용</h4>
-						<div class="icon">
-							<i class="fa fa-code fa-3x"></i>
-						</div>
-						<p>Voluptatem accusantium doloremque laudantium sprea totam
-							rem aperiam.</p>
-
-					</div>
-					<div class="box-bottom">
-						<a href="#">Learn more</a>
-					</div>
-				</div>
-			</div>
+			</c:forEach>
 		</div>
 	</div>
 </div>

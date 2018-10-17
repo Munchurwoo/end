@@ -47,8 +47,8 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 
-	public List<MemberVO> getAllCompanyList(MemberVO memberVO) {
-		return companyMapper.getAllCompanyList(memberVO);
+	public List<MemberVO> getAllCompanyList() {
+		return companyMapper.getAllCompanyList();
 		
 	}
 
