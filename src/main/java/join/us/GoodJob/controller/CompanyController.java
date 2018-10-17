@@ -118,11 +118,13 @@ public class CompanyController {
 		model.addAttribute("locCatList", memberService.getLocCatVOListByNum(jobPostingNum));
 		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNum(jobPostingNum));
 		model.addAttribute("jpvo", companyService.jobPostingDetail(jobPostingNum));
-		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		
+		// 기업,개인 회원 같이 나오게 수정해야함
+		/*MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		if (mvo != null) {
 			CompanyMemberVO cmvo = companyService.myPageCompanyMember(mvo.getId());
 			model.addAttribute("cmvo", cmvo);
-		}
+		}*/
 		return "company/job_posting_detail.tiles2";
 	}
 	@RequestMapping("companyJobPostingList.do")
