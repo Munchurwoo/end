@@ -37,7 +37,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from member where id=#{id}
 	</delete>
 
-	
 	<select id="getAllCompanyList" resultType="companyMemberVO">
 		select 
 		cm.company_id,m.password,m.name,m.address,m.tel,m.email,cm.introduction,

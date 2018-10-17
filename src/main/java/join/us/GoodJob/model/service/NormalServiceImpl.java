@@ -1,6 +1,7 @@
 package join.us.GoodJob.model.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -89,6 +90,16 @@ public class NormalServiceImpl implements NormalService {
 		
 	public PortfolioVO normalDetailPortfolio(String normalId) {
 		return normalMapper.normalDetailPortfolio(normalId);
+	}
+
+	@Override
+	public List<NormalMemberVO> idName() {
+		return normalMapper.idName();
+	}
+
+	@Override
+	public List<PortfolioVO> portFolioVOList(String nomalId) {
+		return normalMapper.portFolioVOList(nomalId);
 	}
 
 }

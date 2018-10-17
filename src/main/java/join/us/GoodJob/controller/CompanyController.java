@@ -103,6 +103,7 @@ public class CompanyController {
 		model.addAttribute("cmvoList", cmvoList);
 		return "company/company_info.tiles";
 	}
+
 	@RequestMapping("user-detailCompanyInfo.do")
 	public String detailCompanyInfo(String companyId,Model model) {
 		model.addAttribute("cmvo", companyService.detailCompanyInfo(companyId));
@@ -118,15 +119,9 @@ public class CompanyController {
 		model.addAttribute("locCatList", memberService.getLocCatVOListByNum(jobPostingNum));
 		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNum(jobPostingNum));
 		model.addAttribute("jpvo", companyService.jobPostingDetail(jobPostingNum));
-		
-		// 기업,개인 회원 같이 나오게 수정해야함
-		/*MemberVO mvo = (MemberVO) session.getAttribute("mvo");
-		if (mvo != null) {
-			CompanyMemberVO cmvo = companyService.myPageCompanyMember(mvo.getId());
-			model.addAttribute("cmvo", cmvo);
-		}*/
 		return "company/job_posting_detail.tiles2";
 	}
+
 	@RequestMapping("companyJobPostingList.do")
 	public String companyJobPostingList(String companyId,Model model) {
 		model.addAttribute("jobPostingList", companyService.companyJobPostingList(companyId));
