@@ -144,7 +144,14 @@ create table job_posting(
 );
 create sequence job_posting_num_seq start with 1001;
 
+select 
+cm.company_id, cm.introduction, cm.company_type, cm.industry, cm.sales, cm.date_of_establishment, cm.num_of_employees,
+j.company_id, j.job_posting_num, j.career_status, j.title, j.content 
+from company_member cm , job_posting j
+where cm.company_id = j.company_id
+
 insert into JOB_POSTING(job_posting_num, company_id, career_status, title, content) values(job_posting_num_seq.nextval, 'NHNuser', '경력 3년', 'NHN엔터테인먼트에서 Java 신입, 프리랜서 개발자 모집', 'Java 어플리케이션 개발 경험자, WAS 이해도가 높은 경험자 우대합니다.');
+insert into JOB_POSTING(job_posting_num, company_id, career_status, title, content) values(job_posting_num_seq.nextval, 'NHNuser', '경력 무관', 'NHN엔터테인먼트에서 css/html 신입, 프리랜서 개발자 모집', '웹퍼블리셔를 모십니다');
 insert into JOB_POSTING(job_posting_num, company_id, career_status, title, content) values(job_posting_num_seq.nextval, 'Tmaxuser', '경력 무관', '티맥스소프트 DBA 2018 하반기 공개채용', 'MS-SQL 서버 모니터링 및 트러블 슈팅경험 있으신 분, OLTP 업무 경험 있으신 분');
 
 select * from job_posting;

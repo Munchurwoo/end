@@ -26,11 +26,14 @@ public interface CompanyService {
 	CompanyMemberVO myPageCompanyMember(String companyId);
 
 	// 기업정보 전체조회
-	List<MemberVO> getAllCompanyList(MemberVO memberVO);
+	List<MemberVO> getAllCompanyList();
 
 	// 기업정보 상세보기
 	CompanyMemberVO detailCompanyInfo(String companyId);
-
+	
+	// 기업정보 상세보기 후 해당 기업 구인공고리스트 바로가기
+	List<JobPostingVO> companyJobPostingList(String companyId);
+	
 	// 구인 상세
 	JobPostingVO jobPostingDetail(String companyNum);
 }
