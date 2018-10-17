@@ -24,7 +24,11 @@ public class DonggyuUnitTest {
 	CompanyMapper companyMapper;
 	@Test
 	public void test() {
-		System.out.println(companyMapper.jobPostringDetail("1001"));
-		System.out.println(memberMapper.getDevCatVOListByNum("1001"));
+		System.out.println(memberMapper.getAcaCatVOListByNormalId("yosep"));
+		System.out.println(memberMapper.getDevCatVOListByNormalId("yosep"));
+		System.out.println(memberMapper.getEmpCatVOListByNormalId("yosep"));
+		System.out.println(memberMapper.getLocCatVOListByNormalId("yosep"));
+		System.out.println(memberMapper.getRecruitCatVOListByNormalId("yosep"));
+		System.out.println(normalMapper.normalDetailPortfolio("yosep"));
 	}
 }

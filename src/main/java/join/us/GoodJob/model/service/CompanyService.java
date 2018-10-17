@@ -7,6 +7,7 @@ import join.us.GoodJob.model.vo.CompanyMemberVO;
 import join.us.GoodJob.model.vo.MemberVO;
 
 import join.us.GoodJob.model.vo.JobPostingVO;
+import join.us.GoodJob.model.vo.NormalMemberVO;
 
 public interface CompanyService {
 
@@ -24,6 +25,10 @@ public interface CompanyService {
 
 	// 기업 마이페이지 상세
 	CompanyMemberVO myPageCompanyMember(String companyId);
+	
+	//인재검색 서비스 
+	NormalMemberVO memberSearch();
+	
 
 	// 기업정보 전체조회
 	List<MemberVO> getAllCompanyList();

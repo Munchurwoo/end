@@ -12,6 +12,7 @@ import join.us.GoodJob.model.vo.CompanyMemberVO;
 import join.us.GoodJob.model.vo.MemberVO;
 
 import join.us.GoodJob.model.vo.JobPostingVO;
+import join.us.GoodJob.model.vo.NormalMemberVO;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
@@ -46,6 +47,10 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
+	public NormalMemberVO memberSearch() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	public List<MemberVO> getAllCompanyList() {
 		return companyMapper.getAllCompanyList();

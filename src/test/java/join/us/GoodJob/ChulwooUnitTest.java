@@ -22,10 +22,10 @@ public class ChulwooUnitTest {
 	
 	@Test
 	public void test() {
-		System.out.println(memberMapper.getRecruitCatVOList());
-		System.out.println(memberMapper.getDevCatVOListByrcNum("101"));
-		System.out.println(memberMapper.getEmpTypeCatVOList());
-		System.out.println(memberMapper.getLocCatVOList());
-		System.out.println(memberMapper.getAcaCatVOList());
+		System.out.println(memberMapper.getAcaCatVOListByNormalId("yosep"));
+		System.out.println(memberMapper.getDevCatVOListByNormalId("yosep"));
+		System.out.println(memberMapper.getEmpCatVOListByNormalId("yosep"));
+		System.out.println(memberMapper.getLocCatVOListByNormalId("yosep"));
+		System.out.println(memberMapper.getRecruitCatVOListByNormalId("yosep"));
 	}
 }

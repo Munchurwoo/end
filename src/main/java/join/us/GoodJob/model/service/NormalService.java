@@ -1,6 +1,7 @@
 package join.us.GoodJob.model.service;
 
 import join.us.GoodJob.model.vo.NormalMemberVO;
+import join.us.GoodJob.model.vo.PortfolioVO;
 
 public interface NormalService {
 	
@@ -14,4 +15,12 @@ public interface NormalService {
 	NormalMemberVO selectNormalMember(String id);
 	//개인 정보 조회
 	NormalMemberVO myPageNormalMember(String memberId);
+	
+	void registerPortfolio(PortfolioVO portfolioVO);
+	
+
+	//포트폴리오등록 상세
+	PortfolioVO normalDetailPortfolio(String normalId);
+
+
 }

@@ -8,11 +8,13 @@
 <a href="updateNormalMemberForm.do">회원정보수정</a><br>
 <a href="registerPortfolioForm.do">이력서 등록</a><br>
 <a href="deleteNormalMember.do">회원탈퇴</a><br>
+<a href="normalDetailPortfolio.do">포트폴리오 상세보기 임시로만듬-동규</a>
 	아이디 ${requestScope.nmvo.id }<br><br>
 	이메일 주소 ${requestScope.nmvo.email }<br><br>
 	이름 ${requestScope.nmvo.name }<br><br>
 	주소 ${requestScope.nmvo.address }<br><br>
 	연락처 ${requestScope.nmvo.tel }<br><br>
 	경력사항 ${requestScope.nmvo.careerStatus }<br><br>
-	사진경로 ${requestScope.nmvo.picturePath }<br><br>
+<%--  181017 요셉 주석 처리 
+사진경로 ${requestScope.nmvo.picturePath }<br><br> --%>
 	성별  ${requestScope.nmvo.gender}<br><br>
