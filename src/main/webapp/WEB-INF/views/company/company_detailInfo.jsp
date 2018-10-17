@@ -51,4 +51,4 @@
 		</thead>
 	</table>
 	</div>
-	<h2><a href="">${requestScope.cmvo.name} 님의 구인공고 바로가기</a></h2>
+	<h2><a href="companyJobPostingList.do?companyId=${requestScope.cmvo.companyId}">${requestScope.cmvo.name} 님의 구인공고 바로가기</a></h2>

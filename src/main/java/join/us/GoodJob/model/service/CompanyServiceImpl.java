@@ -52,8 +52,8 @@ public class CompanyServiceImpl implements CompanyService {
 		return null;
 	}
 
-	public List<MemberVO> getAllCompanyList(MemberVO memberVO) {
-		return companyMapper.getAllCompanyList(memberVO);
+	public List<MemberVO> getAllCompanyList() {
+		return companyMapper.getAllCompanyList();
 		
 	}
 
@@ -64,6 +64,12 @@ public class CompanyServiceImpl implements CompanyService {
 
 	public JobPostingVO jobPostingDetail(String companyNum) {	
 		return companyMapper.jobPostringDetail(companyNum);
+	}
+
+	@Override
+	public List<JobPostingVO> companyJobPostingList(String companyId) {
+		
+		return companyMapper.companyJobPostingList(companyId);
 	}
 
 }

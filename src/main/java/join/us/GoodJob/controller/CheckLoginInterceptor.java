@@ -15,7 +15,7 @@ public class CheckLoginInterceptor extends HandlerInterceptorAdapter{
 			String uri=request.getRequestURI();
 			System.out.println("** HandlerInterceptor preHandle 실행 ** "+uri);
 			System.out.println("** 로그인 후 이용 가능합니다 **");
-			response.sendRedirect("home.do");
+			response.sendRedirect("user-goLogin.do");
 			return false; // 해당 컨트롤러(Handler) 실행 안됨
 		}
 		return true;

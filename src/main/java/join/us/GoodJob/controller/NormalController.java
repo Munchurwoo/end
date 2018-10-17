@@ -103,8 +103,11 @@ public class NormalController {
 	
 	
 	@RequestMapping("registerPortfolio.do")
-	public String registerPortfolio(PortfolioVO portfolioVO) {
-		System.out.println(portfolioVO);
+	public String registerPortfolio(PortfolioVO portfolioVO, HttpSession session) {
+		MemberVO mvo = (MemberVO) session.getAttribute("mvo");		
+		portfolioVO.setNormalId(mvo.getId());		
+		System.out.println("이력서 등록 시작");
+		normalService.registerPortfolio(portfolioVO);		
 		System.out.println("이력서 등록 성공");
 		return "redirect:home.do";
 	}

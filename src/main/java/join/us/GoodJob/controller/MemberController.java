@@ -88,5 +88,8 @@ public class MemberController {
 		if(checkedId == 0) return "ok";
 		else return "fail";
 	}
-	
+	@RequestMapping("user-goLogin.do")
+	public String goLogin() {
+		return "member/must_login.tiles";
+	}
 }
