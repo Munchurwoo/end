@@ -55,7 +55,8 @@ public interface CompanyMapper {
 	List<MemberVO> getAllCompanyList();
 	// 기업정보 상세보기
 	CompanyMemberVO detailCompanyInfo(String companyId);
-
+	// 기업정보 상세보기 후 해당기업 구인공고 리스트 바로가기
+	List<JobPostingVO> companyJobPostingList(String companyId);
 	//구인공고 상세보기
 	JobPostingVO jobPostringDetail(String companyId);
 	

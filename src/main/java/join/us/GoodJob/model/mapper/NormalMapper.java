@@ -1,6 +1,7 @@
 package join.us.GoodJob.model.mapper;
 
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -27,19 +28,19 @@ public interface NormalMapper {
 	// 마이페이지 개인정보 조회(MEMBER)
 	NormalMemberVO myPageNormalMember(String memberId);
 	//포트폴리오 등록(PORTFOLIO)
-	void insertPortfolio(HashMap<String,String> map);				
+	void insertPortfolio(PortfolioVO portfolioVO);				
 	//포트폴리오 파일등록(PORTFOLIO_FILE)
-	void insertPortfolioFile(HashMap<String,String> map);
+	void insertPortfolioFile(Map<String, String> map);
 	//포트폴리오 개발분야 분류 등록(PORTFOLIO_DEV)
-	void insertPortfolioDev(HashMap<String,String> map);
+	void insertPortfolioDev(Map<String, String> map);
 	//포트폴리오 모집직군 분류 등록(PORTFOLIO_RECRUITMENT)
-	void insertPortfolioRecuitment(HashMap<String,String> map);
+	void insertPortfolioRecuitment(Map<String, String> map);
 	//포트폴리오 고용형태 분류 등록(PORTFOLIO_EMP)
-	void insertPortfolioEmp(HashMap<String,String> map);
+	void insertPortfolioEmp(Map<String, String> map);
 	//포트폴리오 지역 분류 등록(PORTFOLIO_LOC)
-	void insertPortfolioLoc(HashMap<String,String> map);	
+	void insertPortfolioLoc(Map<String, String> map);	
 	//포트폴리오 학력 분류 등록(PORTFOLIO_ACADEMIC)
-	void insertPortfolioAcademic(HashMap<String,String> map);
+	void insertPortfolioAcademic(Map<String, String> map);
 	
 	//포트폴리오 전체보기
 	//포트폴리오 검색결과 보기
@@ -47,6 +48,9 @@ public interface NormalMapper {
 	PortfolioVO normalDetailPortfolio(String normalId);	
 	//포트폴리오 삭제
 	//포트폴리오 수정
+	//개인 id, name 조회
+	List<NormalMemberVO> idName();
+	List<PortfolioVO> portFolioVOList(String nomalId);
 	
 	//질의응답 질문등록
 }

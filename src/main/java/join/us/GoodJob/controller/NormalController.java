@@ -27,8 +27,7 @@ public class NormalController {
 	@Resource
 	MemberService memberService;
 	
-	private String serverUploadPath;
-	private String workspaceUploadPath;
+	private String uploadPath;
 
 	/**
 	 * 181015 MIRI 개인 회원가입 폼(NORMAL_MEMBER)
@@ -103,8 +102,11 @@ public class NormalController {
 	}
 	
 	@RequestMapping("registerPortfolio.do")
-	public String registerPortfolio(PortfolioVO portfolioVO) {
-		System.out.println(portfolioVO);
+	public String registerPortfolio(PortfolioVO portfolioVO, HttpSession session) {
+		MemberVO mvo = (MemberVO) session.getAttribute("mvo");		
+		portfolioVO.setNormalId(mvo.getId());		
+		System.out.println("이력서 등록 시작");
+		normalService.registerPortfolio(portfolioVO);		
 		System.out.println("이력서 등록 성공");
 		return "redirect:home.do";
 	}
@@ -123,28 +125,28 @@ public class NormalController {
 	@PostMapping("normalPictureUpload.do")
 	@ResponseBody
 	public String uploadNormalPicture(MultipartFile uploadPicture,HttpServletRequest request){
-		/*System.out.println("uploadNormalPicture시작");
+		System.out.println("uploadNormalPicture시작");
 		//실제 운영시에 사용할 서버 업로드 경로 
-		serverUploadPath
-		=request.getSession().getServletContext().getRealPath("/resources/upload/");*/
+		uploadPath
+		=request.getSession().getServletContext().getRealPath("/resources/upload/");
 		//개발시에는 워크스페이스 업로드 경로로 준다 
-		workspaceUploadPath="C:\\java-kosta\\framework-workspace2\\goodjob\\src\\main\\webapp\\resources\\upload\\";
-		//System.out.println("서버 업로드 경로:"+serverUploadPath);
-		System.out.println("워크스페이스 업로드 경로:"+workspaceUploadPath);
+		//uploadPath="C:\\java-kosta\\framework-workspace2\\springmvc21-fileupload-inst\\src\\main\\webapp\\resources\\upload\\";
+		System.out.println("업로드 경로:"+uploadPath);
 		System.out.println(uploadPicture);
 		if(uploadPicture.isEmpty()==false){
 			System.out.println(uploadPicture.getOriginalFilename());
-			//File uploadServerFile=new File(serverUploadPath+uploadPicture.getOriginalFilename());
-			File uploadWorkspaceFile= new File(workspaceUploadPath+uploadPicture.getOriginalFilename());
+			File uploadFile=new File(uploadPath+uploadPicture.getOriginalFilename());
 			try {
-				//uploadPicture.transferTo(uploadServerFile);
-				uploadPicture.transferTo(uploadWorkspaceFile);
+				uploadPicture.transferTo(uploadFile);
 				System.out.println("사진 업로드 완료!");
 			} catch (IllegalStateException | IOException e) {
 				e.printStackTrace();
 			}
 		}
-		return uploadPicture.getOriginalFilename();
+		/*ModelAndView mv=new ModelAndView("product/register_result.tiles");
+		mv.addObject("name", vo.getName());
+		mv.addObject("fileName", file.getOriginalFilename());*/
+		return "성공";
 	}
 	//나중에 "yosep"->normalId
 	@RequestMapping("normalDetailPortfolio.do")

@@ -6,35 +6,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="registerCompanyMember" parameterType="companyMemberVO">
 		insert into
 		company_member(company_id,introduction,company_type,industry,sales,date_of_establishment,num_of_employees)
-		values(#{id}, #{introduction}, #{companyType}, #{industry}, #{sales},
-		#{dateOfEstablishment}, #{numOfEmployees})
+		values(#{id}, #{introduction}, #{companyType}, #{industry}, #{sales}, #{dateOfEstablishment}, #{numOfEmployees})
 	</insert>
 	<insert id="registerMember" parameterType="companyMemberVO">
 		insert into
 		member(id,password,email,name,tel,member_type,address)
-		values(#{id},
-		#{password}, #{email}, #{name}, #{tel}, 3, #{address})
+		values(#{id}, #{password}, #{email}, #{name}, #{tel}, 3, #{address})
 	</insert>
 	<select id="selectCompanyMember" parameterType="string" resultType="companyMemberVO">
-		select m.id, m.email, m.name, m.address, m.tel,
-		cm.introduction, cm.company_type, cm.industry, cm.sales,
-		cm.date_of_establishment, cm.num_of_employees
-		from company_member cm,
-		member m
+		select m.id, m.email, m.name, m.address, m.tel, cm.introduction, cm.company_type, cm.industry, cm.sales, cm.date_of_establishment, cm.num_of_employees
+		from company_member cm, member m
 		where m.id=cm.company_id and m.id=#{value}
 	</select>
 	<update id="updateCompanyMember" parameterType="companyMemberVO">
-		update
-		company_member set introduction=#{introduction},
-		company_type=#{companyType}, industry=#{industry}, sales=#{sales},
-		date_of_establishment=#{dateOfEstablishment},
-		num_of_employees=#{numOfEmployees}
+		update company_member set introduction=#{introduction}, company_type=#{companyType}, industry=#{industry}, sales=#{sales}, date_of_establishment=#{dateOfEstablishment}, num_of_employees=#{numOfEmployees}
 		where company_id=#{id}
 	</update>
 	<update id="updateMember" parameterType="companyMemberVO">
-		update member set
-		password=#{password}, email=#{email}, address=#{address}, tel=#{tel}
-		where id=#{id}
+		update member set password=#{password}, email=#{email}, address=#{address}, tel=#{tel} where id=#{id}
 	</update>
 	<select id="myPageCompanyMember" resultType="companyMemberVO" parameterType="memberVO">
 		select
@@ -42,12 +31,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		cm.company_type,cm.industry,cm.sales,cm.date_of_establishment,cm.num_of_employees
 		from member m , company_member cm
 		where m.id=cm.company_id
-		and
-		m.id=#{id}
+		and m.id=#{id}
 	</select>
 	<delete id="deleteCompanyMember" parameterType="string">
-		delete from
-		member where id=#{id}
+		delete from member where id=#{id}
 	</delete>
 
 	<select id="getAllCompanyList" resultType="companyMemberVO">
@@ -63,8 +50,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		cm.company_type,cm.industry,cm.sales,cm.date_of_establishment,cm.num_of_employees
 		from member m , company_member cm
 		where m.id=cm.company_id
-		and
-		m.id=#{id}
+		and m.id=#{id}
 	</select>
 	<select id="jobPostringDetail" resultType="jobPostingVO" parameterType="string">
 		select job_posting_num,career_status,title,content
@@ -73,6 +59,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 
 
+	<select id="companyJobPostingList" resultType="jobPostingVO" parameterType="companyMemberVO">
+		select 
+		cm.company_id, cm.introduction, cm.company_type, cm.industry, cm.sales, cm.date_of_establishment, cm.num_of_employees,
+		j.company_id, j.job_posting_num, j.career_status, j.title, j.content 
+		from company_member cm , job_posting j
+		where j.company_id = cm.company_id
+		and j.company_id=#{companyId}
+	</select>
 </mapper> 		
  
  

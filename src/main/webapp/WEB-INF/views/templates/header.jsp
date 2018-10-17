@@ -23,8 +23,13 @@
 							<li><a href="components.html">경력자</a></li>
 							<li><a href="pricingbox.html">프리랜서</a></li>
 						</ul></li>
+
+					<li><a href="user-portfolioAllList.do">인재검색</a></li>
+					<li><a href="blog.html">기업정보</a></li>
+
 					<li><a href="portfolio.html">인재검색</a></li>
 					<li><a href="user-companyInfo.do">기업정보</a></li>
+
 					<li><a href="contact.html">기업서비스</a></li>
 					<c:choose>
 						<c:when test="${empty sessionScope.mvo}">
