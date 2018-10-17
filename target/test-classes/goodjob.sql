@@ -34,13 +34,13 @@ drop sequence portfolio_file_seq;
 
 -- 회원 ( ERD에서 기업/개인 구분하기위해 type 컬럼을 뒀으나 명령어라 사용불가함 따라서 member_type으로 변경
 create table member(
-	id varchar2(100) primary key,
-	password varchar2(100) not null,
-	email varchar2(100) not null,
-	name varchar2(100) not null,
-	address varchar2(100) not null,
-	tel varchar2(100) not null,
-	member_type number --0은 관리자 / 1 은 개인회원 / 2 는 기업회원 승인 X / 3은 기업회원 승인 OK
+   id varchar2(100) primary key,
+   password varchar2(100) not null,
+   email varchar2(100) not null,
+   name varchar2(100) not null,
+   address varchar2(100) not null,
+   tel varchar2(100) not null,
+   member_type number --0은 관리자 / 1 은 개인회원 / 2 는 기업회원 승인 X / 3은 기업회원 승인 OK
 );
 
 insert into MEMBER(id, password, email, name, address, tel, member_type) values('admin', 'admin', 'admin@kosta.or.kr', '관리자', '경기도 성남시 분당구 대왕판교로 670길 유스페이스2 B동 8층', '070-5039-5803, 5805', 0);
@@ -51,17 +51,15 @@ insert into MEMBER(id, password, email, name, address, tel, member_type) values(
 insert into MEMBER(id, password, email, name, address, tel, member_type) values('yosep', '123', 'yosep@gmail.com', '최요셉', '경기도 수원시', '010-3333-3333', 1);
 insert into MEMBER(id, password, email, name, address, tel, member_type) values('hsj', '123', 'hsj@gmail.com', '황성진', '경기도 안양시', '010-4444-4444', 1);
 insert into MEMBER(id, password, email, name, address, tel, member_type) values('MCW', '123', 'MCW@gmail.com', '문철우', '서울특별시 중랑구', '010-5555-5555', 1);
-insert into MEMBER(id, password, email, name, address, tel, member_type) values('B', '123', 'MCW@gmail.com', '김형석', '서울특별시 구리', '010-3213-2345', 1);
-insert into MEMBER(id, password, email, name, address, tel, member_type) values('C', '123', 'MCW@gmail.com', '조민정', '경기도 시흥시', '010-5555-1542', 1);
 
 select * from member;
 ---------------------------------------------------------------------
  
 -- 관리자
 create table manager(
-	id varchar2(100) primary key,
-	manager_level varchar2(100) not null,
-	constraint fk_member_manager foreign key(id) references member(id) on delete cascade
+   id varchar2(100) primary key,
+   manager_level varchar2(100) not null,
+   constraint fk_member_manager foreign key(id) references member(id) on delete cascade
 );
 
 insert into MANAGER(id, manager_level) values('admin', 1);
@@ -71,43 +69,42 @@ select * from manager;
 
 -- 개인회원 
 create table normal_member(
-	normal_id varchar2(100) primary key,
-	picture_path varchar2(100) not null,
-	career_status varchar2(100) not null,
-	gender varchar2(100) not null,
-
-	constraint fk_normalandmember foreign key(normal_id) references member(id) on delete cascade
+   normal_id varchar2(100) primary key,
+   gender varchar2(100) not null,
+   career_status varchar2(100) not null,
+   constraint fk_normalandmember foreign key(normal_id) references member(id) on delete cascade
 );
 
-insert into NORMAL_MEMBER(normal_id, picture_path, career_status, gender) values('qqqq', '이동규.png', 'Java 개발자로 LINE에서 3년 근무', '남');
-insert into NORMAL_MEMBER(normal_id, picture_path, career_status, gender) values('miri', '서미리.png', '.NET(C#) 개발 경력 2년 (마이다시아이티)', '여');
-insert into NORMAL_MEMBER(normal_id, picture_path, career_status, gender) values('yosep', '최요셉.png', '없음', '남');
-insert into NORMAL_MEMBER(normal_id, picture_path, career_status, gender) values('hsj', '황성진.png', 'Oracle DBA 6년', '남');
-insert into NORMAL_MEMBER(normal_id, picture_path, career_status, gender) values('MCW', '문철우.png', 'Python 개발 5년 (네이버)', '남');
+insert into NORMAL_MEMBER(normal_id,  career_status, gender) values('qqqq', 'Java 개발자로 LINE에서 3년 근무', '남');
+insert into NORMAL_MEMBER(normal_id,  career_status, gender) values('miri',  '.NET(C#) 개발 경력 2년 (마이다시아이티)', '여');
+insert into NORMAL_MEMBER(normal_id, career_status, gender) values('yosep',  '없음', '남');
+insert into NORMAL_MEMBER(normal_id,  career_status, gender) values('hsj',  'Oracle DBA 6년', '남');
+insert into NORMAL_MEMBER(normal_id,  career_status, gender) values('MCW', 'Python 개발 5년 (네이버)', '남');
 
 select * from normal_member;
 ---------------------------------------------------------------------
 
 -- 포트폴리오
 create table portfolio(
-	normal_id varchar2(100) primary key,
-	title varchar2(100) not null,
-	content varchar2(1000) not null,
-	constraint fk_member_portfolio foreign key(normal_id) references normal_member(normal_id) on delete cascade
+   normal_id varchar2(100) primary key,
+   title varchar2(100) not null,
+   content varchar2(1000) not null,
+   picture_path varchar2(100) not null,
+   constraint fk_member_portfolio foreign key(normal_id) references normal_member(normal_id) on delete cascade
 );
 
-insert into PORTFOLIO(normal_id, title, content) values('yosep', 'Coder가 아닌 Developer가 되겠습니다.', '항상 배움의 자세로 새로운 분야에 도전하고 있으며, 매사에 도전하고 노력하는 인재입니다.');
-insert into PORTFOLIO(normal_id, title, content) values('MCW', '인재를 싸게 팝니다.', '주변 사람과 소통하며 혁신을 이뤄내는 사원이 되겠습니다.');
+insert into PORTFOLIO(normal_id, title, content, picture_path) values('yosep', 'Coder가 아닌 Developer가 되겠습니다.', '항상 배움의 자세로 새로운 분야에 도전하고 있으며, 매사에 도전하고 노력하는 인재입니다.', '최요셉.png');
+insert into PORTFOLIO(normal_id, title, content, picture_path) values('MCW', '인재를 싸게 팝니다.', '주변 사람과 소통하며 혁신을 이뤄내는 사원이 되겠습니다.', '문철우.png');
 
 select * from portfolio;
 ---------------------------------------------------------------------
 
 -- 포트폴리오 파일 경로 
 create table portfolio_file(
-	file_num number primary key,
-	normal_id varchar2(100) not null,
-	file_path varchar2(100) not null,
-	constraint fk_member_portfolio_file foreign key(normal_id) references portfolio(normal_id) on delete cascade
+   file_num number primary key,
+   normal_id varchar2(100) not null,
+   file_path varchar2(100) not null,
+   constraint fk_member_portfolio_file foreign key(normal_id) references portfolio(normal_id) on delete cascade
 );
 create sequence portfolio_file_seq start with 601;
 
@@ -120,14 +117,14 @@ select * from portfolio_file;
 
 -- 기업회원
 create table company_member(
-	company_id varchar2(100) primary key,
-	introduction varchar2(100) not null,
-	company_type varchar2(100) not null,
-	industry varchar2(100) not null,
-	sales number default 0,
-	date_of_establishment varchar2(100) default null,
-	num_of_employees number default 0,
-	constraint fk_member_company_member foreign key(company_id) references member(id) on delete cascade
+   company_id varchar2(100) primary key,
+   introduction varchar2(100) not null,
+   company_type varchar2(100) not null,
+   industry varchar2(100) not null,
+   sales number default 0,
+   date_of_establishment varchar2(100) default null,
+   num_of_employees number default 0,
+   constraint fk_member_company_member foreign key(company_id) references member(id) on delete cascade
 );
 
 insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, sales, date_of_establishment, num_of_employees) values('NHNuser', '더 넓은 세상, 더 많은 사람들이 더 큰 재미를 우리와 함께 나눕니다.', '대기업', '솔루션', 1813, '2015-11-18', 664);
@@ -138,12 +135,12 @@ select * from company_member;
 
 -- 구인공고와  PK시퀀스
 create table job_posting(
-	job_posting_num number primary key,
-	company_id varchar2(100),
-	career_status varchar2(100) not null,
-	title varchar2(100) not null,
-	content varchar2(1000) not null,
-	constraint fk_company_member_job_posting foreign key(company_id) references company_member(company_id) on delete cascade
+   job_posting_num number primary key,
+   company_id varchar2(100),
+   career_status varchar2(100) not null,
+   title varchar2(100) not null,
+   content varchar2(1000) not null,
+   constraint fk_company_member_job_posting foreign key(company_id) references company_member(company_id) on delete cascade
 );
 create sequence job_posting_num_seq start with 1001;
 
@@ -155,9 +152,9 @@ select * from job_posting;
 
 -- 키워드 삭제(MIRI 2018.10.12)
 --create table keyword(
---	keyword_name varchar2(100),
---	constraint fk_job_keyword foreign key(job_posting_num) references job_posting(job_posting_num),
---	constraint pk_keyword_num_name primary key(job_posting_num, keyword_name)
+--   keyword_name varchar2(100),
+--   constraint fk_job_keyword foreign key(job_posting_num) references job_posting(job_posting_num),
+--   constraint pk_keyword_num_name primary key(job_posting_num, keyword_name)
 --)
 --drop table keyword cascade constraint;
 --
@@ -166,10 +163,10 @@ select * from job_posting;
 
 --구인공고번호와 키워드 복합키
 create table job_posting_keyword(
-	job_posting_num number,
-	keyword_name varchar2(100),
-	constraint fk_job_posting_num foreign key(job_posting_num) references job_posting(job_posting_num) on delete cascade, 
-	constraint pk_keywordname_jobpostingnum primary key(keyword_name,job_posting_num)
+   job_posting_num number,
+   keyword_name varchar2(100),
+   constraint fk_job_posting_num foreign key(job_posting_num) references job_posting(job_posting_num) on delete cascade, 
+   constraint pk_keywordname_jobpostingnum primary key(keyword_name,job_posting_num)
 );
 
 insert into JOB_POSTING_KEYWORD(job_posting_num, keyword_name) values(1001, '워라밸');
@@ -186,13 +183,13 @@ select * from job_posting_keyword;
 
 -- 질의응답과 구인공고게시글/아이디 복합키 설정
 create table question_answer(
-	qa_num number primary key,
-	normal_id varchar2(100),
-	job_posting_num number,
-	question varchar2(200) not null,
-	answer varchar2(500) not null,
-	constraint fk_member_qna foreign key(normal_id) references normal_member(normal_id) on delete set null,
-	constraint fk_job_posting_num_qna foreign key(job_posting_num) references job_posting(job_posting_num) on delete cascade
+   qa_num number primary key,
+   normal_id varchar2(100),
+   job_posting_num number,
+   question varchar2(200) not null,
+   answer varchar2(500) not null,
+   constraint fk_member_qna foreign key(normal_id) references normal_member(normal_id) on delete set null,
+   constraint fk_job_posting_num_qna foreign key(job_posting_num) references job_posting(job_posting_num) on delete cascade
 );
 create sequence qa_num_seq start with 701;
 
@@ -207,8 +204,8 @@ select * from question_answer;
 
 --모집직군분류와 PK 시퀀스
 create table recruitment_category(
-	rc_num number primary key,
-	rc_name varchar2(100) not null
+   rc_num number primary key,
+   rc_name varchar2(100) not null
 );
 create sequence rc_num_seq start with 101;
 
@@ -227,11 +224,11 @@ select * from recruitment_category;
 
 -- 모집직군분류와 구인공고글 복합키 설정
 create table job_recruitment(
-	job_posting_num number,
-	rc_num number,
-	constraint fk_job_posting_num2 foreign key(job_posting_num) references job_posting(job_posting_num) on delete cascade,
-	constraint fk_rc foreign key(rc_num) references recruitment_category(rc_num) on delete cascade,
-	constraint pk_jobpostingnum_rcnum primary key (rc_num,job_posting_num)
+   job_posting_num number,
+   rc_num number,
+   constraint fk_job_posting_num2 foreign key(job_posting_num) references job_posting(job_posting_num) on delete cascade,
+   constraint fk_rc foreign key(rc_num) references recruitment_category(rc_num) on delete cascade,
+   constraint pk_jobpostingnum_rcnum primary key (rc_num,job_posting_num)
 );
 
 insert into JOB_RECRUITMENT(job_posting_num, rc_num) values(1001, 101);
@@ -243,11 +240,11 @@ select * from job_recruitment;
 
 -- 모집직군분류와 구직회원 복합키 설정
 create table portfolio_recruitment(
-	normal_id varchar2(100),
-	rc_num number,
-	constraint fk_id_pf foreign key(normal_id) references portfolio(normal_id) on delete cascade,
-	constraint fk_rc_pf foreign key(rc_num) references recruitment_category(rc_num) on delete cascade,
-	constraint pk_id_rc_pf primary key(rc_num,normal_id)
+   normal_id varchar2(100),
+   rc_num number,
+   constraint fk_id_pf foreign key(normal_id) references portfolio(normal_id) on delete cascade,
+   constraint fk_rc_pf foreign key(rc_num) references recruitment_category(rc_num) on delete cascade,
+   constraint pk_id_rc_pf primary key(rc_num,normal_id)
 );
 
 insert into PORTFOLIO_RECRUITMENT(normal_id, rc_num) values('yosep', 101);
@@ -260,8 +257,8 @@ select * from portfolio_recruitment;
 
 -- 고용형태종류와 PK 시퀀스
 create table employment_type_category(
-	emp_type_num number primary key,
-	emp_type_name varchar2(100) not null
+   emp_type_num number primary key,
+   emp_type_name varchar2(100) not null
 );
 
 create sequence emp_type_num_seq start with 301;
@@ -276,11 +273,11 @@ select * from employment_type_category;
 
 -- 고용형태종류와 구인공고글 복합키 설정
 create table job_emp(
-	job_posting_num number,
-	emp_type_num number,
-	constraint fk_job_posting_num3 foreign key(job_posting_num) references job_posting(job_posting_num) on delete cascade,
-	constraint fk_emp_job foreign key(emp_type_num) references employment_type_category(emp_type_num) on delete cascade,
-	constraint pk_jobposting_jobemp primary key(emp_type_num,job_posting_num)
+   job_posting_num number,
+   emp_type_num number,
+   constraint fk_job_posting_num3 foreign key(job_posting_num) references job_posting(job_posting_num) on delete cascade,
+   constraint fk_emp_job foreign key(emp_type_num) references employment_type_category(emp_type_num) on delete cascade,
+   constraint pk_jobposting_jobemp primary key(emp_type_num,job_posting_num)
 );
 
 insert into JOB_EMP(job_posting_num, emp_type_num) values(1001, 302);
@@ -292,11 +289,11 @@ select * from job_emp;
 
 -- 고용형태종류와 구직회원 복합키 설정
 create table portfolio_emp(
-	normal_id varchar2(100),
-	emp_type_num number,
-	constraint fk_id_emp foreign key(normal_id) references portfolio(normal_id) on delete cascade,
-	constraint fk_emp_pf foreign key(emp_type_num) references employment_type_category(emp_type_num) on delete cascade,
-	constraint pk_id_emp_pf primary key(emp_type_num,normal_id)
+   normal_id varchar2(100),
+   emp_type_num number,
+   constraint fk_id_emp foreign key(normal_id) references portfolio(normal_id) on delete cascade,
+   constraint fk_emp_pf foreign key(emp_type_num) references employment_type_category(emp_type_num) on delete cascade,
+   constraint pk_id_emp_pf primary key(emp_type_num,normal_id)
 );
 
 insert into PORTFOLIO_EMP(normal_id, emp_type_num) values('yosep', 301);
@@ -310,8 +307,8 @@ select * from portfolio_emp;
 
 -- 지역분류와 PK 시퀀스
 create table location_category(
-	loc_num number primary key,
-	loc_name varchar2(100) not null
+   loc_num number primary key,
+   loc_name varchar2(100) not null
 );
 create sequence loc_num_seq start with 501;
 
@@ -324,11 +321,11 @@ select * from location_category;
 
 -- 지역종류와 구인공고글 복합키 설정
 create table job_loc(
-	job_posting_num number,
-	loc_num number,
-	constraint fk_job_posting_num4 foreign key(job_posting_num) references job_posting(job_posting_num) on delete cascade,
-	constraint fk_loc_job foreign key(loc_num) references location_category(loc_num) on delete cascade,
-	constraint pk_jobposting_jobloc primary key(loc_num,job_posting_num)
+   job_posting_num number,
+   loc_num number,
+   constraint fk_job_posting_num4 foreign key(job_posting_num) references job_posting(job_posting_num) on delete cascade,
+   constraint fk_loc_job foreign key(loc_num) references location_category(loc_num) on delete cascade,
+   constraint pk_jobposting_jobloc primary key(loc_num,job_posting_num)
 );
 
 insert into JOB_LOC(job_posting_num, loc_num) values(1001, 501);
@@ -339,11 +336,11 @@ select * from job_loc;
 
 --지역종류와 구직회원 복합키 설정
 create table portfolio_loc(
-	normal_id varchar2(100),
-	loc_num number,
-	constraint fk_id_loc foreign key(normal_id) references portfolio(normal_id) on delete cascade,
-	constraint fk_loc_pf foreign key(loc_num) references location_category(loc_num) on delete cascade,
-	constraint pk_id_loc_pf primary key(loc_num,normal_id)
+   normal_id varchar2(100),
+   loc_num number,
+   constraint fk_id_loc foreign key(normal_id) references portfolio(normal_id) on delete cascade,
+   constraint fk_loc_pf foreign key(loc_num) references location_category(loc_num) on delete cascade,
+   constraint pk_id_loc_pf primary key(loc_num,normal_id)
 );
 
 insert into PORTFOLIO_LOC(normal_id, loc_num) values('yosep', 501);
@@ -356,10 +353,10 @@ select * from portfolio_loc;
 
 -- 개발분야와 PK 시퀀스
 create table development_category(
-	dev_cat_num number primary key,
-	rc_num number not null,
-	dev_cat_name varchar2(100) not null,
-	constraint fk_dev_num foreign key(rc_num) references recruitment_category(rc_num) on delete cascade
+   dev_cat_num number primary key,
+   rc_num number not null,
+   dev_cat_name varchar2(100) not null,
+   constraint fk_dev_num foreign key(rc_num) references recruitment_category(rc_num) on delete cascade
 );
 
 create sequence dev_cat_num_seq start with 201;
@@ -409,11 +406,11 @@ select * from development_category;
 
 -- 개발분야와 구인공고글 복합키 설정
 create table job_dev(
-	job_posting_num number,
-	dev_cat_num number,
-	constraint fk_job_posting_num5 foreign key (job_posting_num) references job_posting(job_posting_num) on delete cascade,
-	constraint fk_dev_job foreign key(dev_cat_num) references development_category(dev_cat_num) on delete cascade,
-	constraint pk_jobposting_jobdev primary key(dev_cat_num,job_posting_num)
+   job_posting_num number,
+   dev_cat_num number,
+   constraint fk_job_posting_num5 foreign key (job_posting_num) references job_posting(job_posting_num) on delete cascade,
+   constraint fk_dev_job foreign key(dev_cat_num) references development_category(dev_cat_num) on delete cascade,
+   constraint pk_jobposting_jobdev primary key(dev_cat_num,job_posting_num)
 );
 
 insert into JOB_DEV(job_posting_num, dev_cat_num) values(1001, 201);
@@ -429,11 +426,11 @@ select * from job_dev;
 
 -- 개발분야와 구직회원 복합키 설정
 create table portfolio_dev(
-	normal_id varchar2(100),
-	dev_cat_num number,
-	constraint fk_id_dev foreign key(normal_id) references portfolio(normal_id) on delete cascade,
-	constraint fk_dev_pf foreign key(dev_cat_num) references development_category(dev_cat_num) on delete cascade,
-	constraint pk_id_dev_pf primary key(dev_cat_num,normal_id)
+   normal_id varchar2(100),
+   dev_cat_num number,
+   constraint fk_id_dev foreign key(normal_id) references portfolio(normal_id) on delete cascade,
+   constraint fk_dev_pf foreign key(dev_cat_num) references development_category(dev_cat_num) on delete cascade,
+   constraint pk_id_dev_pf primary key(dev_cat_num,normal_id)
 );
 
 insert into PORTFOLIO_DEV(normal_id, dev_cat_num) values('yosep', 202);
@@ -447,8 +444,8 @@ select * from portfolio_dev;
 
 -- 학력구분과 PK 시퀀스
 create table academic_category(
-	academic_num number primary key,
-	academic_name varchar2(100) not null
+   academic_num number primary key,
+   academic_name varchar2(100) not null
 );
 create sequence academic_num_seq start with 401;
 
@@ -463,11 +460,11 @@ select * from academic_category;
 
 -- 학력구분과 구인공고글 복합키 설정
 create table job_academic(
-	job_posting_num number,
-	academic_num number,
-	constraint fk_job_posting_num6 foreign key(job_posting_num) references job_posting(job_posting_num) on delete cascade,
-	constraint fk_academic_job foreign key(academic_num) references academic_category(academic_num) on delete cascade,
-	constraint pk_jobposting_jobacademic primary key(academic_num,job_posting_num)
+   job_posting_num number,
+   academic_num number,
+   constraint fk_job_posting_num6 foreign key(job_posting_num) references job_posting(job_posting_num) on delete cascade,
+   constraint fk_academic_job foreign key(academic_num) references academic_category(academic_num) on delete cascade,
+   constraint pk_jobposting_jobacademic primary key(academic_num,job_posting_num)
 );
 
 insert into JOB_ACADEMIC(job_posting_num, academic_num) values(1001, 402);
@@ -478,11 +475,11 @@ select * from job_academic;
 
 -- 학력구분과 구직회원 복합키 설정
 create table portfolio_academic(
-	normal_id varchar2(100),
-	academic_num number,
-	constraint fk_id_aca foreign key(normal_id) references portfolio(normal_id) on delete cascade,
-	constraint fk_aca_pf foreign key(academic_num) references academic_category(academic_num) on delete cascade,
-	constraint pk_id_aca_pf primary key(academic_num,normal_id)
+   normal_id varchar2(100),
+   academic_num number,
+   constraint fk_id_aca foreign key(normal_id) references portfolio(normal_id) on delete cascade,
+   constraint fk_aca_pf foreign key(academic_num) references academic_category(academic_num) on delete cascade,
+   constraint pk_id_aca_pf primary key(academic_num,normal_id)
 );
 
 insert into PORTFOLIO_ACADEMIC(normal_id, academic_num) values('yosep', 403);
@@ -497,26 +494,25 @@ commit
 
 select normal_id
 from( 
-	select pd.normal_id, pd.dev_cat_num, pr.rc_num, pe.emp_type_num
-	from portfolio_dev pd, portfolio_recruitment pr, portfolio_emp pe
-	where pd.normal_id=pr.normal_id 
-	and pr.normal_id=pe.normal_id 
+   select pd.normal_id, pd.dev_cat_num, pr.rc_num, pe.emp_type_num
+   from portfolio_dev pd, portfolio_recruitment pr, portfolio_emp pe
+   where pd.normal_id=pr.normal_id 
+   and pr.normal_id=pe.normal_id 
 )--분류 테이블 세 개를 동등 조인한 결과에서 검색 시작
 where dev_cat_num =201 and rc_num =101 and emp_type_num =304 
 -- 개발분야에서 java 선택  -- 모집직군에서 웹프로그래머선택 --고용형태에서 프리랜서 선택
 
 select distinct normal_id  
 from( 
-	select pd.normal_id, pd.dev_cat_num, pr.rc_num, pe.emp_type_num
-	from portfolio_dev pd, portfolio_recruitment pr, portfolio_emp pe
-	where pd.normal_id=pr.normal_id 
-	and pr.normal_id=pe.normal_id 
+   select pd.normal_id, pd.dev_cat_num, pr.rc_num, pe.emp_type_num
+   from portfolio_dev pd, portfolio_recruitment pr, portfolio_emp pe
+   where pd.normal_id=pr.normal_id 
+   and pr.normal_id=pe.normal_id 
 )--분류 테이블 세 개를 동등 조인한 결과에서 검색 시작
 where dev_cat_num in (201,202) and rc_num in(101,106) and emp_type_num in (301,302) 
 -- 개발분야에서 java, jsp 선택 
 -- 모집직군에서 웹프로그래머, DBA/데이터베이스 선택 
 -- 고용형태에서 인턴, 신입 선택
-
 
 
 

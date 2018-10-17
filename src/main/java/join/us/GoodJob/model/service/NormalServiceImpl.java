@@ -1,10 +1,13 @@
 package join.us.GoodJob.model.service;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
 import join.us.GoodJob.model.mapper.NormalMapper;
+import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PortfolioVO;
 
@@ -43,6 +46,16 @@ public class NormalServiceImpl implements NormalService {
 	@Override
 	public PortfolioVO normalDetailPortfolio(String normalId) {
 		return normalMapper.normalDetailPortfolio(normalId);
+	}
+
+	@Override
+	public List<NormalMemberVO> idName() {
+		return normalMapper.idName();
+	}
+
+	@Override
+	public List<PortfolioVO> portFolioVOList(String nomalId) {
+		return normalMapper.portFolioVOList(nomalId);
 	}
 
 }
