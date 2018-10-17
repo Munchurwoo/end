@@ -29,7 +29,7 @@ public class NormalController {
 	@Resource
 	MemberService memberService;
 
-	private String uploadPath;
+	private String uploadPath; 
 
 	/**
 	 * 181015 MIRI 개인 회원가입 폼(NORMAL_MEMBER)
@@ -183,15 +183,15 @@ public class NormalController {
 		model.addAttribute("empTypeCatList", memberService.getEmpTypeCatVOList());
 		model.addAttribute("locCatList", memberService.getLocCatVOList());
 		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
-		
+
 		// String normalName = memberService.get
 		List<NormalMemberVO> list = normalService.idName();
-		//포트폴리오 list
+		// 포트폴리오 list
 		List<PortfolioVO> plist = new ArrayList<PortfolioVO>();
-		//meber 와 normalmember join 을 활용하여 normalmember 정보 id만 정보저장
+		// meber 와 normalmember join 을 활용하여 normalmember 정보 id만 정보저장
 		ArrayList<String> id = new ArrayList<String>();
 		for (int i = 0; i < list.size(); i++) {
-			plist.add( normalService.portFolioVOById(list.get(i).getId()));
+			plist.add(normalService.portFolioVOById(list.get(i).getId()));
 		}
 		return "member/portfolio_all_list.tiles2";
 	}

@@ -70,6 +70,4 @@ public class NormalMemberVO extends MemberVO {
       return "NormalMemberVO [normalId=" + normalId + ", careerStatus=" + careerStatus + ", gender=" + gender
             + ", portfolio=" + portfolio + ", questionAnswerVOList=" + questionAnswerVOList + "]";
    }
-   
-   
 }

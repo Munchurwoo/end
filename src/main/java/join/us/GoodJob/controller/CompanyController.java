@@ -103,6 +103,7 @@ public class CompanyController {
 		model.addAttribute("cmvoList", cmvoList);
 		return "company/company_info.tiles";
 	}
+
 	@RequestMapping("user-detailCompanyInfo.do")
 	public String detailCompanyInfo(String companyId,Model model) {
 		model.addAttribute("cmvo", companyService.detailCompanyInfo(companyId));
@@ -125,6 +126,7 @@ public class CompanyController {
 		}
 		return "company/job_posting_detail.tiles2";
 	}
+
 	@RequestMapping("companyJobPostingList.do")
 	public String companyJobPostingList(String companyId,Model model) {
 		model.addAttribute("jobPostingList", companyService.companyJobPostingList(companyId));
