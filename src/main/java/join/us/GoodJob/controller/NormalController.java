@@ -27,7 +27,8 @@ public class NormalController {
 	@Resource
 	MemberService memberService;
 	
-	private String uploadPath;
+	private String serverUploadPath;
+	private String workspaceUploadPath;
 
 	/**
 	 * 181015 MIRI 개인 회원가입 폼(NORMAL_MEMBER)
@@ -91,6 +92,19 @@ public class NormalController {
 		return "redirect:home.do";
 	}
 	
+	/**
+	 * 181016 MIRI 개인회원 아이디 중복 검사
+	 * @param id
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("checkNormalMemberId.do")
+	public String checkNormalMemberId(String id) {
+		int checkedId = normalService.checkNormalMemberId(id);
+		if(checkedId == 0) return "ok";
+		else return "fail";
+	}
+	
 	@RequestMapping("registerPortfolioForm.do")
 	public String registerPortfolioForm(Model model) {
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
@@ -122,28 +136,28 @@ public class NormalController {
 	@PostMapping("normalPictureUpload.do")
 	@ResponseBody
 	public String uploadNormalPicture(MultipartFile uploadPicture,HttpServletRequest request){
-		System.out.println("uploadNormalPicture시작");
+		/*System.out.println("uploadNormalPicture시작");
 		//실제 운영시에 사용할 서버 업로드 경로 
-		uploadPath
-		=request.getSession().getServletContext().getRealPath("/resources/upload/");
+		serverUploadPath
+		=request.getSession().getServletContext().getRealPath("/resources/upload/");*/
 		//개발시에는 워크스페이스 업로드 경로로 준다 
-		//uploadPath="C:\\java-kosta\\framework-workspace2\\springmvc21-fileupload-inst\\src\\main\\webapp\\resources\\upload\\";
-		System.out.println("업로드 경로:"+uploadPath);
+		workspaceUploadPath="C:\\java-kosta\\framework-workspace2\\goodjob\\src\\main\\webapp\\resources\\upload\\";
+		//System.out.println("서버 업로드 경로:"+serverUploadPath);
+		System.out.println("워크스페이스 업로드 경로:"+workspaceUploadPath);
 		System.out.println(uploadPicture);
 		if(uploadPicture.isEmpty()==false){
 			System.out.println(uploadPicture.getOriginalFilename());
-			File uploadFile=new File(uploadPath+uploadPicture.getOriginalFilename());
+			//File uploadServerFile=new File(serverUploadPath+uploadPicture.getOriginalFilename());
+			File uploadWorkspaceFile= new File(workspaceUploadPath+uploadPicture.getOriginalFilename());
 			try {
-				uploadPicture.transferTo(uploadFile);
+				//uploadPicture.transferTo(uploadServerFile);
+				uploadPicture.transferTo(uploadWorkspaceFile);
 				System.out.println("사진 업로드 완료!");
 			} catch (IllegalStateException | IOException e) {
 				e.printStackTrace();
 			}
 		}
-		/*ModelAndView mv=new ModelAndView("product/register_result.tiles");
-		mv.addObject("name", vo.getName());
-		mv.addObject("fileName", file.getOriginalFilename());*/
-		return "성공";
+		return uploadPicture.getOriginalFilename();
 	}
 	
 }

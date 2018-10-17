@@ -12,6 +12,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into normal_member(normal_id,picture_path,career_status,gender) 
 		values(#{id}, #{picturePath}, #{careerStatus}, #{gender})
 	</insert>
+	
+	<select id="checkNormalMemberId" parameterType="string" resultType="int">
+		select count(*) from member where id=#{value}
+	</select>
 		
 	<select id="selectNormalMember" parameterType="string" resultType="normalMemberVO">
 		select m.id, m.password, m.email, m.name, m.address, m.tel, nm.gender, nm.picture_path, nm.career_status 

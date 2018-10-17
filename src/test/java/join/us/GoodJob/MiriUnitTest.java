@@ -10,7 +10,6 @@ import join.us.GoodJob.model.mapper.CompanyMapper;
 import join.us.GoodJob.model.mapper.ManagerMapper;
 import join.us.GoodJob.model.mapper.MemberMapper;
 import join.us.GoodJob.model.mapper.NormalMapper;
-import join.us.GoodJob.model.vo.NormalMemberVO;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring-model.xml"})
 public class MiriUnitTest {
