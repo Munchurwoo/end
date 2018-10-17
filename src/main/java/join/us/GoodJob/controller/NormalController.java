@@ -114,6 +114,7 @@ public class NormalController {
 		return "normal/normal_register_portfolio_form.tiles2";
 	}
 	
+	
 	@RequestMapping("registerPortfolio.do")
 	public String registerPortfolio(PortfolioVO portfolioVO) {
 		System.out.println(portfolioVO);
