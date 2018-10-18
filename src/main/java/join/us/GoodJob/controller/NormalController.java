@@ -120,7 +120,8 @@ public class NormalController {
 		return "redirect:home.do";
 	}
 
-	@RequestMapping("deleteNormalMember.do")
+	//181018 MIRI 일반회원, 기업회원 회원탈퇴 공통으로 묶음
+	/*@RequestMapping("deleteNormalMember.do")
 	public String deleteNormalMember(HttpSession session) {
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		String normalId = mvo.getId();
@@ -129,7 +130,7 @@ public class NormalController {
 			session.invalidate();
 		}
 		return "home.tiles";
-	}
+	}*/
 
 	@PostMapping("normalPictureUpload.do")
 	@ResponseBody

@@ -75,9 +75,10 @@ public class CompanyController {
 		}
 		return "company/company_mypage.tiles2";
 	}
-
-	@RequestMapping("deleteCompanyMember.do")
-	public String deleteNormalMember(HttpSession session) {
+	
+	//181018 MIRI 일반회원, 기업회원 회원탈퇴 공통으로 묶음
+	/*@RequestMapping("deleteCompanyMember.do")
+	public String deleteCompanyMember(HttpSession session) {
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		String companyId = mvo.getId();
 		if (companyId != null) {
@@ -85,7 +86,7 @@ public class CompanyController {
 			session.invalidate();
 		}
 		return "home.tiles";
-	}
+	}*/
 
 	@RequestMapping("registerJobPostingForm.do")
 	public String registerJobPostingForm(Model model) {

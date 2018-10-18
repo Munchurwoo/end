@@ -8,7 +8,7 @@
 	function deleteNormalMember() {
 		var delConfirm = confirm("${requestScope.nmvo.id}님 정말 회원 탈퇴를 하시겠습니까?");
 		if(delConfirm == true) {
-			location.href="deleteNormalMember.do";
+			location.href="deleteMember.do";
 		} else {
 			return;
 		}

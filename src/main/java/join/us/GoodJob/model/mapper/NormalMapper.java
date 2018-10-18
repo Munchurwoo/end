@@ -22,8 +22,9 @@ public interface NormalMapper {
 	//개인 회원정보 수정(MEMBER)
 	void updateMember(MemberVO memberVO);
 		
-	//개인 회원탈퇴(MEMBER) --> normal_member의 튜플은 cascade 자동삭제
-	void deleteNormalMember(String normalId);
+	//181018 MIRI 일반회원, 기업회원 회원탈퇴 공통으로 묶음
+	/*//개인 회원탈퇴(MEMBER) --> normal_member의 튜플은 cascade 자동삭제
+	void deleteNormalMember(String normalId);*/
 	
 	//181018 MIRI selectNormalMember와 중복으로 주석
 	/*// 마이페이지 개인정보 조회(MEMBER)

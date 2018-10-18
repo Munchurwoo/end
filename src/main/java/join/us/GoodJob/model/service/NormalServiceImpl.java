@@ -34,10 +34,11 @@ public class NormalServiceImpl implements NormalService {
 		return normalMapper.selectNormalMember(id);
 	}
 
-	@Override
+	//181018 MIRI 일반회원, 기업회원 회원탈퇴 공통으로 묶음
+	/*@Override
 	public void deleteNormalMember(String normalId) {
 		normalMapper.deleteNormalMember(normalId);
-	}
+	}*/
 	
 	//181018 MIRI selectNormalMember와 중복으로 주석
 	/*@Override
