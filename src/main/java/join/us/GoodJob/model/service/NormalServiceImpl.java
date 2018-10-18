@@ -104,4 +104,9 @@ public class NormalServiceImpl implements NormalService {
 		return normalMapper.portFolioVOById(nomalId);
 	}
 
+	@Override
+	public void deletePortfolio(String id) {
+		normalMapper.deletePortfolio(id);
+	}
+
 }

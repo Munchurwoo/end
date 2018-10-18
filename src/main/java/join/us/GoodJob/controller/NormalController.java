@@ -159,17 +159,15 @@ public class NormalController {
 		return uploadPicture.getOriginalFilename();
 	}
 	
-	
-	
 	//나중에 "yosep"->normalId
 	@RequestMapping("normalDetailPortfolio.do")
 	public String normalDetailPortfolio(String normalId, Model model, HttpSession session) {
-		model.addAttribute("devCatList", memberService.getDevCatVOListByNormalId("yosep"));
-		model.addAttribute("empTypeCatList", memberService.getEmpCatVOListByNormalId("yosep"));
-		model.addAttribute("locCatList", memberService.getLocCatVOListByNormalId("yosep"));
-		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNormalId("yosep"));
-		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNormalId("yosep"));
-		model.addAttribute("povo", normalService.normalDetailPortfolio("yosep"));
+		model.addAttribute("devCatList", memberService.getDevCatVOListByNormalId("miri"));
+		model.addAttribute("empTypeCatList", memberService.getEmpCatVOListByNormalId("miri"));
+		model.addAttribute("locCatList", memberService.getLocCatVOListByNormalId("miri"));
+		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNormalId("miri"));
+		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNormalId("miri"));
+		model.addAttribute("povo", normalService.normalDetailPortfolio("miri"));
 		
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		if (mvo != null) {
@@ -201,5 +199,44 @@ public class NormalController {
 			plist.add(normalService.portFolioVOById(list.get(i).getId()));
 		}
 		return "member/portfolio_all_list.tiles2";
+	}
+	
+	/**
+	 * 181018 MIRI 포트폴리오 수정
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("user-updatePortfolio.do")
+	public String updatePortfolio(String id, HttpSession session, Model model) {
+		model.addAttribute("devCatList", memberService.getDevCatVOListByNormalId(id));
+		model.addAttribute("empTypeCatList", memberService.getEmpCatVOListByNormalId("miri"));
+		model.addAttribute("locCatList", memberService.getLocCatVOListByNormalId("miri"));
+		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNormalId("miri"));
+		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNormalId("miri"));
+		model.addAttribute("povo", normalService.normalDetailPortfolio(id));
+		
+		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
+		model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));
+		model.addAttribute("empTypeCatList", memberService.getEmpTypeCatVOList());
+		model.addAttribute("locCatList", memberService.getLocCatVOList());
+		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
+		
+		MemberVO mvo = (MemberVO)session.getAttribute("mvo");
+		if(mvo != null) {
+			NormalMemberVO nmvo = normalService.selectNormalMember(id);
+			model.addAttribute("nmvo", nmvo);
+		}
+		return "normal/normal_update_portfolio.tiles2";
+	}
+	
+	/**
+	 * 181018 MIRI 포트폴리오 삭제
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping("deletePortfolio.do")
+	public String deletePortfolio(String id) {
+		normalService.deletePortfolio(id);
+		return "redirect:home.do";
 	}
 }

@@ -34,5 +34,7 @@ public interface NormalService {
 	List<NormalMemberVO> idName();
 	
 	//개인회원  id 를 활용하여 포트폴리오 모든 정보 출력 
-	PortfolioVO portFolioVOById(String nomalId); 
+	PortfolioVO portFolioVOById(String nomalId);
+	//181018 MIRI 포트폴리오 삭제
+	void deletePortfolio(String id); 
 }

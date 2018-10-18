@@ -73,7 +73,7 @@ public class MemberController {
 	 * @return
 	 */
 	@ResponseBody
-	@RequestMapping("checkMemberId.do")
+	@RequestMapping("user-checkMemberId.do")	//181018 MIRI 'user-'로 변경
 	public String checkMemberId(String id) {
 		int checkedId = memberService.checkMemberId(id);
 		if(checkedId == 0) return "ok";

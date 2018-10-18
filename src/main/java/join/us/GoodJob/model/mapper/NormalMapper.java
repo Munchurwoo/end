@@ -53,6 +53,8 @@ public interface NormalMapper {
 	//개인 id, name 조회
 	List<NormalMemberVO> idName();
 	PortfolioVO portFolioVOById(String nomalId);
+	//포트폴리오 삭제
+	void deletePortfolio(String id);
 	
 	//질의응답 질문등록
 }
