@@ -2,6 +2,8 @@ package join.us.GoodJob.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -52,10 +54,11 @@ public class NormalController {
 
 	/**
 	 * 181015 MIRI 개인회원 마이페이지
+	 * 
 	 * @return
 	 */
 	@RequestMapping("normal_mypage.do")
-	public String myPageNormalMember(String normalId,Model model,HttpSession session) {
+	public String myPageNormalMember(String normalId, Model model, HttpSession session) {
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		if (mvo != null) {
 			NormalMemberVO nmvo= normalService.myPageNormalMember(mvo.getId());
@@ -66,6 +69,7 @@ public class NormalController {
 
 	/**
 	 * 181015 MIRI 개인회원 회원정보수정 폼
+	 * 
 	 * @param session
 	 * @param model
 	 * @return
