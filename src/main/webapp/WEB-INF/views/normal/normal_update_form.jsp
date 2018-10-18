@@ -87,7 +87,6 @@
 	주소 * <input type="text" value="${requestScope.nmvo.address }" name="address" required="required"><br><br>
 	연락처 * <input type="text" value="${requestScope.nmvo.tel }" name="tel" required="required"><br><br>
 	경력사항 * <input type="text" value="${requestScope.nmvo.careerStatus }" name="careerStatus" required="required"><br><br>
-	사진경로 * <input type="text" value="${requestScope.nmvo.picturePath }" name="picturePath" required="required"><br><br>
 	성별 * &nbsp;
 	<input type="radio" name="gender" value="male" disabled="disabled">남자 
     <input type="radio" name="gender" value="female" disabled="disabled">여자<br><br>

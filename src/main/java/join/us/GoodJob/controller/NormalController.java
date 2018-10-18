@@ -29,8 +29,6 @@ public class NormalController {
 	@Resource
 	MemberService memberService;
 
-	
-	private String serverUploadPath;
 	private String workspaceUploadPath;
 
 	/**
@@ -61,10 +59,10 @@ public class NormalController {
 	 * @return
 	 */
 	@RequestMapping("normal_mypage.do")
-	public String myPageNormalMember(String normalId, Model model, HttpSession session) {
+	public String selectNormalMember(String normalId, Model model, HttpSession session) {
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		if (mvo != null) {
-			NormalMemberVO nmvo = normalService.myPageNormalMember(mvo.getId());
+			NormalMemberVO nmvo = normalService.selectNormalMember(mvo.getId());
 			model.addAttribute("nmvo", nmvo);
 		}
 		return "normal/normal_mypage.tiles2";
@@ -170,7 +168,7 @@ public class NormalController {
 		model.addAttribute("povo", normalService.normalDetailPortfolio("yosep"));
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		if (mvo != null) {
-			NormalMemberVO nmvo = normalService.myPageNormalMember(mvo.getId());
+			NormalMemberVO nmvo = normalService.selectNormalMember(mvo.getId());
 			model.addAttribute("nmvo", nmvo);
 		}
 		return "normal/normal_detail_portfolio.tiles2";

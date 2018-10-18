@@ -40,11 +40,6 @@ public class NormalServiceImpl implements NormalService {
 	}
 
 	@Override
-	public NormalMemberVO myPageNormalMember(String memberId) {
-		return normalMapper.myPageNormalMember(memberId);
-	}
-
-	@Override
 	public void registerPortfolio(PortfolioVO portfolioVO) {
 		System.out.println(portfolioVO);
 			

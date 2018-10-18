@@ -15,8 +15,6 @@ public interface NormalService {
 	void deleteNormalMember(String normalId);
 	//개인 회원 검색
 	NormalMemberVO selectNormalMember(String id);
-	//개인 정보 조회
-	NormalMemberVO myPageNormalMember(String memberId);
 
 	void registerPortfolio(PortfolioVO portfolioVO);
 	
