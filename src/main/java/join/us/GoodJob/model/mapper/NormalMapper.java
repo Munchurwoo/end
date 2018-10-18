@@ -50,11 +50,17 @@ public interface NormalMapper {
 	PortfolioVO normalDetailPortfolio(String normalId);	
 	//포트폴리오 삭제
 	//포트폴리오 수정
-	//개인 id, name 조회
-	List<NormalMemberVO> idName();
-	PortfolioVO portFolioVOById(String nomalId);
-	//일반 맴버 모두 출력 
+	
+	/**
+	 * 인재정보 need data 
+	 * 개인회원 모든 정보 받아오기 
+	 * @return
+	 */
 	List<NormalMemberVO> AllFindNomarMember();
+	
+	PortfolioVO portFolioVOById(String nomalId);
+
+	List<PortfolioVO> normalDetailPortfolioList(String normalId);
 	//포트폴리오 삭제
 	void deletePortfolio(String id);
 	

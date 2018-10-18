@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <script type="text/javascript">
 	$(document)
@@ -48,8 +48,13 @@
 					});//ready
 </script>
 
+<div>
+
+</div>
 <!-- normal_register_portfolio -->
 <h3>인재 검색</h3>
+
+
 <form action="portfolioSearchList.do" method="get"
 	id="portfolioSearchList">
 	<h5>지역</h5>
@@ -58,6 +63,7 @@
 		<input type="checkbox" name="locCatNumList" value="${locCat.locNum}">${locCat.locName}&nbsp;
 	</c:forEach>
 	<br>
+
 
 	<h5>학력</h5>
 	<c:forEach items="${requestScope.acaCatList}" var="acaCat"
@@ -97,6 +103,25 @@
 <button type="reset" onclick="location.href='home.do'">홈으로</button>
 
 <!-- 구분선 -->
+<<<<<<< HEAD
+
+<div>
+	<h4 class="heading">
+		<div class="cta-text">
+			<h2>
+				<span>GoodJob</span> 인재
+			</h2>
+		</div>
+	</h4>
+</div>
+
+<%-- <c:forEach items="${list }" var="list" varStatus="status">
+	${list.name}
+	${devCatList[status.index].devCatName}
+	${povo[status.index].content}<br>
+</c:forEach> --%>
+
+=======
 <h4 class="heading">
 	<div class="cta-text">
 		<h2>
@@ -104,75 +129,49 @@
 		</h2>
 	</div>
 </h4>
+>>>>>>> branch 'master' of https://github.com/Munchurwoo/goodjob.git
 <section id="content">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="row">
+<<<<<<< HEAD
+					<c:forEach items="${list}" var="list" varStatus="status">
+						<!--  -->
+						<div class="col-lg-3">
+							<div class="box">
+								<div class="box-gray aligncenter">
+									<div class="icon">
+										<i class="fa fa-desktop fa-3x"></i>
+									</div>
+									<h4>${list.name }</h4>
+										
+									<p>	${povo[status.index].content}
+</p>
+=======
 					<div class="col-lg-3">
 						<div class="box">
 							<div class="box-gray aligncenter">
 								<h4>Kakao</h4>
 								<div class="icon">
 									<i class="fa fa-desktop fa-3x"></i>
+>>>>>>> branch 'master' of https://github.com/Munchurwoo/goodjob.git
 								</div>
-								<p>Voluptatem accusantium doloremque laudantium sprea totam
-									rem aperiam.</p>
-							</div>
-							<div class="box-bottom">
-								<a href="#">Learn more</a>
+								<div class="box-bottom">
+									<a href="user-normalDetailPortfolioList.do?normalId=${list.normalId }">
+									개발분야 : ${devCatList[status.index].devCatName}
+							
+									</a>
+								</div>
 							</div>
 						</div>
-					</div>
-					<div class="col-lg-3">
-						<div class="box">
-							<div class="box-gray aligncenter">
-								<h4>넥슨 채용</h4>
-								<div class="icon">
-									<i class="fa fa-pagelines fa-3x"></i>
-								</div>
-								<p>Voluptatem accusantium doloremque laudantium sprea totam
-									rem aperiam.</p>
-							</div>
-							<div class="box-bottom">
-								<a href="#">Learn more</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3">
-						<div class="box">
-							<div class="box-gray aligncenter">
-								<h4>NaverLine 채용</h4>
-								<div class="icon">
-									<i class="fa fa-edit fa-3x"></i>
-								</div>
-								<p>Voluptatem accusantium doloremque laudantium sprea totam
-									rem aperiam.</p>
-							</div>
-							<div class="box-bottom">
-								<a href="#">Learn more</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-lg-3">
-						<div class="box">
-							<div class="box-gray aligncenter">
-								<h4>티맥스소프트 채용</h4>
-								<div class="icon">
-									<i class="fa fa-code fa-3x"></i>
-								</div>
-								<p>Voluptatem accusantium doloremque laudantium sprea totam
-									rem aperiam.</p>
-							</div>
-							<div class="box-bottom">
-								<a href="#">Learn more</a>
-							</div>
-						</div>
-					</div>
+						<!--  -->
+					</c:forEach>
 				</div>
 			</div>
 		</div>
 	</div>
 </section>
+
 
 

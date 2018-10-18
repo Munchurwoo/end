@@ -93,7 +93,7 @@ public class NormalServiceImpl implements NormalService {
 	public PortfolioVO normalDetailPortfolio(String normalId) {
 		return normalMapper.normalDetailPortfolio(normalId);
 	}
-
+	
 	@Override
 	public List<NormalMemberVO> AllFindNomarMember() {
 		return normalMapper.AllFindNomarMember();
@@ -105,6 +105,9 @@ public class NormalServiceImpl implements NormalService {
 	}
 
 	@Override
+	public List<PortfolioVO> normalDetailPortfolioList(String normalId) {
+		return normalMapper.normalDetailPortfolioList(normalId);
+	}
 	public void deletePortfolio(String id) {
 		normalMapper.deletePortfolio(id);
 	}

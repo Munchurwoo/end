@@ -2,6 +2,7 @@ package join.us.GoodJob;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+//github.com/Munchurwoo/goodjob
 import java.util.List;
 
 import org.junit.Test;
@@ -27,6 +28,7 @@ public class ChulwooUnitTest {
 	 * @Autowired ManagerMapper managerMapper;
 	 */
 
+	@SuppressWarnings("null")
 	@Test
 	public void test() {
 		// System.out.println(memberMapper.getAcaCatVOListByNormalId("yosep"));
@@ -52,6 +54,56 @@ public class ChulwooUnitTest {
 		/*
 		 * System.out.println(list.get(0).getName()+":"+ plist.get(0).getDevCatName());
 		 * System.out.println(list.get(1).getName()+":"+ plist.get(1).getDevCatName());
+=======
+		List<NormalMemberVO> list = normalMapper.AllFindNomarMember();
+		List<DevCatVO> devCatList = new ArrayList<DevCatVO>();
+		List<PortfolioVO> povo = new ArrayList<PortfolioVO>();
+
+		for (int i = 0; i < list.size(); i++) {
+			devCatList.addAll(memberMapper.getDevCatVOListByNormalId(list.get(i).getNormalId()));
+			povo.add(normalMapper.normalDetailPortfolio(list.get(i).getNormalId()));
+		}
+		/*
+		 * model.addAttribute("devCatList",devCatList); model.addAttribute("povo",povo);
+		 */
+		/*
+		 * for(NormalMemberVO normalMemberVO : list) { //enhanced for loop
+		 * model.addAttribute("devCatFindId",memberService.getDevCatVOListByNormalId(
+		 * normalMemberVO.getNormalId())); }
+		 */
+
+		// for (int i = 0; i < povo.size(); i++) {
+		// System.out.println(povo.get(i).getTitle());
+		/*for (int i = 0; i < list.size(); i++) {
+			System.out.println(list.get(i).getName()+":"+devCatList.get(i).getDevCatName());
+			for (int j = 0; j < devCatList.size(); j++) {
+				System.out.println(list.get(i).getName()+":"+devCatList.get(i).get(j).getDevCatName());
+			}
+		}*/
+		// }
+
+		// System.out.println(memberMapper.getAcaCatVOListByNormalId("yosep"));
+		/*
+		 * List<NormalMemberVO> list =normalMapper.AllFindNomarMember(); PortfolioVO vo
+		 * =null; for(int i=0;i<list.size(); i++) { vo =
+		 * normalMapper.normalDetailPortfolio(list.get(i).getNormalId()); }
+		 * System.out.println(vo);
+		 */
+		// portFolioVOList 테스트
+		/*
+		 * List<NormalMemberVO> list =normalMapper.AllFindNomarMember(); List<DevCatVO>
+		 * plist = new ArrayList<>();
+		 * 
+		 * HashMap<String, List<DevCatVO>> map =new HashMap<String, List<DevCatVO>>();
+		 * 
+		 * 
+		 * for(int i =0;i<list.size();i++) { plist =
+		 * memberMapper.getDevCatVOListByNormalId(list.get(i).getNormalId()); } for(int
+		 * i =0; i<plist.size();i++) { map.put(list.get(i).getId(),
+		 * memberMapper.getDevCatVOListByNormalId(list.get(i).getId())); }
+		 * System.out.println(list); System.out.println(plist); for(int i =0;
+		 * i<list.size();i++) { System.out.println(":"+ plist.get(i).getDevCatName()); }
+>>>>>>> branch 'master' of https://github.com/Munchurwoo/goodjob
 		 */
 		// System.out.println(list.get(1).getName()+":"+ plist.get(1).getDevCatName());
 		/*
