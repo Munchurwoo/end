@@ -11,8 +11,6 @@
 					</h2>
 				</div>
 			</h4>
-
-<<<<<<< HEAD
 <c:set var="cmvoList"  value="${postListVO.cmvoList}"></c:set>
 <c:set var="pb"  value="${postListVO.pagingBean}"></c:set>
 
