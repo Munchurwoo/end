@@ -168,11 +168,7 @@ public class NormalController {
 		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNormalId("yosep"));
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNormalId("yosep"));
 		model.addAttribute("povo", normalService.normalDetailPortfolio("yosep"));
-		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
-		if (mvo != null) {
-			NormalMemberVO nmvo = normalService.myPageNormalMember(mvo.getId());
-			model.addAttribute("nmvo", nmvo);
-		}
+		model.addAttribute("nmvo",normalService.selectNormalMember("yosep"));
 		return "normal/normal_detail_portfolio.tiles2";
 
 	}
