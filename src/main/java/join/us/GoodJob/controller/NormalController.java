@@ -29,8 +29,9 @@ public class NormalController {
 	@Resource
 	MemberService memberService;
 
-	/*실제 운영시에 사용
-	private String serverUploadPath;*/	
+
+	
+	//private String serverUploadPath; //삭제하지마 ㅠㅠ
 	private String workspaceUploadPath;
 
 	/**
@@ -61,10 +62,11 @@ public class NormalController {
 	 * @return
 	 */
 	@RequestMapping("normal_mypage.do")
-	public String myPageNormalMember(String normalId, Model model, HttpSession session) {
+	//181018 MIRI selectNormalMember와 중복으로 변경
+	public String selectNormalMember(String normalId, Model model, HttpSession session) {
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		if (mvo != null) {
-			NormalMemberVO nmvo = normalService.myPageNormalMember(mvo.getId());
+			NormalMemberVO nmvo = normalService.selectNormalMember(mvo.getId());
 			model.addAttribute("nmvo", nmvo);
 		}
 		return "normal/normal_mypage.tiles2";
@@ -98,7 +100,12 @@ public class NormalController {
 		normalService.updateNormalMember(normalMemberVO);
 		return "redirect:home.do";
 	}
-
+	/**
+	 * 181015 요셉 
+	 * 이력서 등록 폼으로 이동  
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("registerPortfolioForm.do")
 	public String registerPortfolioForm(Model model) {
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
@@ -108,7 +115,13 @@ public class NormalController {
 		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
 		return "normal/normal_register_portfolio_form.tiles2";
 	}
-
+	/**
+	 * 181017 요셉
+	 * 이력서 등록 작업
+	 * @param portfolioVO
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("registerPortfolio.do")
 	public String registerPortfolio(PortfolioVO portfolioVO, HttpSession session) {
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
@@ -119,7 +132,8 @@ public class NormalController {
 		return "redirect:home.do";
 	}
 
-	@RequestMapping("deleteNormalMember.do")
+	//181018 MIRI 일반회원, 기업회원 회원탈퇴 공통으로 묶음
+	/*@RequestMapping("deleteNormalMember.do")
 	public String deleteNormalMember(HttpSession session) {
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		String normalId = mvo.getId();
@@ -128,8 +142,14 @@ public class NormalController {
 			session.invalidate();
 		}
 		return "home.tiles";
-	}
+	}*/
 
+	/** 181017 요셉
+	 *    사진 업로드 Ajax 컨트롤러
+	 * @param uploadPicture
+	 * @param request
+	 * @return
+	 */
 	@PostMapping("normalPictureUpload.do")
 	@ResponseBody
 	public String uploadNormalPicture(MultipartFile uploadPicture,HttpServletRequest request){
@@ -168,7 +188,13 @@ public class NormalController {
 		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNormalId("yosep"));
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNormalId("yosep"));
 		model.addAttribute("povo", normalService.normalDetailPortfolio("yosep"));
-		model.addAttribute("nmvo",normalService.selectNormalMember("yosep"));
+		
+		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		if (mvo != null) {
+			NormalMemberVO nmvo = normalService.selectNormalMember(mvo.getId());
+			model.addAttribute("nmvo", nmvo);
+		}
+
 		return "normal/normal_detail_portfolio.tiles2";
 
 	}
@@ -193,5 +219,9 @@ public class NormalController {
 			plist.add(normalService.portFolioVOById(list.get(i).getId()));
 		}
 		return "member/portfolio_all_list.tiles2";
+	}
+	@RequestMapping("goInterviewApply.do")
+	public String goInterviewApply() {
+		return "normal/normal_go_interview_apply.tiles";
 	}
 }

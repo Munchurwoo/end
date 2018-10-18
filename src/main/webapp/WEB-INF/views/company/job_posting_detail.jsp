@@ -131,13 +131,13 @@
 	</tbody>
 </table>
 </div>
-<%-- 세션에 있는 회원이 normalMember 이면 면접신청 을 할수있는 기능을 추가하려고 함
+<!-- 세션에 있는 회원이 normalMember 이면 면접신청 을 할수있는 기능을 추가하려고 함 -->
 <c:choose>
-	<c:when test="${sessionScope.mvo }">
-	
+	<c:when test="${sessionScope.mvo.memberType==1}">
+	<form action="goInterviewApply.do?id=${sessionScope.mvo.id}">
+	<input type="submit" value="면접신청">
+	</form>
 	</c:when>
 </c:choose>
 
-<form action="">
-<input type="submit" value="면접신청">
-</form> --%>
+
