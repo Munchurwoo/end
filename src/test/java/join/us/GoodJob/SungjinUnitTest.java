@@ -50,6 +50,5 @@ public class SungjinUnitTest {
 		map.put("locCatNumList", locCatNumList);
 		map.put("acaCatNumList", acaCatNumList);
 		System.out.println(companyMapper.findJobPostingByCatNumList(map));
-		
 	}
 }

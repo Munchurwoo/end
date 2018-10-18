@@ -29,8 +29,9 @@ public class NormalController {
 	@Resource
 	MemberService memberService;
 
+
 	
-	//private String serverUploadPath;
+	//private String serverUploadPath; //삭제하지마 ㅠㅠ
 	private String workspaceUploadPath;
 
 	/**
@@ -99,7 +100,12 @@ public class NormalController {
 		normalService.updateNormalMember(normalMemberVO);
 		return "redirect:home.do";
 	}
-
+	/**
+	 * 181015 요셉 
+	 * 이력서 등록 폼으로 이동  
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("registerPortfolioForm.do")
 	public String registerPortfolioForm(Model model) {
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
@@ -109,7 +115,13 @@ public class NormalController {
 		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
 		return "normal/normal_register_portfolio_form.tiles2";
 	}
-
+	/**
+	 * 181017 요셉
+	 * 이력서 등록 작업
+	 * @param portfolioVO
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("registerPortfolio.do")
 	public String registerPortfolio(PortfolioVO portfolioVO, HttpSession session) {
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
@@ -132,6 +144,12 @@ public class NormalController {
 		return "home.tiles";
 	}*/
 
+	/** 181017 요셉
+	 *    사진 업로드 Ajax 컨트롤러
+	 * @param uploadPicture
+	 * @param request
+	 * @return
+	 */
 	@PostMapping("normalPictureUpload.do")
 	@ResponseBody
 	public String uploadNormalPicture(MultipartFile uploadPicture,HttpServletRequest request){
@@ -140,7 +158,7 @@ public class NormalController {
 		serverUploadPath
 		=request.getSession().getServletContext().getRealPath("/resources/upload/");*/
 		//개발시에는 워크스페이스 업로드 경로로 준다 
-		workspaceUploadPath="C:\\java-kosta\\framework-workspace2\\goodjob\\src\\main\\webapp\\resources\\upload\\";
+		workspaceUploadPath="C:\\java-kosta\\framework-workspace2\\goodjob\\src\\main\\webapp\\resources\\upload\\memberPicture\\";
 		//System.out.println("서버 업로드 경로:"+serverUploadPath);
 		System.out.println("워크스페이스 업로드 경로:"+workspaceUploadPath);
 		System.out.println(uploadPicture);

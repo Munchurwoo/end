@@ -5,8 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="join.us.GoodJob.model.mapper.CompanyMapper">
 	<insert id="registerCompanyMember" parameterType="companyMemberVO">
 		insert into
-		company_member(company_id,introduction,company_type,industry,sales,date_of_establishment,num_of_employees)
-		values(#{id}, #{introduction}, #{companyType}, #{industry}, #{sales}, #{dateOfEstablishment}, #{numOfEmployees})
+		company_member(company_id,introduction,company_type,industry,sales,date_of_establishment,num_of_employees,picture_path)
+		values(#{id}, #{introduction}, #{companyType}, #{industry}, #{sales}, #{dateOfEstablishment}, #{numOfEmployees}, #{picturePath})
 	</insert>
 	<insert id="registerMember" parameterType="companyMemberVO">
 		insert into
@@ -38,13 +38,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from member where id=#{id}
 	</delete> -->
 
-	<select id="getAllCompanyList" resultType="companyMemberVO">
-		select 
-		cm.company_id,m.password,m.name,m.address,m.tel,m.email,cm.introduction,
-		cm.company_type,cm.industry,cm.sales,cm.date_of_establishment,cm.num_of_employees
+	<select id="getAllCompanyList" resultType="companyMemberVO" parameterType="pagingBean">	
+		select company_id, name, introduction
+		from(select row_number() over(order by cm.company_id) as rnum, cm.company_id, m.name, cm.introduction
+		from member m , company_member cm
+		where m.id=cm.company_id
+		) where rnum between #{startRowNumber} and #{endRowNumber}		
+	</select>
+	
+	<select id="getAllCompanyListCount" resultType="int">
+		select count(*)
 		from member m , company_member cm
 		where m.id=cm.company_id
 	</select>
+	
 	<select id="detailCompanyInfo" resultType="companyMemberVO" parameterType="memberVO">
 		select
 		cm.company_id,m.password,m.name,m.address,m.tel,m.email,cm.introduction,

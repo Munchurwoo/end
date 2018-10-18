@@ -55,22 +55,17 @@ public interface CompanyMapper {
 	CompanyMemberVO getDetailCompanyMember(String companyId);
 	
 
-	//header부분 기업정보리스트 보기
-	List<MemberVO> getAllCompanyList();
+	//전체 기업정보 리스트 받아오기
+	List<MemberVO> getAllCompanyList(PagingBean pagingBean);
+	//전체 기업정보 리스트 개수 받아오기
+	int getAllCompanyListCount();
+	
 	// 기업정보 상세보기
 	CompanyMemberVO detailCompanyInfo(String companyId);
 	// 기업정보 상세보기 후 해당기업 구인공고 리스트 바로가기
 	List<JobPostingVO> companyJobPostingList(String companyId);
 	//구인공고 상세보기
 	CompanyMemberVO jobPostringDetail(String jobPostingNum);
-	// 아래부터 구인공고 상세조건 검색
-	// 개발분야번호로 구인공고 조회
-	// 모집직군번호로  	" "
-	// 고용형태번호로	" "
-	// 지역번호로		" "
-	// 학력번호로		" "
-	
-	
 	
 	
 	//구인공고 등록
