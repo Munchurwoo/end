@@ -7,7 +7,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -83,5 +82,21 @@ public class MemberController {
 	@RequestMapping("user-goLogin.do")
 	public String goLogin() {
 		return "member/must_login.tiles";
+	}
+	
+	/**
+	 * 181018 MIRI 회원 탈퇴 (기업, 개인)
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping("deleteMember.do")
+	public String deleteMember(HttpSession session) {
+		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		String normalId = mvo.getId();
+		if (normalId != null) {
+			memberService.deleteMember(normalId);
+			session.invalidate();
+		}
+		return "home.tiles";
 	}
 }

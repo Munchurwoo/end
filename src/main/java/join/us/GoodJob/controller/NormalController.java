@@ -30,7 +30,7 @@ public class NormalController {
 	MemberService memberService;
 
 	
-	private String serverUploadPath;
+	//private String serverUploadPath;
 	private String workspaceUploadPath;
 
 	/**
@@ -61,10 +61,11 @@ public class NormalController {
 	 * @return
 	 */
 	@RequestMapping("normal_mypage.do")
-	public String myPageNormalMember(String normalId, Model model, HttpSession session) {
+	//181018 MIRI selectNormalMember와 중복으로 변경
+	public String selectNormalMember(String normalId, Model model, HttpSession session) {
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		if (mvo != null) {
-			NormalMemberVO nmvo = normalService.myPageNormalMember(mvo.getId());
+			NormalMemberVO nmvo = normalService.selectNormalMember(mvo.getId());
 			model.addAttribute("nmvo", nmvo);
 		}
 		return "normal/normal_mypage.tiles2";
@@ -119,7 +120,8 @@ public class NormalController {
 		return "redirect:home.do";
 	}
 
-	@RequestMapping("deleteNormalMember.do")
+	//181018 MIRI 일반회원, 기업회원 회원탈퇴 공통으로 묶음
+	/*@RequestMapping("deleteNormalMember.do")
 	public String deleteNormalMember(HttpSession session) {
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		String normalId = mvo.getId();
@@ -128,7 +130,7 @@ public class NormalController {
 			session.invalidate();
 		}
 		return "home.tiles";
-	}
+	}*/
 
 	@PostMapping("normalPictureUpload.do")
 	@ResponseBody
@@ -168,7 +170,13 @@ public class NormalController {
 		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNormalId("yosep"));
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNormalId("yosep"));
 		model.addAttribute("povo", normalService.normalDetailPortfolio("yosep"));
-		model.addAttribute("nmvo",normalService.selectNormalMember("yosep"));
+		
+		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		if (mvo != null) {
+			NormalMemberVO nmvo = normalService.selectNormalMember(mvo.getId());
+			model.addAttribute("nmvo", nmvo);
+		}
+
 		return "normal/normal_detail_portfolio.tiles2";
 
 	}

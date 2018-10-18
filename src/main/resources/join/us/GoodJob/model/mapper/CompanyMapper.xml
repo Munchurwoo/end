@@ -33,9 +33,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where m.id=cm.company_id
 		and m.id=#{id}
 	</select>
-	<delete id="deleteCompanyMember" parameterType="string">
+	<!-- 181018 MIRI 일반회원, 기업회원 회원탈퇴 공통으로 묶음 -->
+	<!-- <delete id="deleteCompanyMember" parameterType="string">
 		delete from member where id=#{id}
-	</delete>
+	</delete> -->
 
 	<select id="getAllCompanyList" resultType="companyMemberVO">
 		select 

@@ -20,8 +20,9 @@ public interface CompanyService {
 	// 기업 회원정보 수정
 	void updateCompanyMember(CompanyMemberVO companyMemberVO);
 
-	// 기업 회원 탈퇴
-	void deleteCompanyMember(String companyId);
+	//181018 MIRI 일반회원, 기업회원 회원탈퇴 공통으로 묶음
+	/*// 기업 회원 탈퇴
+	void deleteCompanyMember(String companyId);*/
 
 	// 기업 마이페이지 상세
 	CompanyMemberVO myPageCompanyMember(String companyId);

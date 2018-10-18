@@ -14,6 +14,7 @@ public class CompanyMemberVO extends MemberVO {
 	private String sales;
 	private String dateOfEstablishment;
 	private String numOfEmployees;	//181016 MIRI 기존 int type일 때에 공백으로 가입하면 400Error뜸 -> String type으로 수정하였더니 정상 동작.
+	private String picturePath;
 	private List<JobPostingVO> jobPostingVOList;
 	private JobPostingVO jobPostingVO;
 	public CompanyMemberVO() {
@@ -28,10 +29,16 @@ public class CompanyMemberVO extends MemberVO {
 	 * @param sales 매출액
 	 * @param dateOfEstablishment 설립일
 	 * @param numOfEmployees 사원수
+	 * @param picturePath 기업로고
 	 * @param jobPostingVOList 구인공고 리스트 (기업이 구인공고글을 여러개 등록)
 	 */
+	public CompanyMemberVO(String id, String password, String email, String name, String tel, String memberType,
+			String address) {
+		super(id, password, email, name, tel, memberType, address);
+		
+	}
 	public CompanyMemberVO(String companyId, String introduction, String companyType, String industry, String sales,
-			String dateOfEstablishment, String numOfEmployees, List<JobPostingVO> jobPostingVOList,
+			String dateOfEstablishment, String numOfEmployees, String picturePath, List<JobPostingVO> jobPostingVOList,
 			JobPostingVO jobPostingVO) {
 		super();
 		this.companyId = companyId;
@@ -41,6 +48,7 @@ public class CompanyMemberVO extends MemberVO {
 		this.sales = sales;
 		this.dateOfEstablishment = dateOfEstablishment;
 		this.numOfEmployees = numOfEmployees;
+		this.picturePath = picturePath;
 		this.jobPostingVOList = jobPostingVOList;
 		this.jobPostingVO = jobPostingVO;
 	}
@@ -86,6 +94,12 @@ public class CompanyMemberVO extends MemberVO {
 	public void setNumOfEmployees(String numOfEmployees) {
 		this.numOfEmployees = numOfEmployees;
 	}
+	public String getPicturePath() {
+		return picturePath;
+	}
+	public void setPicturePath(String picturePath) {
+		this.picturePath = picturePath;
+	}
 	public List<JobPostingVO> getJobPostingVOList() {
 		return jobPostingVOList;
 	}
@@ -100,10 +114,10 @@ public class CompanyMemberVO extends MemberVO {
 	}
 	@Override
 	public String toString() {
-		return super.toString()+"CompanyMemberVO [companyId=" + companyId + ", introduction=" + introduction + ", companyType="
+		return "CompanyMemberVO [companyId=" + companyId + ", introduction=" + introduction + ", companyType="
 				+ companyType + ", industry=" + industry + ", sales=" + sales + ", dateOfEstablishment="
-				+ dateOfEstablishment + ", numOfEmployees=" + numOfEmployees + ", jobPostingVOList=" + jobPostingVOList
-				+ ", jobPostingVO=" + jobPostingVO + "]";
+				+ dateOfEstablishment + ", numOfEmployees=" + numOfEmployees + ", picturePath=" + picturePath
+				+ ", jobPostingVOList=" + jobPostingVOList + ", jobPostingVO=" + jobPostingVO + "]";
 	}
 	
 	

@@ -17,6 +17,8 @@ public interface MemberMapper {
 	MemberVO loginMember(MemberVO memberVO);
 	//개인,기업 아이디 중복 검사(MEMBER)
 	int checkMemberId(String id);
+	//개인, 기업 회원탈퇴(MEMBER)
+	void deleteMember(String normalId);
 
 	List<RecruitCatVO> getRecruitCatVOList();
 

@@ -4,6 +4,17 @@
 
 <!-- company_mypage -->
 
+<script>
+	function deleteCompanyMember() {
+		var delConfirm = confirm("${requestScope.cmvo.companyId}님 정말 회원 탈퇴를 하시겠습니까?");
+		if(delConfirm == true) {
+			location.href="deleteMember.do";
+		} else {
+			return;
+		}
+	}
+</script>
+
 <h3 align="center">${sessionScope.mvo.name }님 마이페이지</h3><br><br>
 <div class="container">
 <div class="col-sm-3"></div>
@@ -59,6 +70,6 @@
 </div>
 <a href="updateCompanyMemberForm.do">회원정보수정</a><br><br>
 <a href="registerJobPostingForm.do">구인등록</a><br><br>
-<a href="deleteCompanyMember.do">회원탈퇴</a><br><br>
+<button class="btn-1" onclick="deleteCompanyMember()" style="height:40px; width:150px;">회원탈퇴</button>
 <a href="job_posting_detail.do">구인등록상세보기 임시로만듬-동규</a>
 
