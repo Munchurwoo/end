@@ -32,6 +32,7 @@ drop sequence rc_num_seq;
 drop sequence qa_num_seq;
 drop sequence portfolio_file_seq;
 
+		
 
 
 -- 회원 ( ERD에서 기업/개인 구분하기위해 type 컬럼을 뒀으나 명령어라 사용불가함 따라서 member_type으로 변경
@@ -517,5 +518,43 @@ where dev_cat_num in (201,202) and rc_num in(101,106) and emp_type_num in (301,3
 -- 모집직군에서 웹프로그래머, DBA/데이터베이스 선택 
 -- 고용형태에서 인턴, 신입 선택
 
+select job_posting_num
+from( 
+    select lc.loc_name,jl.loc_num,jl.job_posting_num
+    from location_category lc , job_loc jl
+    where jl.job_posting_num = lc.job_posting_num
+    and 
+)
+where academic_num='401' 
 
 
+
+select job_posting_num
+from( 
+   select jd.job_posting_num, jd.dev_cat_num, jr.rc_num, je.emp_type_num, jl.loc_num, ja.academic_num
+   from job_dev jd, job_recruitment jr, job_emp je, job_loc jl, job_academic ja
+   where jd.job_posting_num=jr.job_posting_num 
+   and jr.job_posting_num=je.job_posting_num 
+   and je.job_posting_num=jl.job_posting_num
+   and jl.job_posting_num=ja.job_posting_num
+)
+where dev_cat_num in() 
+and rc_num in()  
+and emp_type_num in() 
+and loc_num in()
+and academic_num in()
+-- 개발분야에서 java 선택  -- 모집직군에서 웹프로그래머선택 --고용형태에서 프리랜서 선택
+
+
+
+
+select job_posting_num
+from( 
+   select jd.job_posting_num, jd.dev_cat_num, jr.rc_num, je.emp_type_num
+   from job_dev jd, job_recruitment jr, job_emp je
+   where jd.job_posting_num=jr.job_posting_num 
+   and jr.job_posting_num=je.job_posting_num 
+   
+)
+where dev_cat_num in(201,227) 
+and rc_num in(101,106)  

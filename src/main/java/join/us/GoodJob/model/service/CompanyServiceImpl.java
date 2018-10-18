@@ -1,6 +1,7 @@
 package join.us.GoodJob.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -77,4 +78,9 @@ public class CompanyServiceImpl implements CompanyService {
 		return companyMapper.getAllJobPostingList();
 	}
 
+	@Override
+	public List<String> findJobPostingByCatNumList(Map map) {
+		return companyMapper.findJobPostingByCatNumList(map);
+	}
+	
 }

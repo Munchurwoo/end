@@ -2,6 +2,7 @@ package join.us.GoodJob.model.mapper;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -37,7 +38,8 @@ public interface CompanyMapper {
 	//채용정보 클릭 후 전체 채용공고 조회하기
 	List<CompanyMemberVO> getAllJobPostingList();
 	
-	
+	// 마이바티스 동적쿼리 테스트 완료 - 정상작동
+	List<String> findJobPostingByCatNumList(Map map);
 	
 	//기업 전체 리스트 개수 구하기(COMPANY_MEMBER)
 	int getAllCompanyMemberCount();
@@ -61,6 +63,15 @@ public interface CompanyMapper {
 	List<JobPostingVO> companyJobPostingList(String companyId);
 	//구인공고 상세보기
 	CompanyMemberVO jobPostringDetail(String jobPostingNum);
+	// 아래부터 구인공고 상세조건 검색
+	// 개발분야번호로 구인공고 조회
+	// 모집직군번호로  	" "
+	// 고용형태번호로	" "
+	// 지역번호로		" "
+	// 학력번호로		" "
+	
+	
+	
 	
 	//구인공고 등록
 	//구인공고 키워드 등록	

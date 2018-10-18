@@ -1,6 +1,7 @@
 package join.us.GoodJob.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import join.us.GoodJob.model.vo.CompanyMemberVO;
 
@@ -41,6 +42,9 @@ public interface CompanyService {
 	
 	// 기업정보 상세보기 후 해당 기업 구인공고리스트 바로가기
 	List<JobPostingVO> companyJobPostingList(String companyId);
+	
+	// 마이바티스 동적쿼리 테스트 완료 - 정상작동
+	List<String> findJobPostingByCatNumList(Map map);
 	
 	// 구인 상세
 	CompanyMemberVO jobPostingDetail(String jobPostingNum);

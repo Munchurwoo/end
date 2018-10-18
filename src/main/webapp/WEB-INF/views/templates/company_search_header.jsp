@@ -2,8 +2,9 @@
     pageEncoding="UTF-8"%>
   <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 	<script type="text/javascript">	
-	$(document).ready(function(){				
-		$("input[name='recruitCatNumList']").change(function() {	
+	$(document).ready(function(){	
+		
+		$("input[name='recruitCatNumList']").change(function() {
 			$("#empTypeArea").html('');
 			var dataString='';				
 			$.ajax({
@@ -44,14 +45,14 @@
 			<div class="col-lg-12">
 				<form action="user-company_detail_search_list.do" method="get" id="master">
 	
-	<h5>지역</h5>
+		<h5>지역</h5>
 	<c:forEach items="${requestScope.locCatList}" var="locCat" varStatus="i">
-		<input type="checkbox" name="empTypeCatNumList" value="${locCat.locNum}" >${locCat.locName}&nbsp;
+		<input type="checkbox" name="locCatNumList" value="${locCat.locNum}" >${locCat.locName}&nbsp;
 	</c:forEach> <br>
 	
 	<h5>학력</h5>
 	<c:forEach items="${requestScope.acaCatList}" var="acaCat" varStatus="i">	
-		<input type="radio" name="acaCatNumList" value="${acaCat.academicNum}" required="required">${acaCat.academicName}&nbsp;
+		<input type="checkbox" name="acaCatNumList" value="${acaCat.academicNum}">${acaCat.academicName}&nbsp;
 	</c:forEach> <br>
 	
 	<h5>고용형태</h5>

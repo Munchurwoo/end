@@ -1,6 +1,8 @@
 package join.us.GoodJob.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -139,13 +141,24 @@ public class CompanyController {
 		return "company/company_get_all_jobPosting_list.company_search_tiles";
 	}
 	@RequestMapping("user-company_detail_search_list.do")
-	public String companyDetailSearchList(Model model) {
+	public String findJobPostingByCatNumList(Model model, Map map) {
+		// 아래 6줄은 상세조건 폼
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
 		model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));
 		model.addAttribute("empTypeCatList", memberService.getEmpTypeCatVOList());
 		model.addAttribute("locCatList", memberService.getLocCatVOList());
 		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
 		model.addAttribute("jobPostingList", companyService.getAllJobPostingList());
+		// 아래부터는 검색결과 후 디테일 정보보내주기
+		// CatNumList 로 게시글번호를 조회해오는 방법
+		// 내일은 그 게시글 번호로 상세보기 해야함
+		List<String> devCatNumList=new ArrayList<String>();
+		List<String> recruitCatNumList=new ArrayList<String>();
+		List<String> empTypeCatNumList=new ArrayList<String>();
+		List<String> locCatNumList=new ArrayList<String>();
+		List<String> acaCatNumList=new ArrayList<String>();
+	
+		model.addAttribute("", companyService.findJobPostingByCatNumList(map));
 		return "company/company_detail_search_list.company_search_tiles";
 	}
 }

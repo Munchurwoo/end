@@ -3,11 +3,11 @@ package join.us.GoodJob.model.vo;
 import java.util.List;
 
 public class CatNumParamVO {
-	private List<String> locCatNumList;
-	private List<String> recruitCatNumList;
-	private List<String> empTypeCatNumList;
-	private List<String> devCatNumList;
-	private List<String> acaCatNumList;
+		private List<String> locCatNumList;
+		private List<String> recruitCatNumList;
+		private List<String> empTypeCatNumList;
+		private List<String> devCatNumList;
+		private List<String> acaCatNumList;
 	private List<String> keywordNameList;
 	public CatNumParamVO() {
 		super();
