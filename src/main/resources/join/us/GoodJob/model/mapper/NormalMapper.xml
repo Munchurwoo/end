@@ -84,6 +84,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{normalId}, #{rcNum})
 	</insert>
 	
+	<!-- 181018 MIRI normalId->value로 수정 -->
 	<select id="normalDetailPortfolio" resultType="portfolioVO" parameterType="string">
 		select title,content from portfolio where normal_id=#{value}
 	</select>

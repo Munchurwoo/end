@@ -34,14 +34,8 @@ public interface CompanyMapper {
 	//기업 마이페이지 상세보기
 	CompanyMemberVO myPageCompanyMember(String companyId);
 	
-	
-	
-	
-	
-	//기업 전체 리스트 개수 구하기(COMPANY_MEMBER)
-	int getAllCompanyMemberCount();
-	//기업 전체 리스트 보기(COMPANY_MEMBER,MEMBER)
-	List<CompanyMemberVO> getAllCompanyMemberList(PagingBean pagingBean);
+	//채용정보 클릭 후 전체 채용공고 조회하기
+	List<CompanyMemberVO> getAllJobPostingList();
 	
 	//이름으로 기업검색 리스트 개수 구하기(COMPANY_MEMBER,MEMBER)
 	int getSomeCompanyMemberCount(String companyName);
@@ -52,8 +46,11 @@ public interface CompanyMapper {
 	CompanyMemberVO getDetailCompanyMember(String companyId);
 	
 
-	//header부분 기업정보리스트 보기
-	List<MemberVO> getAllCompanyList();
+	//전체 기업정보 리스트 받아오기
+	List<MemberVO> getAllCompanyList(PagingBean pagingBean);
+	//전체 기업정보 리스트 개수 받아오기
+	int getAllCompanyListCount();
+	
 	// 기업정보 상세보기
 	CompanyMemberVO detailCompanyInfo(String companyId);
 	// 기업정보 상세보기 후 해당기업 구인공고 리스트 바로가기

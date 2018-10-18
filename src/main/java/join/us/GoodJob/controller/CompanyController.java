@@ -1,19 +1,25 @@
 package join.us.GoodJob.controller;
 
-import java.util.List;
+
+import java.io.File;
+import java.io.IOException;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import join.us.GoodJob.model.service.CompanyService;
 import join.us.GoodJob.model.service.MemberService;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
 import join.us.GoodJob.model.vo.MemberVO;
+import join.us.GoodJob.model.vo.PostListVO;
 
 @Controller
 public class CompanyController {
@@ -21,6 +27,10 @@ public class CompanyController {
 	CompanyService companyService;
 	@Resource
 	MemberService memberService;
+	
+	/*실제 운영시에 사용
+	private String serverUploadPath;*/	
+	private String workspaceUploadPath;
 
 	@RequestMapping("user-registerCompanyMemberForm.do")
 	public String registerCompanyMemberForm() {
@@ -99,9 +109,9 @@ public class CompanyController {
 	}
 
 	@RequestMapping("user-companyInfo.do")
-	public String allConmapnyInfo(Model model) {
-		List<MemberVO> cmvoList=companyService.getAllCompanyList();
-		model.addAttribute("cmvoList", cmvoList);
+	public String allConmapnyInfo(Model model, String pageNum) {
+		PostListVO postListVO = companyService.getAllCompanyList(pageNum);
+		model.addAttribute("postListVO", postListVO);		
 		return "company/company_info.tiles2";
 	}
 
@@ -127,5 +137,44 @@ public class CompanyController {
 	public String companyJobPostingList(String companyId,Model model) {
 		model.addAttribute("jobPostingList", companyService.companyJobPostingList(companyId));
 		return "company/company_job_postingList.tiles2";
+	}
+	@PostMapping("user-uploadCompanyLogo.do")
+	@ResponseBody
+	public String uploadCompanyLogo(MultipartFile uploadLogo,HttpServletRequest request) {
+		workspaceUploadPath="C:\\java-kosta\\framework-workspace2\\goodjob\\src\\main\\webapp\\resources\\upload\\companyLogo\\";
+		System.out.println("업로드경로"+workspaceUploadPath);
+		if(uploadLogo.isEmpty()==false) {
+			System.out.println("파일명"+uploadLogo.getOriginalFilename());
+			File uploadWorkspaceFile=new File(workspaceUploadPath+uploadLogo.getOriginalFilename());
+			try {
+				uploadLogo.transferTo(uploadWorkspaceFile);
+				System.out.println("성공");
+			} catch (IllegalStateException | IOException e) {
+				
+				e.printStackTrace();
+			}
+		}
+		return uploadLogo.getOriginalFilename();
+	}
+		
+	@RequestMapping("user-getAllJobPostingList.do")
+	public String getAllJobPostingList(Model model) {
+		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
+		model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));
+		model.addAttribute("empTypeCatList", memberService.getEmpTypeCatVOList());
+		model.addAttribute("locCatList", memberService.getLocCatVOList());
+		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
+		model.addAttribute("jobPostingList", companyService.getAllJobPostingList());
+		return "company/company_get_all_jobPosting_list.company_search_tiles";
+	}
+	@RequestMapping("user-company_detail_search_list.do")
+	public String companyDetailSearchList(Model model) {
+		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
+		model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));
+		model.addAttribute("empTypeCatList", memberService.getEmpTypeCatVOList());
+		model.addAttribute("locCatList", memberService.getLocCatVOList());
+		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
+		model.addAttribute("jobPostingList", companyService.getAllJobPostingList());
+		return "company/company_detail_search_list.company_search_tiles";
 	}
 }
