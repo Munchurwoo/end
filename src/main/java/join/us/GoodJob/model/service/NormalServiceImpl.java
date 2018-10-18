@@ -102,4 +102,10 @@ public class NormalServiceImpl implements NormalService {
 		return normalMapper.portFolioVOById(nomalId);
 	}
 
+	@Override
+	public List<PortfolioVO> normalDetailPortfolioList(String normalId) {
+		return normalMapper.normalDetailPortfolioList(normalId);
+
+	}
+
 }

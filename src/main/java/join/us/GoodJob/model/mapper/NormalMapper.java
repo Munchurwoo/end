@@ -57,6 +57,7 @@ public interface NormalMapper {
 	List<NormalMemberVO> AllFindNomarMember();
 	
 	PortfolioVO portFolioVOById(String nomalId);
+	List<PortfolioVO> normalDetailPortfolioList(String normalId);
 	
 	//질의응답 질문등록
 }

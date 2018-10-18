@@ -23,6 +23,7 @@ public interface NormalService {
 
 	//포트폴리오등록 상세
 	PortfolioVO normalDetailPortfolio(String normalId);
+	List<PortfolioVO> normalDetailPortfolioList(String normalId);
 	
 	//개인회원 모든 정보 받아오기
 	List<NormalMemberVO> AllFindNomarMember();

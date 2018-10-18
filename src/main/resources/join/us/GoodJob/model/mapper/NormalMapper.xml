@@ -91,6 +91,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where
 		normal_id=#{normalId}
 	</select>
+	
+	<select id="normalDetailPortfolioList" resultType="portfolioVO"
+		parameterType="string">
+		select title,content,picture_path
+		from portfolio
+		where
+		normal_id=#{normalId}
+	</select>
 	<select id="getAllPortfolioList" resultType="portfolioVO">
 
 	</select>
