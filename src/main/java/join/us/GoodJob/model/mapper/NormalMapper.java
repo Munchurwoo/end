@@ -53,13 +53,10 @@ public interface NormalMapper {
 	//개인 id, name 조회
 	List<NormalMemberVO> idName();
 	PortfolioVO portFolioVOById(String nomalId);
-<<<<<<< HEAD
 	//일반 맴버 모두 출력 
 	List<NormalMemberVO> AllFindNomarMember();
-=======
 	//포트폴리오 삭제
 	void deletePortfolio(String id);
->>>>>>> branch 'master' of https://github.com/Munchurwoo/goodjob
 	
 	//질의응답 질문등록
 }
