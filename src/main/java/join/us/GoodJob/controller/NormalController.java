@@ -29,6 +29,8 @@ public class NormalController {
 	@Resource
 	MemberService memberService;
 
+	
+	//private String serverUploadPath;
 	private String workspaceUploadPath;
 
 	/**
@@ -59,6 +61,7 @@ public class NormalController {
 	 * @return
 	 */
 	@RequestMapping("normal_mypage.do")
+	//181018 MIRI selectNormalMember와 중복으로 변경
 	public String selectNormalMember(String normalId, Model model, HttpSession session) {
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		if (mvo != null) {

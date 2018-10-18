@@ -38,6 +38,12 @@ public class NormalServiceImpl implements NormalService {
 	public void deleteNormalMember(String normalId) {
 		normalMapper.deleteNormalMember(normalId);
 	}
+	
+	//181018 MIRI selectNormalMember와 중복으로 주석
+	/*@Override
+	public NormalMemberVO myPageNormalMember(String memberId) {
+		return normalMapper.myPageNormalMember(memberId);
+	}*/
 
 	@Override
 	public void registerPortfolio(PortfolioVO portfolioVO) {
