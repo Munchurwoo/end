@@ -12,7 +12,7 @@
 					</h2>
 				</div>
 			</h4>
-			<c:forEach items="${requestScope.cmvoList }" var="cmvo" begin="0" end="3">
+			<c:forEach items="${postListVO.cmvoList }" var="cmvo" begin="0" end="3">
 				<div class="col-lg-3">
 					<div class="box">
 						<div class="box-gray aligncenter">

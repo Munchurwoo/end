@@ -1,7 +1,5 @@
 package join.us.GoodJob.controller;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
@@ -14,6 +12,7 @@ import join.us.GoodJob.model.service.CompanyService;
 import join.us.GoodJob.model.service.MemberService;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
 import join.us.GoodJob.model.vo.MemberVO;
+import join.us.GoodJob.model.vo.PostListVO;
 
 @Controller
 public class CompanyController {
@@ -98,9 +97,9 @@ public class CompanyController {
 	}
 
 	@RequestMapping("user-companyInfo.do")
-	public String allConmapnyInfo(Model model) {
-		List<MemberVO> cmvoList=companyService.getAllCompanyList();
-		model.addAttribute("cmvoList", cmvoList);
+	public String allConmapnyInfo(Model model, String pageNum) {
+		PostListVO postListVO = companyService.getAllCompanyList(pageNum);
+		model.addAttribute("postListVO", postListVO); 	
 		return "company/company_info.tiles";
 	}
 

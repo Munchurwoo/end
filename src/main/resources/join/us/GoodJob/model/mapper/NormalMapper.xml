@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="selectNormalMember" parameterType="string"
 		resultType="normalMemberVO">
 		select m.id, m.password, m.email, m.name, m.address, m.tel,
-		nm.gender, nm.picture_path, nm.career_status
+		nm.gender, nm.career_status
 		from normal_member nm,
 		member m
 		where nm.normal_id=m.id and m.id=#{value}

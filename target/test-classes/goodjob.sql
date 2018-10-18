@@ -514,5 +514,36 @@ where dev_cat_num in (201,202) and rc_num in(101,106) and emp_type_num in (301,3
 -- 모집직군에서 웹프로그래머, DBA/데이터베이스 선택 
 -- 고용형태에서 인턴, 신입 선택
 
+--기업 전체보기 테스트 데이터
+insert into MEMBER(id, password, email, name, address, tel, member_type) values('Tmaxuser2', '123', 'Tmaxuser@tmax.com', 'TmaxSoft', '경기도 성남시 분당구 황새울로 258번길 29, BS타워 8-9층 티맥스소프트', '031-8018-1000', 3);
+insert into MEMBER(id, password, email, name, address, tel, member_type) values('Tmaxuser3', '123', 'Tmaxuser@tmax.com', 'TmaxSoft', '경기도 성남시 분당구 황새울로 258번길 29, BS타워 8-9층 티맥스소프트', '031-8018-1000', 3);
+insert into MEMBER(id, password, email, name, address, tel, member_type) values('Tmaxuser4', '123', 'Tmaxuser@tmax.com', 'TmaxSoft', '경기도 성남시 분당구 황새울로 258번길 29, BS타워 8-9층 티맥스소프트', '031-8018-1000', 3);
+insert into MEMBER(id, password, email, name, address, tel, member_type) values('Tmaxuser5', '123', 'Tmaxuser@tmax.com', 'TmaxSoft', '경기도 성남시 분당구 황새울로 258번길 29, BS타워 8-9층 티맥스소프트', '031-8018-1000', 3);
+insert into MEMBER(id, password, email, name, address, tel, member_type) values('Tmaxuser6', '123', 'Tmaxuser@tmax.com', 'TmaxSoft', '경기도 성남시 분당구 황새울로 258번길 29, BS타워 8-9층 티맥스소프트', '031-8018-1000', 3);
+insert into MEMBER(id, password, email, name, address, tel, member_type) values('Tmaxuser7', '123', 'Tmaxuser@tmax.com', 'TmaxSoft', '경기도 성남시 분당구 황새울로 258번길 29, BS타워 8-9층 티맥스소프트', '031-8018-1000', 3);
+insert into MEMBER(id, password, email, name, address, tel, member_type) values('Tmaxuser8', '123', 'Tmaxuser@tmax.com', 'TmaxSoft', '경기도 성남시 분당구 황새울로 258번길 29, BS타워 8-9층 티맥스소프트', '031-8018-1000', 3);
 
+insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees) values('Tmaxuser2', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358);
+insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees) values('Tmaxuser3', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358);
+insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees) values('Tmaxuser4', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358);
+insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees) values('Tmaxuser5', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358);
+insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees) values('Tmaxuser6', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358);
+insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees) values('Tmaxuser7', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358);
+insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees) values('Tmaxuser8', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358);
+
+-- 기업 전체 보기 rnum
+select row_number() over(order by cm.company_id) as rnum, cm.company_id, m.name, cm.introduction
+from member m , company_member cm
+where m.id=cm.company_id
+
+select company_id, name, introduction
+from(select row_number() over(order by cm.company_id) as rnum, cm.company_id, m.name, cm.introduction
+from member m , company_member cm
+where m.id=cm.company_id
+) where rnum between 3 and 6
+
+--기업 전체 보기 게시물 수
+select count(*)
+from member m , company_member cm
+where m.id=cm.company_id
 
