@@ -7,7 +7,6 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -66,15 +65,7 @@ public class MemberController {
 			list.add(memberService.getDevCatVOListByrcNum(rcNum));		
 		return list;				
 	}
-	@RequestMapping("user-portfolioAllList.do")
-	public String portfolioAllList(Model model) {
-		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
-		model.addAttribute("devCatList", 	memberService.getDevCatVOListByrcNum("101"));
-		model.addAttribute("empTypeCatList", 	memberService.getEmpTypeCatVOList()); 
-		model.addAttribute("locCatList", memberService.getLocCatVOList());
-		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
-		return "member/portfolio_all_list.tiles2";
-	}
+	
 
 	/**
 	 * 181016 MIRI 회원 아이디 중복 검사

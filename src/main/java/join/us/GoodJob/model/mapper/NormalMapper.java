@@ -50,7 +50,7 @@ public interface NormalMapper {
 	//포트폴리오 수정
 	//개인 id, name 조회
 	List<NormalMemberVO> idName();
-	List<PortfolioVO> portFolioVOList(String nomalId);
+	PortfolioVO portFolioVOById(String nomalId);
 	
 	//질의응답 질문등록
 }

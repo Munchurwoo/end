@@ -98,8 +98,8 @@ public class NormalServiceImpl implements NormalService {
 	}
 
 	@Override
-	public List<PortfolioVO> portFolioVOList(String nomalId) {
-		return normalMapper.portFolioVOList(nomalId);
+	public PortfolioVO portFolioVOById(String nomalId) {
+		return normalMapper.portFolioVOById(nomalId);
 	}
 
 }
