@@ -35,9 +35,10 @@ public class CompanyServiceImpl implements CompanyService {
 		companyMapper.updateMember(companyMemberVO);
 	}
 
-	@Override
+	//181018 MIRI 일반회원, 기업회원 회원탈퇴 공통으로 묶음
+	/*@Override
 	public void deleteCompanyMember(String companyId) {
-	}
+	}*/
 	
 	@Override
 	public CompanyMemberVO myPageCompanyMember(String companyId) {
@@ -76,6 +77,12 @@ public class CompanyServiceImpl implements CompanyService {
 	public List<JobPostingVO> companyJobPostingList(String companyId) {
 		
 		return companyMapper.companyJobPostingList(companyId);
+	}
+
+	@Override
+	public List<CompanyMemberVO> getAllJobPostingList() {
+		
+		return companyMapper.getAllJobPostingList();
 	}
 
 }

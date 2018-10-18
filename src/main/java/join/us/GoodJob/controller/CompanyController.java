@@ -74,9 +74,10 @@ public class CompanyController {
 		}
 		return "company/company_mypage.tiles2";
 	}
-
-	@RequestMapping("deleteCompanyMember.do")
-	public String deleteNormalMember(HttpSession session) {
+	
+	//181018 MIRI 일반회원, 기업회원 회원탈퇴 공통으로 묶음
+	/*@RequestMapping("deleteCompanyMember.do")
+	public String deleteCompanyMember(HttpSession session) {
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		String companyId = mvo.getId();
 		if (companyId != null) {
@@ -84,7 +85,7 @@ public class CompanyController {
 			session.invalidate();
 		}
 		return "home.tiles";
-	}
+	}*/
 
 	@RequestMapping("registerJobPostingForm.do")
 	public String registerJobPostingForm(Model model) {
@@ -97,16 +98,16 @@ public class CompanyController {
 	}
 
 	@RequestMapping("user-companyInfo.do")
-	public String allConmapnyInfo(Model model, String pageNum) {
-		PostListVO postListVO = companyService.getAllCompanyList(pageNum);
-		model.addAttribute("postListVO", postListVO); 	
-		return "company/company_info.tiles";
+	public String allConmapnyInfo(Model model) {
+		List<MemberVO> cmvoList=companyService.getAllCompanyList();
+		model.addAttribute("cmvoList", cmvoList);
+		return "company/company_info.tiles2";
 	}
 
 	@RequestMapping("user-detailCompanyInfo.do")
 	public String detailCompanyInfo(String companyId,Model model) {
 		model.addAttribute("cmvo", companyService.detailCompanyInfo(companyId));
-		return "company/company_detailInfo.tiles";
+		return "company/company_detail_Info.tiles2";
 	}
 
 	
@@ -124,6 +125,26 @@ public class CompanyController {
 	@RequestMapping("companyJobPostingList.do")
 	public String companyJobPostingList(String companyId,Model model) {
 		model.addAttribute("jobPostingList", companyService.companyJobPostingList(companyId));
-		return "company/company_job_postingList.tiles";
+		return "company/company_job_postingList.tiles2";
+	}
+	@RequestMapping("user-getAllJobPostingList.do")
+	public String getAllJobPostingList(Model model) {
+		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
+		model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));
+		model.addAttribute("empTypeCatList", memberService.getEmpTypeCatVOList());
+		model.addAttribute("locCatList", memberService.getLocCatVOList());
+		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
+		model.addAttribute("jobPostingList", companyService.getAllJobPostingList());
+		return "company/company_get_all_jobPosting_list.company_search_tiles";
+	}
+	@RequestMapping("user-company_detail_search_list.do")
+	public String companyDetailSearchList(Model model) {
+		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
+		model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));
+		model.addAttribute("empTypeCatList", memberService.getEmpTypeCatVOList());
+		model.addAttribute("locCatList", memberService.getLocCatVOList());
+		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
+		model.addAttribute("jobPostingList", companyService.getAllJobPostingList());
+		return "company/company_detail_search_list.company_search_tiles";
 	}
 }

@@ -27,8 +27,9 @@ public interface CompanyMapper {
 	//기업 회원정보 수정(MEMBER)
 	void updateMember(MemberVO memberVO);
 		
-	//기업 회원탈퇴(MEMBER) ->company_member의 튜플은 CASCADE 삭제됨
-	void deleteCompanyMember(String companyId);
+	//181018 MIRI 일반회원, 기업회원 회원탈퇴 공통으로 묶음
+	/*//기업 회원탈퇴(MEMBER) ->company_member의 튜플은 CASCADE 삭제됨
+	void deleteCompanyMember(String companyId);*/
 	
 	//기업 마이페이지 상세보기
 	CompanyMemberVO myPageCompanyMember(String companyId);

@@ -18,8 +18,9 @@ public interface CompanyService {
 	// 기업 회원정보 수정
 	void updateCompanyMember(CompanyMemberVO companyMemberVO);
 
-	// 기업 회원 탈퇴
-	void deleteCompanyMember(String companyId);
+	//181018 MIRI 일반회원, 기업회원 회원탈퇴 공통으로 묶음
+	/*// 기업 회원 탈퇴
+	void deleteCompanyMember(String companyId);*/
 
 	// 기업 마이페이지 상세
 	CompanyMemberVO myPageCompanyMember(String companyId);
@@ -27,6 +28,8 @@ public interface CompanyService {
 	//인재검색 서비스 
 	NormalMemberVO memberSearch();
 	
+	//채용정보 클릭 후 전체 채용공고 조회하기
+	List<CompanyMemberVO> getAllJobPostingList();
 
 	// 기업정보 전체조회
 	PostListVO getAllCompanyList(String pageNum);

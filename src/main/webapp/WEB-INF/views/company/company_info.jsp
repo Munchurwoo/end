@@ -12,6 +12,7 @@
 				</div>
 			</h4>
 
+<<<<<<< HEAD
 <c:set var="cmvoList"  value="${postListVO.cmvoList}"></c:set>
 <c:set var="pb"  value="${postListVO.pagingBean}"></c:set>
 
@@ -31,9 +32,9 @@ ${postListVO.pagingBean} --%>
 	
 						</div>
 						<div class="box-bottom">
-							<a href="user-detailCompanyInfo.do?companyId=${cmvo.companyId}">더보기</a>
+							<a href="user-detailCompanyInfo.do?companyId=${cmvo.companyId}">기업정보 자세히보기</a>
 						</div>
-					</div>
+					</div>					
 				</div>
 				<!-- <div class="col-lg-1">
 				</div> -->

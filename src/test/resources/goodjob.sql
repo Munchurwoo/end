@@ -32,6 +32,8 @@ drop sequence rc_num_seq;
 drop sequence qa_num_seq;
 drop sequence portfolio_file_seq;
 
+
+
 -- 회원 ( ERD에서 기업/개인 구분하기위해 type 컬럼을 뒀으나 명령어라 사용불가함 따라서 member_type으로 변경
 create table member(
    id varchar2(100) primary key,
@@ -124,6 +126,7 @@ create table company_member(
    sales number default 0,
    date_of_establishment varchar2(100) default null,
    num_of_employees number default 0,
+   picture_path varchar2(100) not null,
    constraint fk_member_company_member foreign key(company_id) references member(id) on delete cascade
 );
 
@@ -146,7 +149,7 @@ create sequence job_posting_num_seq start with 1001;
 
 insert into JOB_POSTING(job_posting_num, company_id, career_status, title, content) values(job_posting_num_seq.nextval, 'NHNuser', '경력 3년', 'NHN엔터테인먼트에서 Java 신입, 프리랜서 개발자 모집', 'Java 어플리케이션 개발 경험자, WAS 이해도가 높은 경험자 우대합니다.');
 insert into JOB_POSTING(job_posting_num, company_id, career_status, title, content) values(job_posting_num_seq.nextval, 'Tmaxuser', '경력 무관', '티맥스소프트 DBA 2018 하반기 공개채용', 'MS-SQL 서버 모니터링 및 트러블 슈팅경험 있으신 분, OLTP 업무 경험 있으신 분');
-
+insert into JOB_POSTING(job_posting_num, company_id, career_status, title, content) values(job_posting_num_seq.nextval, 'NHNuser', '경력 3년', 'NHN엔터테인먼트에서 Java 신입, 프리랜서 개발자 모집합니다  ', 'Java 어플리케이션 개발 경험자ㅎㅎㅎㅎㅎ, WAS 이해도가 높은 경험자 우대합니다테스트입니당.');
 select * from job_posting;
 ---------------------------------------------------------------------
 

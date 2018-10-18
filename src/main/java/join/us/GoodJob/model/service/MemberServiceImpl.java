@@ -28,6 +28,11 @@ public class MemberServiceImpl implements MemberService {
 	public int checkMemberId(String id) {
 		return memberMapper.checkMemberId(id);
 	}
+	
+	@Override
+	public void deleteMember(String normalId) {
+		memberMapper.deleteMember(normalId);
+	}
 
 	@Override
 	public List<RecruitCatVO> getRecruitCatVOList() {

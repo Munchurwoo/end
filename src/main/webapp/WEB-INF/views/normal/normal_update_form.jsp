@@ -76,21 +76,26 @@
 </script>
 
 <form id="normalUpdateForm" action="updateNormalMember.do" method="post">
-	* 표시는 필수 입력사항<br><br>
-	아이디 * <input type="text" value="${requestScope.nmvo.id }" name="id" readonly="readonly"><br><br>
-	비밀번호 * <input type="password" id="password" name="password" required="required">
-	<span id="passwordView"> </span><br><br>
-	비밀번호 확인 * <input type="password" id="checkPass" name="checkPass" required="required">
-	<span id="checkPassView"> </span><br><br>
-	이메일 주소 * <input type="text" value="${requestScope.nmvo.email }" name="email" required="required"><br><br>
-	이름 * <input type="text" value="${requestScope.nmvo.name }" name="name" readonly="readonly"><br><br>
-	주소 * <input type="text" value="${requestScope.nmvo.address }" name="address" required="required"><br><br>
-	연락처 * <input type="text" value="${requestScope.nmvo.tel }" name="tel" required="required"><br><br>
-	경력사항 * <input type="text" value="${requestScope.nmvo.careerStatus }" name="careerStatus" required="required"><br><br>
-<%-- 	사진경로 * <input type="text" value="${requestScope.nmvo.picturePath }" name="picturePath" required="required"><br><br>
- --%>	
- 성별 * &nbsp;
-	<input type="radio" name="gender" value="male" disabled="disabled">남자 
-    <input type="radio" name="gender" value="female" disabled="disabled">여자<br><br>
-	<input type="submit" value="회원정보수정">
+	<div class="container">
+		<div class="col-md-3"></div>
+		<div class="col-md-6" style="text-align: left; font-size: 20px; font-weight: bold; " >
+			아이디  <input type="text" value="${requestScope.nmvo.id }" name="id" readonly="readonly" style="height:40px; width:500px;"><br><br>
+			비밀번호  <input type="password" id="password" name="password" required="required" style="height:40px; width:500px;"><br>
+			<span id="passwordView"> </span><br><br>
+			비밀번호 확인  <input type="password" id="checkPass" name="checkPass" required="required"style="height:40px; width:500px;"><br>
+			<span id="checkPassView"> </span><br><br>
+			이메일 주소 * <input type="text" value="${requestScope.nmvo.email }" name="email" required="required"><br><br>
+			이름 * <input type="text" value="${requestScope.nmvo.name }" name="name" readonly="readonly"><br><br>
+			주소 * <input type="text" value="${requestScope.nmvo.address }" name="address" required="required"><br><br>
+			연락처 * <input type="text" value="${requestScope.nmvo.tel }" name="tel" required="required"><br><br>
+			경력사항 * <input type="text" value="${requestScope.nmvo.careerStatus }" name="careerStatus" required="required"><br><br>
+			성별 * &nbsp;
+			<input type="radio" name="gender" value="male" disabled="disabled">남자 &nbsp;&nbsp;&nbsp;&nbsp;
+		    <input type="radio" name="gender" value="female" disabled="disabled">여자<br><br>
+		</div>
+		<div class="col-md-3"></div>
+	</div>
+	<div class="container" style="text-align: center">
+		<input type="submit" value="회원정보수정"  style="height:50px; width:150px;background: #81BEF7;font-size: 20px">
+	</div>
 </form>
