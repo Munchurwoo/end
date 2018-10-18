@@ -103,6 +103,7 @@
 <button type="reset" onclick="location.href='home.do'">홈으로</button>
 
 <!-- 구분선 -->
+<<<<<<< HEAD
 
 <div>
 	<h4 class="heading">
@@ -120,11 +121,21 @@
 	${povo[status.index].content}<br>
 </c:forEach> --%>
 
+=======
+<h4 class="heading">
+	<div class="cta-text">
+		<h2>
+			<span>GoodJob</span> 인재 정보
+		</h2>
+	</div>
+</h4>
+>>>>>>> branch 'master' of https://github.com/Munchurwoo/goodjob.git
 <section id="content">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="row">
+<<<<<<< HEAD
 					<c:forEach items="${list}" var="list" varStatus="status">
 						<!--  -->
 						<div class="col-lg-3">
@@ -137,6 +148,14 @@
 										
 									<p>	${povo[status.index].content}
 </p>
+=======
+					<div class="col-lg-3">
+						<div class="box">
+							<div class="box-gray aligncenter">
+								<h4>Kakao</h4>
+								<div class="icon">
+									<i class="fa fa-desktop fa-3x"></i>
+>>>>>>> branch 'master' of https://github.com/Munchurwoo/goodjob.git
 								</div>
 								<div class="box-bottom">
 									<a href="user-normalDetailPortfolioList.do?normalId=${list.normalId }">

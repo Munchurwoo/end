@@ -39,14 +39,12 @@
  			{1} 은 첫번째 * 에 해당하는 문자열을 의미한다 	
  	 -->
  	<definition name="*.tiles" extends="home.tiles">
- 		<put-attribute name="main"  value="/WEB-INF/views/{1}.jsp"/>
+ 		<put-attribute name="main_header"  value="/WEB-INF/views/{1}.jsp"/>
  		<put-attribute name="title"  value="{1}" />
  	</definition>
  	
  	<definition name="*/*.tiles" extends="home.tiles">
- 		<put-attribute name="main_center" value="/WEB-INF/views/{1}/{2}.jsp"></put-attribute>
- 		<put-attribute name="main_footer" value=""></put-attribute>
- 		<put-attribute name="main_header" value=""></put-attribute>
+ 		<put-attribute name="main_header" value="/WEB-INF/views/{1}/{2}.jsp"></put-attribute>
  	</definition>
  	<!-- 	첫번째 *  {1}  디렉토리명 
  			두번째 *  {2}  파일명 
@@ -58,15 +56,23 @@
  	
  	
  	<definition name="*/*.tiles2" extends="home.tiles">
- 		<put-attribute name="main_center" value=""></put-attribute>
+ 		<put-attribute name="main_center" value="/WEB-INF/views/{1}/{2}.jsp"></put-attribute>
  		<put-attribute name="main_footer" value=""></put-attribute>
- 		<put-attribute name="main_header" value="/WEB-INF/views/{1}/{2}.jsp"></put-attribute>
+ 		<put-attribute name="main_header" value=""></put-attribute>
  	</definition>
  	
  	<definition name="*.tiles2" extends="home.tiles">
- 		<put-attribute name="main_center" value=""></put-attribute>
+ 		<put-attribute name="main_center" value="/WEB-INF/views/{1}.jsp"></put-attribute>
  		<put-attribute name="main_footer" value=""></put-attribute>
- 		<put-attribute name="main_header" value="/WEB-INF/views/{1}.jsp"></put-attribute>
+ 		<put-attribute name="main_header" value=""></put-attribute>
+ 	</definition>
+ 	<definition name="*.company_search_tiles" extends="home.tiles">
+ 		<put-attribute name="main_header" value="/WEB-INF/views/templates/company_search_header.jsp"></put-attribute>
+ 		<put-attribute name="main_center" value="/WEB-INF/views/{1}.jsp"></put-attribute>
+ 	</definition>
+ 	<definition name="*/*.company_search_tiles" extends="home.tiles">
+ 		<put-attribute name="main_header" value="/WEB-INF/views/templates/company_search_header.jsp"></put-attribute>
+ 		<put-attribute name="main_center" value="/WEB-INF/views/{1}/{2}.jsp"></put-attribute>
  	</definition>
  	
  	

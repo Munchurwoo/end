@@ -15,14 +15,7 @@
 			<div class="navbar-collapse collapse ">
 				<ul class="nav navbar-nav">
 					<li class="active"><a href="home.do">Home</a></li>
-					<li class="dropdown"><a href="#" class="dropdown-toggle "
-						data-toggle="dropdown" data-hover="dropdown" data-delay="0"
-						data-close-others="false">채용정보<b class=" icon-angle-down"></b></a>
-						<ul class="dropdown-menu">
-							<!-- <li><a href="typography.html">신입</a></li>
-							<li><a href="components.html">경력자</a></li>
-							<li><a href="pricingbox.html">프리랜서</a></li> -->
-						</ul></li>
+					<li><a href="user-getAllJobPostingList.do">채용정보</a>
 					<li><a href="user-portfolioAllList.do">인재검색</a></li>
 					<li><a href="user-companyInfo.do">기업정보</a></li>
 

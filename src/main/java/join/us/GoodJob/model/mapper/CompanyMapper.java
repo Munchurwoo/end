@@ -2,6 +2,7 @@ package join.us.GoodJob.model.mapper;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -27,15 +28,18 @@ public interface CompanyMapper {
 	//기업 회원정보 수정(MEMBER)
 	void updateMember(MemberVO memberVO);
 		
-	//기업 회원탈퇴(MEMBER) ->company_member의 튜플은 CASCADE 삭제됨
-	void deleteCompanyMember(String companyId);
+	//181018 MIRI 일반회원, 기업회원 회원탈퇴 공통으로 묶음
+	/*//기업 회원탈퇴(MEMBER) ->company_member의 튜플은 CASCADE 삭제됨
+	void deleteCompanyMember(String companyId);*/
 	
 	//기업 마이페이지 상세보기
 	CompanyMemberVO myPageCompanyMember(String companyId);
 	
+	//채용정보 클릭 후 전체 채용공고 조회하기
+	List<CompanyMemberVO> getAllJobPostingList();
 	
-	
-	
+	// 마이바티스 동적쿼리 테스트 완료 - 정상작동
+	List<String> findJobPostingByCatNumList(Map map);
 	
 	//기업 전체 리스트 개수 구하기(COMPANY_MEMBER)
 	int getAllCompanyMemberCount();
@@ -51,14 +55,18 @@ public interface CompanyMapper {
 	CompanyMemberVO getDetailCompanyMember(String companyId);
 	
 
-	//header부분 기업정보리스트 보기
-	List<MemberVO> getAllCompanyList();
+	//전체 기업정보 리스트 받아오기
+	List<MemberVO> getAllCompanyList(PagingBean pagingBean);
+	//전체 기업정보 리스트 개수 받아오기
+	int getAllCompanyListCount();
+	
 	// 기업정보 상세보기
 	CompanyMemberVO detailCompanyInfo(String companyId);
 	// 기업정보 상세보기 후 해당기업 구인공고 리스트 바로가기
 	List<JobPostingVO> companyJobPostingList(String companyId);
 	//구인공고 상세보기
 	CompanyMemberVO jobPostringDetail(String jobPostingNum);
+	
 	
 	//구인공고 등록
 	//구인공고 키워드 등록	

@@ -5,8 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="join.us.GoodJob.model.mapper.CompanyMapper">
 	<insert id="registerCompanyMember" parameterType="companyMemberVO">
 		insert into
-		company_member(company_id,introduction,company_type,industry,sales,date_of_establishment,num_of_employees)
-		values(#{id}, #{introduction}, #{companyType}, #{industry}, #{sales}, #{dateOfEstablishment}, #{numOfEmployees})
+		company_member(company_id,introduction,company_type,industry,sales,date_of_establishment,num_of_employees,picture_path)
+		values(#{id}, #{introduction}, #{companyType}, #{industry}, #{sales}, #{dateOfEstablishment}, #{numOfEmployees}, #{picturePath})
 	</insert>
 	<insert id="registerMember" parameterType="companyMemberVO">
 		insert into
@@ -33,17 +33,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where m.id=cm.company_id
 		and m.id=#{id}
 	</select>
-	<delete id="deleteCompanyMember" parameterType="string">
+	<!-- 181018 MIRI 일반회원, 기업회원 회원탈퇴 공통으로 묶음 -->
+	<!-- <delete id="deleteCompanyMember" parameterType="string">
 		delete from member where id=#{id}
-	</delete>
+	</delete> -->
 
-	<select id="getAllCompanyList" resultType="companyMemberVO">
-		select 
-		cm.company_id,m.password,m.name,m.address,m.tel,m.email,cm.introduction,
-		cm.company_type,cm.industry,cm.sales,cm.date_of_establishment,cm.num_of_employees
+	<select id="getAllCompanyList" resultType="companyMemberVO" parameterType="pagingBean">	
+		select company_id, name, introduction
+		from(select row_number() over(order by cm.company_id) as rnum, cm.company_id, m.name, cm.introduction
+		from member m , company_member cm
+		where m.id=cm.company_id
+		) where rnum between #{startRowNumber} and #{endRowNumber}		
+	</select>
+	
+	<select id="getAllCompanyListCount" resultType="int">
+		select count(*)
 		from member m , company_member cm
 		where m.id=cm.company_id
 	</select>
+	
 	<select id="detailCompanyInfo" resultType="companyMemberVO" parameterType="memberVO">
 		select
 		cm.company_id,m.password,m.name,m.address,m.tel,m.email,cm.introduction,
@@ -77,6 +85,52 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where j.company_id = cm.company_id
 		and j.company_id=#{companyId}
 	</select>
+	
+	<resultMap type="companyMemberVO" id="companyMemberVORM2">
+		<result column="job_posting_num" property="jobPostingVO.jobPostingNum"/>
+		<result column="career_status" property="jobPostingVO.careerStatus"/>
+		<result column="title" property="jobPostingVO.title"/>
+		<result column="content" property="jobPostingVO.content"/>
+	</resultMap>
+	<select id="getAllJobPostingList" resultMap="companyMemberVORM2">
+		select 
+	cm.company_id, cm.introduction, cm.company_type, cm.industry, cm.sales, cm.date_of_establishment, cm.num_of_employees,
+	j.job_posting_num, j.career_status, j.title, j.content, m.address, m.tel, m.email , m.name
+	from job_posting j , company_member cm, member m
+	where j.company_id = cm.company_id and cm.company_id=m.id
+	</select>
+	<select id="findJobPostingByCatNumList" parameterType="map" resultType="string">
+		select distinct job_posting_num
+from( 
+   select jd.job_posting_num, jd.dev_cat_num, jr.rc_num,je.emp_type_num, jl.loc_num, ja.academic_num
+   from job_dev jd, job_recruitment jr , job_emp je, job_loc jl, job_academic ja
+   where jd.job_posting_num=jr.job_posting_num 
+   and jr.job_posting_num=je.job_posting_num
+   and je.job_posting_num=jl.job_posting_num
+   and jl.job_posting_num=ja.job_posting_num
+ )
+	where dev_cat_num in 
+	<foreach collection="devCatNumList" item="devCatNum" separator="," open="(" close=")">
+		#{devCatNum}
+	</foreach>
+	and rc_num in
+	 <foreach collection="recruitCatNumList" item="recruitCatNum" separator="," open="(" close=")">
+		#{recruitCatNum}
+	</foreach>
+	and emp_type_num in
+	<foreach collection="empTypeCatNumList" item="empTypeCatNum" separator="," open="(" close=")">
+		#{empTypeCatNum}
+	</foreach>
+	and loc_num in
+	<foreach collection="locCatNumList" item="locCatNum" separator="," open="(" close=")">
+		#{locCatNum}
+	</foreach>
+	and academic_num in
+	<foreach collection="acaCatNumList" item="acaCatNum" separator="," open="(" close=")">
+		#{acaCatNum}
+	</foreach>
+	</select>
+	
 </mapper> 		
  
  

@@ -112,7 +112,7 @@ button:hover {
 		$("#checkId").click(function() {
 			$.ajax({
 				type:"get",
-				url:"checkMemberId.do",
+				url:"user-checkMemberId.do",	/* 181018 MIRI 'user-'로 변경 */
 				data:"id="+$("#id").val(),
 				success:function(result) {
 					if(result == "ok") {
@@ -154,11 +154,29 @@ button:hover {
 				$("#idView").text("아이디 중복체크를 해주시기 바랍니다.").css("color", "red").css("font-weight", "bold");
 				return false;
 			}
-		});
-	});
+		});//submit
+		$("#uploadLogoBtn").change(function(){
+			var form = $("#companyRegisterForm")[0];	
+			var formData = new FormData(form);
+			$.ajax({
+				type:"post",
+				url:"user-uploadCompanyLogo.do",
+				data:formData,				
+				enctype: 'multipart/form-data',
+				processData: false,
+		        contentType: false,
+		        cache: false,
+				success:function(path){	
+					$("#normal-picture").attr('src', "/GoodJob/resources/upload/companyLogo/"+path);
+					$("#aaa").append("<input type='hidden' name='picturePath' value='"+path+"'>");	
+					
+				}
+			});//ajax
+			});//change
+	});//ready
 </script>
 
-<form id="companyRegisterForm" action="user-registerCompanyMember.do" method="post">
+<form id="companyRegisterForm" action="user-registerCompanyMember.do" method="post" enctype="multipart/form-data">
 	<div class="container">
 	<div class="col-md-2"></div>
 <div class="col-md-8" style="text-align: center">
@@ -173,7 +191,7 @@ button:hover {
 	아이디 <br><input type="text" id="id" name="id" required="required"style="height:40px; width:400px;">
 	<input type="button" id="checkId" value="중복체크" style="height:40px; width:100px;"><br>
 	<span id="idView"> </span><br><br>
-	비밀번호 <br> <input type="password" id="password" name="password" required="required"style="height:40px; width:500px;"><br>dsa
+	비밀번호 <br> <input type="password" id="password" name="password" required="required"style="height:40px; width:500px;"><br>
 	<span id="passwordView"> </span><br><br>
 	비밀번호 확인 <br> <input type="password" id="checkPass" name="checkPass" required="required"style="height:40px; width:500px;"><br>
 	<span id="checkPassView"> </span><br><br>
@@ -187,6 +205,10 @@ button:hover {
 	매출액  <br><input type="number" name="sales"style="height:40px; width:500px;"><br><br>
 	설립일 <br><input type="text" name="dateOfEstablishment"style="height:40px; width:500px;"><br><br>
 	사원수 <br><input type="number" name="numOfEmployees"style="height:40px; width:500px;"><br><br>
+	회사로고<br><input type="file" id="uploadLogoBtn" required="required" name="uploadLogo">
+	 <a href="##" class="box_photo" data-api_type="layer" data-api_id="basic_photo" >
+	  <img id="normal-picture" src="" border="0" width="100" height="140" class="user_image" /></a>
+	<span id="aaa"></span>
 	</div>	
 	  <div class="col-md-3"></div>
 	  </div>
