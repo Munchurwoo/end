@@ -50,9 +50,10 @@
     <td>${requestScope.nmvo.gender}</td>
   </tr> 
 </table>
-<button class="btn-1" onclick="javascript:location.href='updateNormalMemberForm.do'" style="height:40px; width:150px;">회원정보수정</button>
-<button class="btn-1" onclick="javascript:location.href='registerPortfolioForm.do'" style="height:40px; width:150px;">이력서등록</button>
-<button class="btn-1" onclick="deleteNormalMember()" style="height:40px; width:150px;">회원탈퇴</button>
+<button class="btn-1" onclick="javascript:location.href='updateNormalMemberForm.do'" style="height:40px; width:100px;">회원정보수정</button>
+<button class="btn-1" onclick="javascript:location.href='registerPortfolioForm.do'" style="height:40px; width:100px;">이력서등록</button>
+<button class="btn-1" onclick="javascript:location.href='registerPortfolioForm.do'" style="height:40px; width:100px;">이력서보기</button>
+<button class="btn-1" onclick="deleteNormalMember()" style="height:40px; width:100px;">회원탈퇴</button>
 
 </div>
 <div class="col-sm-3"></div>
