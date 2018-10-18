@@ -5,20 +5,60 @@
 <!-- company_mypage -->
 
 <h3 align="center">${sessionScope.mvo.name }님 마이페이지</h3><br><br>
-
+<div class="container">
+<div class="col-sm-3"></div>
+<div class="col-sm-6" style="text-align: center">
+<table class="table table-hover">
+<tr>
+<th>아이디</th>
+<td>${requestScope.cmvo.companyId }</td>
+</tr>
+<tr>
+<th>이메일</th>
+<td>${requestScope.cmvo.email }</td>
+</tr>
+<tr>
+<th>회사명</th>
+<td>${requestScope.cmvo.name }</td>
+</tr>
+<tr>
+<th>회사주소</th>
+<td>${requestScope.cmvo.address }</td>
+</tr>
+<tr>
+<th>연락처</th>
+<td>${requestScope.cmvo.tel }</td>
+</tr>
+<tr>
+<th>회사소개</th>
+<td>${requestScope.cmvo.introduction }</td>
+</tr>
+<tr>
+<th>기업형태</th>
+<td>${requestScope.cmvo.companyType }</td>
+</tr>
+<tr>
+<th>업종</th>
+<td>${requestScope.cmvo.industry }</td>
+</tr>
+<tr>
+<th>매출액</th>
+<td> ${requestScope.cmvo.sales }</td>
+</tr>
+<tr>
+<th>설립일</th>
+<td>${requestScope.cmvo.dateOfEstablishment }</td>
+</tr>
+<tr>
+<th>사원수</th>
+<td>${requestScope.cmvo.numOfEmployees }</td>
+</tr>
+</table>
+</div>
+<div class="col-sm-3"></div>
+</div>
 <a href="updateCompanyMemberForm.do">회원정보수정</a><br><br>
 <a href="registerJobPostingForm.do">구인등록</a><br><br>
 <a href="deleteCompanyMember.do">회원탈퇴</a><br><br>
 <a href="job_posting_detail.do">구인등록상세보기 임시로만듬-동규</a>
-	아이디   ${requestScope.cmvo.companyId }<br><br>
-	이메일 주소  ${requestScope.cmvo.email }"<br><br>
-	회사 명   ${requestScope.cmvo.name }<br><br>
-	회사 주소  ${requestScope.cmvo.address }<br><br>
-	연락처   ${requestScope.cmvo.tel }<br><br>
-	회사 소개  ${requestScope.cmvo.introduction }<br><br>
-	기업 형태  ${requestScope.cmvo.companyType }<br><br>
-	업종  ${requestScope.cmvo.industry }<br><br>
-	매출액  ${requestScope.cmvo.sales }<br><br>
-	설립일  ${requestScope.cmvo.dateOfEstablishment }<br><br>
-	사원수  ${requestScope.cmvo.numOfEmployees }<br><br>
 

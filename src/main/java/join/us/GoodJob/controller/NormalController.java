@@ -160,17 +160,19 @@ public class NormalController {
 	//나중에 "yosep"->normalId
 	@RequestMapping("normalDetailPortfolio.do")
 	public String normalDetailPortfolio(String normalId, Model model, HttpSession session) {
-		model.addAttribute("devCatList", memberService.getDevCatVOListByNormalId("yosep"));
-		model.addAttribute("empTypeCatList", memberService.getEmpCatVOListByNormalId("yosep"));
-		model.addAttribute("locCatList", memberService.getLocCatVOListByNormalId("yosep"));
-		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNormalId("yosep"));
-		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNormalId("yosep"));
-		model.addAttribute("povo", normalService.normalDetailPortfolio("yosep"));
+		model.addAttribute("devCatList", memberService.getDevCatVOListByNormalId(normalId));
+		model.addAttribute("empTypeCatList", memberService.getEmpCatVOListByNormalId(normalId));
+		model.addAttribute("locCatList", memberService.getLocCatVOListByNormalId(normalId));
+		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNormalId(normalId));
+		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNormalId(normalId));
+		model.addAttribute("povo", normalService.normalDetailPortfolio(normalId));
+		
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		if (mvo != null) {
 			NormalMemberVO nmvo = normalService.selectNormalMember(mvo.getId());
 			model.addAttribute("nmvo", nmvo);
 		}
+
 		return "normal/normal_detail_portfolio.tiles2";
 
 	}
