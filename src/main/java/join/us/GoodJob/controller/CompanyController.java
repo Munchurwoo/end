@@ -1,14 +1,19 @@
 package join.us.GoodJob.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import join.us.GoodJob.model.service.CompanyService;
 import join.us.GoodJob.model.service.MemberService;
@@ -21,6 +26,10 @@ public class CompanyController {
 	CompanyService companyService;
 	@Resource
 	MemberService memberService;
+	
+	/*실제 운영시에 사용
+	private String serverUploadPath;*/	
+	private String workspaceUploadPath;
 
 	@RequestMapping("user-registerCompanyMemberForm.do")
 	public String registerCompanyMemberForm() {
@@ -126,5 +135,24 @@ public class CompanyController {
 	public String companyJobPostingList(String companyId,Model model) {
 		model.addAttribute("jobPostingList", companyService.companyJobPostingList(companyId));
 		return "company/company_job_postingList.tiles2";
+	}
+	@PostMapping("user-uploadCompanyLogo.do")
+	@ResponseBody
+	public String uploadCompanyLogo(MultipartFile uploadLogo,HttpServletRequest request) {
+		workspaceUploadPath="C:\\java-kosta\\framework-workspace2\\goodjob\\src\\main\\webapp\\resources\\upload\\companyLogo\\";
+		System.out.println("업로드경로"+workspaceUploadPath);
+		if(uploadLogo.isEmpty()==false) {
+			System.out.println("파일명"+uploadLogo.getOriginalFilename());
+			File uploadWorkspaceFile=new File(workspaceUploadPath+uploadLogo.getOriginalFilename());
+			try {
+				uploadLogo.transferTo(uploadWorkspaceFile);
+				System.out.println("성공");
+			} catch (IllegalStateException | IOException e) {
+				
+				e.printStackTrace();
+			}
+		}
+		return uploadLogo.getOriginalFilename();
+		
 	}
 }

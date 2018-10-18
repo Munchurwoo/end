@@ -29,8 +29,8 @@ public class NormalController {
 	@Resource
 	MemberService memberService;
 
-	
-	private String serverUploadPath;
+	/*실제 운영시에 사용
+	private String serverUploadPath;*/	
 	private String workspaceUploadPath;
 
 	/**
@@ -138,7 +138,7 @@ public class NormalController {
 		serverUploadPath
 		=request.getSession().getServletContext().getRealPath("/resources/upload/");*/
 		//개발시에는 워크스페이스 업로드 경로로 준다 
-		workspaceUploadPath="C:\\java-kosta\\framework-workspace2\\goodjob\\src\\main\\webapp\\resources\\upload\\";
+		workspaceUploadPath="C:\\java-kosta\\framework-workspace2\\goodjob\\src\\main\\webapp\\resources\\upload\\memberPicture\\";
 		//System.out.println("서버 업로드 경로:"+serverUploadPath);
 		System.out.println("워크스페이스 업로드 경로:"+workspaceUploadPath);
 		System.out.println(uploadPicture);

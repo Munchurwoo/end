@@ -38,7 +38,7 @@
 		        contentType: false,
 		        cache: false,
 				success:function(path){
-					$("#normal-picture").attr('src', "/GoodJob/resources/upload/"+path);
+					$("#normal-picture").attr('src', "/GoodJob/resources/upload/memberPicture/"+path);
 					//$("#pictureInput").val(path);
 					alert(path);
 					$("#aaa").append("<input type='hidden' name='picturePath' value='"+path+"'>");	
