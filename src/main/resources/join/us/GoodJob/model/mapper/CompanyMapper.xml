@@ -5,8 +5,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="join.us.GoodJob.model.mapper.CompanyMapper">
 	<insert id="registerCompanyMember" parameterType="companyMemberVO">
 		insert into
-		company_member(company_id,introduction,company_type,industry,sales,date_of_establishment,num_of_employees)
-		values(#{id}, #{introduction}, #{companyType}, #{industry}, #{sales}, #{dateOfEstablishment}, #{numOfEmployees})
+		company_member(company_id,introduction,company_type,industry,sales,date_of_establishment,num_of_employees,picture_path)
+		values(#{id}, #{introduction}, #{companyType}, #{industry}, #{sales}, #{dateOfEstablishment}, #{numOfEmployees}, #{picturePath})
 	</insert>
 	<insert id="registerMember" parameterType="companyMemberVO">
 		insert into
