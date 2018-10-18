@@ -16,6 +16,9 @@ public interface MemberService {
 	//개인, 기업 아이디 중복 검사
 	int checkMemberId(String id);
 	
+	//개인, 기업 회원 탈퇴
+	void deleteMember(String normalId);
+	
 	//모집직군 분류 리스트 받아오기
 	List<RecruitCatVO> getRecruitCatVOList();
 

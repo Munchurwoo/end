@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <h3>${requestScope.cmvo.name} 기업의 상세정보</h3>
-<div class="comtainer">
+<div class="container">
 	<table class="table table-bordered">
 		<thead>
 			<tr>

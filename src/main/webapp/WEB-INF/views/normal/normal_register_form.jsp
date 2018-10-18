@@ -117,7 +117,7 @@ button:hover {
 		$("#checkId").click(function() {
 			$.ajax({
 				type:"get",
-				url:"checkMemberId.do",
+				url:"user-checkMemberId.do",	/* 181018 MIRI 'user-'로 변경 */
 				data:"id="+$("#id").val(),
 				success:function(result) {
 					if(result == "ok") {
@@ -187,7 +187,6 @@ button:hover {
 	주소  <br><input type="text" name="address" required="required" style="height:40px; width:500px;"><br><br>
 	연락처  <br><input type="text" name="tel" required="required" style="height:40px; width:500px;"><br><br>
 	경력사항 <br> <input type="text" name="careerStatus" required="required" style="height:40px; width:500px;"><br><br>
-	사진경로 <br> <input type="text" name="picturePath" required="required"><br><br>
 	성별  <br>&nbsp;<input type="radio" name="gender" value="male" required="required">남자 
 			    <input type="radio" name="gender" value="female" required="required">여자 
 	<br><br>

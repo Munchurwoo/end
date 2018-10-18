@@ -32,6 +32,9 @@ drop sequence rc_num_seq;
 drop sequence qa_num_seq;
 drop sequence portfolio_file_seq;
 
+		
+
+
 -- 회원 ( ERD에서 기업/개인 구분하기위해 type 컬럼을 뒀으나 명령어라 사용불가함 따라서 member_type으로 변경
 create table member(
    id varchar2(100) primary key,
@@ -130,6 +133,7 @@ create table company_member(
    sales number default 0,
    date_of_establishment varchar2(100) default null,
    num_of_employees number default 0,
+   picture_path varchar2(100) not null,
    constraint fk_member_company_member foreign key(company_id) references member(id) on delete cascade
 );
 
@@ -152,7 +156,7 @@ create sequence job_posting_num_seq start with 1001;
 
 insert into JOB_POSTING(job_posting_num, company_id, career_status, title, content) values(job_posting_num_seq.nextval, 'NHNuser', '경력 3년', 'NHN엔터테인먼트에서 Java 신입, 프리랜서 개발자 모집', 'Java 어플리케이션 개발 경험자, WAS 이해도가 높은 경험자 우대합니다.');
 insert into JOB_POSTING(job_posting_num, company_id, career_status, title, content) values(job_posting_num_seq.nextval, 'Tmaxuser', '경력 무관', '티맥스소프트 DBA 2018 하반기 공개채용', 'MS-SQL 서버 모니터링 및 트러블 슈팅경험 있으신 분, OLTP 업무 경험 있으신 분');
-
+insert into JOB_POSTING(job_posting_num, company_id, career_status, title, content) values(job_posting_num_seq.nextval, 'NHNuser', '경력 3년', 'NHN엔터테인먼트에서 Java 신입, 프리랜서 개발자 모집합니다  ', 'Java 어플리케이션 개발 경험자ㅎㅎㅎㅎㅎ, WAS 이해도가 높은 경험자 우대합니다테스트입니당.');
 select * from job_posting;
 ---------------------------------------------------------------------
 
@@ -528,5 +532,74 @@ where dev_cat_num in (201,202) and rc_num in(101,106) and emp_type_num in (301,3
 -- 모집직군에서 웹프로그래머, DBA/데이터베이스 선택 
 -- 고용형태에서 인턴, 신입 선택
 
+select job_posting_num
+from( 
+    select lc.loc_name,jl.loc_num,jl.job_posting_num
+    from location_category lc , job_loc jl
+    where jl.job_posting_num = lc.job_posting_num
+    and 
+)
+where academic_num='401' 
+--기업 전체보기 테스트 데이터
+insert into MEMBER(id, password, email, name, address, tel, member_type) values('Tmaxuser2', '123', 'Tmaxuser@tmax.com', 'TmaxSoft', '경기도 성남시 분당구 황새울로 258번길 29, BS타워 8-9층 티맥스소프트', '031-8018-1000', 3);
+insert into MEMBER(id, password, email, name, address, tel, member_type) values('Tmaxuser3', '123', 'Tmaxuser@tmax.com', 'TmaxSoft', '경기도 성남시 분당구 황새울로 258번길 29, BS타워 8-9층 티맥스소프트', '031-8018-1000', 3);
+insert into MEMBER(id, password, email, name, address, tel, member_type) values('Tmaxuser4', '123', 'Tmaxuser@tmax.com', 'TmaxSoft', '경기도 성남시 분당구 황새울로 258번길 29, BS타워 8-9층 티맥스소프트', '031-8018-1000', 3);
+insert into MEMBER(id, password, email, name, address, tel, member_type) values('Tmaxuser5', '123', 'Tmaxuser@tmax.com', 'TmaxSoft', '경기도 성남시 분당구 황새울로 258번길 29, BS타워 8-9층 티맥스소프트', '031-8018-1000', 3);
+insert into MEMBER(id, password, email, name, address, tel, member_type) values('Tmaxuser6', '123', 'Tmaxuser@tmax.com', 'TmaxSoft', '경기도 성남시 분당구 황새울로 258번길 29, BS타워 8-9층 티맥스소프트', '031-8018-1000', 3);
+insert into MEMBER(id, password, email, name, address, tel, member_type) values('Tmaxuser7', '123', 'Tmaxuser@tmax.com', 'TmaxSoft', '경기도 성남시 분당구 황새울로 258번길 29, BS타워 8-9층 티맥스소프트', '031-8018-1000', 3);
+insert into MEMBER(id, password, email, name, address, tel, member_type) values('Tmaxuser8', '123', 'Tmaxuser@tmax.com', 'TmaxSoft', '경기도 성남시 분당구 황새울로 258번길 29, BS타워 8-9층 티맥스소프트', '031-8018-1000', 3);
+
+insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees) values('Tmaxuser2', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358);
+insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees) values('Tmaxuser3', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358);
+insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees) values('Tmaxuser4', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358);
+insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees) values('Tmaxuser5', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358);
+insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees) values('Tmaxuser6', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358);
+insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees) values('Tmaxuser7', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358);
+insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees) values('Tmaxuser8', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358);
+
+-- 기업 전체 보기 rnum
+select row_number() over(order by cm.company_id) as rnum, cm.company_id, m.name, cm.introduction
+from member m , company_member cm
+where m.id=cm.company_id
+
+select company_id, name, introduction
+from(select row_number() over(order by cm.company_id) as rnum, cm.company_id, m.name, cm.introduction
+from member m , company_member cm
+where m.id=cm.company_id
+) where rnum between 3 and 6
+
+--기업 전체 보기 게시물 수
+select count(*)
+from member m , company_member cm
+where m.id=cm.company_id
 
 
+select job_posting_num
+from( 
+   select jd.job_posting_num, jd.dev_cat_num, jr.rc_num, je.emp_type_num, jl.loc_num, ja.academic_num
+   from job_dev jd, job_recruitment jr, job_emp je, job_loc jl, job_academic ja
+   where jd.job_posting_num=jr.job_posting_num 
+   and jr.job_posting_num=je.job_posting_num 
+   and je.job_posting_num=jl.job_posting_num
+   and jl.job_posting_num=ja.job_posting_num
+)
+where dev_cat_num in() 
+and rc_num in()  
+and emp_type_num in() 
+and loc_num in()
+and academic_num in()
+-- 개발분야에서 java 선택  -- 모집직군에서 웹프로그래머선택 --고용형태에서 프리랜서 선택
+
+
+
+
+select job_posting_num
+from( 
+   select jd.job_posting_num, jd.dev_cat_num, jr.rc_num, je.emp_type_num
+   from job_dev jd, job_recruitment jr, job_emp je
+   where jd.job_posting_num=jr.job_posting_num 
+   and jr.job_posting_num=je.job_posting_num 
+   
+)
+where dev_cat_num in(201,227) 
+and rc_num in(101,106)  

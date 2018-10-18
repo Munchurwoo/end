@@ -1,20 +1,17 @@
 package join.us.GoodJob;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import join.us.GoodJob.model.mapper.CompanyMapper;
 import join.us.GoodJob.model.mapper.ManagerMapper;
 import join.us.GoodJob.model.mapper.MemberMapper;
 import join.us.GoodJob.model.mapper.NormalMapper;
-import join.us.GoodJob.model.vo.PortfolioVO;
+import join.us.GoodJob.model.service.PagingBean;
+import join.us.GoodJob.model.vo.MemberVO;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring-model.xml"})
 public class YosepUnitTest {
@@ -25,10 +22,12 @@ public class YosepUnitTest {
 	MemberMapper memberMapper;
 	@Autowired
 	ManagerMapper managerMapper;	
+	@Autowired
+	CompanyMapper companyMapper;
 	
 	@Test
 	public void test() {
-		 PortfolioVO portfolioVO = new PortfolioVO();
+		/* PortfolioVO portfolioVO = new PortfolioVO();
 		 portfolioVO.setNormalId("miri");
 		 portfolioVO.setTitle("포폴제목");
 		 portfolioVO.setContent("포폴내용");
@@ -40,14 +39,14 @@ public class YosepUnitTest {
 		 List<String> acaCatNumList = new ArrayList<String>();
 		 acaCatNumList.add("401");
 		 acaCatNumList.add("402");
-		 portfolioVO.setAcaCatNumList(acaCatNumList);
+		 portfolioVO.setAcaCatNumList(acaCatNumList);*/
 		
 		//포트폴리오 등록(PORTFOLIO)
 		//normalMapper.insertPortfolio(portfolioVO);
-		
+		/*
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("normalId", portfolioVO.getNormalId());
-		
+		*/
 		//포트폴리오 파일등록(PORTFOLIO_FILE)
 		/*List<String> fileList = portfolioVO.getFileList();
 		for(String filePath : fileList) {
@@ -56,10 +55,18 @@ public class YosepUnitTest {
 		}*/
 		
 		//포트폴리오 학력 분류 등록(PORTFOLIO_ACADEMIC)
-		for(String academicNum :portfolioVO.getAcaCatNumList()) {
+	/*	for(String academicNum :portfolioVO.getAcaCatNumList()) {
 			map.put("academicNum", academicNum);
 			normalMapper.insertPortfolioAcademic(map);
-		}
+		}*/
+		/*int totalCount = companyMapper.getAllCompanyListCount();
+		System.out.println("totalCount:"+totalCount);
+		PagingBean pagingBean = new PagingBean(totalCount,3);
+		
+		for(MemberVO memberVO : companyMapper.getAllCompanyList(pagingBean)) {
+			System.out.println(memberVO);
+		}*/
+		
 		
 	}
 }
