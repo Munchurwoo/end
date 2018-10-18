@@ -256,7 +256,7 @@ public class NormalController {
 	public String deletePortfolio(String id) {
 		normalService.deletePortfolio(id);
 		return "redirect:home.do";
-
+	}
 	@RequestMapping("goInterviewApply.do")
 	public String goInterviewApply() {
 		return "normal/normal_go_interview_apply.tiles";

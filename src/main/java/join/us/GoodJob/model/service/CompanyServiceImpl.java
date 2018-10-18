@@ -1,6 +1,7 @@
 package join.us.GoodJob.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -60,8 +61,11 @@ public class CompanyServiceImpl implements CompanyService {
 		}else { //페이지 번호 안주면 1페이지
 			pagingBean = new PagingBean(totalPostCount);
 		}
-		List<MemberVO> cmvoList= companyMapper.getAllCompanyList(pagingBean);		
-		return new PostListVO(pagingBean, cmvoList);
+		List<MemberVO> cmvoList= companyMapper.getAllCompanyList(pagingBean);				
+		PostListVO postListVO = new PostListVO();
+		postListVO.setPagingBean(pagingBean);
+		postListVO.setCmvoList(cmvoList);		
+		return postListVO;
 	}
 
 	@Override
@@ -85,4 +89,9 @@ public class CompanyServiceImpl implements CompanyService {
 		return companyMapper.getAllJobPostingList();
 	}
 
+	@Override
+	public List<String> findJobPostingByCatNumList(Map map) {
+		return companyMapper.findJobPostingByCatNumList(map);
+	}
+	
 }
