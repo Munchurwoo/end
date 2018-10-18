@@ -34,6 +34,9 @@ public interface CompanyMapper {
 	//기업 마이페이지 상세보기
 	CompanyMemberVO myPageCompanyMember(String companyId);
 	
+	//채용정보 클릭 후 전체 채용공고 조회하기
+	List<CompanyMemberVO> getAllJobPostingList();
+	
 	//이름으로 기업검색 리스트 개수 구하기(COMPANY_MEMBER,MEMBER)
 	int getSomeCompanyMemberCount(String companyName);
 	//이름으로 기업검색 리스트 보기(COMPANY_MEMBER,MEMBER)

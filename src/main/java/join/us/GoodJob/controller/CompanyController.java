@@ -98,9 +98,9 @@ public class CompanyController {
 	}
 
 	@RequestMapping("user-companyInfo.do")
-	public String allConmapnyInfo(Model model) {
-		List<MemberVO> cmvoList=companyService.getAllCompanyList();
-		model.addAttribute("cmvoList", cmvoList);
+	public String allConmapnyInfo(Model model, String pageNum) {
+		PostListVO postListVO = companyService.getAllCompanyList(pageNum);
+		model.addAttribute("postListVO", postListVO);		
 		return "company/company_info.tiles2";
 	}
 
