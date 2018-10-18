@@ -101,13 +101,13 @@ public class CompanyController {
 	public String allConmapnyInfo(Model model) {
 		List<MemberVO> cmvoList=companyService.getAllCompanyList();
 		model.addAttribute("cmvoList", cmvoList);
-		return "company/company_info.tiles";
+		return "company/company_info.tiles2";
 	}
 
 	@RequestMapping("user-detailCompanyInfo.do")
 	public String detailCompanyInfo(String companyId,Model model) {
 		model.addAttribute("cmvo", companyService.detailCompanyInfo(companyId));
-		return "company/company_detailInfo.tiles";
+		return "company/company_detail_Info.tiles2";
 	}
 
 	
@@ -125,6 +125,6 @@ public class CompanyController {
 	@RequestMapping("companyJobPostingList.do")
 	public String companyJobPostingList(String companyId,Model model) {
 		model.addAttribute("jobPostingList", companyService.companyJobPostingList(companyId));
-		return "company/company_job_postingList.tiles";
+		return "company/company_job_postingList.tiles2";
 	}
 }

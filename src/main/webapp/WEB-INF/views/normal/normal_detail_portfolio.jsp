@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<form action="normalDetailPortfolio.do">
 제목 :${povo.title }<br>
 이름 : ${nmvo.name }<br>
 이메일 : ${nmvo.email }<br>
@@ -22,4 +21,3 @@ ${locCatList.locName }
 학력 : <c:forEach items="${acaCatList }" var="acaCatList">
 ${acaCatList.academicName }
 </c:forEach><br><br>
-</form>
