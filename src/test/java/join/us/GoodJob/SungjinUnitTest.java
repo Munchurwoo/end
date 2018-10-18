@@ -24,8 +24,7 @@ public class SungjinUnitTest {
 	CompanyMapper companyMapper;
 	@Test
 	public void test() {
-		String jobPostingNum="1001";
-		//System.out.println(companyMapper.jobPostringDetail(jobPostingNum));
-		System.out.println(companyService.jobPostingDetail(jobPostingNum));
+		
+		System.out.println(companyMapper.getAllJobPostingList());
 	}
 }

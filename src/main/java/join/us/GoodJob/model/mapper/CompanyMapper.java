@@ -33,7 +33,8 @@ public interface CompanyMapper {
 	//기업 마이페이지 상세보기
 	CompanyMemberVO myPageCompanyMember(String companyId);
 	
-	
+	//채용정보 클릭 후 전체 채용공고 조회하기
+	List<CompanyMemberVO> getAllJobPostingList();
 	
 	
 	

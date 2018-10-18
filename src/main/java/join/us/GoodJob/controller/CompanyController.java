@@ -127,4 +127,24 @@ public class CompanyController {
 		model.addAttribute("jobPostingList", companyService.companyJobPostingList(companyId));
 		return "company/company_job_postingList.tiles2";
 	}
+	@RequestMapping("user-getAllJobPostingList.do")
+	public String getAllJobPostingList(Model model) {
+		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
+		model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));
+		model.addAttribute("empTypeCatList", memberService.getEmpTypeCatVOList());
+		model.addAttribute("locCatList", memberService.getLocCatVOList());
+		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
+		model.addAttribute("jobPostingList", companyService.getAllJobPostingList());
+		return "company/company_get_all_jobPosting_list.company_search_tiles";
+	}
+	@RequestMapping("user-company_detail_search_list.do")
+	public String companyDetailSearchList(Model model) {
+		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
+		model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));
+		model.addAttribute("empTypeCatList", memberService.getEmpTypeCatVOList());
+		model.addAttribute("locCatList", memberService.getLocCatVOList());
+		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
+		model.addAttribute("jobPostingList", companyService.getAllJobPostingList());
+		return "company/company_detail_search_list.company_search_tiles";
+	}
 }

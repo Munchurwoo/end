@@ -29,6 +29,8 @@ public interface CompanyService {
 	//인재검색 서비스 
 	NormalMemberVO memberSearch();
 	
+	//채용정보 클릭 후 전체 채용공고 조회하기
+	List<CompanyMemberVO> getAllJobPostingList();
 
 	// 기업정보 전체조회
 	List<MemberVO> getAllCompanyList();

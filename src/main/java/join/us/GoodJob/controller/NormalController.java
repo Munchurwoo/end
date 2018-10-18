@@ -194,4 +194,8 @@ public class NormalController {
 		}
 		return "member/portfolio_all_list.tiles2";
 	}
+	@RequestMapping("goInterviewApply.do")
+	public String goInterviewApply() {
+		return "normal/normal_go_interview_apply.tiles";
+	}
 }

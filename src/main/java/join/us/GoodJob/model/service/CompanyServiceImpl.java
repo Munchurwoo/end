@@ -70,4 +70,10 @@ public class CompanyServiceImpl implements CompanyService {
 		return companyMapper.companyJobPostingList(companyId);
 	}
 
+	@Override
+	public List<CompanyMemberVO> getAllJobPostingList() {
+		
+		return companyMapper.getAllJobPostingList();
+	}
+
 }
