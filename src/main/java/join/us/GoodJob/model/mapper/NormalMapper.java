@@ -51,6 +51,8 @@ public interface NormalMapper {
 	//개인 id, name 조회
 	List<NormalMemberVO> idName();
 	PortfolioVO portFolioVOById(String nomalId);
+	//일반 맴버 모두 출력 
+	List<NormalMemberVO> AllFindNomarMember();
 	
 	//질의응답 질문등록
 }

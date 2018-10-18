@@ -177,17 +177,14 @@ public class NormalController {
 
 	}
 
-	// 인재검색 header 클릭시 이동
+	// 인재검색 header 클릭시 이동	
 	@RequestMapping("user-portfolioAllList.do")
 	public String portfolioAllList(Model model) {
-		// 인재검색 list 출력
-		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
-		model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));
-		model.addAttribute("empTypeCatList", memberService.getEmpTypeCatVOList());
-		model.addAttribute("locCatList", memberService.getLocCatVOList());
-		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
-
-		// String normalName = memberService.get
+		//normal 맴버 모두 조회 
+//		List<NormalMemberVO> list = normalService.AllFindNomarMember();
+		model.addAttribute("devCatFindId", memberService.getDevCatVOListByNormalId("yosep"));
+		model.addAttribute("povo", normalService.normalDetailPortfolio("yosep"));
+		/*//MEMBER 와 NORMALMEMBER 조인해서 ID값 얻어오기
 		List<NormalMemberVO> list = normalService.idName();
 		// 포트폴리오 list
 		List<PortfolioVO> plist = new ArrayList<PortfolioVO>();
@@ -195,7 +192,15 @@ public class NormalController {
 		ArrayList<String> id = new ArrayList<String>();
 		for (int i = 0; i < list.size(); i++) {
 			plist.add(normalService.portFolioVOById(list.get(i).getId()));
-		}
+		}*/
+		// 인재검색 list 출력
+		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
+		model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));
+		model.addAttribute("empTypeCatList", memberService.getEmpTypeCatVOList());
+		model.addAttribute("locCatList", memberService.getLocCatVOList());
+		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
+		
+	
 		return "member/portfolio_all_list.tiles2";
 	}
 }

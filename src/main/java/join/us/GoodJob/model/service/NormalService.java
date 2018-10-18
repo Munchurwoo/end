@@ -29,7 +29,7 @@ public interface NormalService {
 	 * @return
 	 */
 	//개인, 개인회원  (id,name) 불러오기
-	List<NormalMemberVO> idName();
+	List<NormalMemberVO> AllFindNomarMember();
 	
 	//개인회원  id 를 활용하여 포트폴리오 모든 정보 출력 
 	PortfolioVO portFolioVOById(String nomalId); 

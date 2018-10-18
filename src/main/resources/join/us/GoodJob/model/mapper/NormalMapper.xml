@@ -41,49 +41,61 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from member
 		where id=#{id}
 	</delete>
-	
-	<select id="myPageNormalMember" resultType="normalMemberVO" parameterType="memberVO">
-		select m.id,m.password,m.email,m.name,m.tel,m.address,m.member_type,nm.normal_id,nm.gender,nm.career_status
+
+	<select id="myPageNormalMember" resultType="normalMemberVO"
+		parameterType="memberVO">
+		select
+		m.id,m.password,m.email,m.name,m.tel,m.address,m.member_type,nm.normal_id,nm.gender,nm.career_status
 		from member m,normal_member nm
 		where m.id=nm.normal_id
 		and m.id=#{id}
 	</select>
-	
+
 	<insert id="insertPortfolio" parameterType="portfolioVO">
-		insert into portfolio(normal_id, title, content, picture_path)
-		values(#{normalId}, #{title}, #{content}, #{picturePath})
+		insert into
+		portfolio(normal_id, title, content, picture_path)
+		values(#{normalId},
+		#{title}, #{content}, #{picturePath})
 	</insert>
-	
+
 	<insert id="insertPortfolioFile" parameterType="map">
-		insert into portfolio_file(file_num, normal_id, file_path)
+		insert into
+		portfolio_file(file_num, normal_id, file_path)
 		values(portfolio_file_seq.nextval, #{normalId}, #{filePath})
 	</insert>
-	
+
 	<insert id="insertPortfolioAcademic" parameterType="map">
-		insert into portfolio_academic(normal_id, academic_num)
-		values(#{normalId}, #{academicNum})
+		insert into
+		portfolio_academic(normal_id, academic_num)
+		values(#{normalId},
+		#{academicNum})
 	</insert>
-	
+
 	<insert id="insertPortfolioDev" parameterType="map">
-		insert into portfolio_dev(normal_id, dev_cat_num)
+		insert into
+		portfolio_dev(normal_id, dev_cat_num)
 		values(#{normalId}, #{devCatNum})
 	</insert>
 
 	<insert id="insertPortfolioEmp" parameterType="map">
-		insert into portfolio_emp(normal_id, emp_type_num)
-		values(#{normalId}, #{empTypeNum})
+		insert into
+		portfolio_emp(normal_id, emp_type_num)
+		values(#{normalId},
+		#{empTypeNum})
 	</insert>
-	
+
 	<insert id="insertPortfolioLoc" parameterType="map">
-		insert into portfolio_loc(normal_id, loc_num)
+		insert into
+		portfolio_loc(normal_id, loc_num)
 		values(#{normalId}, #{locNum})
 	</insert>
-	
+
 	<insert id="insertPortfolioRecuitment" parameterType="map">
-		insert into portfolio_recruitment(normal_id, rc_num)
+		insert into
+		portfolio_recruitment(normal_id, rc_num)
 		values(#{normalId}, #{rcNum})
 	</insert>
-	
+
 	<select id="normalDetailPortfolio" resultType="portfolioVO"
 		parameterType="string">
 		select title,content
@@ -94,17 +106,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getAllPortfolioList" resultType="portfolioVO">
 
 	</select>
-	
-	<select id="idName" resultType="normalMemberVO">
-		select m.id , m.name
+
+	<select id="AllFindNomarMember" resultType="normalMemberVO">
+		select m.id,m.password,m.email,m.name,m.tel,m.address,m.member_type,nm.normal_id,nm.gender,nm.career_status
 		from member m, normal_member nm
 		where m.id=nm.normal_id
 	</select>
-	
-	<select id="portFolioVOById" resultType="PortfolioVO" parameterType="String" >
-		select * 
-		from portfolio
-		where id=${id}
-	</select>
-	
+
 </mapper>

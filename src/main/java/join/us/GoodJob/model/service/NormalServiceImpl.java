@@ -93,8 +93,8 @@ public class NormalServiceImpl implements NormalService {
 	}
 
 	@Override
-	public List<NormalMemberVO> idName() {
-		return normalMapper.idName();
+	public List<NormalMemberVO> AllFindNomarMember() {
+		return normalMapper.AllFindNomarMember();
 	}
 
 	@Override

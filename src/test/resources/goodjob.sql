@@ -93,6 +93,9 @@ create table portfolio(
    constraint fk_member_portfolio foreign key(normal_id) references normal_member(normal_id) on delete cascade
 );
 
+insert into PORTFOLIO(normal_id, title, content, picture_path) values('qqqq', 'ERP 분야의 선도 주자가 되겠습니다..', '항상 배움의 자세로 새로운 분야에 도전하고 있으며, 매사에 도전하고 노력하는 인재입니다.', '최요셉.png');
+insert into PORTFOLIO(normal_id, title, content, picture_path) values('miri', '퍼블리셔 선도하고 있습니다..', '항상 배움의 자세로 새로운 분야에 도전하고 있으며, 매사에 도전하고 노력하는 인재입니다.', '최요셉.png');
+insert into PORTFOLIO(normal_id, title, content, picture_path) values('hsj', 'Coder가 아닌 Developer가 되겠습니다.', '항상 배움의 자세로 새로운 분야에 도전하고 있으며, 매사에 도전하고 노력하는 인재입니다.', '최요셉.png');
 insert into PORTFOLIO(normal_id, title, content, picture_path) values('yosep', 'Coder가 아닌 Developer가 되겠습니다.', '항상 배움의 자세로 새로운 분야에 도전하고 있으며, 매사에 도전하고 노력하는 인재입니다.', '최요셉.png');
 insert into PORTFOLIO(normal_id, title, content, picture_path) values('MCW', '인재를 싸게 팝니다.', '주변 사람과 소통하며 혁신을 이뤄내는 사원이 되겠습니다.', '문철우.png');
 
@@ -111,6 +114,9 @@ create sequence portfolio_file_seq start with 601;
 insert into PORTFOLIO_FILE(file_num, normal_id, file_path) values(portfolio_file_seq.nextval, 'yosep', '물품공유플랫폼.pdf');
 insert into PORTFOLIO_FILE(file_num, normal_id, file_path) values(portfolio_file_seq.nextval, 'yosep', '소셜다이닝(sharebob).pptx');
 insert into PORTFOLIO_FILE(file_num, normal_id, file_path) values(portfolio_file_seq.nextval, 'MCW', 'GoodJob.pdf');
+insert into PORTFOLIO_FILE(file_num, normal_id, file_path) values(portfolio_file_seq.nextval, 'qqqq', 'GoodJob.pdf');
+insert into PORTFOLIO_FILE(file_num, normal_id, file_path) values(portfolio_file_seq.nextval, 'miri', 'GoodJob.pdf');
+insert into PORTFOLIO_FILE(file_num, normal_id, file_path) values(portfolio_file_seq.nextval, 'hsj', 'GoodJob.pdf');
 
 select * from portfolio_file;
 ---------------------------------------------------------------------
@@ -251,6 +257,10 @@ insert into PORTFOLIO_RECRUITMENT(normal_id, rc_num) values('yosep', 101);
 insert into PORTFOLIO_RECRUITMENT(normal_id, rc_num) values('yosep', 106);
 insert into PORTFOLIO_RECRUITMENT(normal_id, rc_num) values('MCW', 101);
 insert into PORTFOLIO_RECRUITMENT(normal_id, rc_num) values('MCW', 108);
+insert into PORTFOLIO_RECRUITMENT(normal_id, rc_num) values('qqqq', 107);
+insert into PORTFOLIO_RECRUITMENT(normal_id, rc_num) values('miri', 103);
+insert into PORTFOLIO_RECRUITMENT(normal_id, rc_num) values('hsj', 104);
+
 
 select * from portfolio_recruitment;
 ---------------------------------------------------------------------
@@ -437,7 +447,11 @@ insert into PORTFOLIO_DEV(normal_id, dev_cat_num) values('yosep', 202);
 insert into PORTFOLIO_DEV(normal_id, dev_cat_num) values('yosep', 203);
 insert into PORTFOLIO_DEV(normal_id, dev_cat_num) values('yosep', 227);
 insert into PORTFOLIO_DEV(normal_id, dev_cat_num) values('MCW', 201);
-insert into PORTFOLIO_DEV(normal_id, dev_cat_num) values('MCW', 234);
+insert into PORTFOLIO_DEV(normal_id, dev_cat_num) values('MCW', 204);
+insert into PORTFOLIO_DEV(normal_id, dev_cat_num) values('qqqq', 211);
+insert into PORTFOLIO_DEV(normal_id, dev_cat_num) values('qqqq', 212);
+insert into PORTFOLIO_DEV(normal_id, dev_cat_num) values('miri', 205);
+insert into PORTFOLIO_DEV(normal_id, dev_cat_num) values('hsj', 207);
 
 select * from portfolio_dev;
 ----------------------------------------------------------------------
