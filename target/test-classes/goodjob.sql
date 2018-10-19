@@ -352,7 +352,6 @@ insert into PORTFOLIO_LOC(normal_id, loc_num) values('yosep', 503);
 insert into PORTFOLIO_LOC(normal_id, loc_num) values('MCW', 502);
 insert into PORTFOLIO_LOC(normal_id, loc_num) values('MCW', 503);
 
-select * from portfolio_loc;
 -----------------------------------------------------------------------
 
 -- 개발분야와 PK 시퀀스
