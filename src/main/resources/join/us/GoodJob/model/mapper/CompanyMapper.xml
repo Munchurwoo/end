@@ -99,16 +99,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	from job_posting j , company_member cm, member m
 	where j.company_id = cm.company_id and cm.company_id=m.id
 	</select>
+	<select id="getAllJobPostingListByJobPostingNum" resultMap="companyMemberVORM2">
+		select 
+	cm.company_id, cm.introduction, cm.company_type, cm.industry, cm.sales, cm.date_of_establishment, cm.num_of_employees,
+	j.job_posting_num, j.career_status, j.title, j.content, m.address, m.tel, m.email , m.name
+	from job_posting j , company_member cm, member m
+	where j.company_id = cm.company_id and cm.company_id=m.id and j.job_posting_num=#{value}
+	</select>
 	<select id="findJobPostingByCatNumList" parameterType="map" resultType="string">
-		select distinct job_posting_num
-from( 
-   select jd.job_posting_num, jd.dev_cat_num, jr.rc_num,je.emp_type_num, jl.loc_num, ja.academic_num
-   from job_dev jd, job_recruitment jr , job_emp je, job_loc jl, job_academic ja
-   where jd.job_posting_num=jr.job_posting_num 
-   and jr.job_posting_num=je.job_posting_num
-   and je.job_posting_num=jl.job_posting_num
-   and jl.job_posting_num=ja.job_posting_num
- )
+	select distinct job_posting_num
+		from( 
+		   select jd.job_posting_num, jd.dev_cat_num, jr.rc_num,je.emp_type_num, jl.loc_num, ja.academic_num
+		   from job_dev jd, job_recruitment jr , job_emp je, job_loc jl, job_academic ja
+		   where jd.job_posting_num=jr.job_posting_num 
+		   and jr.job_posting_num=je.job_posting_num
+		   and je.job_posting_num=jl.job_posting_num
+		   and jl.job_posting_num=ja.job_posting_num
+		 )
 	where dev_cat_num in 
 	<foreach collection="devCatNumList" item="devCatNum" separator="," open="(" close=")">
 		#{devCatNum}
@@ -131,6 +138,35 @@ from(
 	</foreach>
 	</select>
 	
+	<!-- 구인공고등록 -->
+	<insert id="registerJobPosting" parameterType="jobPostingVO" >
+		insert into JOB_POSTING(job_posting_num, company_id, career_status, title, content) 
+		values(job_posting_num_seq.nextval, #{companyId}, #{careerStatus}, #{title}, #{content})
+	</insert>
+	<insert id="registerJobPostingAcademic" parameterType="map">
+		insert into portfolio_academic(company_id, academic_num)
+		values(#{companyId}, #{academicNum})
+	</insert>
+	
+	<insert id="registerJobPostingDev" parameterType="map">
+		insert into portfolio_dev(company_id, dev_cat_num)
+		values(#{companyId}, #{devCatNum})
+	</insert>
+
+	<insert id="registerJobPostingEmp" parameterType="map">
+		insert into job_emp(company_id, emp_type_num)
+		values(#{companyId}, #{empTypeNum})
+	</insert>
+	
+	<insert id="registerJobPostingLoc" parameterType="map">
+		insert into job_loc(company_id, loc_num)
+		values(#{companyId}, #{locNum})
+	</insert>
+	
+	<insert id="registerJobPostingRecuitment" parameterType="map">
+		insert into job_recruitment(company_id, rc_num)
+		values(#{companyId}, #{rcNum})
+	</insert>
 </mapper> 		
  
  

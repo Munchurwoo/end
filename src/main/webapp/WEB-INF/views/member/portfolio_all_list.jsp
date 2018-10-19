@@ -124,14 +124,15 @@
 			<div class="col-lg-12">
 				<div class="row">
 					<c:forEach items="${list}" var="list" varStatus="status">
-						<!--  -->
-						<div class="col-lg-3">
+													<!--  -->
+					 	<div class="col-lg-3">
 							<div class="box">
 								<div class="box-gray aligncenter">
 									<div class="icon">
 										<i class="fa fa-desktop fa-3x"></i>
 									</div>
 									<h4>${list.name }</h4>
+										
 									<p>	${povo[status.index].content}
 </p>
 								</div>

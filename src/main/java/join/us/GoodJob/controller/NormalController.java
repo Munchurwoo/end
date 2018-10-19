@@ -261,17 +261,17 @@ public class NormalController {
 	@RequestMapping("user-updatePortfolio.do")
 	public String updatePortfolio(String id, HttpSession session, Model model) {
 		model.addAttribute("devCatList", memberService.getDevCatVOListByNormalId(id));
-		model.addAttribute("empTypeCatList", memberService.getEmpCatVOListByNormalId("miri"));
-		model.addAttribute("locCatList", memberService.getLocCatVOListByNormalId("miri"));
-		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNormalId("miri"));
-		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNormalId("miri"));
+		model.addAttribute("empTypeCatList", memberService.getEmpCatVOListByNormalId(id));
+		model.addAttribute("locCatList", memberService.getLocCatVOListByNormalId(id));
+		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNormalId(id));
+		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNormalId(id));
 		model.addAttribute("povo", normalService.normalDetailPortfolio(id));
 		
-		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
-		model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));
-		model.addAttribute("empTypeCatList", memberService.getEmpTypeCatVOList());
-		model.addAttribute("locCatList", memberService.getLocCatVOList());
-		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
+		model.addAttribute("allRecruitCatList", memberService.getRecruitCatVOList());
+		model.addAttribute("allDevCatList", memberService.getDevCatVOListByrcNum("101"));
+		model.addAttribute("allEmpTypeCatList", memberService.getEmpTypeCatVOList());
+		model.addAttribute("allLocCatList", memberService.getLocCatVOList());
+		model.addAttribute("allAcaCatList", memberService.getAcaCatVOList());
 		
 		MemberVO mvo = (MemberVO)session.getAttribute("mvo");
 		if(mvo != null) {

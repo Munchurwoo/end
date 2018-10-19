@@ -4,6 +4,19 @@
 
 <script type="text/javascript">	
 	$(document).ready(function(){
+		$("#empTypeArea").html('');
+		var dataString='';
+		$.ajax({
+			/* type:"get",
+			url:"getDevCatVOListAjax.do",
+			dataType:"json",
+			data:$("#updatePortfolioForm").serialize(),
+			success:function(catList){
+				alert(catList); */
+				/* 181019 MIRI 작업중 */
+			}//success					
+		});//ajax 		
+		
 		$("input[name='recruitCatNumList']").change(function() {	
 			$("#empTypeArea").html('');
 			var dataString='';
@@ -50,7 +63,40 @@
 
 		});//click
 		
-		
+		if(${requestScope.povo != null}) {
+			$('input:checkbox[name="locCatNumList"]').each(function() {
+				<c:forEach items="${requestScope.locCatList}" var="locCat">
+					if(this.value == ${locCat.locNum}) {
+						this.checked = true;
+					}
+				</c:forEach>
+			});
+			
+			$('input:radio[name="acaCatNumList"]').each(function() {
+				<c:forEach items="${requestScope.acaCatList}" var="acaCat">
+					if(this.value == ${acaCat.academicNum}) {
+						$('input:radio[name="acaCatNumList"][value="${acaCat.academicNum}"]').prop('checked',true);
+					}
+			</c:forEach>
+			});
+
+			$('input:checkbox[name="empTypeCatNumList"]').each(function() {
+				<c:forEach items="${requestScope.empTypeCatList}" var="empTypeCat">
+					if(this.value == ${empTypeCat.empTypeNum}) {
+						this.checked = true;
+					}
+				</c:forEach>
+			});
+
+			$('input:checkbox[name="recruitCatNumList"]').each(function() {
+				<c:forEach items="${requestScope.recruitCatList}" var="recruitCat">
+					if(this.value == ${recruitCat.rcNum}) {
+						this.checked = true;
+					}
+				</c:forEach>
+			});
+
+		}
 	});//ready
 </script>
 
@@ -63,28 +109,24 @@
 	내용<br>&nbsp;&nbsp;&nbsp;<textarea rows="10" cols="60" name="content"  required="required">${requestScope.povo.content }</textarea><br><br>
 		
 	<h5>지역</h5>
-	<c:forEach items="${requestScope.locCatList}" var="locCat" varStatus="i">
-		<input type="checkbox" name="locCatNumList" value="${locCat.locNum}" >${locCat.locName}&nbsp;
-		<c:choose>
-			<c:if test="${requestScope.locCatList != null }">
-				<!-- 181018 MIRI 작업중 -->
-			</c:if>
-		</c:choose>
-	</c:forEach> <br>
 	
+	<c:forEach items="${requestScope.allLocCatList}" var="allLocCat">
+		<input type="checkbox" name="locCatNumList" value="${allLocCat.locNum}">${allLocCat.locName}&nbsp;
+	</c:forEach> <br>
+		
 	<h5>학력</h5>
-	<c:forEach items="${requestScope.acaCatList}" var="acaCat" varStatus="i">	
+	<c:forEach items="${requestScope.allAcaCatList}" var="acaCat" varStatus="i">	
 		<input type="radio" name="acaCatNumList" value="${acaCat.academicNum}" required="required">${acaCat.academicName}&nbsp;
 	</c:forEach> <br>
 	
 	<h5>고용형태</h5>
-	<c:forEach items="${requestScope.empTypeCatList}" var="empTypeCat" varStatus="i">
+	<c:forEach items="${requestScope.allEmpTypeCatList}" var="empTypeCat" varStatus="i">
 		<input type="checkbox" name="empTypeCatNumList" value="${empTypeCat.empTypeNum}" >${empTypeCat.empTypeName}&nbsp;
 	</c:forEach> <br>
 	
 	<h5>모집직군</h5> 
 	
-		<c:forEach items="${requestScope.recruitCatList}" var="recruitCat" varStatus="i">
+		<c:forEach items="${requestScope.allRecruitCatList}" var="recruitCat" varStatus="i">
 			<input type="checkbox" class = "recruit" name="recruitCatNumList" value="${recruitCat.rcNum}" >${recruitCat.rcName}  &thinsp;&thinsp;
 			<c:if test="${(i.index+1)%3==0}"><br></c:if>
 		</c:forEach>
