@@ -128,6 +128,7 @@ public class NormalController {
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		portfolioVO.setNormalId(mvo.getId());
 		System.out.println("이력서 등록 시작");
+		//181019 MIRI 포트폴리오 등록/수정 동시에 활용하기위해 flag를 줌
 		normalService.registerPortfolio(portfolioVO, true);
 		System.out.println("이력서 등록 성공");
 		return "redirect:home.do";
@@ -194,6 +195,14 @@ public class NormalController {
 		return "normal/normal_detail_portfolio.tiles2";
 
 	}
+	/**
+	 * 동규
+	 * 포트폴리오 상세보기
+	 * @param normalId
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	//나중에 "yosep"->normalId
 	@RequestMapping("normalDetailPortfolio.do")
 	public String normalDetailPortfolio(String normalId, Model model, HttpSession session) {
@@ -202,14 +211,8 @@ public class NormalController {
 		model.addAttribute("locCatList", memberService.getLocCatVOListByNormalId("miri"));
 		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNormalId("miri"));
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNormalId("miri"));
+		model.addAttribute("nmvo",normalService.selectNormalMember("miri"));
 		model.addAttribute("povo", normalService.normalDetailPortfolio("miri"));
-		
-		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
-		if (mvo != null) {
-			NormalMemberVO nmvo = normalService.selectNormalMember(mvo.getId());
-			model.addAttribute("nmvo", nmvo);
-		}
-
 		return "normal/normal_detail_portfolio.tiles2";
 
 	}
@@ -307,6 +310,11 @@ public class NormalController {
 		normalService.deletePortfolio(id);
 		return "redirect:home.do";
 	}
+	/**
+	 * 2018-10-19 성진
+	 * 구인공고 조회 후 면접신청 폼으로 이동하기
+	 * @return
+	 */
 	@RequestMapping("goInterviewApply.do")
 	public String goInterviewApply() {
 		return "normal/normal_go_interview_apply.tiles";

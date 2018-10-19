@@ -48,11 +48,11 @@ public class JobPostingVO {
 	public void setCareerStatus(String careerStatus) {
 		this.careerStatus = careerStatus;
 	}
-	public String getContents() {
+	public String getContent() {
 		return content;
 	}
-	public void setContents(String contents) {
-		this.content = contents;
+	public void setContent(String content) {
+		this.content = content;
 	}
 	public List<QuestionAnswerVO> getQuestionAnswerVOList() {
 		return questionAnswerVOList;

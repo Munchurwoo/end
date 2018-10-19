@@ -47,7 +47,8 @@ public class NormalServiceImpl implements NormalService {
 	}*/
 
 	@Override
-	public void registerPortfolio(PortfolioVO portfolioVO, boolean registerFlag) {	//181019 MIRI 포트폴리오 등록/수정 동시에 활용하기위해 flag를 줌
+	//181019 MIRI 포트폴리오 등록/수정 동시에 활용하기위해 flag를 줌
+	public void registerPortfolio(PortfolioVO portfolioVO, boolean registerFlag) {	
 		System.out.println(portfolioVO);
 		
 		//포트폴리오 등록(PORTFOLIO)

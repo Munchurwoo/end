@@ -69,15 +69,30 @@ public interface CompanyMapper {
 	CompanyMemberVO jobPostringDetail(String jobPostingNum);
 	CompanyMemberVO getAllJobPostingListByJobPostingNum(String jobPostingNum);
 	
-	
+
 	//구인공고 등록
-	//구인공고 키워드 등록	
-	//구인공고 개발분야 분류 등록	
-	//구인 모집직군 분류 등록
-	//구인 고용형태 분류 등록
-	//구인 지역 분류 등록
-	//구인 분류 등록
+	void registerJobPosting(JobPostingVO jobPostingVO);
 	//구인 학력 분류 등록	
+	void registerJobPostingAcademic(Map<String,String> map);
+	//구인공고 개발분야 분류 등록	
+	void registerJobPostingDev(Map<String,String> map);
+	//구인 고용형태 분류 등록
+	void registerJobPostingEmp(Map<String,String> map);
+	//구인 지역 분류 등록
+	void registerJobPostingLoc(Map<String,String> map);
+	//구인 모집직군 분류 등록
+	void registerJobPostingRecuitment(Map<String,String> map);
+
+	
+	
+	
+	//구인공고 키워드 등록	
+
+	
+	
+	
+	//구인 분류 등록
+		
 		
 	//구인공고 전체보기
 	//구인공고 검색결과 보기

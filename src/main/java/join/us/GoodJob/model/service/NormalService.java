@@ -19,7 +19,8 @@ public interface NormalService {
 	//181018 MIRI selectNormalMember와 중복으로 주석
 	/*//개인 정보 조회
 	NormalMemberVO myPageNormalMember(String memberId);*/
-
+	//포트폴리오 등록
+	//181019 MIRI 포트폴리오 등록/수정 동시에 활용하기위해 flag를 줌
 	void registerPortfolio(PortfolioVO portfolioVO, boolean registerFlag);
 	
 
