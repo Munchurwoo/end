@@ -3,8 +3,6 @@ package join.us.GoodJob.model.service;
 import java.util.List;
 import java.util.Map;
 
-import org.springframework.ui.Model;
-
 import join.us.GoodJob.model.vo.CatNumParamVO;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
 import join.us.GoodJob.model.vo.JobPostingVO;
@@ -51,4 +49,7 @@ public interface CompanyService {
 	CompanyMemberVO jobPostingDetail(String jobPostingNum);
 
 	List<CompanyMemberVO> getSomeCompanyList(CatNumParamVO catNumParamVO);
+	
+	//구인등록
+	void registerJobPosting(JobPostingVO jobPostingVO);
 }
