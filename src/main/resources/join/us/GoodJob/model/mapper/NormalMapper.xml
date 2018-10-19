@@ -84,27 +84,30 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{normalId}, #{rcNum})
 	</insert>
 	
-	<select id="normalDetailPortfolio" resultType="portfolioVO"
+	<select id="normalDetailPortfolioList" resultType="portfolioVO"
 		parameterType="string">
-		select title,content
+		select title,content,picture_path
 		from portfolio
 		where
 		normal_id=#{normalId}
+	</select>
+	<!-- 181018 MIRI normalId->value로 수정 -->
+	<select id="normalDetailPortfolio" resultType="portfolioVO" parameterType="string">
+		select title,content from portfolio where normal_id=#{value}
 	</select>
 	<select id="getAllPortfolioList" resultType="portfolioVO">
 
 	</select>
 	
-	<select id="idName" resultType="normalMemberVO">
-		select m.id , m.name
-		from member m, normal_member nm
+	<select id="AllFindNomarMember" resultType="normalMemberVO">
+		select m.id,m.password,m.email,m.name,m.tel,m.address,m.member_type,nm.normal_id,nm.gender,nm.career_status
+		from member m,normal_member nm
 		where m.id=nm.normal_id
+		
 	</select>
 	
-	<select id="portFolioVOById" resultType="PortfolioVO" parameterType="String" >
-		select * 
-		from portfolio
-		where id=${id}
-	</select>
+	<delete id="deletePortfolio" parameterType="string">
+		delete from portfolio where normal_id=#{value}
+	</delete>
 	
 </mapper>

@@ -112,7 +112,7 @@ button:hover {
 		$("#checkId").click(function() {
 			$.ajax({
 				type:"get",
-				url:"checkMemberId.do",
+				url:"user-checkMemberId.do",	/* 181018 MIRI 'user-'로 변경 */
 				data:"id="+$("#id").val(),
 				success:function(result) {
 					if(result == "ok") {
