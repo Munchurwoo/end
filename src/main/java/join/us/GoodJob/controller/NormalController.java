@@ -33,6 +33,7 @@ public class NormalController {
 
 	
 	//private String serverUploadPath; //삭제하지마 ㅠㅠ
+	private String workspaceUploadPath;
 	private String workspaceDeletePath;
 
 	/**
@@ -160,14 +161,14 @@ public class NormalController {
 		serverUploadPath
 		=request.getSession().getServletContext().getRealPath("/resources/upload/");*/
 		//개발시에는 워크스페이스 업로드 경로로 준다 
-		workspaceDeletePath="C:\\java-kosta\\framework-workspace2\\goodjob\\src\\main\\webapp\\resources\\upload\\memberPicture\\";
+		workspaceUploadPath="C:\\java-kosta\\framework-workspace2\\goodjob\\src\\main\\webapp\\resources\\upload\\memberPicture\\";
 		//System.out.println("서버 업로드 경로:"+serverUploadPath);
-		System.out.println("워크스페이스 업로드 경로:"+workspaceDeletePath);
+		System.out.println("워크스페이스 업로드 경로:"+workspaceUploadPath);
 		System.out.println(uploadPicture);
 		if (uploadPicture.isEmpty() == false) {
 			System.out.println(uploadPicture.getOriginalFilename());
 			//File uploadServerFile=new File(serverUploadPath+uploadPicture.getOriginalFilename());
-			File uploadWorkspaceFile= new File(workspaceDeletePath+uploadPicture.getOriginalFilename());
+			File uploadWorkspaceFile= new File(workspaceUploadPath+uploadPicture.getOriginalFilename());
 			try {
 				//uploadPicture.transferTo(uploadServerFile);
 				uploadPicture.transferTo(uploadWorkspaceFile);
