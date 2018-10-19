@@ -319,4 +319,5 @@ public class NormalController {
 	public String goInterviewApply() {
 		return "normal/normal_go_interview_apply.tiles";
 	}
+
 }

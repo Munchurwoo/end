@@ -131,8 +131,8 @@ create table company_member(
    constraint fk_member_company_member foreign key(company_id) references member(id) on delete cascade
 );
 
-insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, sales, date_of_establishment, num_of_employees) values('NHNuser', '더 넓은 세상, 더 많은 사람들이 더 큰 재미를 우리와 함께 나눕니다.', '대기업', '솔루션', 1813, '2015-11-18', 664);
-insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees) values('Tmaxuser', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358);
+insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, sales, date_of_establishment, num_of_employees,picture_path) values('NHNuser', '더 넓은 세상, 더 많은 사람들이 더 큰 재미를 우리와 함께 나눕니다.', '대기업', '솔루션', 1813, '2015-11-18', 664,'로고로고');
+insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees, picture_path) values('Tmaxuser', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358,'로고로고');
 
 select * from company_member;
 ---------------------------------------------------------------------
@@ -148,7 +148,7 @@ create table job_posting(
 );
 create sequence job_posting_num_seq start with 1001;
 
-insert into JOB_POSTING(job_posting_num, company_id, career_status, title, content) values(job_posting_num_seq.nextval, 'NHNuser', '경력 3년', 'NHN엔터테인먼트에서 Java 신입, 프리랜서 개발자 모집', 'Java 어플리케이션 개발 경험자, WAS 이해도가 높은 경험자 우대합니다.');
+insert into JOB_POSTING(job_posting_num, company_id, career_status, title, content) values(job_posting_num_seq.nextval, 'NHNuser', '경력 3년4', 'NHN엔터테인먼트에서 Java 신입, 프리랜서 개발자 모집', 'Java 어플리케이션 개발 경험자, WAS 이해도가 높은 경험자 우대합니다.');
 insert into JOB_POSTING(job_posting_num, company_id, career_status, title, content) values(job_posting_num_seq.nextval, 'Tmaxuser', '경력 무관', '티맥스소프트 DBA 2018 하반기 공개채용', 'MS-SQL 서버 모니터링 및 트러블 슈팅경험 있으신 분, OLTP 업무 경험 있으신 분');
 insert into JOB_POSTING(job_posting_num, company_id, career_status, title, content) values(job_posting_num_seq.nextval, 'NHNuser', '경력 3년', 'NHN엔터테인먼트에서 Java 신입, 프리랜서 개발자 모집합니다  ', 'Java 어플리케이션 개발 경험자ㅎㅎㅎㅎㅎ, WAS 이해도가 높은 경험자 우대합니다테스트입니당.');
 select * from job_posting;
@@ -256,8 +256,9 @@ insert into PORTFOLIO_RECRUITMENT(normal_id, rc_num) values('yosep', 106);
 insert into PORTFOLIO_RECRUITMENT(normal_id, rc_num) values('MCW', 101);
 insert into PORTFOLIO_RECRUITMENT(normal_id, rc_num) values('MCW', 108);
 insert into PORTFOLIO_RECRUITMENT(normal_id, rc_num) values('qqqq', 107);
-insert into PORTFOLIO_RECRUITMENT(normal_id, rc_num) values('miri', 101);
+insert into PORTFOLIO_RECRUITMENT(normal_id, rc_num) values('miri', 103);
 insert into PORTFOLIO_RECRUITMENT(normal_id, rc_num) values('hsj', 104);
+
 
 select * from portfolio_recruitment;
 ---------------------------------------------------------------------
