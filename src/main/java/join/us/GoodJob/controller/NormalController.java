@@ -291,8 +291,14 @@ public class NormalController {
 		normalService.deletePortfolio(id);
 		return "redirect:home.do";
 	}
+	/**
+	 * 2018-10-19 성진
+	 * 구인공고 조회 후 면접신청 폼으로 이동하기
+	 * @return
+	 */
 	@RequestMapping("goInterviewApply.do")
 	public String goInterviewApply() {
 		return "normal/normal_go_interview_apply.tiles";
 	}
+
 }

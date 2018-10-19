@@ -1,12 +1,8 @@
 package join.us.GoodJob.controller;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-
 import java.io.File;
 import java.io.IOException;
-
+import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import join.us.GoodJob.model.service.CompanyService;
 import join.us.GoodJob.model.service.MemberService;
+import join.us.GoodJob.model.service.NormalService;
 import join.us.GoodJob.model.vo.CatNumParamVO;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
 import join.us.GoodJob.model.vo.MemberVO;
@@ -32,6 +29,8 @@ public class CompanyController {
 	CompanyService companyService;
 	@Resource
 	MemberService memberService;
+	@Resource
+	NormalService normalService;
 	
 	/*실제 운영시에 사용
 	private String serverUploadPath;*/	
@@ -186,8 +185,12 @@ public class CompanyController {
 		//카테고리 번호들로 기업 게시글 리스트 불러옴
 		List<CompanyMemberVO> cmvoList=companyService.getSomeCompanyList(catNumParamVO);
 		model.addAttribute("cmvoList", cmvoList);
-		
-		
 		return "company/company_detail_search_list.company_search_tiles";
+	}
+	@PostMapping("submitInterview.do")
+	public String submitInterview(String normalId,Model model) {
+		model.addAttribute("portfolio", normalService.normalDetailPortfolio(normalId));
+		return "company/company_InterviewApplyList.tiles2";
+		
 	}
 }
