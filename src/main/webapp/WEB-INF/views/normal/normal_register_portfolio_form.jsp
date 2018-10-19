@@ -4,16 +4,16 @@
 
 
 <script type="text/javascript">	
-	$(document).ready(function(){
+	$(document).ready(function(){				
 		$("input[name='recruitCatNumList']").change(function() {	
 			$("#empTypeArea").html('');
-			var dataString='';
+			var dataString='';				
 			$.ajax({
 				type:"get",
 				url:"getDevCatVOListAjax.do",
 				dataType:"json",
 				data:$("#registerForm").serialize(),
-				success:function(catList){
+				success:function(catList){		
 					var catListString='';
 					for(var i=0; i<catList.length; i++){			
 						for(var j=0; j<catList[i].length; j++){
@@ -48,10 +48,7 @@
 		
 		$("#registerBtn").click(function() {
 			$("#registerForm").submit();
-
-		});//click
-		
-		
+		});//click		
 	});//ready
 </script>
 
@@ -104,4 +101,3 @@
 
 <button type="submit"  id="registerBtn">등록하기</button>
 <button type="reset" onclick="location.href='home.do'">홈으로</button>	
-

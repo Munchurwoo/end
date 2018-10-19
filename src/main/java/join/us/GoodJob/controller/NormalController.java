@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import join.us.GoodJob.model.service.MemberService;
 import join.us.GoodJob.model.service.NormalService;
+import join.us.GoodJob.model.vo.DevCatVO;
 import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PortfolioVO;
@@ -177,6 +178,23 @@ public class NormalController {
 		return uploadPicture.getOriginalFilename();
 	}
 	
+	@RequestMapping("user-normalDetailPortfolioList.do")
+	public String normalDetailPortfolioList(String normalId, Model model ) {
+		model.addAttribute("devCatList", memberService.getDevCatVOListByNormalId(normalId));
+		model.addAttribute("empTypeCatList", memberService.getEmpCatVOListByNormalId(normalId));
+		model.addAttribute("locCatList", memberService.getLocCatVOListByNormalId(normalId));
+		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNormalId(normalId));
+		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNormalId(normalId));
+		model.addAttribute("povo", normalService.normalDetailPortfolio(normalId));
+		
+		
+		NormalMemberVO nmvo = normalService.selectNormalMember(normalId);
+		model.addAttribute("nmvo", nmvo);
+			
+		
+		return "normal/normal_detail_portfolio.tiles2";
+
+	}
 	//나중에 "yosep"->normalId
 	@RequestMapping("normalDetailPortfolio.do")
 	public String normalDetailPortfolio(String normalId, Model model, HttpSession session) {
@@ -197,25 +215,41 @@ public class NormalController {
 
 	}
 
-	// 인재검색 header 클릭시 이동
+	// 인재검색 header 클릭시 이동	
 	@RequestMapping("user-portfolioAllList.do")
-	public String portfolioAllList(Model model) {
-		// 인재검색 list 출력
+	public String portfolioAllList(Model model, HttpSession session) {
+		//normal 맴버 모두 조회 
+		List<NormalMemberVO> list =normalService.AllFindNomarMember();
+		List<List<DevCatVO>> devCatList =new ArrayList<List<DevCatVO>>();
+		List<PortfolioVO> povo =new ArrayList<PortfolioVO>();	
+		model.addAttribute("list",list);
+		model.addAttribute("devCatList",devCatList);
+		model.addAttribute("povo",povo);
+		 
+		for(int i =0;i<list.size();i++) {
+			devCatList.add(memberService.getDevCatVOListByNormalId(list.get(i).getNormalId()));
+			povo.add(normalService.normalDetailPortfolio(list.get(i).getNormalId()));
+		}
+		
+	/*	for(NormalMemberVO normalMemberVO : list) { //enhanced for loop
+			model.addAttribute("devCatFindId",memberService.getDevCatVOListByNormalId(normalMemberVO.getNormalId()));
+		}*/
+		
+		/*for(int i =0;i<list.size();i++) {
+			model.addAttribute("devCatList", memberService.getDevCatVOListByNormalId(list.get(i).getNormalId()));
+			model.addAttribute("povo", normalService.normalDetailPortfolioList(list.get(i).getNormalId()));
+			
+			devCatList.add((DevCatVO) memberService.getDevCatVOListByNormalId(list.get(i).getNormalId()));
+			povo.add((PortfolioVO) normalService.normalDetailPortfolioList(list.get(i).getNormalId()));
+		}*/
+		
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
 		model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));
 		model.addAttribute("empTypeCatList", memberService.getEmpTypeCatVOList());
 		model.addAttribute("locCatList", memberService.getLocCatVOList());
 		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
-
-		// String normalName = memberService.get
-		List<NormalMemberVO> list = normalService.idName();
-		// 포트폴리오 list
-		List<PortfolioVO> plist = new ArrayList<PortfolioVO>();
-		// meber 와 normalmember join 을 활용하여 normalmember 정보 id만 정보저장
-		ArrayList<String> id = new ArrayList<String>();
-		for (int i = 0; i < list.size(); i++) {
-			plist.add(normalService.portFolioVOById(list.get(i).getId()));
-		}
+		
+	
 		return "member/portfolio_all_list.tiles2";
 	}
 

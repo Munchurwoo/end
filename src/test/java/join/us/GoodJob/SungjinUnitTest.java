@@ -3,7 +3,6 @@ package join.us.GoodJob;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,6 +12,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import join.us.GoodJob.model.mapper.CompanyMapper;
 import join.us.GoodJob.model.service.CompanyService;
+import join.us.GoodJob.model.vo.CatNumParamVO;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring-model.xml"})
 public class SungjinUnitTest {
@@ -44,11 +44,18 @@ public class SungjinUnitTest {
 		locCatNumList.add("501");
 		locCatNumList.add("502");
 		acaCatNumList.add("403");
-		map.put("devCatNumList", devCatNumList);
-		map.put("recruitCatNumList", recruitCatNumList);
-		map.put("empTypeCatNumList", empTypeCatNumList);
-		map.put("locCatNumList", locCatNumList);
-		map.put("acaCatNumList", acaCatNumList);
+		CatNumParamVO cnp=new CatNumParamVO();
+		cnp.setAcaCatNumList(acaCatNumList);
+		cnp.setDevCatNumList(devCatNumList);
+		cnp.setEmpTypeCatNumList(empTypeCatNumList);
+		cnp.setLocCatNumList(locCatNumList);
+		cnp.setRecruitCatNumList(recruitCatNumList);
+		map.put("devCatNumList", cnp.getAcaCatNumList());
+		map.put("recruitCatNumList", cnp.getDevCatNumList());
+		map.put("empTypeCatNumList", cnp.getEmpTypeCatNumList());
+		map.put("locCatNumList", cnp.getLocCatNumList());
+		map.put("acaCatNumList", cnp.getRecruitCatNumList());
+		
 		System.out.println(companyMapper.findJobPostingByCatNumList(map));
 	}
 }

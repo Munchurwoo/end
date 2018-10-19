@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import join.us.GoodJob.model.service.CompanyService;
 import join.us.GoodJob.model.service.MemberService;
+import join.us.GoodJob.model.vo.CatNumParamVO;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
 import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.PostListVO;
@@ -171,8 +172,8 @@ public class CompanyController {
 		model.addAttribute("jobPostingList", companyService.getAllJobPostingList());
 		return "company/company_get_all_jobPosting_list.company_search_tiles";
 	}
-	@RequestMapping("user-company_detail_search_list.do")
-	public String findJobPostingByCatNumList(Model model, Map map) {
+	@PostMapping("user-company_detail_search_list.do")
+	public String findJobPostingByCatNumList(Model model, Map map, CatNumParamVO catNumParamVO) {
 		// 아래 6줄은 상세조건 폼
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
 		model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));
@@ -180,16 +181,13 @@ public class CompanyController {
 		model.addAttribute("locCatList", memberService.getLocCatVOList());
 		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
 		model.addAttribute("jobPostingList", companyService.getAllJobPostingList());
-		// 아래부터는 검색결과 후 디테일 정보보내주기
-		// CatNumList 로 게시글번호를 조회해오는 방법
-		// 내일은 그 게시글 번호로 상세보기 해야함
-		List<String> devCatNumList=new ArrayList<String>();
-		List<String> recruitCatNumList=new ArrayList<String>();
-		List<String> empTypeCatNumList=new ArrayList<String>();
-		List<String> locCatNumList=new ArrayList<String>();
-		List<String> acaCatNumList=new ArrayList<String>();
-	
-		model.addAttribute("", companyService.findJobPostingByCatNumList(map));
+		//System.out.println(catNumParamVO);
+
+		//카테고리 번호들로 기업 게시글 리스트 불러옴
+		List<CompanyMemberVO> cmvoList=companyService.getSomeCompanyList(catNumParamVO);
+		model.addAttribute("cmvoList", cmvoList);
+		
+		
 		return "company/company_detail_search_list.company_search_tiles";
 	}
 }
