@@ -195,6 +195,14 @@ public class NormalController {
 		return "normal/normal_detail_portfolio.tiles2";
 
 	}
+	/**
+	 * 동규
+	 * 포트폴리오 상세보기
+	 * @param normalId
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	//나중에 "yosep"->normalId
 	@RequestMapping("normalDetailPortfolio.do")
 	public String normalDetailPortfolio(String normalId, Model model, HttpSession session) {
@@ -203,14 +211,8 @@ public class NormalController {
 		model.addAttribute("locCatList", memberService.getLocCatVOListByNormalId("miri"));
 		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNormalId("miri"));
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNormalId("miri"));
+		model.addAttribute("nmvo",normalService.selectNormalMember("miri"));
 		model.addAttribute("povo", normalService.normalDetailPortfolio("miri"));
-		
-		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
-		if (mvo != null) {
-			NormalMemberVO nmvo = normalService.selectNormalMember(mvo.getId());
-			model.addAttribute("nmvo", nmvo);
-		}
-
 		return "normal/normal_detail_portfolio.tiles2";
 
 	}

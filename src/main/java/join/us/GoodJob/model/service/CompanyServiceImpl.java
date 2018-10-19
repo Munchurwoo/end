@@ -129,5 +129,10 @@ public class CompanyServiceImpl implements CompanyService {
 		//System.out.println("게시물리스트 :"+someCompanyList);
 		return someCompanyList;
 	}
+
+	@Override
+	public void registerJobPosting(JobPostingVO jobPostingVO) {
+		companyMapper.registerJobPosting(jobPostingVO);
+	}
 	
 }
