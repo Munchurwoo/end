@@ -47,11 +47,12 @@ public class NormalServiceImpl implements NormalService {
 	}*/
 
 	@Override
-	public void registerPortfolio(PortfolioVO portfolioVO) {
+	public void registerPortfolio(PortfolioVO portfolioVO, boolean registerFlag) {	//181019 MIRI 포트폴리오 등록/수정 동시에 활용하기위해 flag를 줌
 		System.out.println(portfolioVO);
-			
+		
 		//포트폴리오 등록(PORTFOLIO)
-		normalMapper.insertPortfolio(portfolioVO);
+		if(registerFlag == true)	//flag가 true일 경우에만 포트폴리오 등록
+			normalMapper.insertPortfolio(portfolioVO);
 		
 		//포트폴리오 파일등록(PORTFOLIO_FILE) 보류
 		//normalMapper.insertPortfolioFile(portfolioVO);
@@ -110,6 +111,16 @@ public class NormalServiceImpl implements NormalService {
 	}
 	public void deletePortfolio(String id) {
 		normalMapper.deletePortfolio(id);
+	}
+
+	@Override
+	public void updatePortfolio(PortfolioVO portfolioVO) {
+		normalMapper.updatePortfolio(portfolioVO);
+	}
+
+	@Override
+	public void deletePortfolioMulti(String normalId) {
+		normalMapper.deletePortfolioMulti(normalId);
 	}
 
 }

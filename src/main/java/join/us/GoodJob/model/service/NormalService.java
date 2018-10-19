@@ -20,7 +20,7 @@ public interface NormalService {
 	/*//개인 정보 조회
 	NormalMemberVO myPageNormalMember(String memberId);*/
 
-	void registerPortfolio(PortfolioVO portfolioVO);
+	void registerPortfolio(PortfolioVO portfolioVO, boolean registerFlag);
 	
 
 	//포트폴리오등록 상세
@@ -33,5 +33,9 @@ public interface NormalService {
 	//개인회원  id 를 활용하여 포트폴리오 모든 정보 출력 
 	PortfolioVO portFolioVOById(String nomalId);
 	//181018 MIRI 포트폴리오 삭제
-	void deletePortfolio(String id); 
+	void deletePortfolio(String id);
+	//181019 MIRI 포트폴리오 수정
+	void updatePortfolio(PortfolioVO portfolioVO);
+	//181019 MIRI 포트폴리오 삭제(portfolio_dev, portfolio_recruitment, portfolio_emp, portfolio_loc, portfolio_academic)
+	void deletePortfolioMulti(String normalId);
 }

@@ -38,5 +38,5 @@
 	학력 : <c:forEach items="${acaCatList }" var="acaCatList">
 	${acaCatList.academicName }
 	</c:forEach><br><br>
-	<input type="button" onclick="javascript:location.href='user-updatePortfolio.do?id=${requestScope.nmvo.id}'" value="수정하기">
+	<input type="button" onclick="javascript:location.href='user-updatePortfolioForm.do?id=${requestScope.nmvo.id}'" value="수정하기">
 	<input type="button" onclick="deletePortfolio('${nmvo.id}')" value="삭제하기">

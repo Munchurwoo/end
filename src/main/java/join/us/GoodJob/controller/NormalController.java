@@ -128,7 +128,7 @@ public class NormalController {
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		portfolioVO.setNormalId(mvo.getId());
 		System.out.println("이력서 등록 시작");
-		normalService.registerPortfolio(portfolioVO);
+		normalService.registerPortfolio(portfolioVO, true);
 		System.out.println("이력서 등록 성공");
 		return "redirect:home.do";
 	}
@@ -186,7 +186,6 @@ public class NormalController {
 		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNormalId(normalId));
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNormalId(normalId));
 		model.addAttribute("povo", normalService.normalDetailPortfolio(normalId));
-		
 		
 		NormalMemberVO nmvo = normalService.selectNormalMember(normalId);
 		model.addAttribute("nmvo", nmvo);
@@ -254,19 +253,20 @@ public class NormalController {
 	}
 
 	/**
-	 * 181018 MIRI 포트폴리오 수정
+	 * 181018 MIRI 포트폴리오 수정폼
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping("user-updatePortfolio.do")
-	public String updatePortfolio(String id, HttpSession session, Model model) {
+	@RequestMapping("user-updatePortfolioForm.do")
+	public String updatePortfolioForm(String id, HttpSession session, Model model) {
+		//내가 가진 포트폴리오 데이터 리스트
 		model.addAttribute("devCatList", memberService.getDevCatVOListByNormalId(id));
 		model.addAttribute("empTypeCatList", memberService.getEmpCatVOListByNormalId(id));
 		model.addAttribute("locCatList", memberService.getLocCatVOListByNormalId(id));
 		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNormalId(id));
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNormalId(id));
 		model.addAttribute("povo", normalService.normalDetailPortfolio(id));
-		
+		//포트폴리오 전체 리스트 리스트
 		model.addAttribute("allRecruitCatList", memberService.getRecruitCatVOList());
 		model.addAttribute("allDevCatList", memberService.getDevCatVOListByrcNum("101"));
 		model.addAttribute("allEmpTypeCatList", memberService.getEmpTypeCatVOList());
@@ -279,6 +279,22 @@ public class NormalController {
 			model.addAttribute("nmvo", nmvo);
 		}
 		return "normal/normal_update_portfolio.tiles2";
+	}
+	
+	/**
+	 * 181019 MIRI 포트폴리오 수정
+	 * @param portfolioVO
+	 * @param session
+	 * @return
+	 */
+	@PostMapping("user-updatePortfolio.do")
+	public String updatePortfolio(PortfolioVO portfolioVO, HttpSession session) {
+		MemberVO mvo = (MemberVO)session.getAttribute("mvo");
+		portfolioVO.setNormalId(mvo.getId());
+		normalService.updatePortfolio(portfolioVO);	//포트폴리오 수정
+		normalService.deletePortfolioMulti(portfolioVO.getNormalId());	//포트폴리오 관련 복합 table 전부 삭제
+		normalService.registerPortfolio(portfolioVO, false);	//flag 넣어주어 포트폴리오 등록 없이 복합 table에만 데이터 추가
+		return "redirect:normalDetailPortfolio.do";
 	}
 	
 	/**

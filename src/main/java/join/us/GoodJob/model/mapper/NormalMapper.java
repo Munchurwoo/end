@@ -63,6 +63,10 @@ public interface NormalMapper {
 	List<PortfolioVO> normalDetailPortfolioList(String normalId);
 	//포트폴리오 삭제
 	void deletePortfolio(String id);
+	//포트폴리오 수정
+	void updatePortfolio(PortfolioVO portfolioVO);
+	//포트폴리오 삭제(portfolio_dev, portfolio_recruitment, portfolio_emp, portfolio_loc, portfolio_academic)
+	void deletePortfolioMulti(String normalId);
 	
 	//질의응답 질문등록
 }

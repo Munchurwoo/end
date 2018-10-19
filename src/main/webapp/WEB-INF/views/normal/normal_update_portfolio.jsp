@@ -4,19 +4,6 @@
 
 <script type="text/javascript">	
 	$(document).ready(function(){
-		$("#empTypeArea").html('');
-		var dataString='';
-		$.ajax({
-			/* type:"get",
-			url:"getDevCatVOListAjax.do",
-			dataType:"json",
-			data:$("#updatePortfolioForm").serialize(),
-			success:function(catList){
-				alert(catList); */
-				/* 181019 MIRI 작업중 */
-			}//success					
-		});//ajax 		
-		
 		$("input[name='recruitCatNumList']").change(function() {	
 			$("#empTypeArea").html('');
 			var dataString='';
@@ -50,7 +37,7 @@
 		        contentType: false,
 		        cache: false,
 				success:function(path){
-					$("#normal-picture").attr('src', "/GoodJob/resources/upload/"+path);
+					$("#normal-picture").attr('src', "/GoodJob/resources/upload/memberPicture/"+path);
 					//$("#pictureInput").val(path);
 					alert(path);
 					$("#aaa").append("<input type='hidden' name='picturePath' value='"+path+"'>");	
@@ -95,8 +82,38 @@
 					}
 				</c:forEach>
 			});
-
 		}
+		
+		$("#empTypeArea").html('');
+		var dataString='';
+		$.ajax({
+			type:"get",
+			url:"getDevCatVOListAjax.do",
+			dataType:"json",
+			data:$("#updatePortfolioForm").serialize(),
+			success:function(catList){
+				var catListString='';
+				for(var i=0; i<catList.length; i++){			
+					for(var j=0; j<catList[i].length; j++){
+						catListString += '<input type="checkbox" class = "recruit" name="devCatNumList" value="'+catList[i][j].devCatNum+'">'+catList[i][j].devCatName+'&nbsp;';
+					}
+					catListString+='<br>';
+				}
+				$("#empTypeArea").html($("#empTypeArea").html()+catListString);
+				
+				$('input:checkbox[name="devCatNumList"]').each(function() {
+					<c:forEach items="${requestScope.devCatList}" var="devCat">
+						if(this.value == ${devCat.devCatNum}) {
+							this.checked = true;
+						}
+					</c:forEach>
+				});
+			}//success					
+		});//ajax 		
+		
+		$("#updateBtn").click(function() {
+			$("#updatePortfolioForm").submit();
+		});
 	});//ready
 </script>
 
@@ -104,7 +121,7 @@
 
 <h3>이력서 수정</h3>
 
-<form action="normalDetailPortfolio.do" method="get" id="updatePortfolioForm">
+<form action="user-updatePortfolio.do" method="post" id="updatePortfolioForm">
 	제목 <input type="text" name="title" value="${requestScope.povo.title }" required="required"><br>
 	내용<br>&nbsp;&nbsp;&nbsp;<textarea rows="10" cols="60" name="content"  required="required">${requestScope.povo.content }</textarea><br><br>
 		
@@ -146,4 +163,8 @@
   <!--  <a class="photo_delete" href="##" style=""><span class="blind">사진 삭제</span></a> -->
 </div>
 <input type="file" name="uploadPicture" id="pictureUploadBtn"><br>
+
 </form>
+
+<button type="submit" id="updateBtn">수정완료</button> &nbsp;&nbsp;
+<input type="button" value="취소" onclick="javascript:location.href='home.do'">

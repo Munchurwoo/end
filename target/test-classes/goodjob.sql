@@ -256,9 +256,8 @@ insert into PORTFOLIO_RECRUITMENT(normal_id, rc_num) values('yosep', 106);
 insert into PORTFOLIO_RECRUITMENT(normal_id, rc_num) values('MCW', 101);
 insert into PORTFOLIO_RECRUITMENT(normal_id, rc_num) values('MCW', 108);
 insert into PORTFOLIO_RECRUITMENT(normal_id, rc_num) values('qqqq', 107);
-insert into PORTFOLIO_RECRUITMENT(normal_id, rc_num) values('miri', 103);
+insert into PORTFOLIO_RECRUITMENT(normal_id, rc_num) values('miri', 101);
 insert into PORTFOLIO_RECRUITMENT(normal_id, rc_num) values('hsj', 104);
-
 
 select * from portfolio_recruitment;
 ---------------------------------------------------------------------

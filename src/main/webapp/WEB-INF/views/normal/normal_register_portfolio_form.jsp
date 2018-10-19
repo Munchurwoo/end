@@ -91,7 +91,7 @@
 <form enctype="multipart/form-data" action="" id="pictureUploadForm">
  <div class="resume_photo">
    <a href="##" class="box_photo" data-api_type="layer" data-api_id="basic_photo" >
-       <img id="normal-picture" src="" border="0" width="100" height="140" class="user_image" />s</a>
+       <img id="normal-picture" src="" border="0" width="100" height="140" class="user_image" /></a>
   <!--  <a class="photo_delete" href="##" style=""><span class="blind">사진 삭제</span></a> -->
 </div>
 <input type="file" name="uploadPicture" id="pictureUploadBtn"><br>
