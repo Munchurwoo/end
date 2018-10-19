@@ -33,7 +33,7 @@ public class NormalController {
 
 	
 	//private String serverUploadPath; //삭제하지마 ㅠㅠ
-	private String workspaceUploadPath;
+	private String workspaceDeletePath;
 
 	/**
 	 * 181015 MIRI 개인 회원가입 폼(NORMAL_MEMBER)
@@ -160,14 +160,14 @@ public class NormalController {
 		serverUploadPath
 		=request.getSession().getServletContext().getRealPath("/resources/upload/");*/
 		//개발시에는 워크스페이스 업로드 경로로 준다 
-		workspaceUploadPath="C:\\java-kosta\\framework-workspace2\\goodjob\\src\\main\\webapp\\resources\\upload\\memberPicture\\";
+		workspaceDeletePath="C:\\java-kosta\\framework-workspace2\\goodjob\\src\\main\\webapp\\resources\\upload\\memberPicture\\";
 		//System.out.println("서버 업로드 경로:"+serverUploadPath);
-		System.out.println("워크스페이스 업로드 경로:"+workspaceUploadPath);
+		System.out.println("워크스페이스 업로드 경로:"+workspaceDeletePath);
 		System.out.println(uploadPicture);
 		if (uploadPicture.isEmpty() == false) {
 			System.out.println(uploadPicture.getOriginalFilename());
 			//File uploadServerFile=new File(serverUploadPath+uploadPicture.getOriginalFilename());
-			File uploadWorkspaceFile= new File(workspaceUploadPath+uploadPicture.getOriginalFilename());
+			File uploadWorkspaceFile= new File(workspaceDeletePath+uploadPicture.getOriginalFilename());
 			try {
 				//uploadPicture.transferTo(uploadServerFile);
 				uploadPicture.transferTo(uploadWorkspaceFile);
@@ -186,6 +186,7 @@ public class NormalController {
 		model.addAttribute("locCatList", memberService.getLocCatVOListByNormalId(normalId));
 		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNormalId(normalId));
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNormalId(normalId));
+		//181019 MIRI normalDetailPortfolio와 중복되어 normalDetailPortfolio로 수정
 		model.addAttribute("povo", normalService.normalDetailPortfolio(normalId));
 		
 		NormalMemberVO nmvo = normalService.selectNormalMember(normalId);
@@ -306,8 +307,20 @@ public class NormalController {
 	 * @return
 	 */
 	@RequestMapping("deletePortfolio.do")
-	public String deletePortfolio(String id) {
+	public String deletePortfolio(String id, String picturePath, HttpServletRequest request) {
+		workspaceDeletePath="C:\\java-kosta\\framework-workspace2\\goodjob\\src\\main\\webapp\\resources\\upload\\memberPicture\\";
+		if (picturePath.isEmpty() == false) {
+			File deleteWorkspaceFile= new File(workspaceDeletePath+picturePath);
+			try {
+				deleteWorkspaceFile.delete();
+				System.out.println("사진 삭제 완료!");
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			}
+		}
+		
 		normalService.deletePortfolio(id);
+		
 		return "redirect:home.do";
 	}
 	/**
