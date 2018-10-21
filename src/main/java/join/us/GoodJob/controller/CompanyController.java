@@ -24,6 +24,7 @@ import join.us.GoodJob.model.vo.JobPostingVO;
 import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.PortfolioVO;
 import join.us.GoodJob.model.vo.PostListVO;
+import join.us.GoodJob.model.vo.QuestionAnswerVO;
 
 @Controller
 public class CompanyController {
@@ -199,7 +200,29 @@ public class CompanyController {
 	@PostMapping("submitInterview.do")
 	public String submitInterview(String normalId,Model model) {
 		model.addAttribute("portfolio", normalService.normalDetailPortfolio(normalId));
-		return "company/company_InterviewApplyList.tiles2";
+		return "company/job_posting_interviewer_list.tiles2";
 		
+	}
+	
+	/**
+	 * 181020 MIRI 내 구인 공고 면접자 리스트
+	 * @param jobPostingNum
+	 * @return
+	 */
+	@PostMapping("getMyJobPostinginterviewerList.do")
+	public String getMyJobPostinginterviewerList(int jobPostingNum) {
+		return "company/getMyJobPostinginterviewerList.tiles2";
+	}
+	
+	/**
+	 * 181020 MIRI 공고 질문 리스트
+	 * @param jobPostingNum
+	 * @return
+	 */
+	@PostMapping("getMyJobPostingQAList.do")
+	public String getMyJobPostingQAList(String jobPostingNum, Model model) {
+		List<QuestionAnswerVO> qavo = companyService.getMyJobPostingQAList(jobPostingNum);
+		model.addAttribute("qavo", qavo);
+		return "company/job_posting_QA_list.tiles2";
 	}
 }

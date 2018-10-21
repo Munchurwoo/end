@@ -16,6 +16,7 @@ import join.us.GoodJob.model.vo.JobPostingVO;
 import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PostListVO;
+import join.us.GoodJob.model.vo.QuestionAnswerVO;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
@@ -77,7 +78,7 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	public CompanyMemberVO jobPostingDetail(String jobPostingNum) {	
-		return companyMapper.jobPostringDetail(jobPostingNum);
+		return companyMapper.jobPostingDetail(jobPostingNum);
 	}
 
 	@Override
@@ -133,6 +134,11 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	public void registerJobPosting(JobPostingVO jobPostingVO) {
 		companyMapper.registerJobPosting(jobPostingVO);
+	}
+
+	@Override
+	public List<QuestionAnswerVO> getMyJobPostingQAList(String jobPostingNum) {
+		return companyMapper.getMyJobPostingQAList(jobPostingNum);
 	}
 	
 }

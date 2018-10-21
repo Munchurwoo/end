@@ -8,6 +8,7 @@ import join.us.GoodJob.model.vo.CompanyMemberVO;
 import join.us.GoodJob.model.vo.JobPostingVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PostListVO;
+import join.us.GoodJob.model.vo.QuestionAnswerVO;
 
 public interface CompanyService {
 
@@ -52,4 +53,7 @@ public interface CompanyService {
 	
 	//구인등록
 	void registerJobPosting(JobPostingVO jobPostingVO);
+	
+	//공고 질문 리스트
+	List<QuestionAnswerVO> getMyJobPostingQAList(String jobPostingNum);
 }
