@@ -7,7 +7,7 @@
 <table class="table table-bordered">
 	<thead>	
 	<tr>
-	<h4>${jpvo.jobPostingVO.contents}</h4>
+	<h4>${jpvo.jobPostingVO.content}</h4>
 	</tr>
 	</thead>
 	<tbody>

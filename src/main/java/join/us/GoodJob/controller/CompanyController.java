@@ -22,7 +22,6 @@ import join.us.GoodJob.model.vo.CatNumParamVO;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
 import join.us.GoodJob.model.vo.JobPostingVO;
 import join.us.GoodJob.model.vo.MemberVO;
-import join.us.GoodJob.model.vo.PortfolioVO;
 import join.us.GoodJob.model.vo.PostListVO;
 
 @Controller
@@ -113,10 +112,12 @@ public class CompanyController {
 		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
 		return "company/job_posting_register_form.tiles2";
 	}
+	@ResponseBody
 	@RequestMapping("registerJobPosting.do")
 	public String registerPortfolio(JobPostingVO jobPostingVO, HttpSession session) {
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		jobPostingVO.setCompanyId(mvo.getId());
+		jobPostingVO.setJobPostingNum(jobPostingVO.getJobPostingNum());
 		companyService.registerJobPosting(jobPostingVO);
 		return "redirect:home.do";
 	}
