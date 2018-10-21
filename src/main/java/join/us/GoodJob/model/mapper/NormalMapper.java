@@ -59,8 +59,9 @@ public interface NormalMapper {
 	List<NormalMemberVO> AllFindNomarMember();
 	
 	PortfolioVO portFolioVOById(String nomalId);
-
-	List<PortfolioVO> normalDetailPortfolioList(String normalId);
+	
+	//181019 MIRI normalDetailPortfolio와 중복되어 주석
+	//List<PortfolioVO> normalDetailPortfolioList(String normalId);
 	//포트폴리오 삭제
 	void deletePortfolio(String id);
 	//포트폴리오 수정

@@ -105,11 +105,12 @@ public class NormalServiceImpl implements NormalService {
 	public PortfolioVO portFolioVOById(String nomalId) {
 		return normalMapper.portFolioVOById(nomalId);
 	}
-
-	@Override
+	//181019 MIRI normalDetailPortfolio와 중복되어 주석
+	/*@Override
 	public List<PortfolioVO> normalDetailPortfolioList(String normalId) {
 		return normalMapper.normalDetailPortfolioList(normalId);
-	}
+	}*/
+	@Override
 	public void deletePortfolio(String id) {
 		normalMapper.deletePortfolio(id);
 	}
