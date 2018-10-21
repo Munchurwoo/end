@@ -84,16 +84,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{normalId}, #{rcNum})
 	</insert>
 	
-	<select id="normalDetailPortfolioList" resultType="portfolioVO"
+	<!-- 181019 MIRI normalDetailPortfolio와 중복되어 삭제 -->
+	<!-- <select id="normalDetailPortfolioList" resultType="portfolioVO"
 		parameterType="string">
 		select title,content,picture_path
 		from portfolio
 		where
 		normal_id=#{normalId}
-	</select>
+	</select> -->
+	
 	<!-- 181018 MIRI normalId->value로 수정 -->
 	<select id="normalDetailPortfolio" resultType="portfolioVO" parameterType="string">
-		select title,content from portfolio where normal_id=#{value}
+		select title, content, picture_path from portfolio where normal_id=#{value}
 	</select>
 	<select id="getAllPortfolioList" resultType="portfolioVO">
 
@@ -110,4 +112,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from portfolio where normal_id=#{value}
 	</delete>
 	
+	<update id="updatePortfolio" parameterType="portfolioVO">
+		update portfolio set title=#{title}, content=#{content}, picture_path=#{picturePath} where normal_id=#{normalId}
+	</update>
+	
+	<delete id="deletePortfolioMulti" parameterType="string">
+		{
+		 	call
+	        declare
+	        begin
+	            delete from portfolio_dev where normal_id=#{value};
+				delete from portfolio_recruitment where normal_id=#{value};
+				delete from portfolio_emp where normal_id=#{value};
+				delete from portfolio_loc where normal_id=#{value};
+				delete from portfolio_academic where normal_id=#{value};
+	        end
+	    }
+		</delete>
 </mapper>

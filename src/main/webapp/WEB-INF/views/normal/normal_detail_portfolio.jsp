@@ -6,10 +6,10 @@
 <!-- normal_detail_portfolio -->
 
 <script>
-	function deletePortfolio(id) {
+	function deletePortfolio(id, picturePath) {
 		var delPortfolio = confirm("포트폴리오 \'${requestScope.povo.title}\' 를 삭제하시겠습니까?");
 		if(delPortfolio == true) {
-			location.href="deletePortfolio.do?id="+id;
+			location.href="deletePortfolio.do?id="+id+"&picturePath="+picturePath;
 		} else {
 			return;
 		}
@@ -38,5 +38,5 @@
 	학력 : <c:forEach items="${acaCatList }" var="acaCatList">
 	${acaCatList.academicName }
 	</c:forEach><br><br>
-	<input type="button" onclick="javascript:location.href='user-updatePortfolio.do?id=${requestScope.nmvo.id}'" value="수정하기">
-	<input type="button" onclick="deletePortfolio('${nmvo.id}')" value="삭제하기">
+	<input type="button" onclick="javascript:location.href='user-updatePortfolioForm.do?id=${requestScope.nmvo.id}'" value="수정하기">
+	<input type="button" onclick="deletePortfolio('${requestScope.nmvo.id}', '${requestScope.povo.picturePath }')" value="삭제하기">

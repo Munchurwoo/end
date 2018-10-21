@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.ui.Model;
 
 import join.us.GoodJob.model.service.PagingBean;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
@@ -73,15 +72,15 @@ public interface CompanyMapper {
 	//구인공고 등록
 	void registerJobPosting(JobPostingVO jobPostingVO);
 	//구인 학력 분류 등록	
-	void registerJobPostingAcademic(Map<String,String> map);
+	void registerJobPostingAcademic(Map<String,Object> map);
 	//구인공고 개발분야 분류 등록	
-	void registerJobPostingDev(Map<String,String> map);
+	void registerJobPostingDev(Map<String, Object> map);
 	//구인 고용형태 분류 등록
-	void registerJobPostingEmp(Map<String,String> map);
+	void registerJobPostingEmp(Map<String, Object> map);
 	//구인 지역 분류 등록
-	void registerJobPostingLoc(Map<String,String> map);
+	void registerJobPostingLoc(Map<String,Object> map);
 	//구인 모집직군 분류 등록
-	void registerJobPostingRecuitment(Map<String,String> map);
+	void registerJobPostingRecuitment(Map<String,Object> map);
 
 	
 	
