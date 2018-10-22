@@ -157,6 +157,6 @@ public class CompanyServiceImpl implements CompanyService {
 			map.put("devCatNum", devCatNum);
 			companyMapper.registerJobPostingDev(map);
 		}
-
 	}
+	
 }
