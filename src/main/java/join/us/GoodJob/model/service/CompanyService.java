@@ -55,5 +55,5 @@ public interface CompanyService {
 	void registerJobPosting(JobPostingVO jobPostingVO);
 	
 	//공고 질문 리스트
-	List<QuestionAnswerVO> getMyJobPostingQAList(String jobPostingNum);
+	List<QuestionAnswerVO> getJobPostingQAList(String jobPostingNum);
 }

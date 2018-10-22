@@ -24,6 +24,6 @@ public class MiriUnitTest {
 	
 	@Test
 	public void test() {
-		System.out.println(companyMapper.getMyJobPostingQAList("1001"));
+		System.out.println(companyMapper.getJobPostingQAList("1001"));
 	}
 }

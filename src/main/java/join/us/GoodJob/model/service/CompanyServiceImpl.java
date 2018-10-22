@@ -79,7 +79,7 @@ public class CompanyServiceImpl implements CompanyService {
 	
 	public CompanyMemberVO jobPostingDetail(String jobPostingNum) {	
 		return companyMapper.jobPostingDetail(jobPostingNum);
-
+	}
 	@Override
 	public List<JobPostingVO> companyJobPostingList(String companyId) {
 
@@ -160,8 +160,8 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	public List<QuestionAnswerVO> getMyJobPostingQAList(String jobPostingNum) {
-		return companyMapper.getMyJobPostingQAList(jobPostingNum);
+	public List<QuestionAnswerVO> getJobPostingQAList(String jobPostingNum) {
+		return companyMapper.getJobPostingQAList(jobPostingNum);
 	}
 
 }

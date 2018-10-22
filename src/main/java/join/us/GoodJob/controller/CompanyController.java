@@ -215,7 +215,7 @@ public class CompanyController {
 	 * @param jobPostingNum
 	 * @return
 	 */
-	@PostMapping("job_posting_interviewer_list.do")
+	@PostMapping("getJobPostingInterviewerList.do")
 	public String getJobPostingInterviewerList(int jobPostingNum) {
 		//작업중
 		return "company/job_posting_interviewer_list.tiles2";
@@ -226,9 +226,9 @@ public class CompanyController {
 	 * @param jobPostingNum
 	 * @return
 	 */
-	@PostMapping("getMyJobPostingQAList.do")
-	public String getMyJobPostingQAList(String jobPostingNum, Model model) {
-		List<QuestionAnswerVO> qavo = companyService.getMyJobPostingQAList(jobPostingNum);
+	@PostMapping("getJobPostingQAList.do")
+	public String getJobPostingQAList(String jobPostingNum, Model model) {
+		List<QuestionAnswerVO> qavo = companyService.getJobPostingQAList(jobPostingNum);
 		model.addAttribute("qavo", qavo);
 		return "company/job_posting_QA_list.tiles2";
 	}

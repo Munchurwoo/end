@@ -169,7 +169,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</foreach>
 	</select>
 	
-	<select id="getMyJobPostingQAList" parameterType="string" resultType="questionAnswerVO">
+	<select id="getJobPostingQAList" parameterType="string" resultType="questionAnswerVO">
 		select qa.normal_id, qa.question, qa.answer
 		from question_answer qa, job_posting jp
 		where qa.job_posting_num=jp.job_posting_num and jp.job_posting_num=#{value}
