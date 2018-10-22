@@ -336,7 +336,7 @@ public class NormalController {
 	public String goInterviewApply(Model model,String jobPostingNum) {
 		System.out.println("구인공고 "+jobPostingNum+"번 글에 면접신청합니다.");
 		model.addAttribute("jobPostingNum", jobPostingNum);
-		return "normal/normal_go_interview_apply.tiles";
+		return "normal/normal_go_interview_apply.tiles2";
 	}
 	
 	/**
