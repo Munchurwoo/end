@@ -63,8 +63,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 구인공고등록 -->
 	<insert id="registerJobPosting" parameterType="jobPostingVO" >
+		<selectKey keyProperty="jobPostingNum" resultType="int" order="BEFORE" >
+			select job_posting_num_seq.nextval from dual
+		</selectKey>		
+		
 		insert into JOB_POSTING(job_posting_num, company_id, career_status, title, content) 
-		values(job_posting_num_seq.nextval, #{companyId}, #{careerStatus}, #{title}, #{content})
+		values(#{jobPostingNum}, #{companyId}, #{careerStatus}, #{title}, #{content})
 	</insert>
 	
 	<insert id="registerJobPostingAcademic" parameterType="map">

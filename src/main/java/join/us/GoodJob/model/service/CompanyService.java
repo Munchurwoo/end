@@ -54,6 +54,6 @@ public interface CompanyService {
 	//구인등록
 	void registerJobPosting(JobPostingVO jobPostingVO);
 	
-	//공고 질문 리스트
+	//구인 공고별 질답 리스트
 	List<QuestionAnswerVO> getJobPostingQAList(String jobPostingNum);
 }

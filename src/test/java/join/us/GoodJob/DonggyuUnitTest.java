@@ -28,6 +28,6 @@ public class DonggyuUnitTest {
 	CompanyMapper companyMapper;
 	@Test
 	public void test() {
-
+		
 	}
 }

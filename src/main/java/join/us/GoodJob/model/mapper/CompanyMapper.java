@@ -82,7 +82,7 @@ public interface CompanyMapper {
 	void registerJobPostingLoc(Map<String,Object> map);
 	//구인 모집직군 분류 등록
 	void registerJobPostingRecuitment(Map<String,Object> map);
-	//공고 질문 리스트
+	//구인 공고별 질답 리스트
 	List<QuestionAnswerVO> getJobPostingQAList(String jobPostingNum);
 
 	
