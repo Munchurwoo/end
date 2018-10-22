@@ -169,26 +169,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</foreach>
 	</select>
 	
-	<insert id="registerJobPostingDev" parameterType="map">
-		insert into portfolio_dev(company_id, dev_cat_num)
-		values(#{companyId}, #{devCatNum})
-	</insert>
-
-	<insert id="registerJobPostingEmp" parameterType="map">
-		insert into job_emp(company_id, emp_type_num)
-		values(#{companyId}, #{empTypeNum})
-	</insert>
-	
-	<insert id="registerJobPostingLoc" parameterType="map">
-		insert into job_loc(company_id, loc_num)
-		values(#{companyId}, #{locNum})
-	</insert>
-	
-	<insert id="registerJobPostingRecuitment" parameterType="map">
-		insert into job_recruitment(company_id, rc_num)
-		values(#{companyId}, #{rcNum})
-	</insert>
-	
 	<select id="getMyJobPostingQAList" parameterType="string" resultType="questionAnswerVO">
 		select qa.normal_id, qa.question, qa.answer
 		from question_answer qa, job_posting jp
