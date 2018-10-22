@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.ui.Model;
 
 import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
@@ -65,12 +66,17 @@ public interface NormalMapper {
 	//List<PortfolioVO> normalDetailPortfolioList(String normalId);
 	//포트폴리오 삭제
 	void deletePortfolio(String id);
+
+	// 구인공고 상세보기 후 면접신청하기
+	NormalMemberVO submitInterview(String normalId);
+
 	//포트폴리오 수정
 	void updatePortfolio(PortfolioVO portfolioVO);
 	//포트폴리오 삭제(portfolio_dev, portfolio_recruitment, portfolio_emp, portfolio_loc, portfolio_academic)
 	void deletePortfolioMulti(String normalId);
 	//인재검색에서 상세검색 누르고 결과페이지 출력하는 SQL 철우, 건들지 말것.
 	List<String> portfolioSearchList(PortfolioVO portfolioVO);
+
 	
 	//질의응답 질문등록
 }

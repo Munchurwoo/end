@@ -14,18 +14,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="registerNormalMember" parameterType="normalMemberVO">
 		insert into
 		normal_member(normal_id,career_status,gender)
-		values(#{id},
-		#{careerStatus}, #{gender})
+		values(#{id}, #{careerStatus}, #{gender})
 	</insert>
-
+	
 	<!-- 181018 MIRI normal_member picture_path 삭제 -->
-	<select id="selectNormalMember" parameterType="string"
-		resultType="normalMemberVO">
+	<select id="selectNormalMember" parameterType="string" resultType="normalMemberVO">
 		select m.id, m.password, m.email, m.name, m.address, m.tel,
 		nm.gender, nm.career_status
 		from normal_member nm, member m
-		where
-		nm.normal_id=m.id and m.id=#{value}
+		where nm.normal_id=m.id and m.id=#{value}
 	</select>
 
 	<update id="updateMember" parameterType="normalMemberVO">
@@ -36,98 +33,101 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<!-- 181018 MIRI normal_member picture_path 삭제 -->
 	<update id="updateNormalMember" parameterType="normalMemberVO">
-		update
-		normal_member set career_status=#{careerStatus} where normal_id=#{id}
+		update normal_member set career_status=#{careerStatus} where normal_id=#{id}
 	</update>
-
-	<!-- 181018 MIRI 일반회원, 기업회원 회원탈퇴 공통으로 묶음 -->
-	<!-- <delete id="deleteNormalMember" parameterType="string"> delete from 
-		member where id=#{id} </delete> -->
-
+	
+	<!-- 181018 MIRI 일반회원, 기업회원 회원탈퇴 공통으로 묶음  -->
+	<!-- <delete id="deleteNormalMember" parameterType="string">
+		delete from member where id=#{id}
+	</delete> -->
+	
 	<!-- 181018 MIRI selectNormalMember와 중복되어 삭제 -->
-	<!-- <select id="myPageNormalMember" resultType="normalMemberVO" parameterType="memberVO"> 
-		select m.id,m.password,m.email,m.name,m.tel,m.address,m.member_type,nm.normal_id,nm.gender,nm.career_status 
-		from member m,normal_member nm where m.id=nm.normal_id and m.id=#{id} </select> -->
-
+	<!-- <select id="myPageNormalMember" resultType="normalMemberVO" parameterType="memberVO">
+		select m.id,m.password,m.email,m.name,m.tel,m.address,m.member_type,nm.normal_id,nm.gender,nm.career_status
+		from member m,normal_member nm
+		where m.id=nm.normal_id
+		and m.id=#{id}
+	</select> -->
+	
 	<insert id="insertPortfolio" parameterType="portfolioVO">
-		insert into
-		portfolio(normal_id, title, content, picture_path)
-		values(#{normalId},
-		#{title}, #{content}, #{picturePath})
+		insert into portfolio(normal_id, title, content, picture_path)
+		values(#{normalId}, #{title}, #{content}, #{picturePath})
 	</insert>
-
+	
 	<insert id="insertPortfolioFile" parameterType="map">
-		insert into
-		portfolio_file(file_num, normal_id, file_path)
+		insert into portfolio_file(file_num, normal_id, file_path)
 		values(portfolio_file_seq.nextval, #{normalId}, #{filePath})
 	</insert>
-
+	
 	<insert id="insertPortfolioAcademic" parameterType="map">
-		insert into
-		portfolio_academic(normal_id, academic_num)
-		values(#{normalId},
-		#{academicNum})
+		insert into portfolio_academic(normal_id, academic_num)
+		values(#{normalId}, #{academicNum})
 	</insert>
-
+	
 	<insert id="insertPortfolioDev" parameterType="map">
-		insert into
-		portfolio_dev(normal_id, dev_cat_num)
+		insert into portfolio_dev(normal_id, dev_cat_num)
 		values(#{normalId}, #{devCatNum})
 	</insert>
 
 	<insert id="insertPortfolioEmp" parameterType="map">
-		insert into
-		portfolio_emp(normal_id, emp_type_num)
-		values(#{normalId},
-		#{empTypeNum})
+		insert into portfolio_emp(normal_id, emp_type_num)
+		values(#{normalId}, #{empTypeNum})
 	</insert>
-
+	
 	<insert id="insertPortfolioLoc" parameterType="map">
-		insert into
-		portfolio_loc(normal_id, loc_num)
+		insert into portfolio_loc(normal_id, loc_num)
 		values(#{normalId}, #{locNum})
 	</insert>
-
+	
 	<insert id="insertPortfolioRecuitment" parameterType="map">
-		insert into
-		portfolio_recruitment(normal_id, rc_num)
+		insert into portfolio_recruitment(normal_id, rc_num)
 		values(#{normalId}, #{rcNum})
 	</insert>
 
 	<!-- 181019 MIRI normalDetailPortfolio와 중복되어 삭제 -->
-	<!-- <select id="normalDetailPortfolioList" resultType="portfolioVO" parameterType="string"> 
-		select title,content,picture_path from portfolio where normal_id=#{normalId} 
-		</select> -->
-
-	<!-- 181018 MIRI normalId->value로 수정 -->
-	<select id="normalDetailPortfolio" resultType="portfolioVO"
+	<!-- <select id="normalDetailPortfolioList" resultType="portfolioVO"
 		parameterType="string">
-		select title, content, picture_path from portfolio where
-		normal_id=#{value}
+		select title,content,picture_path
+		from portfolio
+		where
+		normal_id=#{normalId}
+	</select> -->
+	
+	<!-- 181018 MIRI normalId->value로 수정 -->
+	<select id="normalDetailPortfolio" resultType="portfolioVO" parameterType="string">
+		select title, content, picture_path from portfolio where normal_id=#{value}
 	</select>
 	<select id="getAllPortfolioList" resultType="portfolioVO">
 
 	</select>
-
+	
 	<select id="AllFindNomarMember" resultType="normalMemberVO">
-		select
-		m.id,m.password,m.email,m.name,m.tel,m.address,m.member_type,nm.normal_id,nm.gender,nm.career_status
+		select m.id,m.password,m.email,m.name,m.tel,m.address,m.member_type,nm.normal_id,nm.gender,nm.career_status
 		from member m,normal_member nm
 		where m.id=nm.normal_id
 
 	</select>
 
 	<delete id="deletePortfolio" parameterType="string">
-		delete from portfolio
-		where normal_id=#{value}
+		delete from portfolio where normal_id=#{value}
 	</delete>
-
+	
+	<resultMap type="normalMemberVO" id="normalMemberVORM">
+		<result column="title" property="portfolio.title"/>
+		<result column="content" property="portfolio.content"/>
+		<result column="picture_path" property="portfolio.picturePath"/>
+	</resultMap>
+	<select id="submitInterview" parameterType="string" resultMap="normalMemberVORM">
+		select p.title,p.content,p.picture_path,n.normal_id,n.gender,n.career_status, m.name, m.tel, m.email, m.address
+		from normal_member n, portfolio p , member m
+		where n.normal_id = p.normal_id and n.normal_id = m.id
+		and p.normal_id=#{value}
+	</select>
+	
 	<update id="updatePortfolio" parameterType="portfolioVO">
-		update portfolio set
-		title=#{title}, content=#{content}, picture_path=#{picturePath} where
-		normal_id=#{normalId}
+		update portfolio set title=#{title}, content=#{content}, picture_path=#{picturePath} where normal_id=#{normalId}
 	</update>
-
+	
 	<delete id="deletePortfolioMulti" parameterType="string">
 		{
 		call
