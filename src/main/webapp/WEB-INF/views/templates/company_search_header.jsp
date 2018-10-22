@@ -43,7 +43,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12">
-				<form action="user-company_detail_search_list.do" method="post" id="master">
+				<form action="user-company_detail_search_list.do" id="master">
 	
 		<h5>지역</h5>
 	<c:forEach items="${requestScope.locCatList}" var="locCat" varStatus="i">

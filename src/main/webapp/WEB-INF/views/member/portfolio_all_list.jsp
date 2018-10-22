@@ -41,96 +41,126 @@
 													});//ajax 			
 										});//change
 
-						$("#SearchBtn").click(function(){
-							$("input[name=locCatNumList]:checked").each(function(){
-								var test = $(this).val();
-								console.log(test);
-							});
-							$("input[name=acaCatNumList]:checked").each(function(){
-								var test = $(this).val();
-								console.log(test);
-							});
-							$("input[name=empTypeCatNumList]:checked").each(function(){
-								var test = $(this).val();
-								console.log(test);
-							});
-							$("input[name=recruitCatNumList]:checked").each(function(){
-								var test = $(this).val();
-								console.log(test);
-							});
-							$("input[name=devCatNumList]:checked").each(function(){
-								var test = $(this).val();
-								console.log(test);
-							});
-							$("#portfolioSearchList").submit();
-						}); 
-						
+						$("#SearchBtn").click(
+								function() {
+									$("input[name=locCatNumList]:checked")
+											.each(function() {
+												var test = $(this).val();
+												console.log(test);
+											});
+									$("input[name=acaCatNumList]:checked")
+											.each(function() {
+												var test = $(this).val();
+												console.log(test);
+											});
+									$("input[name=empTypeCatNumList]:checked")
+											.each(function() {
+												var test = $(this).val();
+												console.log(test);
+											});
+									$("input[name=recruitCatNumList]:checked")
+											.each(function() {
+												var test = $(this).val();
+												console.log(test);
+											});
+									$("input[name=devCatNumList]:checked")
+											.each(function() {
+												var test = $(this).val();
+												console.log(test);
+											});
+									$("#portfolioSearchList").submit();
+								});
+
 					});
 	//ready
-					
 </script>
 
-<div></div>
-
-<h3>인재 검색</h3>
-
-
+	<div class="cta-text">
+		<h2>
+			<span>인재 상세</span> 검색하기
+		</h2>
+	</div>
+	
 <form action="user-portfolioSearchList.do" method="get"
 	id="portfolioSearchList">
-	<h5>지역</h5>
-	<c:forEach items="${requestScope.locCatList}" var="locCat"
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h3 class="panel-title">지역</h3>
+  </div>
+  <div class="panel-body">
+    <c:forEach items="${requestScope.locCatList}" var="locCat"
 		varStatus="i">
-		<input type="checkbox" id="locCatNumList" name="locCatNumList" value="${locCat.locNum}">${locCat.locName}&nbsp;
+		<input type="checkbox" id="locCatNumList" name="locCatNumList"
+			value="${locCat.locNum}">${locCat.locName}&nbsp;
 	</c:forEach>
-	<br>
+  </div>
+</div>
 
-
-	<h5>학력</h5>
-	<c:forEach items="${requestScope.acaCatList}" var="acaCat"
+<div class="panel panel-success">
+  <div class="panel-heading">
+    <h3 class="panel-title">학력</h3>
+  </div>
+  <div class="panel-body">
+   <c:forEach items="${requestScope.acaCatList}" var="acaCat"
 		varStatus="i">
-		<input type="radio" id="acaCatNumList" name="acaCatNumList" value="${acaCat.academicNum}"
-			required="required">${acaCat.academicName}&nbsp;
+		<input type="checkbox" id="acaCatNumList" name="acaCatNumList"
+			value="${acaCat.academicNum}" required="required">${acaCat.academicName}&nbsp;
 	</c:forEach>
-	<br>
+  </div>
+</div>
 
-	<h5>고용형태</h5>
-	<c:forEach items="${requestScope.empTypeCatList}" var="empTypeCat"
+<div class="panel panel-info">
+  <div class="panel-heading">
+    <h3 class="panel-title">고용 형태</h3>
+  </div>
+  <div class="panel-body">
+    <c:forEach items="${requestScope.empTypeCatList}" var="empTypeCat"
 		varStatus="i">
 		<input type="checkbox" name="empTypeCatNumList" id="empTypeCatNumList"
 			value="${empTypeCat.empTypeNum}">${empTypeCat.empTypeName}&nbsp;
 	</c:forEach>
-	<br>
+  </div>
+</div>
 
-	<h5>모집직군</h5>
-
-	<c:forEach items="${requestScope.recruitCatList}" var="recruitCat"
+<div class="panel panel-warning">
+  <div class="panel-heading">
+    <h3 class="panel-title">모집 직군</h3>
+  </div>
+  <div class="panel-body">
+   <c:forEach items="${requestScope.recruitCatList}" var="recruitCat"
 		varStatus="i">
-		<input type="checkbox" class="recruit" name="recruitCatNumList" id="recruitCatNumList"
-			value="${recruitCat.rcNum}">${recruitCat.rcName}  &thinsp;&thinsp;
+		<input type="checkbox" class="recruit" name="recruitCatNumList"
+			id="recruitCatNumList" value="${recruitCat.rcNum}">${recruitCat.rcName}  &thinsp;&thinsp;
 			<c:if test="${(i.index+1)%3==0}">
 			<br>
 		</c:if>
 	</c:forEach>
-	<input type="hidden" name="a" value="b">
-	<h5>개발분야</h5>
-	<div id="empTypeArea"></div>
+	</div>
+</div>
+<div class="panel panel-danger">
+  <div class="panel-heading">
+    <h3 class="panel-title" style="color: #dd4612">개발 분야</h3>
+  </div>
+  <div class="panel-body">
+   <input type="hidden" name="a" value="b">
+   	<div id="empTypeArea"></div>
+   
+	</div>
+</div>
+  
+
 </form>
 
 <span id="enter"></span>
-<button type="reset">초기화</button>
+<div class="cta-text">
+		<button type="reset" class="btn btn-default">초기화</button>
 
-<button type="submit" id="SearchBtn">상세 검색</button>
-<button type="reset" onclick="location.href='home.do'">홈으로</button>
+	<button type="submit" id="SearchBtn" class="btn btn-default">상세 검색</button>
+	<button type="reset" onclick="location.href='home.do'" class="btn btn-default">홈으로</button>
+</div>
 
-<!-- 구분선 -->
-
-
-<%-- <c:forEach items="${list }" var="list" varStatus="status">
-	${list.name}
-	${devCatList[status.index].devCatName}
-	${povo[status.index].content}<br>
-</c:forEach> --%>
-
+<hr>
+<!-- 검색 리스트 -->
 <h4 class="heading">
 	<div class="cta-text">
 		<h2>
@@ -138,6 +168,31 @@
 		</h2>
 	</div>
 </h4>
+
+
+<c:forEach items="${list}" var="list" varStatus="status">
+	<div class="media">
+		<a class="pull-left" href="#"> <img class="media-object"
+			src="${pageContext.request.contextPath}/
+									resources/upload/memberPicture/${povo[status.index].picturePath}"
+			width="130px" height="130px">
+		</a>
+		<div class="media-body">
+			<h4 class="media-heading">${list.name}</h4>
+			<h5>${povo[status.index].title}</h5>
+			<h6>${povo[status.index].content}</h6>
+			<!-- Nested media object -->
+			<div class="media">
+				<a
+					href="user-normalDetailPortfolioList.do?normalId=${list.normalId }">
+					개발분야 : ${devCatList[status.index].devCatName} -> 인재상세 보기 </a>
+			</div>
+		</div>
+	</div>
+	<hr>
+</c:forEach>
+<%-- 
+//2018-10-22 문철우 혹시 모르니 지우지 말아주세요. 재사용 가능성 ok
 <section id="content">
 	<div class="container">
 		<div class="row">
@@ -148,8 +203,12 @@
 						<div class="col-lg-3">
 							<div class="box">
 								<div class="box-gray aligncenter">
-									<div class="icon">
-										<i class="fa fa-desktop fa-3x"></i>
+									<div>
+										<img alt="${povo[status.index].picturePath}"
+											src="${pageContext.request.contextPath}/
+									resources/upload/memberPicture/${povo[status.index].picturePath}"
+											style="width: 100%" height="100%">
+
 									</div>
 									<h4>${list.name }</h4>
 
@@ -168,7 +227,7 @@
 			</div>
 		</div>
 	</div>
-</section>
+</section> --%>
 
 
 

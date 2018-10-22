@@ -20,9 +20,12 @@
 
 	제목 :${povo.title }<br>
 	이름 : ${nmvo.name }<br>
+	<img src="/GoodJob/resources/upload/memberPicture/${povo.picturePath}" height="100px" width="100px" ><br>
 	이메일 : ${nmvo.email }<br>
 	전화번호 : ${nmvo.tel }<br>
-	내용 : ${povo.content }<br><br>
+	내용 : ${povo.content }<br>
+	성별 : ${nmvo.gender }<br>
+	<br>
 	모집직군 : <c:forEach items="${recruitCatList}" var="recruitCatList">
 	${recruitCatList.rcName }
 	</c:forEach><br><br>

@@ -52,6 +52,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where m.id=cm.company_id
 	</select>
 	
+	
 	<select id="detailCompanyInfo" resultType="companyMemberVO" parameterType="memberVO">
 		select
 		cm.company_id,m.password,m.name,m.address,m.tel,m.email,cm.introduction,
@@ -128,16 +129,43 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="content" property="jobPostingVO.content"/>
 	</resultMap>
 	<select id="getAllJobPostingList" resultMap="companyMemberVORM2">
-		select 
+	select company_id, introduction, company_type, industry, sales, date_of_establishment, num_of_employees,
+	job_posting_num, career_status, title, content, address, tel, email , name 
+	from
+	(select row_number() over(order by j.job_posting_num) as rnum,
 	cm.company_id, cm.introduction, cm.company_type, cm.industry, cm.sales, cm.date_of_establishment, cm.num_of_employees,
 	j.job_posting_num, j.career_status, j.title, j.content, m.address, m.tel, m.email , m.name
 	from job_posting j , company_member cm, member m
-	where j.company_id = cm.company_id and cm.company_id=m.id
+	where j.company_id = cm.company_id and cm.company_id=m.id) 
+	where rnum between #{startRowNumber} and #{endRowNumber}
 	</select>
-	<select id="getAllJobPostingListByJobPostingNum" resultMap="companyMemberVORM2" parameterType="java.util.List">
-		select 
-	cm.company_id, cm.introduction, cm.company_type, cm.industry, cm.sales, cm.date_of_establishment, cm.num_of_employees,
+	
+	<select id="getAlljobPostingCount" resultType="int">
+		select count(*)
+		from job_posting j , company_member cm, member m
+		where j.company_id = cm.company_id and cm.company_id=m.id
+	</select>
+	
+	<select id="getAllJobPostingListByJobPostingNum" resultMap="companyMemberVORM2" parameterType="map">
+	
+	select 
+	company_id, introduction, company_type, industry, sales, date_of_establishment, num_of_employees,
+	job_posting_num, career_status, title, content, address, tel, email , name
+	from
+	 (select row_number() over(order by j.job_posting_num) as rnum, cm.company_id, cm.introduction, cm.company_type, cm.industry, cm.sales, cm.date_of_establishment, cm.num_of_employees,
 	j.job_posting_num, j.career_status, j.title, j.content, m.address, m.tel, m.email , m.name
+	from job_posting j , company_member cm, member m
+	where j.company_id = cm.company_id and cm.company_id=m.id and 
+	j.job_posting_num in 
+	<foreach collection="jobPostingNumList" item="jobPostingNum" open="(" separator="," close=")">
+		#{jobPostingNum}
+	</foreach>
+	)
+	where rnum between #{pagingBean.startRowNumber} and #{pagingBean.endRowNumber}
+	</select>
+	
+	<select id="getAllJobPostingListByJobPostingNumCount"  resultType="int">
+	select count(*)
 	from job_posting j , company_member cm, member m
 	where j.company_id = cm.company_id and cm.company_id=m.id and 
 	j.job_posting_num in 
@@ -197,6 +225,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select qa.normal_id, qa.question, qa.answer
 		from question_answer qa, job_posting jp
 		where qa.job_posting_num=jp.job_posting_num and jp.job_posting_num=#{value}
+	</select>
+	
+	<resultMap type="interviewVO" id="interviewVORM">
+		<result column="name" property="normalMemberVO.name"/>
+		<result column="normal_id" property="normalMemberVO.id"/> 
+	</resultMap>
+	<select id="getAllInterviewerList" resultMap="interviewVORM">
+		select i.interview_num,i.job_posting_num,i.title,nm.normal_id,m.name
+		from interview i, normal_member nm , member m
+		where i.normal_id = nm.normal_id and nm.normal_id = m.id
 	</select>
 </mapper> 		
  
