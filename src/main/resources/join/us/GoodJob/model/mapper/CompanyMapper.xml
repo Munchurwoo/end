@@ -102,7 +102,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="title" property="jobPostingVO.title"/>
 		<result column="content" property="jobPostingVO.content"/>
 	</resultMap>
-	<select id="jobPostringDetail" parameterType="string" resultMap="companyMemberVORM">
+	<select id="jobPostingDetail" parameterType="string" resultMap="companyMemberVORM">
 	select 
 	cm.company_id, cm.introduction, cm.company_type, cm.industry, cm.sales, cm.date_of_establishment, cm.num_of_employees,
 	j.job_posting_num, j.career_status, j.title, j.content, m.address, m.tel, m.email , m.name
@@ -134,13 +134,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	from job_posting j , company_member cm, member m
 	where j.company_id = cm.company_id and cm.company_id=m.id
 	</select>
-	<select id="getAllJobPostingListByJobPostingNum" resultMap="companyMemberVORM2">
+	<select id="getAllJobPostingListByJobPostingNum" resultMap="companyMemberVORM2" parameterType="java.util.List">
 		select 
 	cm.company_id, cm.introduction, cm.company_type, cm.industry, cm.sales, cm.date_of_establishment, cm.num_of_employees,
 	j.job_posting_num, j.career_status, j.title, j.content, m.address, m.tel, m.email , m.name
 	from job_posting j , company_member cm, member m
-	where j.company_id = cm.company_id and cm.company_id=m.id and j.job_posting_num=#{value}
+	where j.company_id = cm.company_id and cm.company_id=m.id and 
+	j.job_posting_num in 
+	<foreach collection="list" item="jobPostingNum" open="(" separator="," close=")">
+		#{jobPostingNum}
+	</foreach>
 	</select>
+	
 	<select id="findJobPostingByCatNumList" parameterType="map" resultType="string">
 	select distinct job_posting_num
 		from( 
@@ -151,7 +156,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		   and je.job_posting_num=jl.job_posting_num
 		   and jl.job_posting_num=ja.job_posting_num
 		 )
-	where dev_cat_num in 
+	where dev_cat_num in
 	<foreach collection="devCatNumList" item="devCatNum" separator="," open="(" close=")">
 		#{devCatNum}
 	</foreach>
@@ -173,7 +178,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</foreach>
 	</select>
 	
-	
+	<select id="getJobPostingQAList" parameterType="string" resultType="questionAnswerVO">
+		select qa.normal_id, qa.question, qa.answer
+		from question_answer qa, job_posting jp
+		where qa.job_posting_num=jp.job_posting_num and jp.job_posting_num=#{value}
+	</select>
 </mapper> 		
  
  

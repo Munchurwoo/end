@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import join.us.GoodJob.model.service.CompanyService;
 import join.us.GoodJob.model.service.MemberService;
@@ -23,6 +24,7 @@ import join.us.GoodJob.model.vo.CompanyMemberVO;
 import join.us.GoodJob.model.vo.JobPostingVO;
 import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.PostListVO;
+import join.us.GoodJob.model.vo.QuestionAnswerVO;
 
 @Controller
 public class CompanyController {
@@ -112,24 +114,18 @@ public class CompanyController {
 		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
 		return "company/job_posting_register_form.tiles2";
 	}
-	/**
-	 * 
-	 * 이부분 오류나서 잠깐 주석처리 해놓을게요. 
-	 * @param jobPostingVO
-	 * @param session
-	 * @return
-	 */
-	/*@ResponseBody
+	
 	@RequestMapping("registerJobPosting.do")
-	public String registerPortfolio(JobPostingVO jobPostingVO, HttpSession session) {
+	public String registerJobPosting(JobPostingVO jobPostingVO, HttpSession session) {
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		jobPostingVO.setCompanyId(mvo.getId());
 		//jobPostingVO.setJobPostingNum(jobPostingVO.getJobPostingNum());
 		System.out.println(jobPostingVO);
 		companyService.registerJobPosting(jobPostingVO);
 		return "redirect:home.do";
-	}*/
+	}
 
+	//기업정보 전체 리스트
 	@RequestMapping("user-companyInfo.do")
 	public String allConmapnyInfo(Model model, String pageNum) {
 		PostListVO postListVO = companyService.getAllCompanyList(pageNum);
@@ -204,11 +200,15 @@ public class CompanyController {
 		List<CompanyMemberVO> cmvoList=companyService.getSomeCompanyList(catNumParamVO);
 		model.addAttribute("cmvoList", cmvoList);
 		return "company/company_detail_search_list.company_search_tiles";
-	}
+	} 
+	
+	// 면접신청하기( 면접신청 테이블 생성완료했고 VO 생성해야함)
 	@PostMapping("submitInterview.do")
-	public String submitInterview(String normalId,Model model) {
-		model.addAttribute("portfolio", normalService.normalDetailPortfolio(normalId));
-		return "company/company_InterviewApplyList.tiles2";
+	public ModelAndView submitInterview(String normalId,Model model) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("portfolio", normalService.submitInterview(normalId));
+		mav.setViewName("company/company_InterviewApplyList.tiles2");
+		return mav;
 		
 	}
 }

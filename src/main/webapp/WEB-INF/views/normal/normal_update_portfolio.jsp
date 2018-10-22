@@ -9,7 +9,7 @@
 			var dataString='';
 			$.ajax({
 				type:"get",
-				url:"getDevCatVOListAjax.do",
+				url:"user-getDevCatVOListAjax.do",
 				dataType:"json",
 				data:$("#updatePortfolioForm").serialize(),
 				success:function(catList){

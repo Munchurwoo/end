@@ -110,7 +110,6 @@ public class NormalController {
 	@RequestMapping("registerPortfolioForm.do")
 	public String registerPortfolioForm(Model model) {
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
-		model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));
 		model.addAttribute("empTypeCatList", memberService.getEmpTypeCatVOList());
 		model.addAttribute("locCatList", memberService.getLocCatVOList());
 		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
@@ -327,6 +326,19 @@ public class NormalController {
 	@RequestMapping("goInterviewApply.do")
 	public String goInterviewApply() {
 		return "normal/normal_go_interview_apply.tiles";
+	}
+	
+	/**
+	 * 181021 yosep 이력서 등록 폼에서 X버튼클릭시 사진 삭제
+	 */
+	@RequestMapping("normalPictureDelete")	
+	@ResponseBody
+	public String normalPictureDelete(String deletePicturename) {	
+		String workspaceDeletePath="C:/java-kosta/framework-workspace2/goodjob/src/main/webapp/resources/upload/memberPicture/"+deletePicturename;
+		File file = new File(workspaceDeletePath);
+		file.delete();
+		System.out.println(deletePicturename+"  사진 삭제 완료");
+		return "success";
 	}
 
 	/**
