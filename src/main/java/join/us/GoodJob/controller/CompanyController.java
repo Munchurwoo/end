@@ -115,7 +115,7 @@ public class CompanyController {
 	}
 	@ResponseBody
 	@RequestMapping("registerJobPosting.do")
-	public String registerPortfolio(JobPostingVO jobPostingVO, HttpSession session) {
+	public String registerJobPosting(JobPostingVO jobPostingVO, HttpSession session) {
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		jobPostingVO.setCompanyId(mvo.getId());
 		jobPostingVO.setJobPostingNum(jobPostingVO.getJobPostingNum());
