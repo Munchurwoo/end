@@ -2,7 +2,6 @@ package join.us.GoodJob.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -25,7 +24,6 @@ import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.JobPostingVO;
 import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.PostListVO;
-import join.us.GoodJob.model.vo.QuestionAnswerVO;
 
 @Controller
 public class CompanyController {
@@ -40,11 +38,20 @@ public class CompanyController {
 	private String serverUploadPath;*/	
 	private String workspaceUploadPath;
 
+	/**
+	 * 기업회원 회원가입 폼으로 이동
+	 * @return
+	 */
 	@RequestMapping("user-registerCompanyMemberForm.do")
 	public String registerCompanyMemberForm() {
 		return "company/company_register_form.tiles2";
 	}
 
+	/**
+	 * 기업회원 회원가입 작업
+	 * @param companyMemberVO
+	 * @return
+	 */
 	@PostMapping("user-registerCompanyMember.do")
 	public String registerCompanyMember(CompanyMemberVO companyMemberVO) {
 		companyService.registerCompanyMember(companyMemberVO);
@@ -105,7 +112,12 @@ public class CompanyController {
 		}
 		return "home.tiles";
 	}*/
-
+	
+	/**
+	 *  구인공고 폼으로 이동
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("registerJobPostingForm.do")
 	public String registerJobPostingForm(Model model) {
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
@@ -116,6 +128,12 @@ public class CompanyController {
 		return "company/job_posting_register_form.tiles2";
 	}
 
+	/**
+	 * 구인공고 등록
+	 * @param jobPostingVO
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("registerJobPosting.do")
 	public String registerJobPosting(JobPostingVO jobPostingVO, HttpSession session) {
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
@@ -127,21 +145,37 @@ public class CompanyController {
 	}
 
 
-	//기업정보 전체 리스트
-	@RequestMapping("user-companyInfo.do")
-	public String allConmapnyInfo(Model model, String pageNum) {
+	/**
+	 *  기업정보 전체보기
+	 * @param model
+	 * @param pageNum
+	 * @return
+	 */
+	@RequestMapping("user-allCompanyInfo.do")
+	public String allCompanyInfo(Model model, String pageNum) {
 		PostListVO postListVO = companyService.getAllCompanyList(pageNum);
 		model.addAttribute("postListVO", postListVO);		
 		return "company/company_info.tiles2";
 	}
-
+	/**
+	 *  기업정보 상세보기
+	 * @param companyId
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("user-detailCompanyInfo.do")
 	public String detailCompanyInfo(String companyId,Model model) {
 		model.addAttribute("cmvo", companyService.detailCompanyInfo(companyId));
 		return "company/company_detail_Info.tiles2";
 	}
 
-	
+	/**
+	 *  구인공고 상세보기
+	 * @param jobPostingNum
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("job_posting_detail.do")
 	public String job_posting_detail(String jobPostingNum, Model model, HttpSession session) {
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNum(jobPostingNum));
@@ -152,12 +186,24 @@ public class CompanyController {
 		model.addAttribute("jpvo", companyService.jobPostingDetail(jobPostingNum));
 		return "company/job_posting_detail.tiles2";
 	}
-
+	
+	/**
+	 *  한 기업이 등록한 구인공고리스트 보기 
+	 * @param companyId 기업회원 아이디
+	 * @param model
+	 * @return 특정 기업이 등록한 구인공고 리스트
+	 */
 	@RequestMapping("companyJobPostingList.do")
 	public String companyJobPostingList(String companyId,Model model) {
 		model.addAttribute("jobPostingList", companyService.companyJobPostingList(companyId));
 		return "company/company_job_postingList.tiles2";
 	}
+	/**
+	 * 기업로고사진 파일 등록 Ajax
+	 * @param uploadLogo
+	 * @param request
+	 * @return
+	 */
 	@PostMapping("user-uploadCompanyLogo.do")
 	@ResponseBody
 	public String uploadCompanyLogo(MultipartFile uploadLogo,HttpServletRequest request) {
@@ -176,7 +222,11 @@ public class CompanyController {
 		}
 		return uploadLogo.getOriginalFilename();
 	}
-		
+	/**
+	 * 채용정보 전체보기
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("user-getAllJobPostingList.do")
 	public String getAllJobPostingList(Model model) {
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
@@ -187,8 +237,16 @@ public class CompanyController {
 		model.addAttribute("jobPostingList", companyService.getAllJobPostingList());
 		return "company/company_get_all_jobPosting_list.company_search_tiles";
 	}
+	
+	/**
+	 * 채용정보 검색 결과 보기
+	 * @param model
+	 * @param map
+	 * @param catNumParamVO
+	 * @return
+	 */
 	@PostMapping("user-company_detail_search_list.do")
-	public String findJobPostingByCatNumList(Model model, Map map, CatNumParamVO catNumParamVO) {
+	public String findJobPostingByCatNumList(Model model, CatNumParamVO catNumParamVO) {
 		// 아래 6줄은 상세조건 폼
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
 		model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));

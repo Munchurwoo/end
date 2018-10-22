@@ -17,7 +17,7 @@
 					<li class="active"><a href="home.do">Home</a></li>
 					<li><a href="user-getAllJobPostingList.do">채용정보</a>
 					<li><a href="user-portfolioAllList.do">인재검색</a></li>
-					<li><a href="user-companyInfo.do">기업정보</a></li>
+					<li><a href="user-allCompanyInfo.do">기업정보</a></li>
 					<c:choose>
 						<c:when test="${empty sessionScope.mvo}">
 							<li><a href="user-loginForm.do">로그인</a></li>
