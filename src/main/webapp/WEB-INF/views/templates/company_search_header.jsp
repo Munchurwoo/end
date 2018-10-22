@@ -9,7 +9,7 @@
 			var dataString='';				
 			$.ajax({
 				type:"get",
-				url:"getDevCatVOListAjax.do",
+				url:"user-getDevCatVOListAjax.do",
 				dataType:"json",
 				data:$("#master").serialize(),
 				success:function(catList){		
@@ -33,7 +33,7 @@
 			<h4 class="heading">
 				<div class="cta-text">
 					<h2>
-						<span>채용정보 전체조회</span>
+						<span>채용정보 검색</span>
 					</h2>
 				</div>
 			</h4>

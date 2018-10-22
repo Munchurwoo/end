@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-${portfolio}
+${requestScope.portfolio}
 </body>
 </html>

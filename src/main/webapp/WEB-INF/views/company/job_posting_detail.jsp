@@ -47,16 +47,6 @@
 	</c:forEach>
 	</td>
 	</tr>
-	
-	<tr>
-	<th>학력</th>
-	<td>
-	<c:forEach items="${acaCatList }" var="acaCatList">
-		${acaCatList.academicName }&nbsp;/&nbsp;
-	</c:forEach>
-	</td>
-	</tr>
-	
 	<tr>
 	<th>학력</th>
 	<td>
@@ -141,4 +131,13 @@
 	</c:when>
 </c:choose>
 
+<!-- 181020 MIRI 세션에 있는 회원이 직접 올린 구인 공고 글이면 면접 신청자 리스트를 볼 수 있음 (작억중) -->
+	<c:if test="${sessionScope.mvo.id == requestScope.jpvo.companyId}">
+		<form action="getJobPostingInterviewerList.do?jobPostingNum=${requestScope.jpvo.jobPostingVO.jobPostingNum}" method="post">
+			<input type="submit" value="면접 신청자 리스트">
+		</form>
+		<form action="getJobPostingQAList.do?jobPostingNum=${requestScope.jpvo.jobPostingVO.jobPostingNum}" method="post">
+			<input type="submit" value="구인 공고 질답 리스트">
+		</form>
+	</c:if>
 

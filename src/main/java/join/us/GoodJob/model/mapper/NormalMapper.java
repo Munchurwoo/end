@@ -54,6 +54,7 @@ public interface NormalMapper {
 	//포트폴리오 수정
 	
 	/**
+	 * 10-22 am 8:39 최종수정 cherwoo
 	 * 인재정보 need data 
 	 * 개인회원 모든 정보 받아오기 
 	 * @return
@@ -74,7 +75,12 @@ public interface NormalMapper {
 	void updatePortfolio(PortfolioVO portfolioVO);
 	//포트폴리오 삭제(portfolio_dev, portfolio_recruitment, portfolio_emp, portfolio_loc, portfolio_academic)
 	void deletePortfolioMulti(String normalId);
+
 	InterviewVO iterviewApply(InterviewVO interviewVO);
+
+	//인재검색에서 상세검색 누르고 결과페이지 출력하는 SQL 철우, 건들지 말것.
+	List<String> portfolioSearchList(PortfolioVO portfolioVO);
+
 
 	
 	//질의응답 질문등록
