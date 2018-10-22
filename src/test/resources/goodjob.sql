@@ -22,6 +22,7 @@ drop table portfolio_dev cascade constraint;
 drop table academic_category cascade constraint;
 drop table job_academic cascade constraint;
 drop table portfolio_academic cascade constraint;
+drop table interview cascade constraint;
 
 drop sequence job_posting_num_seq;
 drop sequence academic_num_seq;
@@ -31,6 +32,7 @@ drop sequence emp_type_num_seq;
 drop sequence rc_num_seq;
 drop sequence qa_num_seq;
 drop sequence portfolio_file_seq;
+drop sequence interview_num_seq 
 
 		
 
@@ -196,10 +198,10 @@ create table interview(
 );
 create sequence interview_num_seq start with 2001;
 
-insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'hsj',1001 ,'면접신청합니다', '언제갈까요?')
-insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'qqqq',1001 ,'면접보러갈게요', '불러주세요~!~!~!')
-insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'miri', 1002,'포트폴리오확인하시고 연락주세요', '내일가겠습니다~')
-insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'yosep', 1002,'꼭 가고싶습니다~!', '전화번호로 연락주세요~')
+insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'hsj',1001 ,'면접신청합니다', '언제갈까요?');
+insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'qqqq',1001 ,'면접보러갈게요', '불러주세요~!~!~!');
+insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'miri', 1002,'포트폴리오확인하시고 연락주세요', '내일가겠습니다~');
+insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'yosep', 1002,'꼭 가고싶습니다~!', '전화번호로 연락주세요~');
 
 
 
