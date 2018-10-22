@@ -64,7 +64,9 @@ public class NormalController {
 	@RequestMapping("normal_mypage.do")
 	// 181018 MIRI selectNormalMember와 중복으로 변경
 	public String selectNormalMember(String normalId, Model model, HttpSession session) {
+		
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		model.addAttribute("povo",normalService.normalDetailPortfolio(mvo.getId()));
 		if (mvo != null) {
 			NormalMemberVO nmvo = normalService.selectNormalMember(mvo.getId());
 			model.addAttribute("nmvo", nmvo);

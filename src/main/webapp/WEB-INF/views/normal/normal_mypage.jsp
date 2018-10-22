@@ -50,8 +50,14 @@
   </tr> 
 </table>
 <button class="btn-1" onclick="javascript:location.href='updateNormalMemberForm.do'" style="height:40px; width:100px;">회원정보수정</button>
+<c:choose>
+<c:when test="${empty povo.title }">
 <button class="btn-1" onclick="javascript:location.href='registerPortfolioForm.do'" style="height:40px; width:100px;">이력서등록</button>
+</c:when>
+<c:otherwise>
 <button class="btn-1" onclick="javascript:location.href='normalDetailPortfolio.do?normalId=${requestScope.nmvo.id }'" style="height:40px; width:100px;">이력서보기</button>
+</c:otherwise>
+</c:choose>
 <button class="btn-1" onclick="deleteNormalMember()" style="height:40px; width:100px;">회원탈퇴</button>
 
 </div>
