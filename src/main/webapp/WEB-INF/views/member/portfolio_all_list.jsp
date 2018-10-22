@@ -138,6 +138,7 @@
 		</h2>
 	</div>
 </h4>
+
 <section id="content">
 	<div class="container">
 		<div class="row">
@@ -148,8 +149,10 @@
 						<div class="col-lg-3">
 							<div class="box">
 								<div class="box-gray aligncenter">
-									<div class="icon">
-										<i class="fa fa-desktop fa-3x"></i>
+									<div>
+									<img alt="${povo[status.index].picturePath}" src="${pageContext.request.contextPath}/
+									resources/upload/memberPicture/${povo[status.index].picturePath}" style="width:100%" height="100%">
+									
 									</div>
 									<h4>${list.name }</h4>
 
