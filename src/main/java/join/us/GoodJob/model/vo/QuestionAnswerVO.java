@@ -2,6 +2,7 @@ package join.us.GoodJob.model.vo;
 
 public class QuestionAnswerVO {
 	private String normalId;
+	private String qaNum;
 	private String jobPostingNum;
 	private String question;
 	private String answer;
@@ -9,7 +10,7 @@ public class QuestionAnswerVO {
 		super();
 		
 	}
-	public QuestionAnswerVO(String normalId, String jobPostingNum, String question, String answer) {
+	public QuestionAnswerVO(String normalId, String qaNum, String jobPostingNum, String question, String answer) {
 		super();
 		this.normalId = normalId;
 		this.jobPostingNum = jobPostingNum;
@@ -21,6 +22,12 @@ public class QuestionAnswerVO {
 	}
 	public void setNormalId(String normalId) {
 		this.normalId = normalId;
+	}
+	public String getQaNum() {
+		return qaNum;
+	}
+	public void setQaNum(String qaNum) {
+		this.qaNum = qaNum;
 	}
 	public String getJobPostingNum() {
 		return jobPostingNum;
@@ -42,7 +49,7 @@ public class QuestionAnswerVO {
 	}
 	@Override
 	public String toString() {
-		return "QuestionAnswerVO [normalId=" + normalId + ", jobPostingNum=" + jobPostingNum + ", question=" + question
-				+ ", answer=" + answer + "]";
+		return "QuestionAnswerVO [normalId=" + normalId + ", qaNum=" + qaNum + ", jobPostingNum=" + jobPostingNum
+				+ ", question=" + question + ", answer=" + answer + "]";
 	}
 }

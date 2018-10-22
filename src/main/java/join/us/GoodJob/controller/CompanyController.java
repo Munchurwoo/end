@@ -233,4 +233,33 @@ public class CompanyController {
 		model.addAttribute("qavo", qavo);
 		return "company/job_posting_QA_list.tiles2";
 	}
+	/**
+	 * 181022 MIRI Q&A 답변 수정
+	 * @param QANum
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("updateQAToAnswer.do")
+	public QuestionAnswerVO updateQAToAnswer(String QANum, String answer, Model model) {
+		QuestionAnswerVO qavo = companyService.getJobPostingQAByQANum(QANum);
+		qavo.setAnswer(answer);
+		companyService.updateQAToAnswer(qavo);
+		qavo = companyService.getJobPostingQAByQANum(QANum);
+		model.addAttribute("qavo", qavo);
+		return qavo;
+	}
+	/**
+	 * 181022 MIRI Q&A 답변 삭제
+	 * @param QANum
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("deleteQAToAnswer.do")
+	public QuestionAnswerVO deleteQAToAnswer(String QANum, Model model) {
+		QuestionAnswerVO qavo = companyService.getJobPostingQAByQANum(QANum);
+		companyService.deleteQAToAnswer(QANum);
+		qavo = companyService.getJobPostingQAByQANum(QANum);
+		model.addAttribute("qavo", qavo);
+		return qavo;
+	}
 }

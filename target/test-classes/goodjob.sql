@@ -209,7 +209,7 @@ create table question_answer(
    normal_id varchar2(100),
    job_posting_num number,
    question varchar2(200) not null,
-   answer varchar2(500) not null,
+   answer varchar2(500) default null,
    constraint fk_member_qna foreign key(normal_id) references normal_member(normal_id) on delete set null,
    constraint fk_job_posting_num_qna foreign key(job_posting_num) references job_posting(job_posting_num) on delete cascade
 );
@@ -222,6 +222,17 @@ insert into QUESTION_ANSWER(qa_num, normal_id, job_posting_num, question, answer
 insert into QUESTION_ANSWER(qa_num, normal_id, job_posting_num, question, answer) values(qa_num_seq.nextval, 'qqqq', 1002, '졸업 예정자도 지원 가능한가요?', '네. 가능합니다.');
 
 select * from question_answer;
+select * from job_posting;
+
+select qa.qa_num, qa.question, qa.answer
+from question_answer qa, job_posting jp
+where qa.job_posting_num=jp.job_posting_num and jp.job_posting_num=1001
+
+update question_answer set answer='없습니다.' where qa_num=706
+update question_answer set answer='3명.' where qa_num=707
+update question_answer set answer='중식은 따로 지원되지 않습니다.' where qa_num=708
+
+update QUESTION_ANSWER set answer='6명 입니다.' where qa_num=702;
 ---------------------------------------------------------------------
 
 --모집직군분류와 PK 시퀀스

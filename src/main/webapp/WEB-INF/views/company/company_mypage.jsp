@@ -68,7 +68,6 @@
 </div>
 <div class="col-sm-3"></div>
 </div>
-<a href="">면접신청 명단 리스트</a>
 <a href="updateCompanyMemberForm.do">회원정보수정</a><br><br>
 <a href="registerJobPostingForm.do">구인등록</a><br><br>
 <button class="btn-1" onclick="deleteCompanyMember()" style="height:40px; width:150px;">회원탈퇴</button><br><br>
