@@ -123,10 +123,11 @@ public class NormalController {
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping("registerPortfolio.do")
+	@PostMapping("registerPortfolio.do")
 	public String registerPortfolio(PortfolioVO portfolioVO, HttpSession session) {
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		portfolioVO.setNormalId(mvo.getId());
+
 		System.out.println("이력서 등록 시작");
 		// 181019 MIRI 포트폴리오 등록/수정 동시에 활용하기위해 flag를 줌
 		normalService.registerPortfolio(portfolioVO, true);
