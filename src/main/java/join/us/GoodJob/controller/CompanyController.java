@@ -112,7 +112,14 @@ public class CompanyController {
 		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
 		return "company/job_posting_register_form.tiles2";
 	}
-	@ResponseBody
+	/**
+	 * 
+	 * 이부분 오류나서 잠깐 주석처리 해놓을게요. 
+	 * @param jobPostingVO
+	 * @param session
+	 * @return
+	 */
+	/*@ResponseBody
 	@RequestMapping("registerJobPosting.do")
 	public String registerPortfolio(JobPostingVO jobPostingVO, HttpSession session) {
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
@@ -120,7 +127,7 @@ public class CompanyController {
 		jobPostingVO.setJobPostingNum(jobPostingVO.getJobPostingNum());
 		companyService.registerJobPosting(jobPostingVO);
 		return "redirect:home.do";
-	}
+	}*/
 
 	@RequestMapping("user-companyInfo.do")
 	public String allConmapnyInfo(Model model, String pageNum) {

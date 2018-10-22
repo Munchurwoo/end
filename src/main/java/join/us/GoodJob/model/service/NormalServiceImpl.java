@@ -125,4 +125,10 @@ public class NormalServiceImpl implements NormalService {
 		normalMapper.deletePortfolioMulti(normalId);
 	}
 
+	@Override
+	public List<String> portfolioSearchList(PortfolioVO portfolioVO) {
+		// TODO Auto-generated method stub
+		return normalMapper.portfolioSearchList(portfolioVO);
+	}
+
 }

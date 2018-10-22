@@ -29,8 +29,10 @@ public interface NormalService {
 	//181019 MIRI normalDetailPortfolio와 중복되어 주석
 	//List<PortfolioVO> normalDetailPortfolioList(String normalId);
 	
-	//개인회원 모든 정보 받아오기
+	//개인회원 모든 정보 받아오기 철우 건들지 말아주세요. 
 	List<NormalMemberVO> AllFindNomarMember();
+	//인재검색에서 조건별 검색 후, 검색결과 출력 service
+	List<String> portfolioSearchList(PortfolioVO portfolioVO);
 	
 	//개인회원  id 를 활용하여 포트폴리오 모든 정보 출력 
 	PortfolioVO portFolioVOById(String nomalId);
