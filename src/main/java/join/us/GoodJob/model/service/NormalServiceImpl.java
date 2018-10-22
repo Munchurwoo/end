@@ -133,15 +133,10 @@ public class NormalServiceImpl implements NormalService {
 	}
 
 	@Override
-	public InterviewVO iterviewApply(InterviewVO interviewVO) {
-		
-		return normalMapper.iterviewApply(interviewVO);
+	public void interviewApply(InterviewVO interviewVO) {
+		normalMapper.interviewApply(interviewVO);
 	}
 
-	@Override
-	public NormalMemberVO submitInterview(String normalId) {
-		
-		return normalMapper.submitInterview(normalId);
-	}
+	
 
 }

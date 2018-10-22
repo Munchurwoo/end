@@ -43,6 +43,6 @@ public interface NormalService {
 	//181019 MIRI 포트폴리오 삭제(portfolio_dev, portfolio_recruitment, portfolio_emp, portfolio_loc, portfolio_academic)
 	void deletePortfolioMulti(String normalId);
 	
-	InterviewVO iterviewApply(InterviewVO interviewVO);
-	Object submitInterview(String normalId);
+	void interviewApply(InterviewVO interviewVO);
+	
 }

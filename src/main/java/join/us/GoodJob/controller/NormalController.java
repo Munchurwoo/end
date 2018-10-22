@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import join.us.GoodJob.model.service.MemberService;
 import join.us.GoodJob.model.service.NormalService;
 import join.us.GoodJob.model.vo.DevCatVO;
+import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PortfolioVO;
@@ -377,4 +378,10 @@ public class NormalController {
 
 		return "member/portfolio_search_list.tiles2";
 	}
+	// 면접신청하기
+		@RequestMapping("submitInterviewForm.do")
+		public String submitInterviewForm(InterviewVO interviewVO) {
+			normalService.interviewApply(interviewVO);
+			return "redirect:home.do";
+		}
 }
