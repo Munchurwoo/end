@@ -228,13 +228,14 @@ public class CompanyController {
 	 * @return
 	 */
 	@RequestMapping("user-getAllJobPostingList.do")
-	public String getAllJobPostingList(Model model) {
+	public String getAllJobPostingList(Model model,String pageNum) {
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
 		model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));
 		model.addAttribute("empTypeCatList", memberService.getEmpTypeCatVOList());
 		model.addAttribute("locCatList", memberService.getLocCatVOList());
 		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
-		model.addAttribute("jobPostingList", companyService.getAllJobPostingList());
+		PostListVO postListVO = companyService.getAllJobPostingList(pageNum);
+		model.addAttribute("postListVO", postListVO);
 		return "company/company_get_all_jobPosting_list.company_search_tiles";
 	}
 	
@@ -245,35 +246,28 @@ public class CompanyController {
 	 * @param catNumParamVO
 	 * @return
 	 */
-	@PostMapping("user-company_detail_search_list.do")
-	public String findJobPostingByCatNumList(Model model, CatNumParamVO catNumParamVO) {
+	@RequestMapping("user-company_detail_search_list.do")
+	public String findJobPostingByCatNumList(Model model, CatNumParamVO catNumParamVO,String pageNum) {
 		// 아래 6줄은 상세조건 폼
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
 		model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));
 		model.addAttribute("empTypeCatList", memberService.getEmpTypeCatVOList());
 		model.addAttribute("locCatList", memberService.getLocCatVOList());
 		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
-		model.addAttribute("jobPostingList", companyService.getAllJobPostingList());
+		model.addAttribute("jobPostingList", companyService.getAllJobPostingList(pageNum));
 		//System.out.println(catNumParamVO);
 
 		//카테고리 번호들로 기업 게시글 리스트 불러옴
-		List<CompanyMemberVO> cmvoList=companyService.getSomeCompanyList(catNumParamVO);
-		model.addAttribute("cmvoList", cmvoList);
+		PostListVO postListVO = companyService.findJobPostingByCatNumList(catNumParamVO,pageNum);
+		System.out.println(postListVO.getJobPostingList());
+		model.addAttribute("postListVO", postListVO);
 		return "company/company_detail_search_list.company_search_tiles";
 	} 
 	
-	// 면접신청자 정보 상세보기
-	@RequestMapping("getInterviewerDetailInfo.do")
-	public ModelAndView getInterviewerDetailInfo(Model model) {
-		ModelAndView mav=new ModelAndView();
-		mav.addObject("InterviewerList", companyService.getInterviewerDetailInfo());
-		mav.setViewName("company/주소변경해야함");
-		return mav;
-	}
 	@RequestMapping("getAllInterviewerList.do")
 	public String getAllInterviewerList(Model model) {
 		model.addAttribute("interviewerList", companyService.getAllInterviewerList());
-		return "company/company_InterviewApplyList.tiles";
+		return "company/company_InterviewApplyList.tiles2";
 	}
 	
 

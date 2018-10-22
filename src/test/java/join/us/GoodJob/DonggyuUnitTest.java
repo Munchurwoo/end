@@ -31,9 +31,9 @@ public class DonggyuUnitTest {
 	CompanyMapper companyMapper;
 	@Test
 	public void test() {
-		PortfolioVO pvo=normalMapper.normalDetailPortfolio("qqqq");
-		System.out.println(pvo);
-		NormalMemberVO nmvo=normalMapper.selectNormalMember("qqqq");
-		System.out.println(nmvo);
+		String normalId="yosep";
+		System.out.println(normalMapper.selectNormalMember(normalId));
+		System.out.println(normalMapper.normalDetailPortfolio(normalId));
+		System.out.println(memberMapper.getDevCatVOListByNormalId(normalId));
 	}
 }

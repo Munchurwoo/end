@@ -67,7 +67,7 @@ public class NormalMemberVO extends MemberVO {
    }
    @Override
    public String toString() {
-      return "NormalMemberVO [normalId=" + normalId + ", careerStatus=" + careerStatus + ", gender=" + gender
+      return super.toString()+"NormalMemberVO [normalId=" + normalId + ", careerStatus=" + careerStatus + ", gender=" + gender
             + ", portfolio=" + portfolio + ", questionAnswerVOList=" + questionAnswerVOList + "]";
    }
    
