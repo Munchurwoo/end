@@ -113,12 +113,13 @@ public class CompanyController {
 		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
 		return "company/job_posting_register_form.tiles2";
 	}
-	@ResponseBody
+	
 	@RequestMapping("registerJobPosting.do")
 	public String registerJobPosting(JobPostingVO jobPostingVO, HttpSession session) {
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		jobPostingVO.setCompanyId(mvo.getId());
-		jobPostingVO.setJobPostingNum(jobPostingVO.getJobPostingNum());
+		//jobPostingVO.setJobPostingNum(jobPostingVO.getJobPostingNum());
+		System.out.println(jobPostingVO);
 		companyService.registerJobPosting(jobPostingVO);
 		return "redirect:home.do";
 	}
