@@ -22,7 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select m.id, m.password, m.email, m.name, m.address, m.tel,
 		nm.gender, nm.career_status
 		from normal_member nm, member m
-		where nm.normal_id=m.id and m.id=#{value}
+		where nm.normal_id=m.id and m.id=#{normalId}
 	</select>
 
 	<update id="updateMember" parameterType="normalMemberVO">
@@ -95,7 +95,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 181018 MIRI normalId->value로 수정 -->
 	<select id="normalDetailPortfolio" resultType="portfolioVO" parameterType="string">
-		select title, content, picture_path from portfolio where normal_id=#{value}
+		select normal_id,title, content, picture_path from portfolio where normal_id=#{normalId}
 	</select>
 	<select id="getAllPortfolioList" resultType="portfolioVO">
 
@@ -158,13 +158,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</foreach>
  		 </if>
  		 
-		<!-- <if test="recruitCatNumList != null">
+		<if test="acaCatNumList != null">
    		 and academic_num in
-		<foreach item="recruitCatNumList" collection="recruitCatNumList" open="(" separator="," close=")">
-			#{recruitCatNumList}
+		<foreach item="acaCatNumList" collection="acaCatNumList" open="(" separator="," close=")">
+			#{acaCatNumList}
 		</foreach>
- 		 </if> -->
-		
+ 		 </if>
+
 		<if test="devCatNumList != null">
    		 and dev_cat_num in
 		<foreach item="devCatNumList" collection="devCatNumList" open="(" separator="," close=")">
@@ -178,6 +178,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			#{empTypeCatNumList}
 		</foreach>
  		 </if>
+
  		<!--  
 		and dev_cat_num in
 		<foreach item="devCatNumList" collection="list" open="(" separator="," close=")">
