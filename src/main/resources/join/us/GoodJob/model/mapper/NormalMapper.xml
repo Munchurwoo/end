@@ -170,13 +170,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</foreach>
  		 </if>
  		 
-		<!-- <if test="recruitCatNumList != null">
+		<if test="acaCatNumList != null">
    		 and academic_num in
-		<foreach item="recruitCatNumList" collection="recruitCatNumList" open="(" separator="," close=")">
-			#{recruitCatNumList}
+		<foreach item="acaCatNumList" collection="acaCatNumList" open="(" separator="," close=")">
+			#{acaCatNumList}
 		</foreach>
- 		 </if> -->
-		
+ 		 </if>
+
 		<if test="devCatNumList != null">
    		 and dev_cat_num in
 		<foreach item="devCatNumList" collection="devCatNumList" open="(" separator="," close=")">
@@ -191,7 +191,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</foreach>
  		 </if>
  		 
- 		 
+
  		<!--  
 		and dev_cat_num in
 		<foreach item="devCatNumList" collection="list" open="(" separator="," close=")">
