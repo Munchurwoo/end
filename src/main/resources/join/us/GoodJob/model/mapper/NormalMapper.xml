@@ -116,7 +116,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="title" property="portfolio.title"/>
 		<result column="content" property="portfolio.content"/>
 		<result column="picture_path" property="portfolio.picturePath"/>
-	</resultMap>
+	</resultMap> 
 	<select id="submitInterview" parameterType="string" resultMap="normalMemberVORM">
 		select p.title,p.content,p.picture_path,n.normal_id,n.gender,n.career_status, m.name, m.tel, m.email, m.address
 		from normal_member n, portfolio p , member m
