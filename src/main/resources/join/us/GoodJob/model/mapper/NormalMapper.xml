@@ -30,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		password=#{password}, email=#{email}, address=#{address}, tel=#{tel}
 		where id=#{id}
 	</update>
-	
+
 	<!-- 181018 MIRI normal_member picture_path 삭제 -->
 	<update id="updateNormalMember" parameterType="normalMemberVO">
 		update normal_member set career_status=#{careerStatus} where normal_id=#{id}
@@ -83,7 +83,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into portfolio_recruitment(normal_id, rc_num)
 		values(#{normalId}, #{rcNum})
 	</insert>
-	
+
 	<!-- 181019 MIRI normalDetailPortfolio와 중복되어 삭제 -->
 	<!-- <select id="normalDetailPortfolioList" resultType="portfolioVO"
 		parameterType="string">
@@ -105,8 +105,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select m.id,m.password,m.email,m.name,m.tel,m.address,m.member_type,nm.normal_id,nm.gender,nm.career_status
 		from member m,normal_member nm
 		where m.id=nm.normal_id
-		
+
 	</select>
+
 	<delete id="deletePortfolio" parameterType="string">
 		delete from portfolio where normal_id=#{value}
 	</delete>
@@ -129,15 +130,80 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<delete id="deletePortfolioMulti" parameterType="string">
 		{
-		 	call
-	        declare
-	        begin
-	            delete from portfolio_dev where normal_id=#{value};
-				delete from portfolio_recruitment where normal_id=#{value};
-				delete from portfolio_emp where normal_id=#{value};
-				delete from portfolio_loc where normal_id=#{value};
-				delete from portfolio_academic where normal_id=#{value};
-	        end
-	    }
-		</delete>
+		call
+		declare
+		begin
+		delete from portfolio_dev where normal_id=#{value};
+		delete from
+		portfolio_recruitment where normal_id=#{value};
+		delete from
+		portfolio_emp where normal_id=#{value};
+		delete from portfolio_loc where
+		normal_id=#{value};
+		delete from portfolio_academic where
+		normal_id=#{value};
+		end
+		}
+	</delete>
+	<!-- 인재 상세검색 처리 2018-10-22 AM 7:21 문철우 건들지 말아주세요. -->
+	<select id="portfolioSearchList" parameterType="portfolioVO"
+		resultType="string">
+		select DISTINCT normal_id
+		from(
+		select pa.normal_id, pa.academic_num,
+		pd.dev_cat_num, pe.emp_type_num,
+		pl.loc_num
+		from portfolio_academic pa,
+		portfolio_dev pd, portfolio_emp pe,
+		portfolio_loc pl
+		where pa.normal_id
+		= pd.normal_id
+		and pd.normal_id = pe.normal_id
+		and pe.normal_id =
+		pl.normal_id
+		)
+		
+		<if test="locCatNumList != null">
+   		 where loc_num in
+		<foreach item="locCatNumList" collection="locCatNumList" open="(" separator="," close=")">
+			#{locCatNumList}
+		</foreach>
+ 		 </if>
+ 		 
+		<if test="acaCatNumList != null">
+   		 and academic_num in
+		<foreach item="acaCatNumList" collection="acaCatNumList" open="(" separator="," close=")">
+			#{acaCatNumList}
+		</foreach>
+ 		 </if>
+
+		<if test="devCatNumList != null">
+   		 and dev_cat_num in
+		<foreach item="devCatNumList" collection="devCatNumList" open="(" separator="," close=")">
+			#{devCatNumList}
+		</foreach>
+ 		 </if>
+ 		 
+ 		 <if test="empTypeCatNumList != null">
+   		 and emp_type_num in
+		<foreach item="empTypeCatNumList" collection="empTypeCatNumList" open="(" separator="," close=")">
+			#{empTypeCatNumList}
+		</foreach>
+ 		 </if>
+ 		 
+
+ 		<!--  
+		and dev_cat_num in
+		<foreach item="devCatNumList" collection="list" open="(" separator="," close=")">
+			#{devCatNumList}
+		</foreach>
+		and emp_type_num in
+		<foreach item="empTypeCatNumList" collection="list" open="(" separator="," close=")">
+			#{empTypeCatNumList}
+		</foreach>
+		and loc_num
+		<foreach item="locCatNumList" collection="list" open="(" separator="," close=")">
+			#{locCatNumList}
+		</foreach> -->
+	</select>
 </mapper>

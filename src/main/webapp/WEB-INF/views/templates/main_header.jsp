@@ -1,6 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<section class="callaction">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="big-cta">
+					<div class="cta-text">
+						<h2>
+							<span>GoodJob</span><br>						
+							기업과 사람을 이어주는 프로젝트
+						</h2>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+
 <section id="featured">
 	<!-- start slider -->
 	<div class="container">
@@ -37,22 +55,7 @@
 	</div>
 </section>
 
-<section class="callaction">
-	<div class="container">
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="big-cta">
-					<div class="cta-text">
-						<h2>
-							기업과 사람을 이어주는 프로젝트<br>
-							<span>GoodJob</span>
-						</h2>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</section>
+
 
 
 

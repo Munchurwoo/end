@@ -22,6 +22,7 @@ drop table portfolio_dev cascade constraint;
 drop table academic_category cascade constraint;
 drop table job_academic cascade constraint;
 drop table portfolio_academic cascade constraint;
+drop table interview cascade constraint;
 
 drop sequence job_posting_num_seq;
 drop sequence academic_num_seq;
@@ -31,6 +32,7 @@ drop sequence emp_type_num_seq;
 drop sequence rc_num_seq;
 drop sequence qa_num_seq;
 drop sequence portfolio_file_seq;
+drop sequence interview_num_seq 
 
 		
 
@@ -151,6 +153,7 @@ create sequence job_posting_num_seq start with 1001;
 insert into JOB_POSTING(job_posting_num, company_id, career_status, title, content) values(job_posting_num_seq.nextval, 'NHNuser', '경력 3년4', 'NHN엔터테인먼트에서 Java 신입, 프리랜서 개발자 모집', 'Java 어플리케이션 개발 경험자, WAS 이해도가 높은 경험자 우대합니다.');
 insert into JOB_POSTING(job_posting_num, company_id, career_status, title, content) values(job_posting_num_seq.nextval, 'Tmaxuser', '경력 무관', '티맥스소프트 DBA 2018 하반기 공개채용', 'MS-SQL 서버 모니터링 및 트러블 슈팅경험 있으신 분, OLTP 업무 경험 있으신 분');
 insert into JOB_POSTING(job_posting_num, company_id, career_status, title, content) values(job_posting_num_seq.nextval, 'NHNuser', '경력 3년', 'NHN엔터테인먼트에서 Java 신입, 프리랜서 개발자 모집합니다  ', 'Java 어플리케이션 개발 경험자ㅎㅎㅎㅎㅎ, WAS 이해도가 높은 경험자 우대합니다테스트입니당.');
+
 select * from job_posting;
 ---------------------------------------------------------------------
 
@@ -195,10 +198,11 @@ create table interview(
 );
 create sequence interview_num_seq start with 2001;
 
-insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'hsj',1001 ,'면접신청합니다', '언제갈까요?')
-insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'qqqq',1001 ,'면접보러갈게요', '불러주세요~!~!~!')
-insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'miri', 1002,'포트폴리오확인하시고 연락주세요', '내일가겠습니다~')
-insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'yosep', 1002,'꼭 가고싶습니다~!', '전화번호로 연락주세요~')
+
+insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'hsj',1001 ,'면접신청합니다', '언제갈까요?');
+insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'qqqq',1001 ,'면접보러갈게요', '불러주세요~!~!~!');
+insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'miri', 1002,'포트폴리오확인하시고 연락주세요', '내일가겠습니다~');
+insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'yosep', 1002,'꼭 가고싶습니다~!', '전화번호로 연락주세요~');
 
 
 
@@ -570,10 +574,11 @@ from member m , company_member cm
 where m.id=cm.company_id
 
 select company_id, name, introduction
-from(select row_number() over(order by cm.company_id) as rnum, cm.company_id, m.name, cm.introduction
+from(
+select row_number() over(order by cm.company_id) as rnum, cm.company_id, m.name, cm.introduction
 from member m , company_member cm
 where m.id=cm.company_id
-) where rnum between 3 and 6
+)  where rnum between 3 and 6
 
 --기업 전체 보기 게시물 수
 select count(*)
@@ -599,6 +604,7 @@ and academic_num in()
 
 
 
+
 select job_posting_num
 from( 
    select jd.job_posting_num, jd.dev_cat_num, jr.rc_num, je.emp_type_num
@@ -609,3 +615,6 @@ from(
 )
 where dev_cat_num in(201,227) 
 and rc_num in(101,106)  
+
+
+

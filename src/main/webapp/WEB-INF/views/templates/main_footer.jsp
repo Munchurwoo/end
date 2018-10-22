@@ -6,7 +6,7 @@
 		<h4 class="heading">
 			<div class="cta-text">
 				<h2>
-					<span>GoodJob</span> 인재 추천
+					<span>GoodJob</span> 추천 인재
 				</h2>
 			</div>
 		</h4>

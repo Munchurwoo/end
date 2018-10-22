@@ -8,6 +8,7 @@ import join.us.GoodJob.model.vo.CompanyMemberVO;
 import join.us.GoodJob.model.vo.JobPostingVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PostListVO;
+import join.us.GoodJob.model.vo.QuestionAnswerVO;
 
 public interface CompanyService {
 
@@ -40,10 +41,7 @@ public interface CompanyService {
 	CompanyMemberVO detailCompanyInfo(String companyId);
 	
 	// 기업정보 상세보기 후 해당 기업 구인공고리스트 바로가기
-	List<JobPostingVO> companyJobPostingList(String companyId);
-	
-	// 마이바티스 동적쿼리 테스트 완료 - 정상작동
-	List<String> findJobPostingByCatNumList(Map map);
+	List<JobPostingVO> companyJobPostingList(String companyId);	
 	
 	// 구인 상세
 	CompanyMemberVO jobPostingDetail(String jobPostingNum);
@@ -52,4 +50,7 @@ public interface CompanyService {
 	
 	//구인등록
 	void registerJobPosting(JobPostingVO jobPostingVO);
+	
+	//구인 공고별 질답 리스트
+	List<QuestionAnswerVO> getJobPostingQAList(String jobPostingNum);
 }
