@@ -140,4 +140,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	        end
 	    }
 		</delete>
+	<insert id="interview" parameterType="interviewVO">
+		insert into interview(interview_num,normal_id,job_posting_num,title,content)
+		values(interview_num_seq,#{normalId},#{jobPostingNum},#{title},#{content})
+	</insert>
 </mapper>

@@ -21,6 +21,7 @@ import join.us.GoodJob.model.service.MemberService;
 import join.us.GoodJob.model.service.NormalService;
 import join.us.GoodJob.model.vo.CatNumParamVO;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
+import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.JobPostingVO;
 import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.PostListVO;
@@ -113,7 +114,7 @@ public class CompanyController {
 		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
 		return "company/job_posting_register_form.tiles2";
 	}
-	@ResponseBody
+/*	@ResponseBody
 	@RequestMapping("registerJobPosting.do")
 	public String registerPortfolio(JobPostingVO jobPostingVO, HttpSession session) {
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
@@ -122,7 +123,7 @@ public class CompanyController {
 		companyService.registerJobPosting(jobPostingVO);
 		return "redirect:home.do";
 	}
-
+*/
 	@RequestMapping("user-companyInfo.do")
 	public String allConmapnyInfo(Model model, String pageNum) {
 		PostListVO postListVO = companyService.getAllCompanyList(pageNum);
@@ -206,7 +207,12 @@ public class CompanyController {
 		mav.addObject("portfolio", normalService.submitInterview(normalId));
 		mav.setViewName("company/company_InterviewApplyList.tiles2");
 		return mav;
+	}
+	@PostMapping("submitInterviewForm.do")
+	public String submitInterviewForm(Model model,InterviewVO interviewVO) {
+		model.addAttribute("interviewApply", normalService.iterviewApply(interviewVO));
 		
+		return "";
 	}
 
 }

@@ -13,14 +13,15 @@
 		<c:when test="${sessionScope.mvo==null}">
 		</c:when>
 		<c:otherwise>
-			<form action="submitInterview.do?id=normalId" method="post">
+			<form action="submitInterviewForm.do?id=normalId" method="post">
+				<input type="hidden" name="jobPostingNum" value="${requestScope.jobPostingNum}">
 				<input type="hidden" name="normalId" value="${sessionScope.mvo.id}"> 제목 <input
 					type="text" name="title" placeholder="제목을 입력하세요."
 					required="required"> <br>
 				<br> 내용
 				<textarea rows="15px" cols="100" name="content"
 					placeholder="내용을 입력하세요">
-
+				
 				</textarea>
 				<br>
 				<br> <input type="submit" value="면접신청하기">

@@ -2,8 +2,7 @@ package join.us.GoodJob.model.service;
 
 import java.util.List;
 
-import org.springframework.ui.Model;
-
+import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PortfolioVO;
 
@@ -44,4 +43,5 @@ public interface NormalService {
 	void updatePortfolio(PortfolioVO portfolioVO);
 	//181019 MIRI 포트폴리오 삭제(portfolio_dev, portfolio_recruitment, portfolio_emp, portfolio_loc, portfolio_academic)
 	void deletePortfolioMulti(String normalId);
+	InterviewVO iterviewApply(InterviewVO interviewVO);
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import join.us.GoodJob.model.mapper.NormalMapper;
+import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PortfolioVO;
 
@@ -129,6 +130,12 @@ public class NormalServiceImpl implements NormalService {
 	public void deletePortfolioMulti(String normalId) {
 		normalMapper.deletePortfolioMulti(normalId);
 
+	}
+
+	@Override
+	public InterviewVO iterviewApply(InterviewVO interviewVO) {
+		
+		return normalMapper.iterviewApply(interviewVO);
 	}
 
 }

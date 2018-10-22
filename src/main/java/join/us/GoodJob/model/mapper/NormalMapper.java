@@ -6,6 +6,7 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.ui.Model;
 
+import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PortfolioVO;
@@ -73,6 +74,7 @@ public interface NormalMapper {
 	void updatePortfolio(PortfolioVO portfolioVO);
 	//포트폴리오 삭제(portfolio_dev, portfolio_recruitment, portfolio_emp, portfolio_loc, portfolio_academic)
 	void deletePortfolioMulti(String normalId);
+	InterviewVO iterviewApply(InterviewVO interviewVO);
 
 	
 	//질의응답 질문등록

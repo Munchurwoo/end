@@ -135,6 +135,7 @@
 <c:choose>
 	<c:when test="${sessionScope.mvo.memberType==1}">
 	<form action="goInterviewApply.do?id=${sessionScope.mvo.id}">
+	<input type="hidden" name="jobPostingNum" value="${jpvo.jobPostingVO.jobPostingNum}">
 	<input type="submit" value="면접신청">
 	</form>
 	</c:when>
