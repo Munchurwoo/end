@@ -187,7 +187,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<if test="devCatNumList != null">
 	where dev_cat_num in
 	<foreach collection="devCatNumList" item="devCatNum" separator="," open="(" close=")">
-		#{devCatNum}zs
+		#{devCatNum}
 	</foreach>
 	</if>
 	

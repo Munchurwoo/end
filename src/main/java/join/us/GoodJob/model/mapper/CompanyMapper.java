@@ -86,15 +86,12 @@ public interface CompanyMapper {
 	void registerJobPostingRecuitment(Map<String,Object> map);
 	//구인 공고별 질답 리스트
 	List<QuestionAnswerVO> getJobPostingQAList(String jobPostingNum);
-	
 	//181022 MIRI QA번호로 Q&A 검색
 	QuestionAnswerVO getJobPostingQAByQANum(String qaNum);
 	//181022 MIRI Q&A 답변 수정
 	void updateQAToAnswer(QuestionAnswerVO qavo);
 	//181022 MIRI Q&A 답변 삭제
 	void deleteQAToAnswer(String QANum);
-
-	
 	//구인공고 상세보기
 	CompanyMemberVO jobPostingDetail(String jobPostingNum);
 	// 면접신청자 조회 ->
