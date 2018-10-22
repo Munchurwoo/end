@@ -144,5 +144,16 @@ public class CompanyServiceImpl implements CompanyService {
 	public List<QuestionAnswerVO> getJobPostingQAList(String jobPostingNum) {
 		return companyMapper.getJobPostingQAList(jobPostingNum);
 	}
+	@Override
+	public List<NormalMemberVO> getInterviewerDetailInfo() {
+		
+		return companyMapper.getInterviewerDetailInfo();
+	}
+
+	@Override
+	public List<NormalMemberVO> getAllInterviewerList() {
+		
+		return companyMapper.getAllInterviewerList();
+	}
 
 }

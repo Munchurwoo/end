@@ -10,6 +10,7 @@ import join.us.GoodJob.model.service.PagingBean;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
 import join.us.GoodJob.model.vo.JobPostingVO;
 import join.us.GoodJob.model.vo.MemberVO;
+import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.QuestionAnswerVO;
 
 @Mapper
@@ -85,10 +86,12 @@ public interface CompanyMapper {
 	List<QuestionAnswerVO> getJobPostingQAList(String jobPostingNum);
 	//구인공고 상세보기
 	CompanyMemberVO jobPostingDetail(String jobPostingNum);
-
-	
+	// 면접신청자 상세보기 리스트타입인지 확인 후 수정해야함
+	List<NormalMemberVO> getInterviewerDetailInfo();
+	// 면접신청자 조회 ->
+	List<NormalMemberVO> getAllInterviewerList();
 	//구인공고 키워드 등록	
-
+	
 	
 	
 	

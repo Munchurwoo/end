@@ -31,8 +31,8 @@ public class NormalServiceImpl implements NormalService {
 	}
 	
 	@Override
-	public NormalMemberVO selectNormalMember(String id) {
-		return normalMapper.selectNormalMember(id);
+	public NormalMemberVO selectNormalMember(String normalId) {
+		return normalMapper.selectNormalMember(normalId);
 	}
 
 	//181018 MIRI 일반회원, 기업회원 회원탈퇴 공통으로 묶음
@@ -133,15 +133,10 @@ public class NormalServiceImpl implements NormalService {
 	}
 
 	@Override
-	public InterviewVO iterviewApply(InterviewVO interviewVO) {
-		
-		return normalMapper.iterviewApply(interviewVO);
+	public void interviewApply(InterviewVO interviewVO) {
+		normalMapper.interviewApply(interviewVO);
 	}
 
-	@Override
-	public NormalMemberVO submitInterview(String normalId) {
-		
-		return normalMapper.submitInterview(normalId);
-	}
+	
 
 }

@@ -16,7 +16,6 @@
 </script>
 
 <h3 align="center">${sessionScope.mvo.name }님 마이페이지</h3><br><br>
-<a href="normalDetailPortfolio.do">포트폴리오 상세보기 임시로만듬-동규</a><br>
 <div class="container">
 <div class="col-sm-3"></div>
 <div class="col-sm-6" style="text-align: center">
@@ -51,8 +50,14 @@
   </tr> 
 </table>
 <button class="btn-1" onclick="javascript:location.href='updateNormalMemberForm.do'" style="height:40px; width:100px;">회원정보수정</button>
+<c:choose>
+<c:when test="${empty povo.title }">
 <button class="btn-1" onclick="javascript:location.href='registerPortfolioForm.do'" style="height:40px; width:100px;">이력서등록</button>
-<button class="btn-1" onclick="javascript:location.href='registerPortfolioForm.do'" style="height:40px; width:100px;">이력서보기</button>
+</c:when>
+<c:otherwise>
+<button class="btn-1" onclick="javascript:location.href='normalDetailPortfolio.do?normalId=${requestScope.nmvo.id }'" style="height:40px; width:100px;">이력서보기</button>
+</c:otherwise>
+</c:choose>
 <button class="btn-1" onclick="deleteNormalMember()" style="height:40px; width:100px;">회원탈퇴</button>
 
 </div>

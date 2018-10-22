@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import join.us.GoodJob.model.service.MemberService;
 import join.us.GoodJob.model.service.NormalService;
 import join.us.GoodJob.model.vo.DevCatVO;
+import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PortfolioVO;
@@ -64,7 +65,9 @@ public class NormalController {
 	@RequestMapping("normal_mypage.do")
 	// 181018 MIRI selectNormalMember와 중복으로 변경
 	public String selectNormalMember(String normalId, Model model, HttpSession session) {
+		
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		model.addAttribute("povo",normalService.normalDetailPortfolio(mvo.getId()));
 		if (mvo != null) {
 			NormalMemberVO nmvo = normalService.selectNormalMember(mvo.getId());
 			model.addAttribute("nmvo", nmvo);
@@ -205,19 +208,24 @@ public class NormalController {
 	 * @param session
 	 * @return
 	 */
+
 	// 나중에 "yosep"->normalId
 	/*
 	 * 10월 22일 am 3:22분 문철우. 이부분은 어떤 활용 용도로 놔둔건가요?
 	 */
+
 	@RequestMapping("normalDetailPortfolio.do")
-	public String normalDetailPortfolio(String normalId, Model model, HttpSession session) {
-		model.addAttribute("devCatList", memberService.getDevCatVOListByNormalId("miri"));
-		model.addAttribute("empTypeCatList", memberService.getEmpCatVOListByNormalId("miri"));
-		model.addAttribute("locCatList", memberService.getLocCatVOListByNormalId("miri"));
-		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNormalId("miri"));
-		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNormalId("miri"));
-		model.addAttribute("nmvo", normalService.selectNormalMember("miri"));
-		model.addAttribute("povo", normalService.normalDetailPortfolio("miri"));
+
+	public String normalDetailPortfolio(String normalId, Model model) {
+		System.out.println(normalId);
+		model.addAttribute("nmvo", normalService.selectNormalMember(normalId));
+		model.addAttribute("povo",normalService.normalDetailPortfolio(normalId));
+		model.addAttribute("devCatList", memberService.getDevCatVOListByNormalId(normalId));
+		model.addAttribute("empTypeCatList", memberService.getEmpCatVOListByNormalId(normalId));
+		model.addAttribute("locCatList", memberService.getLocCatVOListByNormalId(normalId));
+		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNormalId(normalId));
+		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNormalId(normalId));
+
 		return "normal/normal_detail_portfolio.tiles2";
 
 	}
@@ -370,4 +378,10 @@ public class NormalController {
 
 		return "member/portfolio_search_list.tiles2";
 	}
+	// 면접신청하기
+		@RequestMapping("submitInterviewForm.do")
+		public String submitInterviewForm(InterviewVO interviewVO) {
+			normalService.interviewApply(interviewVO);
+			return "redirect:home.do";
+		}
 }

@@ -50,7 +50,10 @@ public interface CompanyService {
 	
 	//구인등록
 	void registerJobPosting(JobPostingVO jobPostingVO);
-	
+	// 면접신청자 상세정보 -> 리스트타입인지 확인 후 수정
+	List<NormalMemberVO> getInterviewerDetailInfo();
+	// 면접신청자 전체 조회
+	List<NormalMemberVO> getAllInterviewerList();
 	//구인 공고별 질답 리스트
 	List<QuestionAnswerVO> getJobPostingQAList(String jobPostingNum);
 }
