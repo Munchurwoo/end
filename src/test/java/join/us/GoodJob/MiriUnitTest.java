@@ -24,9 +24,6 @@ public class MiriUnitTest {
 	
 	@Test
 	public void test() {
-		/*List<MemberVO> memberList = companyMapper.getAllCompanyList();
-		for (MemberVO vo : memberList) {
-			System.out.println(vo);
-		}*/
+		System.out.println(normalMapper.normalDetailPortfolio("miri"));
 	}
 }

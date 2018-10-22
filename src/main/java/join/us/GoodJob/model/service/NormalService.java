@@ -2,6 +2,8 @@ package join.us.GoodJob.model.service;
 
 import java.util.List;
 
+import org.springframework.ui.Model;
+
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PortfolioVO;
 
@@ -19,13 +21,17 @@ public interface NormalService {
 	//181018 MIRI selectNormalMember와 중복으로 주석
 	/*//개인 정보 조회
 	NormalMemberVO myPageNormalMember(String memberId);*/
-
-	void registerPortfolio(PortfolioVO portfolioVO);
+	//포트폴리오 등록
+	//181019 MIRI 포트폴리오 등록/수정 동시에 활용하기위해 flag를 줌
+	void registerPortfolio(PortfolioVO portfolioVO, boolean registerFlag);
 	
-
 	//포트폴리오등록 상세
 	PortfolioVO normalDetailPortfolio(String normalId);
-	List<PortfolioVO> normalDetailPortfolioList(String normalId);
+	//181019 MIRI normalDetailPortfolio와 중복되어 주석
+	//List<PortfolioVO> normalDetailPortfolioList(String normalId);
+	
+	// 구인공고 상세조회 후 면접신청하기
+	NormalMemberVO submitInterview(String normalId);
 	
 	//개인회원 모든 정보 받아오기
 	List<NormalMemberVO> AllFindNomarMember();
@@ -33,5 +39,9 @@ public interface NormalService {
 	//개인회원  id 를 활용하여 포트폴리오 모든 정보 출력 
 	PortfolioVO portFolioVOById(String nomalId);
 	//181018 MIRI 포트폴리오 삭제
-	void deletePortfolio(String id); 
+	void deletePortfolio(String id);
+	//181019 MIRI 포트폴리오 수정
+	void updatePortfolio(PortfolioVO portfolioVO);
+	//181019 MIRI 포트폴리오 삭제(portfolio_dev, portfolio_recruitment, portfolio_emp, portfolio_loc, portfolio_academic)
+	void deletePortfolioMulti(String normalId);
 }

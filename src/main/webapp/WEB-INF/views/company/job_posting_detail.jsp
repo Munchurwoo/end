@@ -7,7 +7,7 @@
 <table class="table table-bordered">
 	<thead>	
 	<tr>
-	<h4>${jpvo.jobPostingVO.contents}</h4>
+	<h4>${jpvo.jobPostingVO.content}</h4>
 	</tr>
 	</thead>
 	<tbody>
@@ -47,16 +47,6 @@
 	</c:forEach>
 	</td>
 	</tr>
-	
-	<tr>
-	<th>학력</th>
-	<td>
-	<c:forEach items="${acaCatList }" var="acaCatList">
-		${acaCatList.academicName }&nbsp;/&nbsp;
-	</c:forEach>
-	</td>
-	</tr>
-	
 	<tr>
 	<th>학력</th>
 	<td>

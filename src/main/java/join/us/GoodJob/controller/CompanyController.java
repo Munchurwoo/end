@@ -1,12 +1,8 @@
 package join.us.GoodJob.controller;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
-
 import java.io.File;
 import java.io.IOException;
-
+import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -18,11 +14,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import join.us.GoodJob.model.service.CompanyService;
 import join.us.GoodJob.model.service.MemberService;
+import join.us.GoodJob.model.service.NormalService;
 import join.us.GoodJob.model.vo.CatNumParamVO;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
+import join.us.GoodJob.model.vo.JobPostingVO;
 import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.PostListVO;
 
@@ -32,6 +31,8 @@ public class CompanyController {
 	CompanyService companyService;
 	@Resource
 	MemberService memberService;
+	@Resource
+	NormalService normalService;
 	
 	/*실제 운영시에 사용
 	private String serverUploadPath;*/	
@@ -112,6 +113,16 @@ public class CompanyController {
 		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
 		return "company/job_posting_register_form.tiles2";
 	}
+	
+	@RequestMapping("registerJobPosting.do")
+	public String registerJobPosting(JobPostingVO jobPostingVO, HttpSession session) {
+		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+		jobPostingVO.setCompanyId(mvo.getId());
+		//jobPostingVO.setJobPostingNum(jobPostingVO.getJobPostingNum());
+		System.out.println(jobPostingVO);
+		companyService.registerJobPosting(jobPostingVO);
+		return "redirect:home.do";
+	}
 
 	//기업정보 전체 리스트
 	@RequestMapping("user-companyInfo.do")
@@ -182,8 +193,17 @@ public class CompanyController {
 		//카테고리 번호들로 기업 게시글 리스트 불러옴
 		List<CompanyMemberVO> cmvoList=companyService.getSomeCompanyList(catNumParamVO);
 		model.addAttribute("cmvoList", cmvoList);
-		
-		
 		return "company/company_detail_search_list.company_search_tiles";
+	} 
+	
+	// 면접신청하기( 면접신청 테이블 생성완료했고 VO 생성해야함)
+	@PostMapping("submitInterview.do")
+	public ModelAndView submitInterview(String normalId,Model model) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("portfolio", normalService.submitInterview(normalId));
+		mav.setViewName("company/company_InterviewApplyList.tiles2");
+		return mav;
+		
 	}
+
 }

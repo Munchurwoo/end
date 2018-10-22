@@ -61,6 +61,41 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and m.id=#{id}
 	</select>
 	
+	<!-- 구인공고등록 -->
+	<insert id="registerJobPosting" parameterType="jobPostingVO" >
+		<selectKey keyProperty="jobPostingNum" resultType="int" order="BEFORE" >
+			select job_posting_num_seq.nextval from dual
+		</selectKey>		
+		
+		insert into JOB_POSTING(job_posting_num, company_id, career_status, title, content) 
+		values(#{jobPostingNum}, #{companyId}, #{careerStatus}, #{title}, #{content})
+	</insert>
+	
+	<insert id="registerJobPostingAcademic" parameterType="map">
+		insert into job_academic(job_posting_num, academic_num)
+		values(#{jobPostingNum}, #{academicNum})
+	</insert>
+	
+	<insert id="registerJobPostingDev" parameterType="map">
+		insert into job_dev(job_posting_num, dev_cat_num)
+		values(#{jobPostingNum}, #{devCatNum})
+	</insert>
+
+	<insert id="registerJobPostingEmp" parameterType="map">
+		insert into job_emp(job_posting_num, emp_type_num)
+		values(#{jobPostingNum}, #{empTypeNum})
+	</insert>
+	
+	<insert id="registerJobPostingLoc" parameterType="map">
+		insert into job_loc(job_posting_num, loc_num)
+		values(#{jobPostingNum}, #{locNum})
+	</insert>
+	
+	<insert id="registerJobPostingRecuitment" parameterType="map">
+		insert into job_recruitment(job_posting_num, rc_num)
+		values(#{jobPostingNum}, #{rcNum})
+	</insert>
+	
 	<resultMap type="companyMemberVO" id="companyMemberVORM">
 		<result column="job_posting_num" property="jobPostingVO.jobPostingNum"/>
 		<result column="career_status" property="jobPostingVO.careerStatus"/>
@@ -142,6 +177,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{acaCatNum}
 	</foreach>
 	</select>
+	
 	
 </mapper> 		
  
