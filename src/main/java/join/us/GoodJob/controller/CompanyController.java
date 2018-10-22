@@ -139,7 +139,7 @@ public class CompanyController {
 
 	
 	@RequestMapping("job_posting_detail.do")
-	public String job_posting_detail(String jobPostingNum, Model model, HttpSession session) {
+	public String job_posting_detail(String jobPostingNum, Model model) {
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNum(jobPostingNum));
 		model.addAttribute("devCatList", memberService.getDevCatVOListByNum(jobPostingNum));
 		model.addAttribute("empTypeCatList", memberService.getEmpCatVOListByNum(jobPostingNum));

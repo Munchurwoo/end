@@ -205,16 +205,16 @@ public class NormalController {
 	 * @param session
 	 * @return
 	 */
-	//나중에 "yosep"->normalId
 	@RequestMapping("normalDetailPortfolio.do")
-	public String normalDetailPortfolio(String normalId, Model model, HttpSession session) {
-		model.addAttribute("devCatList", memberService.getDevCatVOListByNormalId("miri"));
-		model.addAttribute("empTypeCatList", memberService.getEmpCatVOListByNormalId("miri"));
-		model.addAttribute("locCatList", memberService.getLocCatVOListByNormalId("miri"));
-		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNormalId("miri"));
-		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNormalId("miri"));
-		model.addAttribute("nmvo",normalService.selectNormalMember("miri"));
-		model.addAttribute("povo", normalService.normalDetailPortfolio("miri"));
+	public String normalDetailPortfolio(String normalId, Model model) {
+		System.out.println(normalId);
+		model.addAttribute("nmvo", normalService.selectNormalMember(normalId));
+		model.addAttribute("povo",normalService.normalDetailPortfolio(normalId));
+		model.addAttribute("devCatList", memberService.getDevCatVOListByNormalId(normalId));
+		model.addAttribute("empTypeCatList", memberService.getEmpCatVOListByNormalId(normalId));
+		model.addAttribute("locCatList", memberService.getLocCatVOListByNormalId(normalId));
+		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNormalId(normalId));
+		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNormalId(normalId));
 		return "normal/normal_detail_portfolio.tiles2";
 
 	}

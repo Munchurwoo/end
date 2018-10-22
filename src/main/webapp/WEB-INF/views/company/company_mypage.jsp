@@ -72,5 +72,5 @@
 <a href="updateCompanyMemberForm.do">회원정보수정</a><br><br>
 <a href="registerJobPostingForm.do">구인등록</a><br><br>
 <button class="btn-1" onclick="deleteCompanyMember()" style="height:40px; width:150px;">회원탈퇴</button>
-<a href="job_posting_detail.do">구인등록상세보기 임시로만듬-동규</a>
+
 

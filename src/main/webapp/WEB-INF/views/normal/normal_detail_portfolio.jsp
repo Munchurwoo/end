@@ -18,11 +18,13 @@
 
 <h3 align="center">포트폴리오 상세보기</h3><br><br>
 
-	제목 :${povo.title }<br>
-	이름 : ${nmvo.name }<br>
-	이메일 : ${nmvo.email }<br>
-	전화번호 : ${nmvo.tel }<br>
-	내용 : ${povo.content }<br><br>
+	제목 :${requstScope.povo.title }<br>
+	이름 : ${requstScope.nmvo.name }<br>
+	이메일 : ${requstScope.nmvo.email }<br>
+	전화번호 : ${requstScope.nmvo.tel }<br>
+	내용 : ${requstScope.povo.content }<br>
+	성별 : ${requstScope.nmvo.gender }<br>
+	<br>
 	모집직군 : <c:forEach items="${recruitCatList}" var="recruitCatList">
 	${recruitCatList.rcName }
 	</c:forEach><br><br>

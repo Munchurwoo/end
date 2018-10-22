@@ -17,7 +17,7 @@ public interface NormalService {
 	/*//개인 회원 탈퇴
 	void deleteNormalMember(String normalId);*/
 	//개인 회원 검색
-	NormalMemberVO selectNormalMember(String id);
+	NormalMemberVO selectNormalMember(String normalId);
 	//181018 MIRI selectNormalMember와 중복으로 주석
 	/*//개인 정보 조회
 	NormalMemberVO myPageNormalMember(String memberId);*/
