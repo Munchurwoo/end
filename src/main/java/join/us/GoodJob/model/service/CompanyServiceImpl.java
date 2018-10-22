@@ -131,6 +131,8 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	public void registerJobPosting(JobPostingVO jobPostingVO) {
 		companyMapper.registerJobPosting(jobPostingVO);
+		System.out.println(jobPostingVO);		
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("jobPostingNum", jobPostingVO.getJobPostingNum());
 

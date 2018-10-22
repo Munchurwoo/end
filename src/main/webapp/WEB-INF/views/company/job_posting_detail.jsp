@@ -47,16 +47,6 @@
 	</c:forEach>
 	</td>
 	</tr>
-	
-	<tr>
-	<th>학력</th>
-	<td>
-	<c:forEach items="${acaCatList }" var="acaCatList">
-		${acaCatList.academicName }&nbsp;/&nbsp;
-	</c:forEach>
-	</td>
-	</tr>
-	
 	<tr>
 	<th>학력</th>
 	<td>

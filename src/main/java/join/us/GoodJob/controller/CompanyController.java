@@ -124,7 +124,8 @@ public class CompanyController {
 	public String registerPortfolio(JobPostingVO jobPostingVO, HttpSession session) {
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		jobPostingVO.setCompanyId(mvo.getId());
-		jobPostingVO.setJobPostingNum(jobPostingVO.getJobPostingNum());
+		//jobPostingVO.setJobPostingNum(jobPostingVO.getJobPostingNum());
+		System.out.println(jobPostingVO);
 		companyService.registerJobPosting(jobPostingVO);
 		return "redirect:home.do";
 	}*/
