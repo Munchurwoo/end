@@ -22,7 +22,6 @@ import join.us.GoodJob.model.vo.CatNumParamVO;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
 import join.us.GoodJob.model.vo.JobPostingVO;
 import join.us.GoodJob.model.vo.MemberVO;
-import join.us.GoodJob.model.vo.PortfolioVO;
 import join.us.GoodJob.model.vo.PostListVO;
 import join.us.GoodJob.model.vo.QuestionAnswerVO;
 
@@ -114,10 +113,12 @@ public class CompanyController {
 		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
 		return "company/job_posting_register_form.tiles2";
 	}
+	@ResponseBody
 	@RequestMapping("registerJobPosting.do")
 	public String registerPortfolio(JobPostingVO jobPostingVO, HttpSession session) {
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		jobPostingVO.setCompanyId(mvo.getId());
+		jobPostingVO.setJobPostingNum(jobPostingVO.getJobPostingNum());
 		companyService.registerJobPosting(jobPostingVO);
 		return "redirect:home.do";
 	}
@@ -200,18 +201,19 @@ public class CompanyController {
 	@PostMapping("submitInterview.do")
 	public String submitInterview(String normalId,Model model) {
 		model.addAttribute("portfolio", normalService.normalDetailPortfolio(normalId));
-		return "company/job_posting_interviewer_list.tiles2";
+		return "company/company_InterviewApplyList.tiles2";
 		
 	}
 	
 	/**
-	 * 181020 MIRI 내 구인 공고 면접자 리스트
+	 * 181020 MIRI 구인 공고 면접자 리스트
 	 * @param jobPostingNum
 	 * @return
 	 */
-	@PostMapping("getMyJobPostinginterviewerList.do")
-	public String getMyJobPostinginterviewerList(int jobPostingNum) {
-		return "company/getMyJobPostinginterviewerList.tiles2";
+	@PostMapping("job_posting_interviewer_list.do")
+	public String getJobPostingInterviewerList(int jobPostingNum) {
+		//작업중
+		return "company/job_posting_interviewer_list.tiles2";
 	}
 	
 	/**

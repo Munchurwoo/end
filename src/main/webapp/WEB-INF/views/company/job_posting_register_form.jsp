@@ -25,9 +25,6 @@
 				}//success					
 			});//ajax 			
 		});//change
-		$("#registerBtn").click(function() {
-			$("#registerForm").submit();
-		});//click		
 	});//ready
 </script>
 
@@ -63,9 +60,11 @@
 	<h5>개발분야</h5>
 	<div id="empTypeArea">		
 	</div>	
+		<button type="reset">초기화</button>	
+		<input type="submit" value="등록하기">
+		<button type="reset" onclick="location.href='home.do'">홈으로</button>	
 </form>	
 
 
 
-<button type="submit"  id="registerBtn">등록하기</button>
-<button type="reset" onclick="location.href='home.do'">홈으로</button>	
+
