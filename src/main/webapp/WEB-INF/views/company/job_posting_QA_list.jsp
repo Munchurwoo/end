@@ -64,18 +64,23 @@
 									alert("답변이 아직 등록되지 않았습니다.");
 									return false;
 								}
-								$.ajax({
-									type:"get",
-									data:"QANum="+qanum,
-									url:"deleteQAToAnswer.do",
-									success:function(result) {
-										if(result.answer == null) {
-											alert("해당 답변이 삭제 되었습니다.");
-											answer = result.answer;
-											$("#qaText"+qanum).text(" ");
+								var delConfirm = confirm("정말 삭제하시겠습니까?");
+								if(delConfirm == false) {
+									return false;
+								} else {
+									$.ajax({
+										type:"get",
+										data:"QANum="+qanum,
+										url:"deleteQAToAnswer.do",
+										success:function(result) {
+											if(result.answer == null) {
+												alert("해당 답변이 삭제 되었습니다.");
+												answer = result.answer;
+												$("#qaText"+qanum).text(" ");
+											}
 										}
-									}
-								});
+									});
+								}
 							});
 							$("#answerOK"+${qavo.qaNum}).click(function() {
 								var qanum = ${qavo.qaNum};
