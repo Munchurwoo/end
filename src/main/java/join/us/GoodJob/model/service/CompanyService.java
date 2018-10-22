@@ -1,10 +1,10 @@
 package join.us.GoodJob.model.service;
 
 import java.util.List;
-import java.util.Map;
 
 import join.us.GoodJob.model.vo.CatNumParamVO;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
+import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.JobPostingVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PostListVO;
@@ -32,7 +32,7 @@ public interface CompanyService {
 	NormalMemberVO memberSearch();
 	
 	//채용정보 클릭 후 전체 채용공고 조회하기
-	List<CompanyMemberVO> getAllJobPostingList();
+	PostListVO getAllJobPostingList(String pageNum);
 
 	// 기업정보 전체조회
 	PostListVO getAllCompanyList(String pageNum);
@@ -41,19 +41,17 @@ public interface CompanyService {
 	CompanyMemberVO detailCompanyInfo(String companyId);
 	
 	// 기업정보 상세보기 후 해당 기업 구인공고리스트 바로가기
-	List<JobPostingVO> companyJobPostingList(String companyId);
-	
-	// 마이바티스 동적쿼리 테스트 완료 - 정상작동
-	List<String> findJobPostingByCatNumList(Map map);
+	List<JobPostingVO> companyJobPostingList(String companyId);	
 	
 	// 구인 상세
 	CompanyMemberVO jobPostingDetail(String jobPostingNum);
-
-	List<CompanyMemberVO> getSomeCompanyList(CatNumParamVO catNumParamVO);
+	// 상세조건 검색
+	PostListVO findJobPostingByCatNumList(CatNumParamVO catNumParamVO, String pageNum);
 	
 	//구인등록
 	void registerJobPosting(JobPostingVO jobPostingVO);
-	
+	// 면접신청자 전체 조회
+	List<InterviewVO> getAllInterviewerList();
 	//구인 공고별 질답 리스트
 	List<QuestionAnswerVO> getJobPostingQAList(String jobPostingNum);
 
@@ -66,4 +64,5 @@ public interface CompanyService {
 	//181022 MIRI Q&A 답변 삭제
 	void deleteQAToAnswer(String QANum);
 
+	// 채용정보 페이징처리
 }

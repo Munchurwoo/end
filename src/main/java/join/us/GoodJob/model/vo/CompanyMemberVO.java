@@ -114,7 +114,7 @@ public class CompanyMemberVO extends MemberVO {
 	}
 	@Override
 	public String toString() {
-		return "CompanyMemberVO [companyId=" + companyId + ", introduction=" + introduction + ", companyType="
+		return super.toString()+"CompanyMemberVO [companyId=" + companyId + ", introduction=" + introduction + ", companyType="
 				+ companyType + ", industry=" + industry + ", sales=" + sales + ", dateOfEstablishment="
 				+ dateOfEstablishment + ", numOfEmployees=" + numOfEmployees + ", picturePath=" + picturePath
 				+ ", jobPostingVOList=" + jobPostingVOList + ", jobPostingVO=" + jobPostingVO + "]";

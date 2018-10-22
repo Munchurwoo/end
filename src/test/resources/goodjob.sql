@@ -22,6 +22,7 @@ drop table portfolio_dev cascade constraint;
 drop table academic_category cascade constraint;
 drop table job_academic cascade constraint;
 drop table portfolio_academic cascade constraint;
+drop table interview cascade constraint;
 
 drop sequence job_posting_num_seq;
 drop sequence academic_num_seq;
@@ -31,6 +32,7 @@ drop sequence emp_type_num_seq;
 drop sequence rc_num_seq;
 drop sequence qa_num_seq;
 drop sequence portfolio_file_seq;
+drop sequence interview_num_seq 
 
 		
 
@@ -196,10 +198,11 @@ create table interview(
 );
 create sequence interview_num_seq start with 2001;
 
-insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'hsj',1001 ,'면접신청합니다', '언제갈까요?')
-insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'qqqq',1001 ,'면접보러갈게요', '불러주세요~!~!~!')
-insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'miri', 1002,'포트폴리오확인하시고 연락주세요', '내일가겠습니다~')
-insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'yosep', 1002,'꼭 가고싶습니다~!', '전화번호로 연락주세요~')
+
+insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'hsj',1001 ,'면접신청합니다', '언제갈까요?');
+insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'qqqq',1001 ,'면접보러갈게요', '불러주세요~!~!~!');
+insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'miri', 1002,'포트폴리오확인하시고 연락주세요', '내일가겠습니다~');
+insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'yosep', 1002,'꼭 가고싶습니다~!', '전화번호로 연락주세요~');
 
 
 
@@ -222,17 +225,6 @@ insert into QUESTION_ANSWER(qa_num, normal_id, job_posting_num, question, answer
 insert into QUESTION_ANSWER(qa_num, normal_id, job_posting_num, question, answer) values(qa_num_seq.nextval, 'qqqq', 1002, '졸업 예정자도 지원 가능한가요?', '네. 가능합니다.');
 
 select * from question_answer;
-select * from job_posting;
-
-select qa.qa_num, qa.question, qa.answer
-from question_answer qa, job_posting jp
-where qa.job_posting_num=jp.job_posting_num and jp.job_posting_num=1001
-
-update question_answer set answer='없습니다.' where qa_num=706
-update question_answer set answer='3명.' where qa_num=707
-update question_answer set answer='중식은 따로 지원되지 않습니다.' where qa_num=708
-
-update QUESTION_ANSWER set answer='6명 입니다.' where qa_num=702;
 ---------------------------------------------------------------------
 
 --모집직군분류와 PK 시퀀스
@@ -582,10 +574,50 @@ from member m , company_member cm
 where m.id=cm.company_id
 
 select company_id, name, introduction
-from(select row_number() over(order by cm.company_id) as rnum, cm.company_id, m.name, cm.introduction
+from(
+select row_number() over(order by cm.company_id) as rnum, 
+	cm.company_id, m.name, cm.introduction
 from member m , company_member cm
 where m.id=cm.company_id
-) where rnum between 3 and 6
+)  where rnum between 3 and 6
+
+-- 채용정보 페이징처리
+select 
+	company_id, introduction, company_type, industry, sales, date_of_establishment, num_of_employees,
+	job_posting_num, career_status,title,content,address,tel,email ,name 
+from(
+select row_number() over(order by j.job_posting_num) as rnum,
+	cm.company_id, cm.introduction, cm.company_type, cm.industry, cm.sales, cm.date_of_establishment, cm.num_of_employees,
+	j.job_posting_num, j.career_status, j.title, j.content, m.address, m.tel, m.email , m.name
+	from job_posting j , company_member cm, member m
+	where j.company_id = cm.company_id and cm.company_id=m.id
+) where rnum between 1 and 3
+
+-- 상세검색 페이징처리
+
+select count(*)
+from job_posting j , company_member cm, member m
+where j.company_id = cm.company_id and cm.company_id=m.id and 
+	j.job_posting_num in (1001,1002)
+
+select 
+	company_id, introduction, company_type, industry, sales, date_of_establishment, num_of_employees,
+	job_posting_num, career_status, title, content, address, tel, email , name
+	from
+	 (select row_number() over(order by j.job_posting_num) as rnum, cm.company_id, cm.introduction, cm.company_type, cm.industry, cm.sales, cm.date_of_establishment, cm.num_of_employees,
+	j.job_posting_num, j.career_status, j.title, j.content, m.address, m.tel, m.email , m.name
+	from job_posting j , company_member cm, member m
+	where j.company_id = cm.company_id and cm.company_id=m.id and 
+	j.job_posting_num in 
+	(1001,1002)
+	)
+	where rnum between 1 and 3
+		
+	
+	
+	
+	
+
 
 --기업 전체 보기 게시물 수
 select count(*)
@@ -611,6 +643,7 @@ and academic_num in()
 
 
 
+
 select job_posting_num
 from( 
    select jd.job_posting_num, jd.dev_cat_num, jr.rc_num, je.emp_type_num
@@ -621,3 +654,6 @@ from(
 )
 where dev_cat_num in(201,227) 
 and rc_num in(101,106)  
+
+
+

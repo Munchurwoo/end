@@ -1,6 +1,5 @@
 package join.us.GoodJob.model.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,6 +11,7 @@ import org.springframework.stereotype.Service;
 import join.us.GoodJob.model.mapper.CompanyMapper;
 import join.us.GoodJob.model.vo.CatNumParamVO;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
+import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.JobPostingVO;
 import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
@@ -56,6 +56,7 @@ public class CompanyServiceImpl implements CompanyService {
 		return null;
 	}
 
+	//기업정보 전체 리스트
 	public PostListVO getAllCompanyList(String pageNum) {
 		PagingBean pagingBean;
 		// 기업정보 게시물 수 가져오기
@@ -76,7 +77,7 @@ public class CompanyServiceImpl implements CompanyService {
 	public CompanyMemberVO detailCompanyInfo(String companyId) {
 		return companyMapper.detailCompanyInfo(companyId);
 	}
-	
+	@Override	
 	public CompanyMemberVO jobPostingDetail(String jobPostingNum) {	
 		return companyMapper.jobPostingDetail(jobPostingNum);
 	}
@@ -87,45 +88,51 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	public List<CompanyMemberVO> getAllJobPostingList() {
-
-		return companyMapper.getAllJobPostingList();
-	}
+	public PostListVO getAllJobPostingList(String pageNum) {
+			PagingBean pagingBean;
+			int totalJobPostingCount=companyMapper.getAlljobPostingCount();
+			if (pageNum != null) { // 페이지 번호 주면
+				pagingBean = new PagingBean(totalJobPostingCount, Integer.parseInt(pageNum));
+			} else { // 페이지 번호 안주면 1페이지
+				pagingBean = new PagingBean(totalJobPostingCount);
+			}
+			List<CompanyMemberVO> jobPostingList= companyMapper.getAllJobPostingList(pagingBean);
+			PostListVO postListVO = new PostListVO();
+			postListVO.setJobPostingList(jobPostingList);
+			postListVO.setPagingBean(pagingBean);
+		return postListVO;
+	}	
 
 	@Override
-	public List<String> findJobPostingByCatNumList(Map map) {
-		CatNumParamVO cnpvo = new CatNumParamVO();
-		map.put("devCatNumList", cnpvo.getDevCatNumList());
-		map.put("recruitCatNumList", cnpvo.getRecruitCatNumList());
-		map.put("empTypeCatNumList", cnpvo.getEmpTypeCatNumList());
-		map.put("locCatNumList", cnpvo.getLocCatNumList());
-		map.put("acaCatNumList", cnpvo.getAcaCatNumList());
-		return companyMapper.findJobPostingByCatNumList(map);
-	}
-
-	@Override
-	public List<CompanyMemberVO> getSomeCompanyList(CatNumParamVO catNumParamVO) {
-		List<CompanyMemberVO> someCompanyList = new ArrayList<CompanyMemberVO>();
-
-		// catNumParamVO로 List<String> 타입으로 구인공고 번호 리스트 받아옴
-		Map<String, List<String>> map = new HashMap<String, List<String>>();
-		map.put("devCatNumList", catNumParamVO.getDevCatNumList());
-		map.put("recruitCatNumList", catNumParamVO.getRecruitCatNumList());
-		map.put("empTypeCatNumList", catNumParamVO.getEmpTypeCatNumList());
-		map.put("locCatNumList", catNumParamVO.getLocCatNumList());
-		map.put("acaCatNumList", catNumParamVO.getAcaCatNumList());
-
-		List<String> jobPostingNumList = companyMapper.findJobPostingByCatNumList(map);
-		// System.out.println("구인공고 번호리스트 :"+jobPostingNumList);
-		// 위에서 받아온 번호 리스트로 for문 돌려서 List<CompanyMemberVO>에 add
-		for (String jobPostingNum : jobPostingNumList) {
-			CompanyMemberVO companyMemberVO = companyMapper.getAllJobPostingListByJobPostingNum(jobPostingNum);
-			someCompanyList.add(companyMemberVO);
-		}
-
-		// myBatis에서 동적 sql하면 멋있음 -보류
-		// System.out.println("게시물리스트 :"+someCompanyList);
-		return someCompanyList;
+	public PostListVO findJobPostingByCatNumList(CatNumParamVO catNumParamVO, String pageNum) {
+	  PagingBean pagingBean;
+	  Map<String, List<String>> map = new HashMap<String, List<String>>();
+      map.put("devCatNumList", catNumParamVO.getDevCatNumList());
+      map.put("recruitCatNumList", catNumParamVO.getRecruitCatNumList());
+      map.put("empTypeCatNumList", catNumParamVO.getEmpTypeCatNumList());
+      map.put("locCatNumList", catNumParamVO.getLocCatNumList());
+      map.put("acaCatNumList", catNumParamVO.getAcaCatNumList());      
+      List<String> jobPostingNumList = companyMapper.findJobPostingByCatNumList(map); 
+      
+      //총 게시물 수
+      int totalCount=companyMapper.getAllJobPostingListByJobPostingNumCount(jobPostingNumList);
+		if (pageNum != null) { // 페이지 번호 주면
+			pagingBean = new PagingBean(totalCount, Integer.parseInt(pageNum));
+		} else { // 페이지 번호 안주면 1페이지
+			pagingBean = new PagingBean(totalCount);
+		} 
+      
+	
+		Map<String,Object> map2=new HashMap<String,Object>();
+		map2.put("jobPostingNumList", jobPostingNumList);
+		map2.put("pagingBean", pagingBean);
+      
+      List<CompanyMemberVO> jobPostingList =companyMapper.getAllJobPostingListByJobPostingNum(map2);
+     
+      PostListVO postListVO = new PostListVO();
+      postListVO.setJobPostingList(jobPostingList);
+      postListVO.setPagingBean(pagingBean);	      
+      return postListVO;
 	}
 
 	@Override
@@ -161,6 +168,7 @@ public class CompanyServiceImpl implements CompanyService {
 		}
 	}
 
+
 	@Override
 	public List<QuestionAnswerVO> getJobPostingQAList(String jobPostingNum) {
 		return companyMapper.getJobPostingQAList(jobPostingNum);
@@ -181,5 +189,8 @@ public class CompanyServiceImpl implements CompanyService {
 		return companyMapper.getJobPostingQAByQANum(qaNum);
 	}
 
+	public List<InterviewVO> getAllInterviewerList() {
+		return companyMapper.getAllInterviewerList();
+	}
 
 }

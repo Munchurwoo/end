@@ -14,6 +14,9 @@ import join.us.GoodJob.model.mapper.ManagerMapper;
 import join.us.GoodJob.model.mapper.MemberMapper;
 import join.us.GoodJob.model.mapper.NormalMapper;
 import join.us.GoodJob.model.vo.DevCatVO;
+import join.us.GoodJob.model.vo.JobPostingVO;
+import join.us.GoodJob.model.vo.NormalMemberVO;
+import join.us.GoodJob.model.vo.PortfolioVO;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring-model.xml"})
 public class DonggyuUnitTest {
@@ -28,6 +31,9 @@ public class DonggyuUnitTest {
 	CompanyMapper companyMapper;
 	@Test
 	public void test() {
-		
+		String normalId="yosep";
+		System.out.println(normalMapper.selectNormalMember(normalId));
+		System.out.println(normalMapper.normalDetailPortfolio(normalId));
+		System.out.println(memberMapper.getDevCatVOListByNormalId(normalId));
 	}
 }

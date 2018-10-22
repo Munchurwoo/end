@@ -5,27 +5,14 @@
 
 <!-- normal_detail_portfolio -->
 
-<script>
-	function deletePortfolio(id, picturePath) {
-		var delPortfolio = confirm("포트폴리오 \'${requestScope.povo.title}\' 를 삭제하시겠습니까?");
-		if(delPortfolio == true) {
-			location.href="deletePortfolio.do?id="+id+"&picturePath="+picturePath;
-		} else {
-			return;
-		}
-	}
-</script>
 
-<h3 align="center">이력서 상세보기</h3><br><br>
+<h3 align="center">포트폴리오 상세보기</h3><br><br>
 
 	제목 :${povo.title }<br>
 	이름 : ${nmvo.name }<br>
-	<img src="/GoodJob/resources/upload/memberPicture/${povo.picturePath}" height="100px" width="100px" ><br>
 	이메일 : ${nmvo.email }<br>
 	전화번호 : ${nmvo.tel }<br>
-	내용 : ${povo.content }<br>
-	성별 : ${nmvo.gender }<br>
-	<br>
+	내용 : ${povo.content }<br><br>
 	모집직군 : <c:forEach items="${recruitCatList}" var="recruitCatList">
 	${recruitCatList.rcName }
 	</c:forEach><br><br>
@@ -41,5 +28,3 @@
 	학력 : <c:forEach items="${acaCatList }" var="acaCatList">
 	${acaCatList.academicName }
 	</c:forEach><br><br>
-	<input type="button" onclick="javascript:location.href='user-updatePortfolioForm.do?id=${requestScope.nmvo.id}'" value="수정하기">
-	<input type="button" onclick="deletePortfolio('${requestScope.nmvo.id}', '${requestScope.povo.picturePath }')" value="삭제하기">
