@@ -76,7 +76,7 @@ public interface NormalMapper {
 	//포트폴리오 삭제(portfolio_dev, portfolio_recruitment, portfolio_emp, portfolio_loc, portfolio_academic)
 	void deletePortfolioMulti(String normalId);
 
-	InterviewVO iterviewApply(InterviewVO interviewVO);
+	void interviewApply(InterviewVO interviewVO);
 
 	//인재검색에서 상세검색 누르고 결과페이지 출력하는 SQL 철우, 건들지 말것.
 	List<String> portfolioSearchList(PortfolioVO portfolioVO);

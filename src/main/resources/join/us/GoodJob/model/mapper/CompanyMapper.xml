@@ -183,6 +183,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from question_answer qa, job_posting jp
 		where qa.job_posting_num=jp.job_posting_num and jp.job_posting_num=#{value}
 	</select>
+	
+	<resultMap type="normalMemberVO" id="normalMemberVORM">
+		<result column="title" property="portfolio.title"/>
+		<result column="content" property="portfolio.content"/>
+		<result column="picture_path" property="portfolio.picturePath"/>
+	</resultMap>
+	<select id="getInterviewerDetailInfo" resultMap="normalMemberVORM">
+		select p.title,p.content,p.picture_path,n.normal_id,n.gender,n.career_status, m.name, m.tel, m.email, m.address
+		from normal_member n, portfolio p , member m
+		where n.normal_id = p.normal_id and n.normal_id = m.id
+	</select>
+	
+	<select id="getAllInterviewerList" resultType="interviewVO">
+		select i.interview_num,i.job_posting_num,i.title,nm.normal_id,m.name
+		from interview i, normal_member nm , member m
+		where i.normal_id = nm.normal_id and nm.normal_id = m.id
+	</select>
 </mapper> 		
  
  

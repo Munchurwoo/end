@@ -204,18 +204,19 @@ public class CompanyController {
 		return "company/company_detail_search_list.company_search_tiles";
 	} 
 	
-	// 면접신청하기( 면접신청 테이블 생성완료했고 VO 생성해야함)
-	@PostMapping("submitInterview.do")
-	public ModelAndView submitInterview(String normalId,Model model) {
+	// 면접신청자 정보 상세보기
+	@RequestMapping("getInterviewerDetailInfo.do")
+	public ModelAndView getInterviewerDetailInfo(Model model) {
 		ModelAndView mav=new ModelAndView();
-		mav.addObject("portfolio", normalService.submitInterview(normalId));
-		mav.setViewName("company/company_InterviewApplyList.tiles2");
+		mav.addObject("InterviewerList", companyService.getInterviewerDetailInfo());
+		mav.setViewName("company/주소변경해야함");
 		return mav;
 	}
-	@PostMapping("submitInterviewForm.do")
-	public String submitInterviewForm(Model model,InterviewVO interviewVO) {
-		model.addAttribute("interviewApply", normalService.iterviewApply(interviewVO));
-		
-		return "";
+	@RequestMapping("getAllInterviewerList.do")
+	public String getAllInterviewerList(Model model) {
+		model.addAttribute("interviewerList", companyService.getAllInterviewerList());
+		return "company/company_InterviewApplyList.tiles";
 	}
+	
+
 }

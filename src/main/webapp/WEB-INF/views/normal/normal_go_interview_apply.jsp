@@ -6,7 +6,7 @@
 		<c:when test="${sessionScope.mvo==null}">
 		</c:when>
 		<c:otherwise>
-			<form action="submitInterviewForm.do?id=normalId" method="post">
+			<form action="submitInterviewForm.do?id=normalId">
 				<input type="hidden" name="jobPostingNum" value="${requestScope.jobPostingNum}">
 				<input type="hidden" name="normalId" value="${sessionScope.mvo.id}"> 제목 <input
 					type="text" name="title" placeholder="제목을 입력하세요."
