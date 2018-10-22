@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import join.us.GoodJob.model.mapper.NormalMapper;
 import join.us.GoodJob.model.vo.NormalMemberVO;
@@ -110,6 +111,11 @@ public class NormalServiceImpl implements NormalService {
 	}
 	public void deletePortfolio(String id) {
 		normalMapper.deletePortfolio(id);
+	}
+
+	@Override
+	public NormalMemberVO submitInterview(String normalId) {
+		return normalMapper.submitInterview(normalId);
 	}
 
 }

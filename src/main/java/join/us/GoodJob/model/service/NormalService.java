@@ -2,6 +2,8 @@ package join.us.GoodJob.model.service;
 
 import java.util.List;
 
+import org.springframework.ui.Model;
+
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PortfolioVO;
 
@@ -22,10 +24,12 @@ public interface NormalService {
 
 	void registerPortfolio(PortfolioVO portfolioVO);
 	
-
 	//포트폴리오등록 상세
 	PortfolioVO normalDetailPortfolio(String normalId);
 	List<PortfolioVO> normalDetailPortfolioList(String normalId);
+	
+	// 구인공고 상세조회 후 면접신청하기
+	NormalMemberVO submitInterview(String normalId);
 	
 	//개인회원 모든 정보 받아오기
 	List<NormalMemberVO> AllFindNomarMember();

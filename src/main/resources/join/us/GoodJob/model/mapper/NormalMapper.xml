@@ -105,9 +105,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where m.id=nm.normal_id
 		
 	</select>
-	
 	<delete id="deletePortfolio" parameterType="string">
 		delete from portfolio where normal_id=#{value}
 	</delete>
+	
+	<resultMap type="normalMemberVO" id="normalMemberVORM">
+		<result column="title" property="portfolio.title"/>
+		<result column="content" property="portfolio.content"/>
+		<result column="picture_path" property="portfolio.picturePath"/>
+	</resultMap>
+	<select id="submitInterview" parameterType="string" resultMap="normalMemberVORM">
+		select p.title,p.content,p.picture_path,n.normal_id,n.gender,n.career_status, m.name, m.tel, m.email, m.address
+		from normal_member n, portfolio p , member m
+		where n.normal_id = p.normal_id and n.normal_id = m.id
+		and p.normal_id=#{value}
+	</select>
 	
 </mapper>

@@ -135,4 +135,5 @@ public class CompanyServiceImpl implements CompanyService {
 		companyMapper.registerJobPosting(jobPostingVO);
 	}
 	
+	
 }

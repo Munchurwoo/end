@@ -184,6 +184,23 @@ insert into JOB_POSTING_KEYWORD(job_posting_num, keyword_name) values(1002, '야
 
 select * from job_posting_keyword;
 ---------------------------------------------------------------------
+create table interview(
+	interview_num number primary key,
+	normal_id varchar2(100),
+	job_posting_num number,
+	title varchar2(100) not null,
+	content varchar2(100) not null,
+	constraint fk_member_interview foreign key(normal_id) references normal_member(normal_id) on delete set null,
+    constraint fk_job_posting_interview_num foreign key(job_posting_num) references job_posting(job_posting_num) on delete cascade
+);
+create sequence interview_num_seq start with 2001;
+
+insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'hsj',1001 ,'면접신청합니다', '언제갈까요?')
+insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'qqqq',1001 ,'면접보러갈게요', '불러주세요~!~!~!')
+insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'miri', 1002,'포트폴리오확인하시고 연락주세요', '내일가겠습니다~')
+insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'yosep', 1002,'꼭 가고싶습니다~!', '전화번호로 연락주세요~')
+
+
 
 -- 질의응답과 구인공고게시글/아이디 복합키 설정
 create table question_answer(
@@ -579,7 +596,6 @@ and emp_type_num in()
 and loc_num in()
 and academic_num in()
 -- 개발분야에서 java 선택  -- 모집직군에서 웹프로그래머선택 --고용형태에서 프리랜서 선택
-
 
 
 

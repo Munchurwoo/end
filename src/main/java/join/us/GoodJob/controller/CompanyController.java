@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import join.us.GoodJob.model.service.CompanyService;
 import join.us.GoodJob.model.service.MemberService;
@@ -22,7 +23,6 @@ import join.us.GoodJob.model.vo.CatNumParamVO;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
 import join.us.GoodJob.model.vo.JobPostingVO;
 import join.us.GoodJob.model.vo.MemberVO;
-import join.us.GoodJob.model.vo.PortfolioVO;
 import join.us.GoodJob.model.vo.PostListVO;
 
 @Controller
@@ -195,11 +195,16 @@ public class CompanyController {
 		List<CompanyMemberVO> cmvoList=companyService.getSomeCompanyList(catNumParamVO);
 		model.addAttribute("cmvoList", cmvoList);
 		return "company/company_detail_search_list.company_search_tiles";
-	}
+	} 
+	
+	// 면접신청하기( 면접신청 테이블 생성완료했고 VO 생성해야함)
 	@PostMapping("submitInterview.do")
-	public String submitInterview(String normalId,Model model) {
-		model.addAttribute("portfolio", normalService.normalDetailPortfolio(normalId));
-		return "company/company_InterviewApplyList.tiles2";
+	public ModelAndView submitInterview(String normalId,Model model) {
+		ModelAndView mav=new ModelAndView();
+		mav.addObject("portfolio", normalService.submitInterview(normalId));
+		mav.setViewName("company/company_InterviewApplyList.tiles2");
+		return mav;
 		
 	}
+
 }
