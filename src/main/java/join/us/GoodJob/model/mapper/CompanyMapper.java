@@ -10,6 +10,7 @@ import join.us.GoodJob.model.service.PagingBean;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
 import join.us.GoodJob.model.vo.JobPostingVO;
 import join.us.GoodJob.model.vo.MemberVO;
+import join.us.GoodJob.model.vo.QuestionAnswerVO;
 
 @Mapper
 public interface CompanyMapper {
@@ -66,8 +67,7 @@ public interface CompanyMapper {
 	List<JobPostingVO> companyJobPostingList(String companyId);
 	//구인공고 상세보기
 	CompanyMemberVO jobPostringDetail(String jobPostingNum);
-	List<CompanyMemberVO> getAllJobPostingListByJobPostingNum(List<String> jobPostingNumList);
-	
+	List<CompanyMemberVO> getAllJobPostingListByJobPostingNum(List<String> jobPostingNumList);	
 
 	//구인공고 등록
 	void registerJobPosting(JobPostingVO jobPostingVO);
@@ -81,9 +81,11 @@ public interface CompanyMapper {
 	void registerJobPostingLoc(Map<String,Object> map);
 	//구인 모집직군 분류 등록
 	void registerJobPostingRecuitment(Map<String,Object> map);
+	//구인 공고별 질답 리스트
+	List<QuestionAnswerVO> getJobPostingQAList(String jobPostingNum);
+	//구인공고 상세보기
+	CompanyMemberVO jobPostingDetail(String jobPostingNum);
 
-	
-	
 	
 	//구인공고 키워드 등록	
 

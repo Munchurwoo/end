@@ -71,6 +71,6 @@
 <a href="">면접신청 명단 리스트</a>
 <a href="updateCompanyMemberForm.do">회원정보수정</a><br><br>
 <a href="registerJobPostingForm.do">구인등록</a><br><br>
-<button class="btn-1" onclick="deleteCompanyMember()" style="height:40px; width:150px;">회원탈퇴</button>
-<a href="job_posting_detail.do">구인등록상세보기 임시로만듬-동규</a>
+<button class="btn-1" onclick="deleteCompanyMember()" style="height:40px; width:150px;">회원탈퇴</button><br><br>
+<button class="btn-1" onclick="location.href='companyJobPostingList.do?companyId=${requestScope.cmvo.companyId}'" style="height:40px; width:150px;">내 구인공고 리스트</button><br><br>
 

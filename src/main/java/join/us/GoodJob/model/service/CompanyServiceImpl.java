@@ -16,6 +16,7 @@ import join.us.GoodJob.model.vo.JobPostingVO;
 import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PostListVO;
+import join.us.GoodJob.model.vo.QuestionAnswerVO;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
@@ -76,11 +77,10 @@ public class CompanyServiceImpl implements CompanyService {
 	public CompanyMemberVO detailCompanyInfo(String companyId) {
 		return companyMapper.detailCompanyInfo(companyId);
 	}
-
-	public CompanyMemberVO jobPostingDetail(String jobPostingNum) {
-		return companyMapper.jobPostringDetail(jobPostingNum);
+	@Override	
+	public CompanyMemberVO jobPostingDetail(String jobPostingNum) {	
+		return companyMapper.jobPostingDetail(jobPostingNum);
 	}
-
 	@Override
 	public List<JobPostingVO> companyJobPostingList(String companyId) {
 
@@ -95,8 +95,6 @@ public class CompanyServiceImpl implements CompanyService {
 
 	@Override
 	public List<CompanyMemberVO> getSomeCompanyList(CatNumParamVO catNumParamVO) {
-		List<CompanyMemberVO> someCompanyList = new ArrayList<CompanyMemberVO>();
-
 		// catNumParamVO로 List<String> 타입으로 구인공고 번호 리스트 받아옴
 		Map<String, List<String>> map = new HashMap<String, List<String>>();
 		map.put("devCatNumList", catNumParamVO.getDevCatNumList());
@@ -140,5 +138,10 @@ public class CompanyServiceImpl implements CompanyService {
 			companyMapper.registerJobPostingDev(map);
 		}
 	}
-	
+
+	@Override
+	public List<QuestionAnswerVO> getJobPostingQAList(String jobPostingNum) {
+		return companyMapper.getJobPostingQAList(jobPostingNum);
+	}
+
 }

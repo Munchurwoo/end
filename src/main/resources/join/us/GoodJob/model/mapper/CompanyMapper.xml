@@ -102,7 +102,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="title" property="jobPostingVO.title"/>
 		<result column="content" property="jobPostingVO.content"/>
 	</resultMap>
-	<select id="jobPostringDetail" parameterType="string" resultMap="companyMemberVORM">
+	<select id="jobPostingDetail" parameterType="string" resultMap="companyMemberVORM">
 	select 
 	cm.company_id, cm.introduction, cm.company_type, cm.industry, cm.sales, cm.date_of_establishment, cm.num_of_employees,
 	j.job_posting_num, j.career_status, j.title, j.content, m.address, m.tel, m.email , m.name
@@ -178,7 +178,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</foreach>
 	</select>
 	
-	
+	<select id="getJobPostingQAList" parameterType="string" resultType="questionAnswerVO">
+		select qa.normal_id, qa.question, qa.answer
+		from question_answer qa, job_posting jp
+		where qa.job_posting_num=jp.job_posting_num and jp.job_posting_num=#{value}
+	</select>
 </mapper> 		
  
  
