@@ -42,10 +42,7 @@ public interface CompanyService {
 	CompanyMemberVO detailCompanyInfo(String companyId);
 	
 	// 기업정보 상세보기 후 해당 기업 구인공고리스트 바로가기
-	List<JobPostingVO> companyJobPostingList(String companyId);
-	
-	// 마이바티스 동적쿼리 테스트 완료 - 정상작동
-	List<String> findJobPostingByCatNumList(Map map);
+	List<JobPostingVO> companyJobPostingList(String companyId);	
 	
 	// 구인 상세
 	CompanyMemberVO jobPostingDetail(String jobPostingNum);

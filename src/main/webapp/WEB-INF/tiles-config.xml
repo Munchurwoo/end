@@ -69,10 +69,14 @@
  	<definition name="*.company_search_tiles" extends="home.tiles">
  		<put-attribute name="main_header" value="/WEB-INF/views/templates/company_search_header.jsp"></put-attribute>
  		<put-attribute name="main_center" value="/WEB-INF/views/{1}.jsp"></put-attribute>
+ 		 		<put-attribute name="main_footer" value=""></put-attribute>
+ 		
  	</definition>
  	<definition name="*/*.company_search_tiles" extends="home.tiles">
  		<put-attribute name="main_header" value="/WEB-INF/views/templates/company_search_header.jsp"></put-attribute>
  		<put-attribute name="main_center" value="/WEB-INF/views/{1}/{2}.jsp"></put-attribute>
+ 		 		<put-attribute name="main_footer" value=""></put-attribute>
+ 		
  	</definition>
  	
  	

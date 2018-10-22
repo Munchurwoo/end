@@ -113,6 +113,7 @@ public class CompanyController {
 		return "company/job_posting_register_form.tiles2";
 	}
 
+	//기업정보 전체 리스트
 	@RequestMapping("user-companyInfo.do")
 	public String allConmapnyInfo(Model model, String pageNum) {
 		PostListVO postListVO = companyService.getAllCompanyList(pageNum);
@@ -129,11 +130,6 @@ public class CompanyController {
 	
 	@RequestMapping("job_posting_detail.do")
 	public String job_posting_detail(String jobPostingNum, Model model, HttpSession session) {
-		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNum(jobPostingNum));
-		model.addAttribute("devCatList", memberService.getDevCatVOListByNum(jobPostingNum));
-		model.addAttribute("empTypeCatList", memberService.getEmpCatVOListByNum(jobPostingNum));
-		model.addAttribute("locCatList", memberService.getLocCatVOListByNum(jobPostingNum));
-		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNum(jobPostingNum));
 		model.addAttribute("jpvo", companyService.jobPostingDetail(jobPostingNum));
 		return "company/job_posting_detail.tiles2";
 	}

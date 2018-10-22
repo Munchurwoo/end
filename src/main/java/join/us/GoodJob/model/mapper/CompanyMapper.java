@@ -67,7 +67,7 @@ public interface CompanyMapper {
 	List<JobPostingVO> companyJobPostingList(String companyId);
 	//구인공고 상세보기
 	CompanyMemberVO jobPostringDetail(String jobPostingNum);
-	CompanyMemberVO getAllJobPostingListByJobPostingNum(String jobPostingNum);
+	List<CompanyMemberVO> getAllJobPostingListByJobPostingNum(List<String> jobPostingNumList);
 	
 	
 	//구인공고 등록

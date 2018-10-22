@@ -556,7 +556,7 @@ select company_id, name, introduction
 from(select row_number() over(order by cm.company_id) as rnum, cm.company_id, m.name, cm.introduction
 from member m , company_member cm
 where m.id=cm.company_id
-) where rnum between 3 and 6
+)  where rnum between 3 and 6
 
 --기업 전체 보기 게시물 수
 select count(*)

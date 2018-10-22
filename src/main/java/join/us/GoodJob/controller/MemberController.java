@@ -42,13 +42,15 @@ public class MemberController {
 		return "redirect:home.do";
 	}
 	
-	@RequestMapping("getDevCatVOListAjax.do")
+	@RequestMapping("user-getDevCatVOListAjax.do")
 	@ResponseBody
 	public List<List<DevCatVO>> getDevCatVOListAjax(CatNumParamVO paramVO) {
 		List<String> recruitCatNumList=paramVO.getRecruitCatNumList();
 		List<List<DevCatVO>> list= new ArrayList<List<DevCatVO>>();
-		for(String rcNum : recruitCatNumList) 
-			list.add(memberService.getDevCatVOListByrcNum(rcNum));		
+		if(recruitCatNumList!=null) {
+			for(String rcNum : recruitCatNumList) 
+				list.add(memberService.getDevCatVOListByrcNum(rcNum));		
+		}
 		return list;				
 	}
 	/**

@@ -1,7 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<style type="text/css">
+.resume_photo{
+	position : relative;
+	width : 100px;
+	height : 140px;
+}
 
+#normal-picture{
+	position : absolute;
+	width : 100px;
+	height : 140px;
+}
+
+#pictureDeleteBtn{	
+	position: absolute;
+	z-index: 1;
+	right:0;
+	top:0;
+	width:23px;
+	height:23px;
+}
+
+
+</style>
 
 <script type="text/javascript">	
 	$(document).ready(function(){				
@@ -10,7 +33,7 @@
 			var dataString='';				
 			$.ajax({
 				type:"get",
-				url:"getDevCatVOListAjax.do",
+				url:"user-getDevCatVOListAjax.do",
 				dataType:"json",
 				data:$("#registerForm").serialize(),
 				success:function(catList){		
@@ -27,7 +50,12 @@
 		});//change
 		
 		$("#pictureUploadBtn").change(function(){
-			var form = $("#pictureUploadForm")[0];	
+			 var deletePictureName=$("#normal-picture").attr('alt');
+			if( (!deletePictureName) == false){ //기존 사진 있으면 
+				pictureDelete(deletePictureName); //삭제
+			}			
+			//사진 업로드
+			var form = $("#pictureUploadForm")[0];
 			var formData = new FormData(form);
 			$.ajax({
 				type:"post",
@@ -39,17 +67,41 @@
 		        cache: false,
 				success:function(path){
 					$("#normal-picture").attr('src', "/GoodJob/resources/upload/memberPicture/"+path);
-					//$("#pictureInput").val(path);
-					alert(path);
-					$("#aaa").append("<input type='hidden' name='picturePath' value='"+path+"'>");	
+					$("#normal-picture").attr('alt', path);
+					$("#pictureInputArea").append("<input type='hidden' name='picturePath' value='"+path+"'>");	
 				}
-			});
+			});//ajax
+			$("#pictureDeleteBtn").css('display', 'block');
 		});//change
 		
 		$("#registerBtn").click(function() {
 			$("#registerForm").submit();
-		});//click		
+		});//click				
+		
+		$("#pictureDeleteBtn").click(function() {
+			//사진파일 삭제
+			pictureDelete($("#normal-picture").attr('alt'));			
+			//src변경
+			$("#normal-picture").attr('src', "/GoodJob/resources/upload/etc/member_picture_add.png");
+			//alt변경
+			$("#normal-picture").attr('alt', "");
+			//display변경
+			$("#pictureDeleteBtn").css('display', 'none');
+			//input value비움
+			$("#pictureUploadBtn").val("");		
+		});	//click
 	});//ready
+	
+	function pictureDelete(deletePicturename){
+		$.ajax({
+			type:"post",
+			url:"normalPictureDelete.do",
+			data:"deletePicturename="+deletePicturename,
+			success:function(result){
+				//alert("사진삭제완료");
+			}
+		});//ajax			
+	}
 </script>
 
 <!-- normal_register_portfolio -->
@@ -83,19 +135,19 @@
 	<h5>개발분야</h5>
 	<div id="empTypeArea">		
 	</div>	
-	<span id="aaa"></span>
+	<span id="pictureInputArea"></span>
 	
 	<button type="reset">초기화</button>	
 </form >
 <h5>사진등록</h5>
 <form enctype="multipart/form-data" action="" id="pictureUploadForm">
  <div class="resume_photo">
-   <a href="##" class="box_photo" data-api_type="layer" data-api_id="basic_photo" >
-       <img id="normal-picture" src="" border="0" width="100" height="140" class="user_image" />s</a>
-  <!--  <a class="photo_delete" href="##" style=""><span class="blind">사진 삭제</span></a> -->
+ 		<img id="normal-picture"  src="${pageContext.request.contextPath}/resources/upload/etc/member_picture_add.png" border="0" width="100" height="140"  >
+  		<img id="pictureDeleteBtn" src="${pageContext.request.contextPath}/resources/upload/etc/x-button.jpg" class="button"  style="display: none; ">
 </div>
+<div>
 <input type="file" name="uploadPicture" id="pictureUploadBtn"><br>
-
+</div>
 </form>
 
 

@@ -1,6 +1,5 @@
 package join.us.GoodJob.model.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -55,6 +54,7 @@ public class CompanyServiceImpl implements CompanyService {
 		return null;
 	}
 
+	//기업정보 전체 리스트
 	public PostListVO getAllCompanyList(String pageNum) {
 		PagingBean pagingBean;
 		//기업정보 게시물 수 가져오기
@@ -93,41 +93,16 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	public List<String> findJobPostingByCatNumList(Map map) {
-		CatNumParamVO cnpvo=new CatNumParamVO();
-		map.put("devCatNumList", cnpvo.getDevCatNumList());
-		map.put("recruitCatNumList", cnpvo.getRecruitCatNumList());
-		map.put("empTypeCatNumList", cnpvo.getEmpTypeCatNumList());
-		map.put("locCatNumList", cnpvo.getLocCatNumList());
-		map.put("acaCatNumList", cnpvo.getAcaCatNumList());
-		return companyMapper.findJobPostingByCatNumList(map);
-	}
-
-	@Override
-	public List<CompanyMemberVO> getSomeCompanyList(CatNumParamVO catNumParamVO) {
-		List<CompanyMemberVO> someCompanyList = new ArrayList<CompanyMemberVO>();
-		
+	public List<CompanyMemberVO> getSomeCompanyList(CatNumParamVO catNumParamVO) {		
 		//catNumParamVO로 List<String> 타입으로 구인공고 번호 리스트 받아옴	
 		Map<String,List<String>> map = new HashMap<String,List<String>>();
 		map.put("devCatNumList", catNumParamVO.getDevCatNumList());
 		map.put("recruitCatNumList", catNumParamVO.getRecruitCatNumList());
 		map.put("empTypeCatNumList", catNumParamVO.getEmpTypeCatNumList());
 		map.put("locCatNumList", catNumParamVO.getLocCatNumList());
-		map.put("acaCatNumList", catNumParamVO.getAcaCatNumList());
-		
-		List<String> jobPostingNumList = companyMapper.findJobPostingByCatNumList(map);
-		//System.out.println("구인공고 번호리스트 :"+jobPostingNumList);
-		//위에서 받아온 번호 리스트로 for문 돌려서  List<CompanyMemberVO>에 add
-		for(String jobPostingNum : jobPostingNumList) {
-			CompanyMemberVO companyMemberVO 
-			=companyMapper.getAllJobPostingListByJobPostingNum(jobPostingNum);
-			someCompanyList.add(companyMemberVO);
-		}
-		
-		
-		//myBatis에서 동적 sql하면 멋있음 -보류
-		//System.out.println("게시물리스트 :"+someCompanyList);
-		return someCompanyList;
+		map.put("acaCatNumList", catNumParamVO.getAcaCatNumList());		
+		List<String> jobPostingNumList = companyMapper.findJobPostingByCatNumList(map);	
+		return companyMapper.getAllJobPostingListByJobPostingNum(jobPostingNumList);
 	}
 	
 }
