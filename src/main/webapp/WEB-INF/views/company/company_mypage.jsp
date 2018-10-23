@@ -68,6 +68,7 @@
 </div>
 <div class="col-sm-3"></div>
 </div>
+
 <a href="getAllInterviewerList.do">면접신청자 명단조회</a><br><br>
 <a href="updateCompanyMemberForm.do">회원정보수정</a><br><br>
 <a href="registerJobPostingForm.do">구인등록</a><br><br>

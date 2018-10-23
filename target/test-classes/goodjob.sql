@@ -212,7 +212,7 @@ create table question_answer(
    normal_id varchar2(100),
    job_posting_num number,
    question varchar2(200) not null,
-   answer varchar2(500) not null,
+   answer varchar2(500) default null,
    constraint fk_member_qna foreign key(normal_id) references normal_member(normal_id) on delete set null,
    constraint fk_job_posting_num_qna foreign key(job_posting_num) references job_posting(job_posting_num) on delete cascade
 );
@@ -575,10 +575,49 @@ where m.id=cm.company_id
 
 select company_id, name, introduction
 from(
-select row_number() over(order by cm.company_id) as rnum, cm.company_id, m.name, cm.introduction
+select row_number() over(order by cm.company_id) as rnum, 
+	cm.company_id, m.name, cm.introduction
 from member m , company_member cm
 where m.id=cm.company_id
 )  where rnum between 3 and 6
+
+-- 채용정보 페이징처리
+select 
+	company_id, introduction, company_type, industry, sales, date_of_establishment, num_of_employees,
+	job_posting_num, career_status,title,content,address,tel,email ,name 
+from(
+select row_number() over(order by j.job_posting_num) as rnum,
+	cm.company_id, cm.introduction, cm.company_type, cm.industry, cm.sales, cm.date_of_establishment, cm.num_of_employees,
+	j.job_posting_num, j.career_status, j.title, j.content, m.address, m.tel, m.email , m.name
+	from job_posting j , company_member cm, member m
+	where j.company_id = cm.company_id and cm.company_id=m.id
+) where rnum between 1 and 3
+
+-- 상세검색 페이징처리
+
+select count(*)
+from job_posting j , company_member cm, member m
+where j.company_id = cm.company_id and cm.company_id=m.id and 
+	j.job_posting_num in (1001,1002)
+
+select 
+	company_id, introduction, company_type, industry, sales, date_of_establishment, num_of_employees,
+	job_posting_num, career_status, title, content, address, tel, email , name
+	from
+	 (select row_number() over(order by j.job_posting_num) as rnum, cm.company_id, cm.introduction, cm.company_type, cm.industry, cm.sales, cm.date_of_establishment, cm.num_of_employees,
+	j.job_posting_num, j.career_status, j.title, j.content, m.address, m.tel, m.email , m.name
+	from job_posting j , company_member cm, member m
+	where j.company_id = cm.company_id and cm.company_id=m.id and 
+	j.job_posting_num in 
+	(1001,1002)
+	)
+	where rnum between 1 and 3
+		
+	
+	
+	
+	
+
 
 --기업 전체 보기 게시물 수
 select count(*)

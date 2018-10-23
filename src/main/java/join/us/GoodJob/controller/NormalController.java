@@ -126,10 +126,11 @@ public class NormalController {
 	 * @param session
 	 * @return
 	 */
-	@RequestMapping("registerPortfolio.do")
+	@PostMapping("registerPortfolio.do")
 	public String registerPortfolio(PortfolioVO portfolioVO, HttpSession session) {
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		portfolioVO.setNormalId(mvo.getId());
+
 		System.out.println("이력서 등록 시작");
 		// 181019 MIRI 포트폴리오 등록/수정 동시에 활용하기위해 flag를 줌
 		normalService.registerPortfolio(portfolioVO, true);
@@ -335,7 +336,7 @@ public class NormalController {
 	public String goInterviewApply(Model model,String jobPostingNum) {
 		System.out.println("구인공고 "+jobPostingNum+"번 글에 면접신청합니다.");
 		model.addAttribute("jobPostingNum", jobPostingNum);
-		return "normal/normal_go_interview_apply.tiles";
+		return "normal/normal_go_interview_apply.tiles2";
 	}
 	
 	/**

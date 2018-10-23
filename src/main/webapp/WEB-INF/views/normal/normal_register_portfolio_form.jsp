@@ -1,17 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
+
 <style type="text/css">
 .resume_photo{
 	position : relative;
-	width : 100px;
-	height : 140px;
+	width : 120px;
+	height : 160px;
 }
 
 #normal-picture{
 	position : absolute;
-	width : 100px;
-	height : 140px;
+	width : 120px;
+	height : 160px;
 }
 
 #pictureDeleteBtn{	
@@ -19,8 +22,7 @@
 	z-index: 1;
 	right:0;
 	top:0;
-	width:23px;
-	height:23px;
+	width:27px;
 }
 
 
@@ -55,13 +57,14 @@
 				pictureDelete(deletePictureName); //삭제
 			}			
 			//사진 업로드
-			var form = $("#pictureUploadForm")[0];
+			var form = $("#registerForm")[0];
 			var formData = new FormData(form);
 			$.ajax({
 				type:"post",
 				url:"normalPictureUpload.do",
 				data:formData,				
 				enctype: 'multipart/form-data',
+				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 				processData: false,
 		        contentType: false,
 		        cache: false,
@@ -90,6 +93,9 @@
 			//input value비움
 			$("#pictureUploadBtn").val("");		
 		});	//click
+		
+		
+		
 	});//ready
 	
 	function pictureDelete(deletePicturename){
@@ -106,50 +112,108 @@
 
 <!-- normal_register_portfolio -->
 <h3>이력서 작성</h3>
-<form action="registerPortfolio.do" method="get" id="registerForm">
-	제목 <input type="text" name="title" placeholder="제목을 입력하세요" required="required"><br>
-	내용<br>&nbsp;&nbsp;&nbsp;<textarea rows="10" cols="60" name="content" placeholder="내용을 입력하세요" required="required"></textarea><br><br>
-		
-	<h5>지역</h5>
-	<c:forEach items="${requestScope.locCatList}" var="locCat" varStatus="i">
-		<input type="checkbox" name="locCatNumList" value="${locCat.locNum}" >${locCat.locName}&nbsp;
-	</c:forEach> <br>
+<form action="registerPortfolio.do" method="post" id="registerForm" enctype="multipart/form-data">
+<h5>제목</h5>
+ <input size="98px"  height="50px" type="text" name="title" placeholder="제목을 입력하세요" required="required"><br>
+
+<div>
+<br>
+
+	<div style="float:left;">
+		<h5>사진등록</h5>	
+		 <div class="resume_photo" style="width:120px;">
+		 		<img id="normal-picture"  src="${pageContext.request.contextPath}/resources/upload/etc/member_picture_add.png" border="0" width="120" height="160"  >
+		  		<img id="pictureDeleteBtn" src="${pageContext.request.contextPath}/resources/upload/etc/x-button.jpg" class="button"  style="display: none; ">
+		</div>
+ 		<span id="pictureInputArea"></span>	<br>
+		<input type="file" name="uploadPicture" id="pictureUploadBtn"><br>
+	</div>
+	<table class="advantage-table">
+	      <colgroup>
+	        <col width="76px">
+	        <col width="320px">
+	        <col width="120px">
+	        <col width="320px">
+	      </colgroup>
+	      <tbody>
+	      <tr height="50px">
+	        <th>지역</th>
+	        <td colspan="3">
+	        	<c:forEach items="${requestScope.locCatList}" var="locCat" varStatus="i">
+					<input type="checkbox" name="locCatNumList" value="${locCat.locNum}" >${locCat.locName}&nbsp;
+				</c:forEach>
+	         </td>
+	      </tr>
+	      
+	      <tr height="50px">
+	        <th>학력</th>
+	        <td colspan="3">
+	        	<c:forEach items="${requestScope.acaCatList}" var="acaCat" varStatus="i">	
+					<input type="radio" name="acaCatNumList" value="${acaCat.academicNum}" required="required">${acaCat.academicName}&nbsp;
+				</c:forEach> 
+	        </td>
+	      </tr>
+	      
+	      <tr height="50px">
+	        <th>고용형태</th>
+	        <td>
+	        	<c:forEach items="${requestScope.empTypeCatList}" var="empTypeCat" varStatus="i">
+					<input type="checkbox" name="empTypeCatNumList" value="${empTypeCat.empTypeNum}" >${empTypeCat.empTypeName}&nbsp;
+				</c:forEach>
+	        </td>        
+	      </tr>
+	      
+	      <tr>
+	      	<th>포트폴리오</th>
+	      	<td>
+				<input type="file" name="fileList[0]" >
+				<input type="file" name="fileList[1]" >
+				<input type="file" name="fileList[2]" >
+	      	</td>
+	      </tr>
+	      
+	    
+	    </tbody>
+	</table>	
+</div>
+<br>
+<div>
+<h5>내용</h5>
+<textarea rows="8" cols="98" name="content" placeholder="내용을 입력하세요" required="required"></textarea><br><br>
+</div>
 	
-	<h5>학력</h5>
-	<c:forEach items="${requestScope.acaCatList}" var="acaCat" varStatus="i">	
-		<input type="radio" name="acaCatNumList" value="${acaCat.academicNum}" required="required">${acaCat.academicName}&nbsp;
-	</c:forEach> <br>
-	
-	<h5>고용형태</h5>
-	<c:forEach items="${requestScope.empTypeCatList}" var="empTypeCat" varStatus="i">
-		<input type="checkbox" name="empTypeCatNumList" value="${empTypeCat.empTypeNum}" >${empTypeCat.empTypeName}&nbsp;
-	</c:forEach> <br>
-	
-	<h5>모집직군</h5> 
-	
-		<c:forEach items="${requestScope.recruitCatList}" var="recruitCat" varStatus="i">
-			<input type="checkbox" class = "recruit" name="recruitCatNumList" value="${recruitCat.rcNum}" >${recruitCat.rcName}  &thinsp;&thinsp;
-			<c:if test="${(i.index+1)%3==0}"><br></c:if>
-		</c:forEach>
-		<input type="hidden" name="a" value="b">	
-	<h5>개발분야</h5>
-	<div id="empTypeArea">		
-	</div>	
-	<span id="pictureInputArea"></span>
-	
+
+
+<table class="advantage-table">
+	<colgroup>
+	        <col width="92px">
+	       <%--  <col width="320px"> --%>
+	      </colgroup>
+	<tbody>
+	  <tr height="50px">
+	      	<th>모집직군</th>
+	        <td>
+				<c:forEach items="${requestScope.recruitCatList}" var="recruitCat" varStatus="i" >
+					<input type="checkbox" class = "recruit" name="recruitCatNumList" value="${recruitCat.rcNum}" >${recruitCat.rcName}  &thinsp;&thinsp;
+					<c:if test="${(i.index+1)%4==0}">
+						<br>
+					</c:if>
+				</c:forEach>
+	        </td>      
+	      </tr>
+	      
+	      <tr height="50px" >
+	        <th>개발분야</th>
+	        <td style="padding-top:24px;">
+	        	<div id="empTypeArea">		
+				</div>					
+	        </td>        
+	      </tr>      
+	      </tbody>
+</table>
+<br><br>
 	<button type="reset">초기화</button>	
 </form >
-<h5>사진등록</h5>
-<form enctype="multipart/form-data" action="" id="pictureUploadForm">
- <div class="resume_photo">
- 		<img id="normal-picture"  src="${pageContext.request.contextPath}/resources/upload/etc/member_picture_add.png" border="0" width="100" height="140"  >
-  		<img id="pictureDeleteBtn" src="${pageContext.request.contextPath}/resources/upload/etc/x-button.jpg" class="button"  style="display: none; ">
-</div>
-<div>
-<input type="file" name="uploadPicture" id="pictureUploadBtn"><br>
-</div>
-</form>
-
 
 <button type="submit"  id="registerBtn">등록하기</button>
 <button type="reset" onclick="location.href='home.do'">홈으로</button>	

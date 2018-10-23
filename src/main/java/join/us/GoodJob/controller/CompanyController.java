@@ -24,6 +24,7 @@ import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.JobPostingVO;
 import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.PostListVO;
+import join.us.GoodJob.model.vo.QuestionAnswerVO;
 
 @Controller
 public class CompanyController {
@@ -228,13 +229,14 @@ public class CompanyController {
 	 * @return
 	 */
 	@RequestMapping("user-getAllJobPostingList.do")
-	public String getAllJobPostingList(Model model) {
+	public String getAllJobPostingList(Model model,String pageNum) {
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
 		model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));
 		model.addAttribute("empTypeCatList", memberService.getEmpTypeCatVOList());
 		model.addAttribute("locCatList", memberService.getLocCatVOList());
 		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
-		model.addAttribute("jobPostingList", companyService.getAllJobPostingList());
+		PostListVO postListVO = companyService.getAllJobPostingList(pageNum);
+		model.addAttribute("postListVO", postListVO);
 		return "company/company_get_all_jobPosting_list.company_search_tiles";
 	}
 	
@@ -245,36 +247,79 @@ public class CompanyController {
 	 * @param catNumParamVO
 	 * @return
 	 */
-	@PostMapping("user-company_detail_search_list.do")
-	public String findJobPostingByCatNumList(Model model, CatNumParamVO catNumParamVO) {
+	@RequestMapping("user-company_detail_search_list.do")
+	public String findJobPostingByCatNumList(Model model, CatNumParamVO catNumParamVO,String pageNum) {
 		// 아래 6줄은 상세조건 폼
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
 		model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));
 		model.addAttribute("empTypeCatList", memberService.getEmpTypeCatVOList());
 		model.addAttribute("locCatList", memberService.getLocCatVOList());
 		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
-		model.addAttribute("jobPostingList", companyService.getAllJobPostingList());
+		model.addAttribute("jobPostingList", companyService.getAllJobPostingList(pageNum));
 		//System.out.println(catNumParamVO);
 
 		//카테고리 번호들로 기업 게시글 리스트 불러옴
-		List<CompanyMemberVO> cmvoList=companyService.getSomeCompanyList(catNumParamVO);
-		model.addAttribute("cmvoList", cmvoList);
+		PostListVO postListVO = companyService.findJobPostingByCatNumList(catNumParamVO,pageNum);
+		System.out.println(postListVO.getJobPostingList());
+		model.addAttribute("postListVO", postListVO);
 		return "company/company_detail_search_list.company_search_tiles";
 	} 
 	
-	// 면접신청자 정보 상세보기
-	@RequestMapping("getInterviewerDetailInfo.do")
-	public ModelAndView getInterviewerDetailInfo(Model model) {
-		ModelAndView mav=new ModelAndView();
-		mav.addObject("InterviewerList", companyService.getInterviewerDetailInfo());
-		mav.setViewName("company/주소변경해야함");
-		return mav;
-	}
 	@RequestMapping("getAllInterviewerList.do")
 	public String getAllInterviewerList(Model model) {
 		model.addAttribute("interviewerList", companyService.getAllInterviewerList());
-		return "company/company_InterviewApplyList.tiles";
+		return "company/company_InterviewApplyList.tiles2";
 	}
 	
-
+	/**
+	 * 181020 MIRI 구인 공고별 면접자 리스트
+	 * @param jobPostingNum
+	 * @return
+	 */
+	@PostMapping("getJobPostingInterviewerList.do")
+	public String getJobPostingInterviewerList(int jobPostingNum) {
+		//작업중
+		return "company/job_posting_interviewer_list.tiles2";
+	}
+	
+	/**
+	 * 181020 MIRI 구인 공고별 질답 리스트
+	 * @param jobPostingNum
+	 * @return
+	 */
+	@PostMapping("getJobPostingQAList.do")
+	public String getJobPostingQAList(String jobPostingNum, Model model) {
+		List<QuestionAnswerVO> qavo = companyService.getJobPostingQAList(jobPostingNum);
+		model.addAttribute("qavo", qavo);
+		return "company/job_posting_QA_list.tiles2";
+	}
+	/**
+	 * 181022 MIRI Q&A 답변 수정
+	 * @param QANum
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("updateQAToAnswer.do")
+	public QuestionAnswerVO updateQAToAnswer(String QANum, String answer, Model model) {
+		QuestionAnswerVO qavo = companyService.getJobPostingQAByQANum(QANum);
+		qavo.setAnswer(answer);
+		companyService.updateQAToAnswer(qavo);
+		qavo = companyService.getJobPostingQAByQANum(QANum);
+		model.addAttribute("qavo", qavo);
+		return qavo;
+	}
+	/**
+	 * 181022 MIRI Q&A 답변 삭제
+	 * @param QANum
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("deleteQAToAnswer.do")
+	public QuestionAnswerVO deleteQAToAnswer(String QANum, Model model) {
+		QuestionAnswerVO qavo = companyService.getJobPostingQAByQANum(QANum);
+		companyService.deleteQAToAnswer(QANum);
+		qavo = companyService.getJobPostingQAByQANum(QANum);
+		model.addAttribute("qavo", qavo);
+		return qavo;
+	}
 }

@@ -10,7 +10,25 @@
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
 
 <!-- 어노테이션 기반 springmvc 설정  -->
-<mvc:annotation-driven/>
+<mvc:annotation-driven>
+	<mvc:message-converters>
+			<bean
+				class="org.springframework.http.converter.StringHttpMessageConverter">
+
+				<property name="supportedMediaTypes">
+
+					<list>
+
+						<value>text/html; charset=UTF-8</value>
+
+					</list>
+
+				</property>
+
+			</bean>
+
+		</mvc:message-converters>
+</mvc:annotation-driven>
 <bean id="viewResolver" 
 class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 	<property name="prefix" value="/WEB-INF/views/"/>
@@ -37,6 +55,23 @@ class="org.springframework.web.servlet.view.InternalResourceViewResolver">
  		</list>
  	</property>
  </bean>
+ 
+ <!-- 파일업로드를 위한 설정 -->
+ 
+ <bean id="multipartResolver" 
+class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+	<property name="defaultEncoding" value="utf-8"/>
+</bean>
+ 
+ 
+ <!-- 파일다운로드를 위한 설정  -->
+<bean id="downloadView" 
+class="join.us.GoodJob.controller.DownloadView"></bean>
+<bean id="beanNameViewResolver" 
+class="org.springframework.web.servlet.view.BeanNameViewResolver">
+	<property name="order" value="1" />
+</bean>
+ 
 <mvc:interceptors>
 	<mvc:interceptor>
 		<mvc:mapping path="/**/*.do"/>

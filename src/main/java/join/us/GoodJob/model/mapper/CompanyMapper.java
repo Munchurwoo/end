@@ -7,10 +7,13 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import join.us.GoodJob.model.service.PagingBean;
+import join.us.GoodJob.model.vo.CatNumParamVO;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
+import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.JobPostingVO;
 import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
+import join.us.GoodJob.model.vo.PostListVO;
 import join.us.GoodJob.model.vo.QuestionAnswerVO;
 
 @Mapper
@@ -38,7 +41,7 @@ public interface CompanyMapper {
 	CompanyMemberVO myPageCompanyMember(String companyId);
 	
 	//채용정보 클릭 후 전체 채용공고 조회하기
-	List<CompanyMemberVO> getAllJobPostingList();
+	List<CompanyMemberVO> getAllJobPostingList(PagingBean pagingBean);
 	
 	// 마이바티스 동적쿼리 테스트 완료 - 정상작동
 	List<String> findJobPostingByCatNumList(Map map);
@@ -67,9 +70,8 @@ public interface CompanyMapper {
 	// 기업정보 상세보기 후 해당기업 구인공고 리스트 바로가기
 	List<JobPostingVO> companyJobPostingList(String companyId);
 	//구인공고 상세보기
-	CompanyMemberVO jobPostringDetail(String jobPostingNum);
-	List<CompanyMemberVO> getAllJobPostingListByJobPostingNum(List<String> jobPostingNumList);	
-
+	CompanyMemberVO jobPostringDetail(String jobPostingNum);	
+	
 	//구인공고 등록
 	void registerJobPosting(JobPostingVO jobPostingVO);
 	//구인 학력 분류 등록	
@@ -84,13 +86,22 @@ public interface CompanyMapper {
 	void registerJobPostingRecuitment(Map<String,Object> map);
 	//구인 공고별 질답 리스트
 	List<QuestionAnswerVO> getJobPostingQAList(String jobPostingNum);
+	//181022 MIRI QA번호로 Q&A 검색
+	QuestionAnswerVO getJobPostingQAByQANum(String qaNum);
+	//181022 MIRI Q&A 답변 수정
+	void updateQAToAnswer(QuestionAnswerVO qavo);
+	//181022 MIRI Q&A 답변 삭제
+	void deleteQAToAnswer(String QANum);
 	//구인공고 상세보기
 	CompanyMemberVO jobPostingDetail(String jobPostingNum);
-	// 면접신청자 상세보기 리스트타입인지 확인 후 수정해야함
-	List<NormalMemberVO> getInterviewerDetailInfo();
 	// 면접신청자 조회 ->
-	List<NormalMemberVO> getAllInterviewerList();
+	List<InterviewVO> getAllInterviewerList();
 	//구인공고 키워드 등록	
+	// 헤더/채용정보 페이징처리
+	int getAlljobPostingCount();
+	// 채용정보 상세검색 페이징처리
+	int getAllJobPostingListByJobPostingNumCount(List<String> jobPostingNumList);
+	List<CompanyMemberVO> getAllJobPostingListByJobPostingNum(Map<String, Object> map2);
 	
 	
 	
