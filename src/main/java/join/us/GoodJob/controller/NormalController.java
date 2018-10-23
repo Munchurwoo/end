@@ -183,7 +183,7 @@ public class NormalController {
 		return uploadPicture.getOriginalFilename();
 	}
 
-	// 인재검색 섹션에서 인재검색 결과를 나타냄
+	// 인재검색 섹션에서 인재검색 결과를 나타냄 
 	@RequestMapping("user-normalDetailPortfolioList.do")
 	public String normalDetailPortfolioList(String normalId, Model model) {
 		model.addAttribute("devCatList", memberService.getDevCatVOListByNormalId(normalId));
@@ -193,7 +193,7 @@ public class NormalController {
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNormalId(normalId));
 		// 181019 MIRI normalDetailPortfolio와 중복되어 normalDetailPortfolio로 수정
 		model.addAttribute("povo", normalService.normalDetailPortfolio(normalId));
-
+		
 		NormalMemberVO nmvo = normalService.selectNormalMember(normalId);
 		model.addAttribute("nmvo", nmvo);
 
@@ -231,22 +231,39 @@ public class NormalController {
 
 	}
 
-	// 인재검색 header 클릭시 이동
+	/**
+	 * 인재검색 header 클릭시 이동 10-22 cherwoo
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("user-portfolioAllList.do")
 	public String portfolioAllList(Model model, HttpSession session) {
 		// normal 맴버 모두 조회
 		List<NormalMemberVO> list = normalService.AllFindNomarMember();
 		List<List<DevCatVO>> devCatList = new ArrayList<List<DevCatVO>>();
 		List<PortfolioVO> povo = new ArrayList<PortfolioVO>();
-		model.addAttribute("list", list);
-		model.addAttribute("devCatList", devCatList);
-		model.addAttribute("povo", povo);
 
 		for (int i = 0; i < list.size(); i++) {
 			devCatList.add(memberService.getDevCatVOListByNormalId(list.get(i).getNormalId()));
 			povo.add(normalService.normalDetailPortfolio(list.get(i).getNormalId()));
 		}
-
+		String a = null;
+		System.out.println(devCatList.iterator());
+		System.out.println(devCatList.size());
+		
+		for(int i =0; i<list.size();i++) {
+			for(int j=0; j<devCatList.get(i).size();j++){
+				a=devCatList.get(i).get(j).getDevCatName();
+				System.out.print(a);
+			}
+			System.out.println();
+		}
+		
+		model.addAttribute("list", list);
+		model.addAttribute("devCatList", devCatList);
+		model.addAttribute("povo", povo);
+		//상세검색 카테고리 제공 
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
 		model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));
 		model.addAttribute("empTypeCatList", memberService.getEmpTypeCatVOList());
