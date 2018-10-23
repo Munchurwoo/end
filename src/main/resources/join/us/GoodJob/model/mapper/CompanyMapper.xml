@@ -39,8 +39,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete> -->
 
 	<select id="getAllCompanyList" resultType="companyMemberVO" parameterType="pagingBean">	
-		select company_id, name, introduction
-		from(select row_number() over(order by cm.company_id) as rnum, cm.company_id, m.name, cm.introduction
+		select company_id, name, introduction, picture_path
+		from(select row_number() over(order by cm.company_id) as rnum, cm.company_id, m.name, cm.introduction, cm.picture_path
 		from member m , company_member cm
 		where m.id=cm.company_id
 		) where rnum between #{startRowNumber} and #{endRowNumber}		
@@ -181,11 +181,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		   from job_dev jd, job_recruitment jr , job_emp je, job_loc jl, job_academic ja
 		   where jd.job_posting_num=jr.job_posting_num 
 		   and jr.job_posting_num=je.job_posting_num
-		   and je.job_posting_num=jl.job_posting_num
+		   and je.job_posting_num=jl.job_posting_num	
 		   and jl.job_posting_num=ja.job_posting_num
 		 )
+	
+	<if test="locCatNumList != null">
+	where loc_num in
+	<foreach collection="locCatNumList" item="locCatNum" separator="," open="(" close=")">
+		#{locCatNum}
+	</foreach>
+	</if>
+	
 	<if test="devCatNumList != null">
-	where dev_cat_num in
+	and dev_cat_num in
 	<foreach collection="devCatNumList" item="devCatNum" separator="," open="(" close=")">
 		#{devCatNum}
 	</foreach>
@@ -202,13 +210,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	and emp_type_num in
 	<foreach collection="empTypeCatNumList" item="empTypeCatNum" separator="," open="(" close=")">
 		#{empTypeCatNum}
-	</foreach>
-	</if>
-	
-	<if test="locCatNumList != null">
-	and loc_num in
-	<foreach collection="locCatNumList" item="locCatNum" separator="," open="(" close=")">
-		#{locCatNum}
 	</foreach>
 	</if>
 	

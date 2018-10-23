@@ -77,56 +77,93 @@
 
 <div></div>
 
-<h3>인재 검색</h3>
-
-<div class="container">
+<div class="cta-text">
+	<h2>
+		<span>인재 상세</span> 검색하기
+	</h2>
+</div>
+<div class="container"
+	style="padding-left: 120px; padding-right: 120px;">
 	<form action="user-portfolioSearchList.do" method="get"
 		id="portfolioSearchList">
-		<h5>지역</h5>
-		<c:forEach items="${requestScope.locCatList}" var="locCat"
-			varStatus="i">
-			<input type="checkbox" id="locCatNumList" name="locCatNumList"
-				value="${locCat.locNum}">${locCat.locName}&nbsp;
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">지역</h3>
+			</div>
+			<div class="panel-body">
+				<c:forEach items="${requestScope.locCatList}" var="locCat"
+					varStatus="i">
+					<input type="checkbox" id="locCatNumList" name="locCatNumList"
+						value="${locCat.locNum}">${locCat.locName}&nbsp;
 	</c:forEach>
-		<br>
+			</div>
+		</div>
 
-
-		<h5>학력</h5>
-		<c:forEach items="${requestScope.acaCatList}" var="acaCat"
-			varStatus="i">
-			<input type="radio" id="acaCatNumList" name="acaCatNumList"
-				value="${acaCat.academicNum}" required="required">${acaCat.academicName}&nbsp;
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">학력</h3>
+			</div>
+			<div class="panel-body">
+				<c:forEach items="${requestScope.acaCatList}" var="acaCat"
+					varStatus="i">
+					<input type="checkbox" id="acaCatNumList" name="acaCatNumList"
+						value="${acaCat.academicNum}" required="required">${acaCat.academicName}&nbsp;
 	</c:forEach>
-		<br>
+			</div>
+		</div>
 
-		<h5>고용형태</h5>
-		<c:forEach items="${requestScope.empTypeCatList}" var="empTypeCat"
-			varStatus="i">
-			<input type="checkbox" name="empTypeCatNumList"
-				id="empTypeCatNumList" value="${empTypeCat.empTypeNum}">${empTypeCat.empTypeName}&nbsp;
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">고용 형태</h3>
+			</div>
+			<div class="panel-body">
+				<c:forEach items="${requestScope.empTypeCatList}" var="empTypeCat"
+					varStatus="i">
+					<input type="checkbox" name="empTypeCatNumList"
+						id="empTypeCatNumList" value="${empTypeCat.empTypeNum}">${empTypeCat.empTypeName}&nbsp;
 	</c:forEach>
-		<br>
+			</div>
+		</div>
 
-		<h5>모집직군</h5>
-
-		<c:forEach items="${requestScope.recruitCatList}" var="recruitCat"
-			varStatus="i">
-			<input type="checkbox" class="recruit" name="recruitCatNumList"
-				id="recruitCatNumList" value="${recruitCat.rcNum}">${recruitCat.rcName}  &thinsp;&thinsp;
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">모집 직군</h3>
+			</div>
+			<div class="panel-body">
+				<c:forEach items="${requestScope.recruitCatList}" var="recruitCat"
+					varStatus="i">
+					<input type="checkbox" class="recruit" name="recruitCatNumList"
+						id="recruitCatNumList" value="${recruitCat.rcNum}">${recruitCat.rcName}  &thinsp;&thinsp;
 			<c:if test="${(i.index+1)%3==0}">
-				<br>
-			</c:if>
-		</c:forEach>
-		<input type="hidden" name="a" value="b">
-		<h5>개발분야</h5>
-		<div id="empTypeArea"></div>
-	</form>
-</div>
-<span id="enter"></span>
-<button type="reset">초기화</button>
+						<br>
+					</c:if>
+				</c:forEach>
+			</div>
+		</div>
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">개발 분야</h3>
+			</div>
+			<div class="panel-body">
+				<input type="hidden" name="a" value="b">
+				<div id="empTypeArea"></div>
 
-<button type="submit" id="SearchBtn">상세 검색</button>
-<button type="reset" onclick="location.href='home.do'">홈으로</button>
+			</div>
+		</div>
+
+
+	</form>
+
+	<span id="enter"></span>
+	<div class="cta-text">
+		<button type="reset" class="btn btn-default">초기화</button>
+
+		<button type="submit" id="SearchBtn" class="btn btn-default">상세
+			검색</button>
+		<button type="reset" onclick="location.href='home.do'"
+			class="btn btn-default">홈으로</button>
+	</div>
+</div>
 
 <!-- 구분선 -->
 

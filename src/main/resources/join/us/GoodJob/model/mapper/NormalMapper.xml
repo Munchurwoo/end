@@ -159,8 +159,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where pa.normal_id
 		= pd.normal_id
 		and pd.normal_id = pe.normal_id
-		and pe.normal_id =
-		pl.normal_id
+		and pe.normal_id = pl.normal_id
 		)
 		
 		<if test="locCatNumList != null">
