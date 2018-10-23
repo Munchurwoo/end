@@ -66,10 +66,10 @@ public interface CompanyMapper {
 	CompanyMemberVO detailCompanyInfo(String companyId);
 	// 기업정보 상세보기 후 해당기업 구인공고 리스트 바로가기
 	List<JobPostingVO> companyJobPostingList(String companyId);
-	// 면접신청자 조회 ->
-	List<InterviewVO> getAllInterviewerList();
-	//구인공고 등록
-	void registerJobPosting(JobPostingVO jobPostingVO);
+ 	//구인공고 상세보기
+ 	CompanyMemberVO jobPostringDetail(String jobPostingNum);	
+ 	//구인공고 등록
+ 	void registerJobPosting(JobPostingVO jobPostingVO);
 	//구인 학력 분류 등록	
 	void registerJobPostingAcademic(Map<String,Object> map);
 	//구인공고 개발분야 분류 등록	
@@ -90,9 +90,10 @@ public interface CompanyMapper {
 	void deleteQAToAnswer(String QANum);
 	//구인공고 상세보기
 	CompanyMemberVO jobPostingDetail(String jobPostingNum);	
-	//구인공고 키워드 등록	
-	
-	// 헤더/채용정보 페이징처리
+ 	// 면접신청자 조회 ->
+ 	List<InterviewVO> getAllInterviewerList();
+ 	//구인공고 키워드 등록	
+ 	// 헤더/채용정보 페이징처리
 	int getAlljobPostingCount();
 	// 채용정보 상세검색 페이징처리
 	int getAllJobPostingListByJobPostingNumCount(List<String> jobPostingNumList);
@@ -100,8 +101,18 @@ public interface CompanyMapper {
 	//181023 MIRI 구인 공고별 면접자 리스트
 	List<InterviewVO> getJobPostingInterviewerList(String jobPostingNum);
 	
-	//구인 분류 등록
-		
+	// 구인공고 수정등록 
+	void updateJobPosting(JobPostingVO jobPostingVO);
+	// 구인공고 수정 전 전체 삭제 학력/개발분야/고용형태/지역/모집직군
+	void deleteJobPostingMulti(int jobPostingNum);
+	// 구인공고 삭제
+	void deleteJobPostingByNum(int jobPostingNum);
+	List<CompanyMemberVO> findJobPostingBytitle(Map<String, Object> map);
+	int findJobPostingBytitleCount(String keyword);
+	
+	
+	//구인 분류 등록	
+
 	//구인공고 전체보기
 	
 	//구인공고 검색결과 보기

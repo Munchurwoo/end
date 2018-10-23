@@ -38,7 +38,6 @@
 				</div>
 			</h4>
 
-<div class="container">
 <section id="featured">
 	<!-- start slider -->
 	<div class="container">
@@ -47,23 +46,23 @@
 				<form action="user-company_detail_search_list.do" id="master">
 	
 		<h5>지역</h5>
-	<c:forEach items="${requestScope.locCatList}" var="locCat" varStatus="i">
+	<c:forEach items="${requestScope.allLocCatList}" var="locCat" varStatus="i">
 		<input type="checkbox" name="locCatNumList" value="${locCat.locNum}" >${locCat.locName}&nbsp;
 	</c:forEach> <br>
 	
 	<h5>학력</h5>
-	<c:forEach items="${requestScope.acaCatList}" var="acaCat" varStatus="i">	
+	<c:forEach items="${requestScope.allAcaCatList}" var="acaCat" varStatus="i">	
 		<input type="checkbox" name="acaCatNumList" value="${acaCat.academicNum}">${acaCat.academicName}&nbsp;
 	</c:forEach> <br>
 	
 	<h5>고용형태</h5>
-	<c:forEach items="${requestScope.empTypeCatList}" var="empTypeCat" varStatus="i">
+	<c:forEach items="${requestScope.allEmpTypeCatList}" var="empTypeCat" varStatus="i">
 		<input type="checkbox" name="empTypeCatNumList" value="${empTypeCat.empTypeNum}" >${empTypeCat.empTypeName}&nbsp;
 	</c:forEach>경력여부<input type="text" placeholder="ex)개발3년" id="recru"> <br>
 	
 	<h5>모집직군</h5> 
 	
-		<c:forEach items="${requestScope.recruitCatList}" var="recruitCat" varStatus="i">
+		<c:forEach items="${requestScope.allRecruitCatList}" var="recruitCat" varStatus="i">
 			<input type="checkbox" class = "recruit" name="recruitCatNumList" value="${recruitCat.rcNum}" >${recruitCat.rcName}  &thinsp;&thinsp;
 			<c:if test="${(i.index+1)%3==0}"><br></c:if>
 		</c:forEach>
@@ -75,33 +74,17 @@
 	<button type="reset">초기화</button>
 	<button type="reset" onclick="location.href='home.do'">홈으로</button>	
 </form>
-				</div>
+<br>
+				<form action="user-findJobPostingByKeyword.do">
+					<input type="text" name="keyword" required="required">
+					
+					<button type="submit">키워드로 검색하기</button>
+				</form>
 			</div>
 		</div>
+	</div>
 </section>
-</div>
 
 		</div>
 	</div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

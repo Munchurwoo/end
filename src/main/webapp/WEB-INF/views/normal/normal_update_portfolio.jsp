@@ -116,7 +116,6 @@
 		});
 	});//ready
 </script>
-
 <!-- normal_update_portfolio -->
 
 <h3>이력서 수정</h3>

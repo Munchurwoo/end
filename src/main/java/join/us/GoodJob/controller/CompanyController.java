@@ -158,7 +158,7 @@ public class CompanyController {
 		jobPostingVO.setCompanyId(mvo.getId());
 		//jobPostingVO.setJobPostingNum(jobPostingVO.getJobPostingNum());
 		System.out.println(jobPostingVO);
-		companyService.registerJobPosting(jobPostingVO);
+		companyService.registerJobPosting(jobPostingVO,true);
 		return "redirect:home.do";
 	}
 
@@ -247,11 +247,11 @@ public class CompanyController {
 	 */
 	@RequestMapping("user-getAllJobPostingList.do")
 	public String getAllJobPostingList(Model model,String pageNum) {
-		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
-		model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));
-		model.addAttribute("empTypeCatList", memberService.getEmpTypeCatVOList());
-		model.addAttribute("locCatList", memberService.getLocCatVOList());
-		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
+		model.addAttribute("allRecruitCatList", memberService.getRecruitCatVOList());
+		model.addAttribute("allDevCatList", memberService.getDevCatVOListByrcNum("101"));
+		model.addAttribute("allEmpTypeCatList", memberService.getEmpTypeCatVOList());
+		model.addAttribute("allLocCatList", memberService.getLocCatVOList());
+		model.addAttribute("allAcaCatList", memberService.getAcaCatVOList());
 		PostListVO postListVO = companyService.getAllJobPostingList(pageNum);
 		model.addAttribute("postListVO", postListVO);
 		return "company/company_get_all_jobPosting_list.company_search_tiles";
@@ -318,6 +318,7 @@ public class CompanyController {
 		model.addAttribute("qavo", qavo);
 		return "company/job_posting_QA_list.tiles2";
 	}
+	
 	/**
 	 * 181022 MIRI Q&A 답변 수정
 	 * @param QANum
@@ -333,6 +334,7 @@ public class CompanyController {
 		model.addAttribute("qavo", qavo);
 		return qavo;
 	}
+	
 	/**
 	 * 181022 MIRI Q&A 답변 삭제
 	 * @param QANum
@@ -346,5 +348,52 @@ public class CompanyController {
 		qavo = companyService.getJobPostingQAByQANum(QANum);
 		model.addAttribute("qavo", qavo);
 		return qavo;
+	}
+	
+	@RequestMapping("updateJobPostingForm.do")
+	public String updateJobPostingForm(String jobPostingNum,Model model) {
+		// DB에서 기본 업데이트 폼 양식을 가져오는 코드
+		model.addAttribute("allRecruitCatList", memberService.getRecruitCatVOList());
+		model.addAttribute("allDevCatList", memberService.getDevCatVOListByrcNum("101"));
+		model.addAttribute("allEmpTypeCatList", memberService.getEmpTypeCatVOList());
+		model.addAttribute("allLocCatList", memberService.getLocCatVOList());
+		model.addAttribute("allAcaCatList", memberService.getAcaCatVOList());
+		// 구인공고 글에 설정된 카테고리 
+		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNum(jobPostingNum));
+		model.addAttribute("devCatList", memberService.getDevCatVOListByNum(jobPostingNum));
+		model.addAttribute("empTypeCatList", memberService.getEmpCatVOListByNum(jobPostingNum));
+		model.addAttribute("locCatList", memberService.getLocCatVOListByNum(jobPostingNum));
+		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNum(jobPostingNum));
+		// 구인 상세정보
+		model.addAttribute("jpvo", companyService.jobPostingDetail(jobPostingNum));
+	
+		return "company/job_posting_update_form.tiles2";
+	}
+	
+	@RequestMapping("updateJobPosting.do")
+	public String updateJobPosting(JobPostingVO jobPostingVO) {
+			companyService.updateJobPosting(jobPostingVO);
+			companyService.deleteJobPostingMulti(jobPostingVO.getJobPostingNum());
+			companyService.registerJobPosting(jobPostingVO, false);
+		return "redirect:home.do";
+	}
+	@RequestMapping("deleteJobPosting.do")
+	public String deleteJobPosting(int jobPostingNum) {
+		System.out.println(jobPostingNum);
+			companyService.deleteJobPostingByNum(jobPostingNum);
+		return "redirect:home.do";
+	}
+	@RequestMapping("user-findJobPostingByKeyword.do")
+	public String findJobPostingByKeyword(String keyword,Model model,String pageNum) {
+		model.addAttribute("allRecruitCatList", memberService.getRecruitCatVOList());
+		model.addAttribute("allDevCatList", memberService.getDevCatVOListByrcNum("101"));
+		model.addAttribute("allEmpTypeCatList", memberService.getEmpTypeCatVOList());
+		model.addAttribute("allLocCatList", memberService.getLocCatVOList());
+		model.addAttribute("allAcaCatList", memberService.getAcaCatVOList());
+		PostListVO jobPostingList2 = (PostListVO) companyService.findJobPostingBytitle(keyword,pageNum);
+		System.out.println(jobPostingList2);
+		model.addAttribute("jobPostingList2", jobPostingList2);
+		
+		return "company/keywordSearch_result.company_search_tiles";
 	}
 }

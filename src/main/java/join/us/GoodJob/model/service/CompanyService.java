@@ -39,21 +39,19 @@ public interface CompanyService {
 	PostListVO getAllCompanyList(String pageNum);
 
 	// 기업정보 상세보기
-	CompanyMemberVO detailCompanyInfo(String companyId);
-	
-	// 기업정보 상세보기 후 해당 기업 구인공고리스트 바로가기
-	List<JobPostingVO> companyJobPostingList(String companyId);	
-
- 	// 마이바티스 동적쿼리 테스트 완료 - 정상작동
- 	List<String> findJobPostingByCatNumList(Map map);
+ 	CompanyMemberVO detailCompanyInfo(String companyId);
+	 	
+ 	// 기업정보 상세보기 후 해당 기업 구인공고리스트 바로가기
+ 	List<JobPostingVO> companyJobPostingList(String companyId);	
  	
-	// 구인 상세
-	CompanyMemberVO jobPostingDetail(String jobPostingNum);
-	// 상세조건 검색
+ 	// 구인 상세
+ 	CompanyMemberVO jobPostingDetail(String jobPostingNum);
+	
+ 	// 상세조건 검색
 	PostListVO findJobPostingByCatNumList(CatNumParamVO catNumParamVO, String pageNum);
 	
-	//구인등록
-	void registerJobPosting(JobPostingVO jobPostingVO);
+	//구인등록 181023 MIRI가 만든것 재사용 포트폴리오 등록/수정 동시에 활용하기위해 flag를 줌
+	void registerJobPosting(JobPostingVO jobPostingVO,boolean registerFlag);
 	// 면접신청자 전체 조회
 	List<InterviewVO> getAllInterviewerList();
 	
@@ -68,9 +66,18 @@ public interface CompanyService {
 	
 	//181022 MIRI Q&A 답변 삭제
 	void deleteQAToAnswer(String QANum);
+	
+	// 구인공고 수정
+	void updateJobPosting(JobPostingVO jobPostingVO);
+	// 구인공고 수정 전 테이블 비우기
+	void deleteJobPostingMulti(int jobPostingNum);	
+	// 채용정보 페이징처리
+
+	void deleteJobPostingByNum(int jobPostingNum);
+
+
+	PostListVO findJobPostingBytitle(String keyword, String pageNum);
 
 	//181023 MIRI 구인 공고별 면접자 리스트
 	List<InterviewVO> getJobPostingInterviewerList(String jobPostingNum);
-
-	// 채용정보 페이징처리
 }

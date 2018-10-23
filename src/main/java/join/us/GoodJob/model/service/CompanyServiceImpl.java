@@ -137,7 +137,9 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	public void registerJobPosting(JobPostingVO jobPostingVO) {
+	public void registerJobPosting(JobPostingVO jobPostingVO,boolean registerFlag) {
+		
+		if(registerFlag==true)//flag가 true일 경우에만 포트폴리오 등록
 		companyMapper.registerJobPosting(jobPostingVO);
 		System.out.println(jobPostingVO);		
 		
@@ -189,7 +191,8 @@ public class CompanyServiceImpl implements CompanyService {
 	public QuestionAnswerVO getJobPostingQAByQANum(String qaNum) {
 		return companyMapper.getJobPostingQAByQANum(qaNum);
 	}
-
+	
+	@Override
 	public List<InterviewVO> getAllInterviewerList() {
 		return companyMapper.getAllInterviewerList();
 	}
@@ -198,5 +201,40 @@ public class CompanyServiceImpl implements CompanyService {
 	public List<InterviewVO> getJobPostingInterviewerList(String jobPostingNum) {
 		return companyMapper.getJobPostingInterviewerList(jobPostingNum);
 	}
+	
+	@Override
+	public void updateJobPosting(JobPostingVO jobPostingVO) {
+		companyMapper.updateJobPosting(jobPostingVO);
+	}
 
+	@Override
+	public void deleteJobPostingMulti(int jobPostingNum) {
+		companyMapper.deleteJobPostingMulti(jobPostingNum);
+	}
+
+	@Override
+	public void deleteJobPostingByNum(int jobPostingNum) {
+		companyMapper.deleteJobPostingByNum(jobPostingNum);
+	}
+
+	@Override
+	public PostListVO findJobPostingBytitle(String keyword,String pageNum) {
+		PagingBean pagingBean;
+		int totalJobPostingCount=companyMapper.findJobPostingBytitleCount(keyword);
+		if (pageNum != null) { // 페이지 번호 주면
+			pagingBean = new PagingBean(totalJobPostingCount, Integer.parseInt(pageNum));
+		} else { // 페이지 번호 안주면 1페이지
+			pagingBean = new PagingBean(totalJobPostingCount);
+		}
+		Map<String,Object> map=new HashMap<String,Object>();
+		map.put("keyword",keyword);
+		map.put("pagingBean",pagingBean);
+		System.out.println("서비스임플 타이틀:"+map);
+		List<CompanyMemberVO> jobPostingList = companyMapper.findJobPostingBytitle(map);
+		
+		PostListVO postListVO=new PostListVO();
+		postListVO.setJobPostingList(jobPostingList);
+		postListVO.setPagingBean(pagingBean);
+		return postListVO;
+	}
 }

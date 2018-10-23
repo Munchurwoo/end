@@ -13,7 +13,7 @@
 			</h4>	
 			
 <%--Controller에서 받아온 기업정보리스트를 아래 div 구간에 정보들을 집어 넣고 반복문을 돌려보기  --%>	
-			<c:forEach items="${jobPostingList}" var="jobList">
+			<c:forEach items="${requestScope.jobPostingList}" var="jobList">
 			<div class="col-lg-3">
 				<div class="box">
 					<div class="box-gray aligncenter">
