@@ -121,17 +121,18 @@ public class CompanyServiceImpl implements CompanyService {
 		} else { // 페이지 번호 안주면 1페이지
 			pagingBean = new PagingBean(totalCount);
 		} 
+		PostListVO postListVO = new PostListVO();
       
 	
 		Map<String,Object> map2=new HashMap<String,Object>();
 		map2.put("jobPostingNumList", jobPostingNumList);
 		map2.put("pagingBean", pagingBean);
-      
-      List<CompanyMemberVO> jobPostingList =companyMapper.getAllJobPostingListByJobPostingNum(map2);
-     
-      PostListVO postListVO = new PostListVO();
-      postListVO.setJobPostingList(jobPostingList);
-      postListVO.setPagingBean(pagingBean);	      
+		System.out.println(jobPostingNumList);
+      if(!jobPostingNumList.isEmpty()) {
+		List<CompanyMemberVO> jobPostingList =companyMapper.getAllJobPostingListByJobPostingNum(map2);
+		postListVO.setJobPostingList(jobPostingList);
+		postListVO.setPagingBean(pagingBean);	      
+      }	
       return postListVO;
 	}
 

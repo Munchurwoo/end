@@ -71,7 +71,7 @@ public class CompanyController {
 		if (mvo != null) {
 			CompanyMemberVO cmvo = companyService.selectCompanyMember(mvo.getId());
 			model.addAttribute("cmvo", cmvo);
-		}
+		}	
 		return "company/company_update_form.tiles2";
 	}
 
@@ -85,6 +85,22 @@ public class CompanyController {
 	public String updateCompanyMember(CompanyMemberVO companyMemberVO) {
 		companyService.updateCompanyMember(companyMemberVO);
 		return "redirect:home.do";
+	}
+	@ResponseBody
+	@PostMapping("user-updateCompanyLogo.do")
+	public String updateCompanyLogo(MultipartFile updateLogo) {
+		workspaceUploadPath="C:\\java-kosta\\framework-workspace2\\goodjob\\src\\main\\webapp\\resources\\upload\\companyLogo\\";
+		if(updateLogo.isEmpty()==false) {
+			File updateLogoPath=new File(workspaceUploadPath+updateLogo.getOriginalFilename());
+			try {
+				updateLogo.transferTo(updateLogoPath);
+			} catch (IllegalStateException | IOException e) {
+				
+				e.printStackTrace();
+			}
+		}
+		return updateLogo.getOriginalFilename();
+		
 	}
 
 	/**
@@ -270,7 +286,6 @@ public class CompanyController {
 		model.addAttribute("interviewerList", companyService.getAllInterviewerList());
 		return "company/company_InterviewApplyList.tiles2";
 	}
-	
 	/**
 	 * 181020 MIRI 구인 공고별 면접자 리스트
 	 * @param jobPostingNum
