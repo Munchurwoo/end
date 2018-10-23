@@ -126,7 +126,7 @@
 		  		<img id="pictureDeleteBtn" src="${pageContext.request.contextPath}/resources/upload/etc/x-button.jpg" class="button"  style="display: none; ">
 		</div>
  		<span id="pictureInputArea"></span>	<br>
-		<input type="file" name="uploadPicture" id="pictureUploadBtn"><br>
+		<input type="file" name="uploadPicture" id="pictureUploadBtn" required="required"><br>
 	</div>
 	<table class="advantage-table">
 	      <colgroup>
