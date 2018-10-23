@@ -157,22 +157,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 (select row_number() over(order by j.job_posting_num) as rnum, cm.company_id, cm.introduction, cm.company_type, cm.industry, cm.sales, cm.date_of_establishment, cm.num_of_employees,
 	j.job_posting_num, j.career_status, j.title, j.content, m.address, m.tel, m.email , m.name
 	from job_posting j , company_member cm, member m
-	where j.company_id = cm.company_id and cm.company_id=m.id and 
-	j.job_posting_num in 
-	<foreach collection="jobPostingNumList" item="jobPostingNum" open="(" separator="," close=")">
-		#{jobPostingNum}
+	where j.company_id = cm.company_id and cm.company_id=m.id 
+	
+	<!-- jobPostingNumList null 일 경우 처리 10-23 철우  -->
+	and	j.job_posting_num in 
+	<foreach collection="jobPostingNumList" item="jobPostingNumList" open="(" separator="," close=")">
+		#{jobPostingNumList}
 	</foreach>
-	)
+	) <!-- 서브쿼리 from 종료	cherwoo -->
 	where rnum between #{pagingBean.startRowNumber} and #{pagingBean.endRowNumber}
 	</select>
 	
-	<select id="getAllJobPostingListByJobPostingNumCount"  resultType="int">
+	<select id="getAllJobPostingListByJobPostingNumCount" resultType="int">
 	select count(*)
 	from job_posting j , company_member cm, member m
-	where j.company_id = cm.company_id and cm.company_id=m.id and 
-	j.job_posting_num in 
-	<foreach collection="list" item="jobPostingNum" open="(" separator="," close=")">
+	where j.company_id = cm.company_id and cm.company_id=m.id 
+	<!-- 기업상세검색, paging 처리 10-23 cherwoo 수정 절대 금지 -->
+	<foreach collection="list" item="jobPostingNum">
+	<if test="jobPostingNum != null" >
+	and	j.job_posting_num in
+		<foreach collection="list" item="jobPostingNum" open="(" separator="," close=")">
 		#{jobPostingNum}
+		</foreach>
+	</if>
 	</foreach>
 	</select>
 	

@@ -54,15 +54,11 @@ public interface CompanyService {
 	List<InterviewVO> getAllInterviewerList();
 	//구인 공고별 질답 리스트
 	List<QuestionAnswerVO> getJobPostingQAList(String jobPostingNum);
+	// 채용정보 페이징처리
 
-	//181022 MIRI QA번호로 Q&A 검색
 	QuestionAnswerVO getJobPostingQAByQANum(String qaNum);
 
-	//181022 MIRI Q&A 답변 수정
-	void updateQAToAnswer(QuestionAnswerVO qavo);
-	
-	//181022 MIRI Q&A 답변 삭제
 	void deleteQAToAnswer(String QANum);
 
-	// 채용정보 페이징처리
+	void updateQAToAnswer(QuestionAnswerVO qavo);
 }
