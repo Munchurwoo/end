@@ -84,7 +84,7 @@ public interface CompanyMapper {
 	void registerJobPostingLoc(Map<String,Object> map);
 	//구인 모집직군 분류 등록
 	void registerJobPostingRecuitment(Map<String,Object> map);
-	//구인 공고별 질답 리스트
+	//181022 MIRI 구인 공고별 질답 리스트
 	List<QuestionAnswerVO> getJobPostingQAList(String jobPostingNum);
 	//181022 MIRI QA번호로 Q&A 검색
 	QuestionAnswerVO getJobPostingQAByQANum(String qaNum);
@@ -102,6 +102,8 @@ public interface CompanyMapper {
 	// 채용정보 상세검색 페이징처리
 	int getAllJobPostingListByJobPostingNumCount(List<String> jobPostingNumList);
 	List<CompanyMemberVO> getAllJobPostingListByJobPostingNum(Map<String, Object> map2);
+	//181023 MIRI 구인 공고별 면접자 리스트
+	List<InterviewVO> getJobPostingInterviewerList(String jobPostingNum);
 	
 	
 	

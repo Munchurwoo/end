@@ -52,7 +52,8 @@ public interface CompanyService {
 	void registerJobPosting(JobPostingVO jobPostingVO);
 	// 면접신청자 전체 조회
 	List<InterviewVO> getAllInterviewerList();
-	//구인 공고별 질답 리스트
+	
+	//181022 MIRI 구인 공고별 질답 리스트
 	List<QuestionAnswerVO> getJobPostingQAList(String jobPostingNum);
 
 	//181022 MIRI QA번호로 Q&A 검색
@@ -63,6 +64,9 @@ public interface CompanyService {
 	
 	//181022 MIRI Q&A 답변 삭제
 	void deleteQAToAnswer(String QANum);
+
+	//181023 MIRI 구인 공고별 면접자 리스트
+	List<InterviewVO> getJobPostingInterviewerList(String jobPostingNum);
 
 	// 채용정보 페이징처리
 }

@@ -95,7 +95,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 181018 MIRI normalId->value로 수정 -->
 	<select id="normalDetailPortfolio" resultType="portfolioVO" parameterType="string">
-		select normal_id,title, content, picture_path from portfolio where normal_id=#{normalId}
+		select normal_id,title, content, picture_path from portfolio where normal_id=#{value}
 	</select>
 	<select id="getAllPortfolioList" resultType="portfolioVO">
 

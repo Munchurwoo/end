@@ -100,6 +100,8 @@ create table portfolio(
 
 insert into PORTFOLIO(normal_id, title, content, picture_path) values('yosep', 'Coder가 아닌 Developer가 되겠습니다.', '항상 배움의 자세로 새로운 분야에 도전하고 있으며, 매사에 도전하고 노력하는 인재입니다.', '최요셉.png');
 insert into PORTFOLIO(normal_id, title, content, picture_path) values('MCW', '인재를 싸게 팝니다.', '주변 사람과 소통하며 혁신을 이뤄내는 사원이 되겠습니다.', '문철우.png');
+insert into PORTFOLIO(normal_id, title, content, picture_path) values('hsj', 'hsjhsj', '황성진~~', '황성진.png');
+insert into PORTFOLIO(normal_id, title, content, picture_path) values('qqqq', 'qqqqq', '동큐동큐', '이동규.png');
 
 select * from portfolio;
 ---------------------------------------------------------------------
@@ -204,8 +206,11 @@ insert into interview(interview_num, normal_id, job_posting_num, title, content)
 insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'miri', 1002,'포트폴리오확인하시고 연락주세요', '내일가겠습니다~');
 insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'yosep', 1002,'꼭 가고싶습니다~!', '전화번호로 연락주세요~');
 
+select normal_id, title, content from interview where job_posting_num='1001'
 
-
+select i.interview_num,i.job_posting_num,i.title,i.content,nm.normal_id,m.name
+from interview i, normal_member nm , member m
+where i.normal_id = nm.normal_id and nm.normal_id = m.id and i.job_posting_num='1001'
 -- 질의응답과 구인공고게시글/아이디 복합키 설정
 create table question_answer(
    qa_num number primary key,

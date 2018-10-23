@@ -243,10 +243,18 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="name" property="normalMemberVO.name"/>
 		<result column="normal_id" property="normalMemberVO.id"/> 
 	</resultMap>
-	<select id="getAllInterviewerList" resultMap="interviewVORM">
-		select i.interview_num,i.job_posting_num,i.title,nm.normal_id,m.name
+	<!-- 181023 MIRI 반복되는 sql 묶기 -->
+	<sql id="getInterviewerInfo">
+		select i.interview_num,i.job_posting_num,i.title,i.content,nm.normal_id,m.name
 		from interview i, normal_member nm , member m
 		where i.normal_id = nm.normal_id and nm.normal_id = m.id
+	</sql>
+	<select id="getAllInterviewerList" resultMap="interviewVORM">
+		<include refid="getInterviewerInfo"/>
+	</select>
+	<select id="getJobPostingInterviewerList" parameterType="string" resultMap="interviewVORM">
+		<include refid="getInterviewerInfo"/>
+		and i.job_posting_num=#{value}
 	</select>
 </mapper> 		
  

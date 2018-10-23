@@ -193,4 +193,9 @@ public class CompanyServiceImpl implements CompanyService {
 		return companyMapper.getAllInterviewerList();
 	}
 
+	@Override
+	public List<InterviewVO> getJobPostingInterviewerList(String jobPostingNum) {
+		return companyMapper.getJobPostingInterviewerList(jobPostingNum);
+	}
+
 }

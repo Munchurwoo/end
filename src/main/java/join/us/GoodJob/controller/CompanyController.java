@@ -1,6 +1,7 @@
 package join.us.GoodJob.controller;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -23,6 +24,7 @@ import join.us.GoodJob.model.vo.CompanyMemberVO;
 import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.JobPostingVO;
 import join.us.GoodJob.model.vo.MemberVO;
+import join.us.GoodJob.model.vo.PortfolioVO;
 import join.us.GoodJob.model.vo.PostListVO;
 import join.us.GoodJob.model.vo.QuestionAnswerVO;
 
@@ -272,13 +274,21 @@ public class CompanyController {
 	}
 	
 	/**
-	 * 181020 MIRI 구인 공고별 면접자 리스트
+	 * 181023 MIRI 구인 공고별 면접자 리스트
 	 * @param jobPostingNum
 	 * @return
 	 */
 	@PostMapping("getJobPostingInterviewerList.do")
-	public String getJobPostingInterviewerList(int jobPostingNum) {
-		//작업중
+	public String getJobPostingInterviewerList(String jobPostingNum, Model model) {
+		List<InterviewVO> ivvoList = companyService.getJobPostingInterviewerList(jobPostingNum);
+		if(ivvoList.isEmpty() == false) {
+			List<PortfolioVO> povoList = new ArrayList<PortfolioVO>();
+			for (InterviewVO ivvo : ivvoList) {
+				povoList.add(normalService.normalDetailPortfolio(ivvo.getNormalMemberVO().getId()));
+			}
+			model.addAttribute("povoList", povoList);
+		}
+		model.addAttribute("ivvoList", ivvoList);
 		return "company/job_posting_interviewer_list.tiles2";
 	}
 	
