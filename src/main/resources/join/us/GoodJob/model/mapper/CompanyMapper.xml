@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="myPageCompanyMember" resultType="companyMemberVO" parameterType="memberVO">
 		select
 		cm.company_id,m.password,m.name,m.address,m.tel,m.email,cm.introduction,
-		cm.company_type,cm.industry,cm.sales,cm.date_of_establishment,cm.num_of_employees
+		cm.company_type,cm.industry,cm.sales,cm.date_of_establishment,cm.num_of_employees,cm.picture_path
 		from member m , company_member cm
 		where m.id=cm.company_id
 		and m.id=#{id}
@@ -56,7 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="detailCompanyInfo" resultType="companyMemberVO" parameterType="memberVO">
 		select
 		cm.company_id,m.password,m.name,m.address,m.tel,m.email,cm.introduction,
-		cm.company_type,cm.industry,cm.sales,cm.date_of_establishment,cm.num_of_employees, cm.picture_path
+		cm.company_type,cm.industry,cm.sales,cm.date_of_establishment,cm.num_of_employees,cm.picture_path
 		from member m , company_member cm
 		where m.id=cm.company_id
 		and m.id=#{id}

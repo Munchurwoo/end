@@ -6,9 +6,11 @@
 
 	<table class="table table-bordered">
 		<thead>
-			<tr>
-			<th>아이디</th>
-			<td>${requestScope.cmvo.companyId}</td>
+			<tr>		
+			<th>기업로고</th>
+			<td>
+			<img src="/GoodJob/resources/upload/companyLogo/${requestScope.cmvo.picturePath}" height="100px" width="100px" >
+			</td>
 			</tr>
 			<tr>
 			<th>이메일주소</th>
