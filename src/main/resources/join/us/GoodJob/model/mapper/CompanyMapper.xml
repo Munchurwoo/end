@@ -223,10 +223,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getJobPostingQAList" parameterType="string" resultType="questionAnswerVO">
-		select qa.normal_id, qa.question, qa.answer
+		select qa.qa_num, qa.question, qa.answer
 		from question_answer qa, job_posting jp
 		where qa.job_posting_num=jp.job_posting_num and jp.job_posting_num=#{value}
 	</select>
+	
+	<select id="getJobPostingQAByQANum" parameterType="string" resultType="questionAnswerVO">
+		select qa_num, question, answer from question_answer where qa_num=#{value}
+	</select>
+	
+	<update id="updateQAToAnswer" parameterType="questionAnswerVO">
+		update question_answer set answer=#{answer} where qa_num=#{qaNum}
+	</update>
+	
+	<update id="deleteQAToAnswer" parameterType="questionAnswerVO">
+		update question_answer set answer=null where qa_num=${value}
+	</update>
 	
 	<resultMap type="interviewVO" id="interviewVORM">
 		<result column="name" property="normalMemberVO.name"/>

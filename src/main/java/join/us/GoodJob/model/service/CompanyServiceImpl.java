@@ -175,8 +175,21 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
+	public void updateQAToAnswer(QuestionAnswerVO qavo) {
+		companyMapper.updateQAToAnswer(qavo);
+	}
+	
+	@Override
+	public void deleteQAToAnswer(String QANum) {
+		companyMapper.deleteQAToAnswer(QANum);
+	}
+
+	@Override
+	public QuestionAnswerVO getJobPostingQAByQANum(String qaNum) {
+		return companyMapper.getJobPostingQAByQANum(qaNum);
+	}
+
 	public List<InterviewVO> getAllInterviewerList() {
-		
 		return companyMapper.getAllInterviewerList();
 	}
 

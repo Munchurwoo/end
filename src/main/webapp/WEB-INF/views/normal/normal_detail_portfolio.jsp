@@ -16,7 +16,7 @@
 	}
 </script>
 
-<h3 align="center">포트폴리오 상세보기</h3><br><br>
+<h3 align="center">이력서 상세보기</h3><br><br>
 
 	제목 :${povo.title }<br>
 	이름 : ${nmvo.name }<br>

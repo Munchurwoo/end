@@ -212,7 +212,7 @@ create table question_answer(
    normal_id varchar2(100),
    job_posting_num number,
    question varchar2(200) not null,
-   answer varchar2(500) not null,
+   answer varchar2(500) default null,
    constraint fk_member_qna foreign key(normal_id) references normal_member(normal_id) on delete set null,
    constraint fk_job_posting_num_qna foreign key(job_posting_num) references job_posting(job_posting_num) on delete cascade
 );

@@ -1,5 +1,7 @@
 package join.us.GoodJob.model.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,6 +9,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import join.us.GoodJob.model.mapper.NormalMapper;
 import join.us.GoodJob.model.vo.InterviewVO;
@@ -56,13 +59,30 @@ public class NormalServiceImpl implements NormalService {
 		if(registerFlag == true)	//flag가 true일 경우에만 포트폴리오 등록
 			normalMapper.insertPortfolio(portfolioVO);
 		
-		//포트폴리오 파일등록(PORTFOLIO_FILE) 보류
-		//normalMapper.insertPortfolioFile(portfolioVO);
+		
+		
 		
 		//포트폴리오 분류 등록 시작
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("normalId", portfolioVO.getNormalId());
 		
+		
+		//포트폴리오 파일 업로드, 파일경로등록(PORTFOLIO_FILE) 
+
+		List<MultipartFile> fileList = portfolioVO.getFileList();
+		String workspaceUploadPath = "C:\\java-kosta\\framework-workspace2\\goodjob\\src\\main\\webapp\\resources\\upload\\memberPortfolio\\";
+
+		for(MultipartFile currentMultipartFile : fileList) {
+			File file = new File(workspaceUploadPath+currentMultipartFile.getOriginalFilename());
+			try {
+				currentMultipartFile.transferTo(file);
+				map.put("filePath", currentMultipartFile.getOriginalFilename());
+				normalMapper.insertPortfolioFile(map);
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+			};
+		}		
+				
 		//포트폴리오 학력 분류 등록(PORTFOLIO_ACADEMIC)
 		for(String academicNum :portfolioVO.getAcaCatNumList()) {
 			map.put("academicNum", academicNum);
@@ -136,6 +156,7 @@ public class NormalServiceImpl implements NormalService {
 	public void interviewApply(InterviewVO interviewVO) {
 		normalMapper.interviewApply(interviewVO);
 	}
+
 
 	
 
