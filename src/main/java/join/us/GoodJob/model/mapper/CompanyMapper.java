@@ -66,9 +66,8 @@ public interface CompanyMapper {
 	CompanyMemberVO detailCompanyInfo(String companyId);
 	// 기업정보 상세보기 후 해당기업 구인공고 리스트 바로가기
 	List<JobPostingVO> companyJobPostingList(String companyId);
-	//구인공고 상세보기
-	CompanyMemberVO jobPostringDetail(String jobPostingNum);	
-	
+	// 면접신청자 조회 ->
+	List<InterviewVO> getAllInterviewerList();
 	//구인공고 등록
 	void registerJobPosting(JobPostingVO jobPostingVO);
 	//구인 학력 분류 등록	
@@ -89,8 +88,8 @@ public interface CompanyMapper {
 	void updateQAToAnswer(QuestionAnswerVO qavo);
 	//181022 MIRI Q&A 답변 삭제
 	void deleteQAToAnswer(String QANum);
-	// 면접신청자 조회 ->
-	List<InterviewVO> getAllInterviewerList();
+	//구인공고 상세보기
+	CompanyMemberVO jobPostingDetail(String jobPostingNum);	
 	//구인공고 키워드 등록	
 	
 	// 헤더/채용정보 페이징처리
