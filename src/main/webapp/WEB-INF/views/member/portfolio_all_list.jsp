@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
+<c:set var="pb" value="${postListVO.pagingBean }"/>
 <script type="text/javascript">
 	$(document)
 			.ready(
@@ -174,7 +175,7 @@
 </h4>
 
 
-<c:forEach items="${list}" var="list" varStatus="status">
+<c:forEach items="${postListVO.nmList}" var="list" varStatus="status">
 	<div class="media">
 		<a class="pull-left" href="#"> <img class="media-object"
 			src="${pageContext.request.contextPath}/
@@ -184,16 +185,44 @@
 		<div class="media-body">
 			<h4 class="media-heading">${list.name}</h4>
 			<h5>${povo[status.index].title}</h5>
-			<h6>${povo[status.index].content}</h6>
-			<!-- Nested media object -->
-			<div class="media">
-				<a
-					href="user-normalDetailPortfolioList.do?normalId=${list.normalId }">
-					개발분야 : ${devCatList[status.index].devCatName} -> 인재상세 보기 </a>
-			</div>
+			<h5>${povo[status.index].content}</h5>
+			<h5>개발분야 : 
+			<c:forEach items="${ devCatList}" var="devCatList">
+			${devCatList.devCatName}
+			</c:forEach>
+			<a href="user-normalDetailPortfolioList.do?normalId=${list.normalId }" style="font-weight: bold;">
+			인재상세 보기 
+			</a>
+			</h5>
 		</div>
 	</div>
 	<hr>
 </c:forEach>
 
+<div class="col-lg-12">
+		<div align="center">
+			<ul class="pagination">
+				<c:if test="${pb.previousPageGroup }">
+					<li><a
+						href="${pageContext.request.contextPath}/user-portfolioAllList.do?pageNum=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+				</c:if>
+				<c:forEach begin="${pb.startPageOfPageGroup}"
+					end="${pb.endPageOfPageGroup}" var="pagenum">
+					<c:choose>
+						<c:when test="${pagenum==pb.nowPage}">
+							<li class="active"><a href="#">${pagenum}</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><a
+								href="${pageContext.request.contextPath}/user-portfolioAllList.do?pageNum=${pagenum}">${pagenum}</a></li>
+						</c:otherwise>
+					</c:choose>
+				</c:forEach>				
+				<c:if test="${pb.nextPageGroup }">
+					<li><a
+						href="${pageContext.request.contextPath}/user-portfolioAllList.do?pageNum=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+				</c:if>
+			</ul>
+		</div>	
+	</div>	
 

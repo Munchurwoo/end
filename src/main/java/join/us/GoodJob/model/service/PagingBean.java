@@ -22,11 +22,11 @@ public class PagingBean {
 	/**
 	 * 페이지당 게시물수
 	 */
-	private int postCountPerPage = 2;
+	private int postCountPerPage = 4;
 	/**
 	 * 페이지 그룹당 페이지수
 	 */
-	private int pageCountPerPageGroup = 2;
+	private int pageCountPerPageGroup = 4;
 	/**
 	 * database에 저장된 총게시물수
 	 */
@@ -35,11 +35,26 @@ public class PagingBean {
 	public PagingBean(int totalPostCount) {
 		this.totalPostCount = totalPostCount;
 	}
+	
 
 	public PagingBean(int totalPostCount, int nowPage) {
 		this.totalPostCount = totalPostCount;
 		this.nowPage = nowPage;
 	}
+
+	public PagingBean(int totalPostCount, int nowPage,int postCountPerPage ) {
+		this.postCountPerPage = postCountPerPage;
+	}
+
+	public int getPostCountPerPage() {
+		return postCountPerPage;
+	}
+
+
+	public void setPostCountPerPage(int postCountPerPage) {
+		this.postCountPerPage = postCountPerPage;
+	}
+
 
 	public int getNowPage() {
 		return nowPage;

@@ -15,6 +15,7 @@ import join.us.GoodJob.model.mapper.NormalMapper;
 import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PortfolioVO;
+import join.us.GoodJob.model.vo.PostListVO;
 
 @Service
 public class NormalServiceImpl implements NormalService {
@@ -155,6 +156,25 @@ public class NormalServiceImpl implements NormalService {
 	@Override
 	public void interviewApply(InterviewVO interviewVO) {
 		normalMapper.interviewApply(interviewVO);
+	}
+
+	@Override
+	public PostListVO portfolioAllListAndPagingProcess(String pageNum, int postCountPerPage) {
+		
+		PagingBean pagingBean;
+		int totalPostCount = normalMapper.getAllMemberListCount();
+		if (pageNum != null) { // 페이지 번호 주면
+			pagingBean = new PagingBean(totalPostCount, Integer.parseInt(pageNum));
+		} else { // 페이지 번호 안주면 1페이지
+			pagingBean = new PagingBean(totalPostCount);
+		}
+		pagingBean.setPostCountPerPage(postCountPerPage);
+		//normalMember list 이름만 찾음.
+		List<NormalMemberVO> nmList= normalMapper.getNormalMemberId(pagingBean);
+		PostListVO postListVO = new PostListVO();
+		postListVO.setNmList(nmList);
+		postListVO.setPagingBean(pagingBean);
+		return postListVO;
 	}
 
 
