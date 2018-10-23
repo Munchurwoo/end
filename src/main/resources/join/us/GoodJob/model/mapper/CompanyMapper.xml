@@ -14,12 +14,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{id}, #{password}, #{email}, #{name}, #{tel}, 3, #{address})
 	</insert>
 	<select id="selectCompanyMember" parameterType="string" resultType="companyMemberVO">
-		select m.id, m.email, m.name, m.address, m.tel, cm.introduction, cm.company_type, cm.industry, cm.sales, cm.date_of_establishment, cm.num_of_employees
+		select m.id, m.email, m.name, m.address, m.tel, cm.introduction, cm.company_type, cm.industry,
+		 cm.sales, cm.date_of_establishment, cm.num_of_employees, cm.picture_path
 		from company_member cm, member m
 		where m.id=cm.company_id and m.id=#{value}
 	</select>
 	<update id="updateCompanyMember" parameterType="companyMemberVO">
-		update company_member set introduction=#{introduction}, company_type=#{companyType}, industry=#{industry}, sales=#{sales}, date_of_establishment=#{dateOfEstablishment}, num_of_employees=#{numOfEmployees}
+		update company_member set introduction=#{introduction}, company_type=#{companyType}, industry=#{industry}, 
+		sales=#{sales}, date_of_establishment=#{dateOfEstablishment}, num_of_employees=#{numOfEmployees}, picture_path=#{picturePath}
 		where company_id=#{id}
 	</update>
 	<update id="updateMember" parameterType="companyMemberVO">
@@ -252,10 +254,60 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="name" property="normalMemberVO.name"/>
 		<result column="normal_id" property="normalMemberVO.id"/> 
 	</resultMap>
-	<select id="getAllInterviewerList" resultMap="interviewVORM">
-		select i.interview_num,i.job_posting_num,i.title,nm.normal_id,m.name
+	<!-- 181023 MIRI 반복되는 sql 묶기 -->
+	<sql id="getInterviewerInfo">
+		select i.interview_num,i.job_posting_num,i.title,i.content,nm.normal_id,m.name
 		from interview i, normal_member nm , member m
 		where i.normal_id = nm.normal_id and nm.normal_id = m.id
+	</sql>
+	<select id="getAllInterviewerList" resultMap="interviewVORM">
+		<include refid="getInterviewerInfo"/>
+	</select>
+	<select id="getJobPostingInterviewerList" parameterType="string" resultMap="interviewVORM">
+		<include refid="getInterviewerInfo"/>
+		and i.job_posting_num=#{value}
+	</select>
+	
+	<update id="updateJobPosting" parameterType="jobPostingVO">
+		update job_posting set title=#{title} , content=#{content}, career_status=#{careerStatus} where job_posting_num=#{jobPostingNum}
+	</update>
+	<delete id="deleteJobPostingMulti" parameterType="int">
+		{
+		call
+		declare
+		begin
+		delete from job_dev where job_posting_num=#{value};
+		delete from job_recruitment where job_posting_num=#{value};
+		delete from job_emp where job_posting_num=#{value};
+		delete from job_loc where job_posting_num=#{value};
+		delete from job_academic where job_posting_num=#{value};
+		end
+		}
+	</delete>
+	<delete id="deleteJobPostingByNum" parameterType="int">
+		delete from job_posting where job_posting_num=#{value}
+	</delete>
+	
+	<resultMap type="companyMemberVO" id="companyMemberVORM3">
+		<result column="job_posting_num" property="jobPostingVO.jobPostingNum"/>
+		<result column="career_status" property="jobPostingVO.careerStatus"/>
+		<result column="title" property="jobPostingVO.title"/>
+		<result column="content" property="jobPostingVO.content"/>
+	</resultMap>
+	<select id="findJobPostingBytitle" parameterType="map" resultMap="companyMemberVORM3">
+		select
+		job_posting_num,company_id,career_status,title,content
+		from(
+		select row_number() over(order by job_posting_num) as rnum ,job_posting_num, company_id,career_status,title,content
+		from job_posting where title like '%'||#{keyword}||'%'
+		)
+		where rnum between #{pagingBean.startRowNumber} and #{pagingBean.endRowNumber}	
+	</select>
+	
+	
+	<select id="findJobPostingBytitleCount" resultType="int">
+		select count(*)
+		from job_posting where title like '%'||#{keyword}||'%'
 	</select>
 </mapper> 		
  

@@ -1,6 +1,7 @@
 package join.us.GoodJob.controller;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import join.us.GoodJob.model.service.CompanyService;
 import join.us.GoodJob.model.service.MemberService;
@@ -23,7 +23,9 @@ import join.us.GoodJob.model.vo.CompanyMemberVO;
 import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.JobPostingVO;
 import join.us.GoodJob.model.vo.MemberVO;
+import join.us.GoodJob.model.vo.PortfolioVO;
 import join.us.GoodJob.model.vo.PostListVO;
+import join.us.GoodJob.model.vo.QuestionAnswerVO;
 
 @Controller
 public class CompanyController {
@@ -70,7 +72,7 @@ public class CompanyController {
 		if (mvo != null) {
 			CompanyMemberVO cmvo = companyService.selectCompanyMember(mvo.getId());
 			model.addAttribute("cmvo", cmvo);
-		}
+		}	
 		return "company/company_update_form.tiles2";
 	}
 
@@ -84,6 +86,22 @@ public class CompanyController {
 	public String updateCompanyMember(CompanyMemberVO companyMemberVO) {
 		companyService.updateCompanyMember(companyMemberVO);
 		return "redirect:home.do";
+	}
+	@ResponseBody
+	@PostMapping("user-updateCompanyLogo.do")
+	public String updateCompanyLogo(MultipartFile updateLogo) {
+		workspaceUploadPath="C:\\java-kosta\\framework-workspace2\\goodjob\\src\\main\\webapp\\resources\\upload\\companyLogo\\";
+		if(updateLogo.isEmpty()==false) {
+			File updateLogoPath=new File(workspaceUploadPath+updateLogo.getOriginalFilename());
+			try {
+				updateLogo.transferTo(updateLogoPath);
+			} catch (IllegalStateException | IOException e) {
+				
+				e.printStackTrace();
+			}
+		}
+		return updateLogo.getOriginalFilename();
+		
 	}
 
 	/**
@@ -140,7 +158,7 @@ public class CompanyController {
 		jobPostingVO.setCompanyId(mvo.getId());
 		//jobPostingVO.setJobPostingNum(jobPostingVO.getJobPostingNum());
 		System.out.println(jobPostingVO);
-		companyService.registerJobPosting(jobPostingVO);
+		companyService.registerJobPosting(jobPostingVO,true);
 		return "redirect:home.do";
 	}
 
@@ -229,11 +247,11 @@ public class CompanyController {
 	 */
 	@RequestMapping("user-getAllJobPostingList.do")
 	public String getAllJobPostingList(Model model,String pageNum) {
-		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
-		model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));
-		model.addAttribute("empTypeCatList", memberService.getEmpTypeCatVOList());
-		model.addAttribute("locCatList", memberService.getLocCatVOList());
-		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
+		model.addAttribute("allRecruitCatList", memberService.getRecruitCatVOList());
+		model.addAttribute("allDevCatList", memberService.getDevCatVOListByrcNum("101"));
+		model.addAttribute("allEmpTypeCatList", memberService.getEmpTypeCatVOList());
+		model.addAttribute("allLocCatList", memberService.getLocCatVOList());
+		model.addAttribute("allAcaCatList", memberService.getAcaCatVOList());
 		PostListVO postListVO = companyService.getAllJobPostingList(pageNum);
 		model.addAttribute("postListVO", postListVO);
 		return "company/company_get_all_jobPosting_list.company_search_tiles";
@@ -270,5 +288,112 @@ public class CompanyController {
 		return "company/company_InterviewApplyList.tiles2";
 	}
 	
-
+	/**
+	 * 181023 MIRI 구인 공고별 면접자 리스트
+	 * @param jobPostingNum
+	 * @return
+	 */
+	@PostMapping("getJobPostingInterviewerList.do")
+	public String getJobPostingInterviewerList(String jobPostingNum, Model model) {
+		List<InterviewVO> ivvoList = companyService.getJobPostingInterviewerList(jobPostingNum);
+		if(ivvoList.isEmpty() == false) {
+			List<PortfolioVO> povoList = new ArrayList<PortfolioVO>();
+			for (InterviewVO ivvo : ivvoList) {
+				povoList.add(normalService.normalDetailPortfolio(ivvo.getNormalMemberVO().getId()));
+			}
+			model.addAttribute("povoList", povoList);
+		}
+		model.addAttribute("ivvoList", ivvoList);
+		return "company/job_posting_interviewer_list.tiles2";
+	}
+	
+	/**
+	 * 181020 MIRI 구인 공고별 질답 리스트
+	 * @param jobPostingNum
+	 * @return
+	 */
+	@PostMapping("getJobPostingQAList.do")
+	public String getJobPostingQAList(String jobPostingNum, Model model) {
+		List<QuestionAnswerVO> qavo = companyService.getJobPostingQAList(jobPostingNum);
+		model.addAttribute("qavo", qavo);
+		return "company/job_posting_QA_list.tiles2";
+	}
+	
+	/**
+	 * 181022 MIRI Q&A 답변 수정
+	 * @param QANum
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("updateQAToAnswer.do")
+	public QuestionAnswerVO updateQAToAnswer(String QANum, String answer, Model model) {
+		QuestionAnswerVO qavo = companyService.getJobPostingQAByQANum(QANum);
+		qavo.setAnswer(answer);
+		companyService.updateQAToAnswer(qavo);
+		qavo = companyService.getJobPostingQAByQANum(QANum);
+		model.addAttribute("qavo", qavo);
+		return qavo;
+	}
+	
+	/**
+	 * 181022 MIRI Q&A 답변 삭제
+	 * @param QANum
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("deleteQAToAnswer.do")
+	public QuestionAnswerVO deleteQAToAnswer(String QANum, Model model) {
+		QuestionAnswerVO qavo = companyService.getJobPostingQAByQANum(QANum);
+		companyService.deleteQAToAnswer(QANum);
+		qavo = companyService.getJobPostingQAByQANum(QANum);
+		model.addAttribute("qavo", qavo);
+		return qavo;
+	}
+	
+	@RequestMapping("updateJobPostingForm.do")
+	public String updateJobPostingForm(String jobPostingNum,Model model) {
+		// DB에서 기본 업데이트 폼 양식을 가져오는 코드
+		model.addAttribute("allRecruitCatList", memberService.getRecruitCatVOList());
+		model.addAttribute("allDevCatList", memberService.getDevCatVOListByrcNum("101"));
+		model.addAttribute("allEmpTypeCatList", memberService.getEmpTypeCatVOList());
+		model.addAttribute("allLocCatList", memberService.getLocCatVOList());
+		model.addAttribute("allAcaCatList", memberService.getAcaCatVOList());
+		// 구인공고 글에 설정된 카테고리 
+		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNum(jobPostingNum));
+		model.addAttribute("devCatList", memberService.getDevCatVOListByNum(jobPostingNum));
+		model.addAttribute("empTypeCatList", memberService.getEmpCatVOListByNum(jobPostingNum));
+		model.addAttribute("locCatList", memberService.getLocCatVOListByNum(jobPostingNum));
+		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNum(jobPostingNum));
+		// 구인 상세정보
+		model.addAttribute("jpvo", companyService.jobPostingDetail(jobPostingNum));
+	
+		return "company/job_posting_update_form.tiles2";
+	}
+	
+	@RequestMapping("updateJobPosting.do")
+	public String updateJobPosting(JobPostingVO jobPostingVO) {
+			companyService.updateJobPosting(jobPostingVO);
+			companyService.deleteJobPostingMulti(jobPostingVO.getJobPostingNum());
+			companyService.registerJobPosting(jobPostingVO, false);
+		return "redirect:home.do";
+	}
+	@RequestMapping("deleteJobPosting.do")
+	public String deleteJobPosting(int jobPostingNum) {
+		System.out.println(jobPostingNum);
+			companyService.deleteJobPostingByNum(jobPostingNum);
+		return "redirect:home.do";
+	}
+	@RequestMapping("user-findJobPostingByKeyword.do")
+	public String findJobPostingByKeyword(String keyword,Model model,String pageNum) {
+		model.addAttribute("allRecruitCatList", memberService.getRecruitCatVOList());
+		model.addAttribute("allDevCatList", memberService.getDevCatVOListByrcNum("101"));
+		model.addAttribute("allEmpTypeCatList", memberService.getEmpTypeCatVOList());
+		model.addAttribute("allLocCatList", memberService.getLocCatVOList());
+		model.addAttribute("allAcaCatList", memberService.getAcaCatVOList());
+		PostListVO jobPostingList2 = (PostListVO) companyService.findJobPostingBytitle(keyword,pageNum);
+		System.out.println(jobPostingList2);
+		model.addAttribute("jobPostingList2", jobPostingList2);
+		
+		return "company/keywordSearch_result.company_search_tiles";
+	}
 }

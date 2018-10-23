@@ -24,8 +24,8 @@ ${postListVO.pagingBean} --%>
 						<div class="box-gray aligncenter">
 							<h4>${cmvo.name}</h4>
 							<div class="icon">
-								<i class="fa fa-desktop fa-3x"></i>
-								${cmvo.picturePath}
+								
+								<img src="/GoodJob/resources/upload/companyLogo/${cmvo.picturePath}" height="100px" width="100px" >
 							</div>
 							<p>${cmvo.introduction}</p>
 	
