@@ -25,6 +25,7 @@ ${postListVO.pagingBean} --%>
 							<h4>${cmvo.name}</h4>
 							<div class="icon">
 								<i class="fa fa-desktop fa-3x"></i>
+								${cmvo.picturePath}
 							</div>
 							<p>${cmvo.introduction}</p>
 	
@@ -44,7 +45,7 @@ ${postListVO.pagingBean} --%>
 			<ul class="pagination">
 				<c:if test="${pb.previousPageGroup }">
 					<li><a
-						href="${pageContext.request.contextPath}/user-companyInfo.do?pageNum=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+						href="${pageContext.request.contextPath}/user-allCompanyInfo.do?pageNum=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
 				</c:if>
 				<c:forEach begin="${pb.startPageOfPageGroup}"
 					end="${pb.endPageOfPageGroup}" var="pagenum">
@@ -54,13 +55,13 @@ ${postListVO.pagingBean} --%>
 						</c:when>
 						<c:otherwise>
 							<li><a
-								href="${pageContext.request.contextPath}/user-companyInfo.do?pageNum=${pagenum}">${pagenum}</a></li>
+								href="${pageContext.request.contextPath}/user-allCompanyInfo.do?pageNum=${pagenum}">${pagenum}</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>				
 				<c:if test="${pb.nextPageGroup }">
 					<li><a
-						href="${pageContext.request.contextPath}/user-companyInfo.do?pageNum=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+						href="${pageContext.request.contextPath}/user-allCompanyInfo.do?pageNum=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
 				</c:if>
 			</ul>
 		</div>	
