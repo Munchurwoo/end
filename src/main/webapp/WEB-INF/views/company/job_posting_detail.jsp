@@ -129,13 +129,30 @@
 	<input type="submit" value="면접신청">
 	</form>
 	</c:when>
+	<c:otherwise>
+	<c:if test="${sessionScope.mvo.id==jpvo.companyId}">
+	<form action="updateJobPostingForm.do">
+	<input type="hidden" name="companyId" value="${jpvo.companyId}">
+	<input type="hidden" name="jobPostingNum" value="${jpvo.jobPostingVO.jobPostingNum}">
+	<input type="submit" value="수정하기">
+	</form>	
+	<br>
+	<form action="deleteJobPosting.do">
+	<input type="hidden" name="companyId" value="${jpvo.companyId}">
+	<input type="hidden" name="jobPostingNum" value="${jpvo.jobPostingVO.jobPostingNum}">
+	<input type="submit" value="삭제하기">
+	</form>
+	</c:if>
+	</c:otherwise>
 </c:choose>
+<br>
 
 <!-- 181020 MIRI 세션에 있는 회원이 직접 올린 구인 공고 글이면 면접 신청자 리스트를 볼 수 있음 (작억중) -->
 	<c:if test="${sessionScope.mvo.id == requestScope.jpvo.companyId}">
 		<form action="getJobPostingInterviewerList.do?jobPostingNum=${requestScope.jpvo.jobPostingVO.jobPostingNum}" method="post">
 			<input type="submit" value="면접 신청자 리스트">
 		</form>
+		<br>
 		<form action="getJobPostingQAList.do?jobPostingNum=${requestScope.jpvo.jobPostingVO.jobPostingNum}" method="post">
 			<input type="submit" value="구인 공고 질답 리스트">
 		</form>

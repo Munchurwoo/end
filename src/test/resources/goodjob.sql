@@ -32,7 +32,7 @@ drop sequence emp_type_num_seq;
 drop sequence rc_num_seq;
 drop sequence qa_num_seq;
 drop sequence portfolio_file_seq;
-drop sequence interview_num_seq 
+drop sequence interview_num_seq;
 
 		
 
@@ -612,8 +612,7 @@ select
 	(1001,1002)
 	)
 	where rnum between 1 and 3
-		
-	
+
 	
 	
 	
@@ -654,6 +653,33 @@ from(
 )
 where dev_cat_num in(201,227) 
 and rc_num in(101,106)  
+select title,content from job_posting
+update job_posting set title='안녕쓰~' , content='하이룽쓰~' where job_posting_num='1001'
+update job_academic set academic_num='401' where job_posting_num='1001'
 
-
-
+-- 문자열이 포함된 타이틀로 검색하기
+select job_posting_num,company_id,career_status,title,content
+from job_posting where title like  '%'||#{keyword}||'%'
+-- 문자열이 포함된 타이틀로 검색하기 페이징
+select
+		job_posting_num,company_id,career_status,title,content
+from(
+select row_number() over(order by job_posting_num) as rnum ,job_posting_num, company_id,career_status,title,content
+from job_posting where title like '%Java%'
+)
+where rnum between 1 and 3
+-- 키워드로 검색하기
+select
+		job_posting_num,title,company_id,career_status,content
+from(
+select row_number() over(order by k.job_posting_num) as rnum, j.job_posting_num ,j.title,j.company_id,j.career_status,j.content
+from job_posting_keyword k , job_posting j
+where k.job_posting_num = j.job_posting_num
+and k.keyword_name like '%워라밸%'
+)
+where rnum between 1 and 3
+-- 키워드로 검색하기 페이징
+select count(*)
+from job_posting_keyword k , job_posting j
+where k.job_posting_num = j.job_posting_num
+and k.keyword_name like '%수평적문화%'

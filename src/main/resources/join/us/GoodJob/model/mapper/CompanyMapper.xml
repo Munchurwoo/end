@@ -248,6 +248,48 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from interview i, normal_member nm , member m
 		where i.normal_id = nm.normal_id and nm.normal_id = m.id
 	</select>
+	
+	<update id="updateJobPosting" parameterType="jobPostingVO">
+		update job_posting set title=#{title} , content=#{content}, career_status=#{careerStatus} where job_posting_num=#{jobPostingNum}
+	</update>
+	<delete id="deleteJobPostingMulti" parameterType="int">
+		{
+		call
+		declare
+		begin
+		delete from job_dev where job_posting_num=#{value};
+		delete from job_recruitment where job_posting_num=#{value};
+		delete from job_emp where job_posting_num=#{value};
+		delete from job_loc where job_posting_num=#{value};
+		delete from job_academic where job_posting_num=#{value};
+		end
+		}
+	</delete>
+	<delete id="deleteJobPostingByNum" parameterType="int">
+		delete from job_posting where job_posting_num=#{value}
+	</delete>
+	
+	<resultMap type="companyMemberVO" id="companyMemberVORM3">
+		<result column="job_posting_num" property="jobPostingVO.jobPostingNum"/>
+		<result column="career_status" property="jobPostingVO.careerStatus"/>
+		<result column="title" property="jobPostingVO.title"/>
+		<result column="content" property="jobPostingVO.content"/>
+	</resultMap>
+	<select id="findJobPostingBytitle" parameterType="map" resultMap="companyMemberVORM3">
+		select
+		job_posting_num,company_id,career_status,title,content
+		from(
+		select row_number() over(order by job_posting_num) as rnum ,job_posting_num, company_id,career_status,title,content
+		from job_posting where title like '%'||#{keyword}||'%'
+		)
+		where rnum between #{pagingBean.startRowNumber} and #{pagingBean.endRowNumber}	
+	</select>
+	
+	
+	<select id="findJobPostingBytitleCount" resultType="int">
+		select count(*)
+		from job_posting where title like '%'||#{keyword}||'%'
+	</select>
 </mapper> 		
  
  

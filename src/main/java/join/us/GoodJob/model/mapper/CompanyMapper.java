@@ -103,12 +103,17 @@ public interface CompanyMapper {
 	int getAllJobPostingListByJobPostingNumCount(List<String> jobPostingNumList);
 	List<CompanyMemberVO> getAllJobPostingListByJobPostingNum(Map<String, Object> map2);
 	
+	// 구인공고 수정등록 
+	void updateJobPosting(JobPostingVO jobPostingVO);
+	// 구인공고 수정 전 전체 삭제 학력/개발분야/고용형태/지역/모집직군
+	void deleteJobPostingMulti(int jobPostingNum);
+	// 구인공고 삭제
+	void deleteJobPostingByNum(int jobPostingNum);
+	List<CompanyMemberVO> findJobPostingBytitle(Map<String, Object> map);
+	int findJobPostingBytitleCount(String keyword);
 	
 	
-	
-	//구인 분류 등록
-		
-		
+	//구인 분류 등록	
 	//구인공고 전체보기
 	//구인공고 검색결과 보기
 	

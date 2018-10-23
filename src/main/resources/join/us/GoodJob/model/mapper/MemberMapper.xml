@@ -31,31 +31,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete>
 	<!-- 번호로 조회 -->
 	<select id="getDevCatVOListByNum" resultType="devCatVO">
-		select dc.dev_cat_name
+		select dc.dev_cat_name,dc.dev_cat_num
 		from development_category dc, job_dev jd
 		where dc.dev_cat_num=jd.dev_cat_num 
 		and jd.job_posting_num=#{jobPostingNum}
 	</select>
 	<select id="getLocCatVOListByNum" resultType="locCatVO">
-		select lc.loc_name
+		select lc.loc_name,lc.loc_num
 		from location_category lc , job_loc jl
 		where lc.loc_num=jl.loc_num
 		and jl.job_posting_num=#{jobPostingNum}
 	</select>
 	<select id="getRecruitCatVOListByNum" resultType="recruitCatVO">
-		select rc.rc_name
+		select rc.rc_name,rc.rc_num
 		from recruitment_category rc , job_recruitment jr 
 		where rc.rc_num=jr.rc_num 
 		and jr.job_posting_num=#{jobPostingNum}
 	</select>
 	<select id="getAcaCatVOListByNum" resultType="acaCatVO">
-		select ac.academic_name
+		select ac.academic_name,ac.academic_num
 		from academic_category ac , job_academic ja
 		where ac.academic_num=ja.academic_num
 		and ja.job_posting_num=#{jobPostingNum}
 	</select>
 	<select id="getEmpCatVOListByNum" resultType="empTypeCatVO">
-		select etc.emp_type_name
+		select etc.emp_type_name,etc.emp_type_num
 		from employment_type_category etc , job_emp je
 		where etc.emp_type_num=je.emp_type_num
 		and je.job_posting_num=#{jobPostingNum}
