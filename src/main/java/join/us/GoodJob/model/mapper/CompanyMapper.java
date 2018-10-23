@@ -7,13 +7,10 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import join.us.GoodJob.model.service.PagingBean;
-import join.us.GoodJob.model.vo.CatNumParamVO;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
 import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.JobPostingVO;
 import join.us.GoodJob.model.vo.MemberVO;
-import join.us.GoodJob.model.vo.NormalMemberVO;
-import join.us.GoodJob.model.vo.PostListVO;
 import join.us.GoodJob.model.vo.QuestionAnswerVO;
 
 @Mapper
@@ -92,11 +89,10 @@ public interface CompanyMapper {
 	void updateQAToAnswer(QuestionAnswerVO qavo);
 	//181022 MIRI Q&A 답변 삭제
 	void deleteQAToAnswer(String QANum);
-	//구인공고 상세보기
-	CompanyMemberVO jobPostingDetail(String jobPostingNum);
 	// 면접신청자 조회 ->
 	List<InterviewVO> getAllInterviewerList();
 	//구인공고 키워드 등록	
+	
 	// 헤더/채용정보 페이징처리
 	int getAlljobPostingCount();
 	// 채용정보 상세검색 페이징처리
@@ -105,23 +101,9 @@ public interface CompanyMapper {
 	//181023 MIRI 구인 공고별 면접자 리스트
 	List<InterviewVO> getJobPostingInterviewerList(String jobPostingNum);
 	
-	
-	
-	
 	//구인 분류 등록
 		
-		
 	//구인공고 전체보기
+	
 	//구인공고 검색결과 보기
-	
-	
-	
-	//질의응답 답변 등록
-	
-	
-	
-	
-	
-	
-	
 }

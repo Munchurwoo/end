@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import join.us.GoodJob.model.service.CompanyService;
 import join.us.GoodJob.model.service.MemberService;
@@ -26,6 +25,7 @@ import join.us.GoodJob.model.vo.JobPostingVO;
 import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.PortfolioVO;
 import join.us.GoodJob.model.vo.PostListVO;
+import join.us.GoodJob.model.vo.QuestionAnswerVO;
 
 @Controller
 public class CompanyController {
