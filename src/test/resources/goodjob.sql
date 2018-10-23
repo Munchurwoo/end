@@ -32,7 +32,7 @@ drop sequence emp_type_num_seq;
 drop sequence rc_num_seq;
 drop sequence qa_num_seq;
 drop sequence portfolio_file_seq;
-drop sequence interview_num_seq 
+drop sequence interview_num_seq;
 
 		
 
@@ -560,13 +560,13 @@ insert into MEMBER(id, password, email, name, address, tel, member_type) values(
 insert into MEMBER(id, password, email, name, address, tel, member_type) values('Tmaxuser7', '123', 'Tmaxuser@tmax.com', 'TmaxSoft', '경기도 성남시 분당구 황새울로 258번길 29, BS타워 8-9층 티맥스소프트', '031-8018-1000', 3);
 insert into MEMBER(id, password, email, name, address, tel, member_type) values('Tmaxuser8', '123', 'Tmaxuser@tmax.com', 'TmaxSoft', '경기도 성남시 분당구 황새울로 258번길 29, BS타워 8-9층 티맥스소프트', '031-8018-1000', 3);
 
-insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees) values('Tmaxuser2', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358);
-insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees) values('Tmaxuser3', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358);
-insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees) values('Tmaxuser4', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358);
-insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees) values('Tmaxuser5', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358);
-insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees) values('Tmaxuser6', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358);
-insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees) values('Tmaxuser7', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358);
-insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees) values('Tmaxuser8', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358);
+insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees, picture_path) values('Tmaxuser2', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358, 'maeil.jpg');
+insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees, picture_path) values('Tmaxuser3', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358, 'maeil.jpg');
+insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees, picture_path) values('Tmaxuser4', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358, 'maeil.jpg');
+insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees, picture_path) values('Tmaxuser5', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358, 'maeil.jpg');
+insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees, picture_path) values('Tmaxuser6', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358, 'maeil.jpg');
+insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees, picture_path) values('Tmaxuser7', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358, 'maeil.jpg');
+insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees, picture_path) values('Tmaxuser8', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358, 'maeil.jpg');
 
 -- 기업 전체 보기 rnum
 select row_number() over(order by cm.company_id) as rnum, cm.company_id, m.name, cm.introduction

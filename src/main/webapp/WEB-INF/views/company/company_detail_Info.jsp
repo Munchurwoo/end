@@ -2,11 +2,15 @@
     pageEncoding="UTF-8"%>
 <h3>${requestScope.cmvo.name} 기업의 상세정보</h3>
 <div class="container">
+	사진...${requestScope.cmvo.picturePath}
+
 	<table class="table table-bordered">
 		<thead>
-			<tr>
-			<th>아이디</th>
-			<td>${requestScope.cmvo.companyId}</td>
+			<tr>		
+			<th>기업로고</th>
+			<td>
+			<img src="/GoodJob/resources/upload/companyLogo/${requestScope.cmvo.picturePath}" height="100px" width="100px" >
+			</td>
 			</tr>
 			<tr>
 			<th>이메일주소</th>

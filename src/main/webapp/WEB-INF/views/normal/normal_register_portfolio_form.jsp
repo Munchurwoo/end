@@ -76,10 +76,10 @@
 			});//ajax
 			$("#pictureDeleteBtn").css('display', 'block');
 		});//change
-		
+	/* 	
 		$("#registerBtn").click(function() {
 			$("#registerForm").submit();
-		});//click				
+		});//click			 */	
 		
 		$("#pictureDeleteBtn").click(function() {
 			//사진파일 삭제
@@ -126,7 +126,7 @@
 		  		<img id="pictureDeleteBtn" src="${pageContext.request.contextPath}/resources/upload/etc/x-button.jpg" class="button"  style="display: none; ">
 		</div>
  		<span id="pictureInputArea"></span>	<br>
-		<input type="file" name="uploadPicture" id="pictureUploadBtn"><br>
+		<input type="file" name="uploadPicture" id="pictureUploadBtn" required="required"><br>
 	</div>
 	<table class="advantage-table">
 	      <colgroup>
@@ -213,7 +213,7 @@
 </table>
 <br><br>
 	<button type="reset">초기화</button>	
+	<button type="submit"  >등록하기</button>	
 </form >
 
-<button type="submit"  id="registerBtn">등록하기</button>
 <button type="reset" onclick="location.href='home.do'">홈으로</button>	

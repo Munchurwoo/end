@@ -28,7 +28,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="myPageCompanyMember" resultType="companyMemberVO" parameterType="memberVO">
 		select
 		cm.company_id,m.password,m.name,m.address,m.tel,m.email,cm.introduction,
-		cm.company_type,cm.industry,cm.sales,cm.date_of_establishment,cm.num_of_employees
+		cm.company_type,cm.industry,cm.sales,cm.date_of_establishment,cm.num_of_employees,cm.picture_path
 		from member m , company_member cm
 		where m.id=cm.company_id
 		and m.id=#{id}
@@ -39,8 +39,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete> -->
 
 	<select id="getAllCompanyList" resultType="companyMemberVO" parameterType="pagingBean">	
-		select company_id, name, introduction
-		from(select row_number() over(order by cm.company_id) as rnum, cm.company_id, m.name, cm.introduction
+		select company_id, name, introduction, picture_path
+		from(select row_number() over(order by cm.company_id) as rnum, cm.company_id, m.name, cm.introduction, cm.picture_path
 		from member m , company_member cm
 		where m.id=cm.company_id
 		) where rnum between #{startRowNumber} and #{endRowNumber}		
@@ -56,7 +56,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="detailCompanyInfo" resultType="companyMemberVO" parameterType="memberVO">
 		select
 		cm.company_id,m.password,m.name,m.address,m.tel,m.email,cm.introduction,
-		cm.company_type,cm.industry,cm.sales,cm.date_of_establishment,cm.num_of_employees
+		cm.company_type,cm.industry,cm.sales,cm.date_of_establishment,cm.num_of_employees,cm.picture_path
 		from member m , company_member cm
 		where m.id=cm.company_id
 		and m.id=#{id}
