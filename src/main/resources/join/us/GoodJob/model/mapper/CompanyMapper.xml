@@ -14,12 +14,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values(#{id}, #{password}, #{email}, #{name}, #{tel}, 3, #{address})
 	</insert>
 	<select id="selectCompanyMember" parameterType="string" resultType="companyMemberVO">
-		select m.id, m.email, m.name, m.address, m.tel, cm.introduction, cm.company_type, cm.industry, cm.sales, cm.date_of_establishment, cm.num_of_employees
+		select m.id, m.email, m.name, m.address, m.tel, cm.introduction, cm.company_type, cm.industry,
+		 cm.sales, cm.date_of_establishment, cm.num_of_employees, cm.picture_path
 		from company_member cm, member m
 		where m.id=cm.company_id and m.id=#{value}
 	</select>
 	<update id="updateCompanyMember" parameterType="companyMemberVO">
-		update company_member set introduction=#{introduction}, company_type=#{companyType}, industry=#{industry}, sales=#{sales}, date_of_establishment=#{dateOfEstablishment}, num_of_employees=#{numOfEmployees}
+		update company_member set introduction=#{introduction}, company_type=#{companyType}, industry=#{industry}, 
+		sales=#{sales}, date_of_establishment=#{dateOfEstablishment}, num_of_employees=#{numOfEmployees}, picture_path=#{picturePath}
 		where company_id=#{id}
 	</update>
 	<update id="updateMember" parameterType="companyMemberVO">
@@ -28,7 +30,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="myPageCompanyMember" resultType="companyMemberVO" parameterType="memberVO">
 		select
 		cm.company_id,m.password,m.name,m.address,m.tel,m.email,cm.introduction,
-		cm.company_type,cm.industry,cm.sales,cm.date_of_establishment,cm.num_of_employees
+		cm.company_type,cm.industry,cm.sales,cm.date_of_establishment,cm.num_of_employees,cm.picture_path
 		from member m , company_member cm
 		where m.id=cm.company_id
 		and m.id=#{id}
@@ -39,8 +41,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</delete> -->
 
 	<select id="getAllCompanyList" resultType="companyMemberVO" parameterType="pagingBean">	
-		select company_id, name, introduction
-		from(select row_number() over(order by cm.company_id) as rnum, cm.company_id, m.name, cm.introduction
+		select company_id, name, introduction, picture_path
+		from(select row_number() over(order by cm.company_id) as rnum, cm.company_id, m.name, cm.introduction, cm.picture_path
 		from member m , company_member cm
 		where m.id=cm.company_id
 		) where rnum between #{startRowNumber} and #{endRowNumber}		
@@ -56,7 +58,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="detailCompanyInfo" resultType="companyMemberVO" parameterType="memberVO">
 		select
 		cm.company_id,m.password,m.name,m.address,m.tel,m.email,cm.introduction,
-		cm.company_type,cm.industry,cm.sales,cm.date_of_establishment,cm.num_of_employees
+		cm.company_type,cm.industry,cm.sales,cm.date_of_establishment,cm.num_of_employees,cm.picture_path
 		from member m , company_member cm
 		where m.id=cm.company_id
 		and m.id=#{id}
@@ -155,22 +157,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 (select row_number() over(order by j.job_posting_num) as rnum, cm.company_id, cm.introduction, cm.company_type, cm.industry, cm.sales, cm.date_of_establishment, cm.num_of_employees,
 	j.job_posting_num, j.career_status, j.title, j.content, m.address, m.tel, m.email , m.name
 	from job_posting j , company_member cm, member m
-	where j.company_id = cm.company_id and cm.company_id=m.id and 
-	j.job_posting_num in 
-	<foreach collection="jobPostingNumList" item="jobPostingNum" open="(" separator="," close=")">
-		#{jobPostingNum}
+	where j.company_id = cm.company_id and cm.company_id=m.id 
+	
+	<!-- jobPostingNumList null 일 경우 처리 10-23 철우  -->
+	and	j.job_posting_num in 
+	<foreach collection="jobPostingNumList" item="jobPostingNumList" open="(" separator="," close=")">
+		#{jobPostingNumList}
 	</foreach>
-	)
+	) <!-- 서브쿼리 from 종료	cherwoo -->
 	where rnum between #{pagingBean.startRowNumber} and #{pagingBean.endRowNumber}
 	</select>
 	
-	<select id="getAllJobPostingListByJobPostingNumCount"  resultType="int">
+	<select id="getAllJobPostingListByJobPostingNumCount" resultType="int">
 	select count(*)
 	from job_posting j , company_member cm, member m
-	where j.company_id = cm.company_id and cm.company_id=m.id and 
-	j.job_posting_num in 
-	<foreach collection="list" item="jobPostingNum" open="(" separator="," close=")">
+	where j.company_id = cm.company_id and cm.company_id=m.id 
+	<!-- 기업상세검색, paging 처리 10-23 cherwoo 수정 절대 금지 -->
+	<foreach collection="list" item="jobPostingNum">
+	<if test="jobPostingNum != null" >
+	and	j.job_posting_num in
+		<foreach collection="list" item="jobPostingNum" open="(" separator="," close=")">
 		#{jobPostingNum}
+		</foreach>
+	</if>
 	</foreach>
 	</select>
 	
@@ -181,11 +190,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		   from job_dev jd, job_recruitment jr , job_emp je, job_loc jl, job_academic ja
 		   where jd.job_posting_num=jr.job_posting_num 
 		   and jr.job_posting_num=je.job_posting_num
-		   and je.job_posting_num=jl.job_posting_num
+		   and je.job_posting_num=jl.job_posting_num	
 		   and jl.job_posting_num=ja.job_posting_num
 		 )
+	
+	<if test="locCatNumList != null">
+	where loc_num in
+	<foreach collection="locCatNumList" item="locCatNum" separator="," open="(" close=")">
+		#{locCatNum}
+	</foreach>
+	</if>
+	
 	<if test="devCatNumList != null">
-	where dev_cat_num in
+	and dev_cat_num in
 	<foreach collection="devCatNumList" item="devCatNum" separator="," open="(" close=")">
 		#{devCatNum}
 	</foreach>
@@ -202,13 +219,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	and emp_type_num in
 	<foreach collection="empTypeCatNumList" item="empTypeCatNum" separator="," open="(" close=")">
 		#{empTypeCatNum}
-	</foreach>
-	</if>
-	
-	<if test="locCatNumList != null">
-	and loc_num in
-	<foreach collection="locCatNumList" item="locCatNum" separator="," open="(" close=")">
-		#{locCatNum}
 	</foreach>
 	</if>
 	

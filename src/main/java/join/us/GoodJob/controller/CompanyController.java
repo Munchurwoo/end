@@ -26,7 +26,6 @@ import join.us.GoodJob.model.vo.JobPostingVO;
 import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.PortfolioVO;
 import join.us.GoodJob.model.vo.PostListVO;
-import join.us.GoodJob.model.vo.QuestionAnswerVO;
 
 @Controller
 public class CompanyController {
@@ -73,7 +72,7 @@ public class CompanyController {
 		if (mvo != null) {
 			CompanyMemberVO cmvo = companyService.selectCompanyMember(mvo.getId());
 			model.addAttribute("cmvo", cmvo);
-		}
+		}	
 		return "company/company_update_form.tiles2";
 	}
 
@@ -87,6 +86,22 @@ public class CompanyController {
 	public String updateCompanyMember(CompanyMemberVO companyMemberVO) {
 		companyService.updateCompanyMember(companyMemberVO);
 		return "redirect:home.do";
+	}
+	@ResponseBody
+	@PostMapping("user-updateCompanyLogo.do")
+	public String updateCompanyLogo(MultipartFile updateLogo) {
+		workspaceUploadPath="C:\\java-kosta\\framework-workspace2\\goodjob\\src\\main\\webapp\\resources\\upload\\companyLogo\\";
+		if(updateLogo.isEmpty()==false) {
+			File updateLogoPath=new File(workspaceUploadPath+updateLogo.getOriginalFilename());
+			try {
+				updateLogo.transferTo(updateLogoPath);
+			} catch (IllegalStateException | IOException e) {
+				
+				e.printStackTrace();
+			}
+		}
+		return updateLogo.getOriginalFilename();
+		
 	}
 
 	/**

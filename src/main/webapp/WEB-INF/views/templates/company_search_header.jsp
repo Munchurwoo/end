@@ -38,6 +38,7 @@
 				</div>
 			</h4>
 
+<div class="container">
 <section id="featured">
 	<!-- start slider -->
 	<div class="container">
@@ -74,11 +75,11 @@
 	<button type="reset">초기화</button>
 	<button type="reset" onclick="location.href='home.do'">홈으로</button>	
 </form>
-				
+				</div>
 			</div>
 		</div>
-	</div>
 </section>
+</div>
 
 		</div>
 	</div>
