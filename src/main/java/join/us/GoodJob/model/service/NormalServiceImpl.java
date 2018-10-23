@@ -157,6 +157,7 @@ public class NormalServiceImpl implements NormalService {
 		normalMapper.interviewApply(interviewVO);
 	}
 
+
 	
 
 }

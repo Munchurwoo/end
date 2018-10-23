@@ -181,11 +181,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		   from job_dev jd, job_recruitment jr , job_emp je, job_loc jl, job_academic ja
 		   where jd.job_posting_num=jr.job_posting_num 
 		   and jr.job_posting_num=je.job_posting_num
-		   and je.job_posting_num=jl.job_posting_num
+		   and je.job_posting_num=jl.job_posting_num	
 		   and jl.job_posting_num=ja.job_posting_num
 		 )
+	
+	<if test="locCatNumList != null">
+	where loc_num in
+	<foreach collection="locCatNumList" item="locCatNum" separator="," open="(" close=")">
+		#{locCatNum}
+	</foreach>
+	</if>
+	
 	<if test="devCatNumList != null">
-	where dev_cat_num in
+	and dev_cat_num in
 	<foreach collection="devCatNumList" item="devCatNum" separator="," open="(" close=")">
 		#{devCatNum}
 	</foreach>
@@ -205,13 +213,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</foreach>
 	</if>
 	
-	<if test="locCatNumList != null">
-	and loc_num in
-	<foreach collection="locCatNumList" item="locCatNum" separator="," open="(" close=")">
-		#{locCatNum}
-	</foreach>
-	</if>
-	
 	<if test="acaCatNumList != null">
 	and academic_num in
 	<foreach collection="acaCatNumList" item="acaCatNum" separator="," open="(" close=")">
@@ -222,10 +223,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getJobPostingQAList" parameterType="string" resultType="questionAnswerVO">
-		select qa.normal_id, qa.question, qa.answer
+		select qa.qa_num, qa.question, qa.answer
 		from question_answer qa, job_posting jp
 		where qa.job_posting_num=jp.job_posting_num and jp.job_posting_num=#{value}
 	</select>
+	
+	<select id="getJobPostingQAByQANum" parameterType="string" resultType="questionAnswerVO">
+		select qa_num, question, answer from question_answer where qa_num=#{value}
+	</select>
+	
+	<update id="updateQAToAnswer" parameterType="questionAnswerVO">
+		update question_answer set answer=#{answer} where qa_num=#{qaNum}
+	</update>
+	
+	<update id="deleteQAToAnswer" parameterType="questionAnswerVO">
+		update question_answer set answer=null where qa_num=${value}
+	</update>
 	
 	<resultMap type="interviewVO" id="interviewVORM">
 		<result column="name" property="normalMemberVO.name"/>
