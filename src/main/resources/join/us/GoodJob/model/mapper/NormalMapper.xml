@@ -190,23 +190,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		</foreach>
  		 </if>
 
- 		<!--  
-		and dev_cat_num in
-		<foreach item="devCatNumList" collection="list" open="(" separator="," close=")">
-			#{devCatNumList}
-		</foreach>
-		and emp_type_num in
-		<foreach item="empTypeCatNumList" collection="list" open="(" separator="," close=")">
-			#{empTypeCatNumList}
-		</foreach>
-		and loc_num
-		<foreach item="locCatNumList" collection="list" open="(" separator="," close=")">
-			#{locCatNumList}
-		</foreach> -->
 	</select>
 	
 	<insert id="interviewApply" parameterType="interviewVO">
 		insert into interview(interview_num, normal_id, job_posting_num, title, content) 
 		values (interview_num_seq.nextval, #{normalId},#{jobPostingNum},#{title},#{content})
 	</insert>
+	
+	<!-- 1023 CHERWOO 
+	인재검색 페이징 처리를 위한 게시물수 출력
+	 -->
+	 <select id="getAllMemberListCount" resultType="int">
+		select count(*) 
+		from member m , normal_member nm, portfolio p
+		where m.id = nm.normal_id and nm.normal_id=p.normal_id
+	 </select>
+	 
+	 <select id="getNormalMemberId" resultType="normalMemberVO" parameterType="pagingBean">
+	 	select normal_id 
+	 	from (
+	 	select row_number() over(order by nm.normal_id) as rnum, nm.normal_id
+	 	from member m , normal_member nm , portfolio p
+	 	where m.id = nm.normal_id and nm.normal_id = p.normal_id
+	 	)where rnum between #{startRowNumber} and #{endRowNumber}
+	 	
+	 </select>
 </mapper>
