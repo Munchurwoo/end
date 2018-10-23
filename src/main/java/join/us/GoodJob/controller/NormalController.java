@@ -218,7 +218,6 @@ public class NormalController {
 	@RequestMapping("normalDetailPortfolio.do")
 
 	public String normalDetailPortfolio(String normalId, Model model) {
-		System.out.println(normalId);
 		model.addAttribute("nmvo", normalService.selectNormalMember(normalId));
 		model.addAttribute("povo",normalService.normalDetailPortfolio(normalId));
 		model.addAttribute("devCatList", memberService.getDevCatVOListByNormalId(normalId));
@@ -300,7 +299,7 @@ public class NormalController {
 		normalService.updatePortfolio(portfolioVO); // 포트폴리오 수정
 		normalService.deletePortfolioMulti(portfolioVO.getNormalId()); // 포트폴리오 관련 복합 table 전부 삭제
 		normalService.registerPortfolio(portfolioVO, false); // flag 넣어주어 포트폴리오 등록 없이 복합 table에만 데이터 추가
-		return "redirect:normalDetailPortfolio.do";
+		return "redirect:normalDetailPortfolio.do?normalId="+portfolioVO.getNormalId();	//181023 MIRI parameter value 넘기기
 	}
 
 	/**

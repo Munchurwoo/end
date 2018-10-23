@@ -111,7 +111,14 @@
 </script>
 
 <!-- normal_register_portfolio -->
-<h3>이력서 작성</h3>
+<h4 class="heading">
+	<div class="cta-text">
+		<h2>
+			<span>GoodJob</span> 이력서 작성
+		</h2>
+	</div>
+</h4>
+
 <form action="registerPortfolio.do" method="post" id="registerForm" enctype="multipart/form-data">
 <h5>제목</h5>
  <input size="98px"  height="50px" type="text" name="title" placeholder="제목을 입력하세요" required="required"><br>
