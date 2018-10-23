@@ -32,7 +32,7 @@ drop sequence emp_type_num_seq;
 drop sequence rc_num_seq;
 drop sequence qa_num_seq;
 drop sequence portfolio_file_seq;
-drop sequence interview_num_seq 
+drop sequence interview_num_seq;
 
 		
 
