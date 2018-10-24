@@ -60,9 +60,6 @@ public class NormalServiceImpl implements NormalService {
 		if(registerFlag == true)	//flag가 true일 경우에만 포트폴리오 등록
 			normalMapper.insertPortfolio(portfolioVO);
 		
-		
-		
-		
 		//포트폴리오 분류 등록 시작
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("normalId", portfolioVO.getNormalId());
@@ -72,17 +69,20 @@ public class NormalServiceImpl implements NormalService {
 
 		List<MultipartFile> fileList = portfolioVO.getFileList();
 		String workspaceUploadPath = "C:\\java-kosta\\framework-workspace2\\goodjob\\src\\main\\webapp\\resources\\upload\\memberPortfolio\\";
-
-		for(MultipartFile currentMultipartFile : fileList) {
-			File file = new File(workspaceUploadPath+currentMultipartFile.getOriginalFilename());
-			try {
-				currentMultipartFile.transferTo(file);
-				map.put("filePath", currentMultipartFile.getOriginalFilename());
-				normalMapper.insertPortfolioFile(map);
-			} catch (IllegalStateException | IOException e) {
-				e.printStackTrace();
-			};
-		}		
+		
+		//181023 MIRI 수정폼에 포트폴리오 파일 업로드 없어서 NullPointError 발생, 포트폴리오 수정시 포트폴리오 파일 업로드 안해도 수정 되게끔 조건문 추가
+		if(fileList != null) {
+			for(MultipartFile currentMultipartFile : fileList) {
+				File file = new File(workspaceUploadPath+currentMultipartFile.getOriginalFilename());
+				try {
+					currentMultipartFile.transferTo(file);
+					map.put("filePath", currentMultipartFile.getOriginalFilename());
+					normalMapper.insertPortfolioFile(map);
+				} catch (IllegalStateException | IOException e) {
+					e.printStackTrace();
+				};
+			}		
+		}
 				
 		//포트폴리오 학력 분류 등록(PORTFOLIO_ACADEMIC)
 		for(String academicNum :portfolioVO.getAcaCatNumList()) {

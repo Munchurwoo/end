@@ -46,7 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		cm.company_id, m.name, cm.introduction, cm.picture_path
 		from member m , company_member cm
 		where m.id=cm.company_id
-		) where rnum between #{startRowNumber} and #{endRowNumber}		
+		) where rnum between #{startRowNumber} and #{endRowNumber}	
 	</select>
 	
 	<select id="getAllCompanyListCount" resultType="int">
