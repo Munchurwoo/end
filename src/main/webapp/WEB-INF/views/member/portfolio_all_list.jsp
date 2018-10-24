@@ -5,74 +5,33 @@
 
 <c:set var="pb" value="${postListVO.pagingBean }"/>
 <script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-						$("input[name='recruitCatNumList']")
-								.change(
-										function() {
-											$("#empTypeArea").html('');
-											var dataString = '';
-											$
-													.ajax({
-														type : "get",
-														url : "user-DevCatVOListAjax.do",
-														dataType : "json",
-														data : $(
-																"#portfolioSearchList")
-																.serialize(),
-														success : function(
-																catList) {
-															var catListString = '';
-															for (var i = 0; i < catList.length; i++) {
-																for (var j = 0; j < catList[i].length; j++) {
-																	catListString += '<input type="checkbox" class = "recruit" id="devCatNumList" name="devCatNumList" value="'+catList[i][j].devCatNum+'">'
-																			+ catList[i][j].devCatName
-																			+ '&nbsp;';
-																}
-																catListString += '<br>';
-															}
-															$("#empTypeArea")
-																	.html(
-																			$(
-																					"#empTypeArea")
-																					.html()
-																					+ catListString);
-														}//success					
-													});//ajax 			
-										});//change
+$(document).ready(function(){	
+	$("input[name='recruitCatNumList']").change(function() {
+		$("#empTypeArea").html('');
+		var dataString='';				
+		$.ajax({
+			type:"get",
+			url:"user-DevCatVOListAjax.do",
+			dataType:"json",
+			data:$("#portfolioSearchList").serialize(),
+			success:function(catList){		
+				var catListString='';
+				for(var i=0; i<catList.length; i++){			
+					for(var j=0; j<catList[i].length; j++){
+						catListString += '<input type="checkbox" class = "recruit" name="devCatNumList" value="'+catList[i][j].devCatNum+'">'+catList[i][j].devCatName+'&nbsp;';
+					}
+					catListString+='<br>';
+				}
+				$("#empTypeArea").html($("#empTypeArea").html()+catListString);
+			}//success					
+		});//ajax
+	});//change
+		$("#SearchBtn").click(function(){
+			$("#portfolioSearchList").submit();
+		});
 
-						$("#SearchBtn").click(
-								function() {
-									$("input[name=locCatNumList]:checked")
-											.each(function() {
-												var test = $(this).val();
-												console.log(test);
-											});
-									$("input[name=acaCatNumList]:checked")
-											.each(function() {
-												var test = $(this).val();
-												console.log(test);
-											});
-									$("input[name=empTypeCatNumList]:checked")
-											.each(function() {
-												var test = $(this).val();
-												console.log(test);
-											});
-									$("input[name=recruitCatNumList]:checked")
-											.each(function() {
-												var test = $(this).val();
-												console.log(test);
-											});
-									$("input[name=devCatNumList]:checked")
-											.each(function() {
-												var test = $(this).val();
-												console.log(test);
-											});
-									$("#portfolioSearchList").submit();
-								});
+});//ready
 
-					});
 	//ready
 </script>
 
@@ -149,25 +108,23 @@
 
 			</div>
 		</div>
-
-
-	</form>
-
 	<span id="enter"></span>
 	<div class="cta-text">
-		<button type="reset" class="btn btn-default">초기화</button>
+		<button type="reset" class="btn btn-default" id="reset">초기화</button>
 
 		<button type="submit" id="SearchBtn" class="btn btn-default">상세
 			검색</button>
 		<button type="reset" onclick="location.href='home.do'"
 			class="btn btn-default">홈으로</button>
 	</div>
+	</form>
+
 </div>
 
 <hr>
 <!-- 검색 리스트 -->
 <h4 class="heading">
-	<div class="cta-text">
+	<div class="cta-text" id="row">
 		<h2>
 			<span>GoodJob</span> 인재 정보
 		</h2>
@@ -204,23 +161,23 @@
 			<ul class="pagination">
 				<c:if test="${pb.previousPageGroup }">
 					<li><a
-						href="${pageContext.request.contextPath}/user-portfolioAllList.do?pageNum=${pb.startPageOfPageGroup-1}">&laquo;</a></li>
+						href="${pageContext.request.contextPath}/user-portfolioAllList.do?pageNum=${pb.startPageOfPageGroup-1}#row">&laquo;</a></li>
 				</c:if>
 				<c:forEach begin="${pb.startPageOfPageGroup}"
 					end="${pb.endPageOfPageGroup}" var="pagenum">
 					<c:choose>
 						<c:when test="${pagenum==pb.nowPage}">
-							<li class="active"><a href="#">${pagenum}</a></li>
+							<li class="active"><a href="${pageContext.request.contextPath}/user-portfolioAllList.do?pageNum=${pagenum}#row">${pagenum}</a></li>
 						</c:when>
 						<c:otherwise>
 							<li><a
-								href="${pageContext.request.contextPath}/user-portfolioAllList.do?pageNum=${pagenum}">${pagenum}</a></li>
+								href="${pageContext.request.contextPath}/user-portfolioAllList.do?pageNum=${pagenum}#row">${pagenum}</a></li>
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>				
 				<c:if test="${pb.nextPageGroup }">
 					<li><a
-						href="${pageContext.request.contextPath}/user-portfolioAllList.do?pageNum=${pb.endPageOfPageGroup+1}">&raquo;</a></li>
+						href="${pageContext.request.contextPath}/user-portfolioAllList.do?pageNum=${pb.endPageOfPageGroup+1}#row">&raquo;</a></li>
 				</c:if>
 			</ul>
 		</div>	
