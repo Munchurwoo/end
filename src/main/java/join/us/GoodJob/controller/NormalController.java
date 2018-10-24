@@ -248,11 +248,11 @@ public class NormalController {
 		//List<NormalMemberVO> list = normalService.AllFindNomarMember();
 		List<List<DevCatVO>> devCatList = new ArrayList<List<DevCatVO>>();
 		List<PortfolioVO> povo = new ArrayList<PortfolioVO>();
-
 		for (int i = 0; i < postListVO.getNmList().size(); i++) {
 			devCatList.add(memberService.getDevCatVOListByNormalId(postListVO.getNmList().get(i).getNormalId()));
 			povo.add(normalService.normalDetailPortfolio(postListVO.getNmList().get(i).getNormalId()));
 		}
+		System.out.println(devCatList.get(2));
 		//페이징처리 
 		model.addAttribute("postListVO",postListVO);
 		//개발분야 출력 
@@ -314,7 +314,8 @@ public class NormalController {
 		normalService.updatePortfolio(portfolioVO); // 포트폴리오 수정
 		normalService.deletePortfolioMulti(portfolioVO.getNormalId()); // 포트폴리오 관련 복합 table 전부 삭제
 		normalService.registerPortfolio(portfolioVO, false); // flag 넣어주어 포트폴리오 등록 없이 복합 table에만 데이터 추가
-		return "redirect:normalDetailPortfolio.do?normalId="+portfolioVO.getNormalId();	//181023 MIRI parameter value 넘기기
+		//181023 MIRI return값에 parameter value 넘기기
+		return "redirect:normalDetailPortfolio.do?normalId="+portfolioVO.getNormalId();	
 	}
 
 	/**
