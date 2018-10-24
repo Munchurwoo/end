@@ -205,6 +205,7 @@ public class CompanyController {
 		model.addAttribute("locCatList", memberService.getLocCatVOListByNum(jobPostingNum));
 		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNum(jobPostingNum));
 		model.addAttribute("jpvo", companyService.jobPostingDetail(jobPostingNum));
+		model.addAttribute("qaList", companyService.getJobPostingQAList(jobPostingNum));
 		return "company/job_posting_detail.tiles2";
 	}
 	

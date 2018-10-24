@@ -5,18 +5,19 @@
 $(document).ready(function(){	
 	var jobPostingNum=${jpvo.jobPostingVO.jobPostingNum};
 	$("#registerQuestionBtn").click(function(){
-		alert(123)
 		 $.ajax({
 		type:"get",
 		url:"registerQuestion.do",
 		data:"question="+$("#questionArea").val()+"&jobPostingNum="+jobPostingNum,
 		success:function(result) {
-			alert(result);
 			$("#questionArea").val("");
-		}
-		
+			document.location.reload();
+				}	
 			})//ajax 
 		})//click	
+		$("#questionTable").click(function(){
+			$("#detail").toggle();
+		})
 	})//ready
 </script>
 <h3>${jpvo.jobPostingVO.title }</h3>
@@ -135,6 +136,16 @@ $(document).ready(function(){
 	${jpvo.email }
 	</td>
 	</tr>
+	
+	<tr>
+	<th colspan="2" id="questionTable">질의응답</th>
+	</tr>	
+	
+		
+		<tr><td colspan="2" id="detail">
+		<c:forEach items="${qaList}" var="qaList">질문 : ${qaList.question }<br>답 : ${qaList.answer }<br><br></c:forEach></td></tr>
+		
+
 	</tbody>
 </table>
 <c:choose>
