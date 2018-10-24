@@ -205,6 +205,7 @@ public class CompanyController {
 		model.addAttribute("locCatList", memberService.getLocCatVOListByNum(jobPostingNum));
 		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNum(jobPostingNum));
 		model.addAttribute("jpvo", companyService.jobPostingDetail(jobPostingNum));
+		model.addAttribute("qaList", companyService.getJobPostingQAList(jobPostingNum));
 		return "company/job_posting_detail.tiles2";
 	}
 	
@@ -300,7 +301,6 @@ public class CompanyController {
 	public String getJobPostingInterviewerList(String jobPostingNum, Model model) {
 		List<InterviewVO> ivvoList = companyService.getJobPostingInterviewerList(jobPostingNum);
 		if(ivvoList.isEmpty() == false) {
-			List<PortfolioVO> povoList = new ArrayList<PortfolioVO>();
 			List<DevCatVO> dcvoList = new ArrayList<DevCatVO>();
 			List<String> dcnameList = null;
 			List<Map<String, Object>> mapList = new ArrayList<Map<String, Object>>();
@@ -318,7 +318,6 @@ public class CompanyController {
 					map.put("picturePath", povo.getPicturePath());
 				mapList.add(map);
 			}
-			model.addAttribute("povoList", povoList);
 			model.addAttribute("mapList", mapList);
 		}
 		model.addAttribute("ivvoList", ivvoList);

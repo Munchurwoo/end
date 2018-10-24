@@ -59,7 +59,7 @@
 </c:otherwise>
 </c:choose>
 <button class="btn-1" onclick="deleteNormalMember()" style="height:40px; width:100px;">회원탈퇴</button>
-
+<button class="btn-1" onclick="javascript:location.href='getMyQuestionList.do?normalId=${requestScope.nmvo.id }'" style="height:40px; width:100px;">내 질문 목록</button>
 </div>
 <div class="col-sm-3"></div>
 </div>

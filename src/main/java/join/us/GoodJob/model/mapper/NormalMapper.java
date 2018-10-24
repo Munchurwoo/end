@@ -11,6 +11,7 @@ import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PortfolioVO;
+import join.us.GoodJob.model.vo.QuestionAnswerVO;
 
 @Mapper
 public interface NormalMapper {
@@ -81,13 +82,15 @@ public interface NormalMapper {
 
 	//인재검색에서 상세검색 누르고 결과페이지 출력하는 SQL 철우, 건들지 말것.
 	List<String> portfolioSearchList(PortfolioVO portfolioVO);
-	
+
 	//페이징 처리를 위한 게시풀 전체 수 받아오기
 	int getAllMemberListCount();
 	//페이징 처리 normal member 리스트 값 받아오기 < normal_id만 필요해서 id만 받아옴
 	List<NormalMemberVO> getNormalMemberId(PagingBean pagingBean);
-
-
 	
 	//질의응답 질문등록
+	void registerQuestion(QuestionAnswerVO qaVO);
+	
+	//질의응답 나의 질문 리스트
+	List<QuestionAnswerVO> getMyQuestionList(String normalId);
 }

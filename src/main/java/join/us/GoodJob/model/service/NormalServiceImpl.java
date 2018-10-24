@@ -15,7 +15,9 @@ import join.us.GoodJob.model.mapper.NormalMapper;
 import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PortfolioVO;
+import join.us.GoodJob.model.vo.QuestionAnswerVO;
 import join.us.GoodJob.model.vo.PostListVO;
+
 
 @Service
 public class NormalServiceImpl implements NormalService {
@@ -161,6 +163,11 @@ public class NormalServiceImpl implements NormalService {
 	}
 
 	@Override
+	public void registerQuestion(QuestionAnswerVO qaVO) {
+		normalMapper.registerQuestion(qaVO);
+	}
+	
+	@Override
 	public PostListVO portfolioAllListAndPagingProcess(String pageNum, int postCountPerPage) {
 		
 		PagingBean pagingBean;
@@ -177,6 +184,11 @@ public class NormalServiceImpl implements NormalService {
 		postListVO.setNmList(nmList);
 		postListVO.setPagingBean(pagingBean);
 		return postListVO;
+	}
+
+	@Override
+	public List<QuestionAnswerVO> getMyQuestionList(String normalId) {
+		return normalMapper.getMyQuestionList(normalId);
 	}
 
 
