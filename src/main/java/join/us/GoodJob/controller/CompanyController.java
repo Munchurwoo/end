@@ -2,7 +2,9 @@ package join.us.GoodJob.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +22,7 @@ import join.us.GoodJob.model.service.MemberService;
 import join.us.GoodJob.model.service.NormalService;
 import join.us.GoodJob.model.vo.CatNumParamVO;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
+import join.us.GoodJob.model.vo.DevCatVO;
 import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.JobPostingVO;
 import join.us.GoodJob.model.vo.MemberVO;
@@ -202,6 +205,7 @@ public class CompanyController {
 		model.addAttribute("locCatList", memberService.getLocCatVOListByNum(jobPostingNum));
 		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNum(jobPostingNum));
 		model.addAttribute("jpvo", companyService.jobPostingDetail(jobPostingNum));
+		model.addAttribute("qaList", companyService.getJobPostingQAList(jobPostingNum));
 		return "company/job_posting_detail.tiles2";
 	}
 	
@@ -290,7 +294,7 @@ public class CompanyController {
 	}
 	
 	/**
-	 * 181023 MIRI 구인 공고별 면접자 리스트
+	 * 181024 MIRI 구인 공고별 면접자 리스트
 	 * @param jobPostingNum
 	 * @return
 	 */
@@ -298,11 +302,24 @@ public class CompanyController {
 	public String getJobPostingInterviewerList(String jobPostingNum, Model model) {
 		List<InterviewVO> ivvoList = companyService.getJobPostingInterviewerList(jobPostingNum);
 		if(ivvoList.isEmpty() == false) {
-			List<PortfolioVO> povoList = new ArrayList<PortfolioVO>();
+			List<DevCatVO> dcvoList = new ArrayList<DevCatVO>();
+			List<String> dcnameList = null;
+			List<Map<String, Object>> mapList = new ArrayList<Map<String, Object>>();
 			for (InterviewVO ivvo : ivvoList) {
-				povoList.add(normalService.normalDetailPortfolio(ivvo.getNormalMemberVO().getId()));
+				String id = ivvo.getNormalMemberVO().getId();
+				PortfolioVO povo = normalService.normalDetailPortfolio(id);
+				dcvoList = memberService.getDevCatVOListByNormalId(id);
+				dcnameList = new ArrayList<String>();
+				for (DevCatVO dcvo : dcvoList)
+					dcnameList.add(dcvo.getDevCatName());
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("id", id);
+				map.put("dcnameList", dcnameList);
+				if(povo != null)
+					map.put("picturePath", povo.getPicturePath());
+				mapList.add(map);
 			}
-			model.addAttribute("povoList", povoList);
+			model.addAttribute("mapList", mapList);
 		}
 		model.addAttribute("ivvoList", ivvoList);
 		return "company/job_posting_interviewer_list.tiles2";

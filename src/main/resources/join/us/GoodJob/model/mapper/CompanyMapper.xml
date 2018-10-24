@@ -310,6 +310,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*)
 		from job_posting where title like '%'||#{keyword}||'%'
 	</select>
+	
+	
 </mapper> 		
  
  

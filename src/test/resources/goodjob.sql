@@ -104,6 +104,8 @@ insert into PORTFOLIO(normal_id, title, content, picture_path) values('miri', 'C
 insert into PORTFOLIO(normal_id, title, content, picture_path) values('hsj', '인재를 싸게 팝니다.', '주변 사람과 소통하며 혁신을 이뤄내는 사원이 되겠습니다.', '황성진.jpg');
 insert into PORTFOLIO(normal_id, title, content, picture_path) values('qqqq', 'Coder가 아닌 Developer가 되겠습니다.', '항상 배움의 자세로 새로운 분야에 도전하고 있으며, 매사에 도전하고 노력하는 인재입니다.', '엔시소.png');
 select * from portfolio;
+
+update PORTFOLIO set picture_path='miri.png' where normal_id='miri'
 ---------------------------------------------------------------------
 
 -- 포트폴리오 파일 경로 
@@ -119,7 +121,8 @@ insert into PORTFOLIO_FILE(file_num, normal_id, file_path) values(portfolio_file
 insert into PORTFOLIO_FILE(file_num, normal_id, file_path) values(portfolio_file_seq.nextval, 'yosep', '소셜다이닝(sharebob).pptx');
 insert into PORTFOLIO_FILE(file_num, normal_id, file_path) values(portfolio_file_seq.nextval, 'MCW', 'GoodJob.pdf');
 
-select * from portfolio_file;
+select * from portfolio_dev;
+
 ---------------------------------------------------------------------
 
 -- 기업회원

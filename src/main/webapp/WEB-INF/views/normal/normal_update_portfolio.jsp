@@ -159,11 +159,6 @@
 	</div>	
 	<span id="aaa"></span>
 	
-	<h5>포트폴리오</h5>
-	<input type="file" name="fileList[0]" >
-	<input type="file" name="fileList[1]" >
-	<input type="file" name="fileList[2]" >
-	
 	<button type="reset">전체 초기화</button>	
 </form >
 <h5>사진등록</h5>
@@ -174,6 +169,11 @@
   <!--  <a class="photo_delete" href="##" style=""><span class="blind">사진 삭제</span></a> -->
 </div>
 <input type="file" name="uploadPicture" id="pictureUploadBtn"><br>
+	
+	<h5>포트폴리오</h5>
+	<input type="file" name="fileList[0]" >
+	<input type="file" name="fileList[1]" >
+	<input type="file" name="fileList[2]" ><br>
 
 </form>
 
