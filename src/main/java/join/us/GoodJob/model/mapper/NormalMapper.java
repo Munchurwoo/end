@@ -10,6 +10,7 @@ import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PortfolioVO;
+import join.us.GoodJob.model.vo.QuestionAnswerVO;
 
 @Mapper
 public interface NormalMapper {
@@ -80,8 +81,7 @@ public interface NormalMapper {
 
 	//인재검색에서 상세검색 누르고 결과페이지 출력하는 SQL 철우, 건들지 말것.
 	List<String> portfolioSearchList(PortfolioVO portfolioVO);
-
-
 	
 	//질의응답 질문등록
+	void registerQuestion(QuestionAnswerVO qaVO);
 }

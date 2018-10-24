@@ -4,6 +4,7 @@ import java.util.List;
 import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PortfolioVO;
+import join.us.GoodJob.model.vo.QuestionAnswerVO;
 
 public interface NormalService {
 	
@@ -45,4 +46,6 @@ public interface NormalService {
 	
 	void interviewApply(InterviewVO interviewVO);
 	
+	//질의응답 질문 등록
+	void registerQuestion(QuestionAnswerVO qaVO);
 }

@@ -1,7 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<script type="text/javascript">
+$(document).ready(function(){	
+	var jobPostingNum=${jpvo.jobPostingVO.jobPostingNum};
+	$("#registerQuestionBtn").click(function(){
+		alert(123)
+		 $.ajax({
+		type:"get",
+		url:"registerQuestion.do",
+		data:"question="+$("#questionArea").val()+"&jobPostingNum="+jobPostingNum,
+		success:function(result) {
+			alert(result);
+			$("#questionArea").val("");
+		}
+		
+			})//ajax 
+		})//click	
+	})//ready
+</script>
 <h3>${jpvo.jobPostingVO.title }</h3>
 <div class="container">
 <table class="table table-bordered">
@@ -120,6 +137,18 @@
 	</tr>
 	</tbody>
 </table>
+<c:choose>
+<c:when test="${sessionScope.mvo.memberType==1}">
+<form id="registerQuestion">
+		<input type="text" name="questionArea" id="questionArea" required="required">
+		<input type="hidden" name="jobPostingNum" id="jobPostingNum">
+		<input type="button" value="질문등록" id="registerQuestionBtn" name="registerQuestionBtn">
+		</form>
+		</c:when>
+		<c:otherwise>
+		
+		</c:otherwise>
+</c:choose>
 </div>
 <!-- 세션에 있는 회원이 normalMember 이면 면접신청 을 할수있는 기능을 추가하려고 함 -->
 <c:choose>

@@ -209,4 +209,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into interview(interview_num, normal_id, job_posting_num, title, content) 
 		values (interview_num_seq.nextval, #{normalId},#{jobPostingNum},#{title},#{content})
 	</insert>
+	
+	<insert id="registerQuestion" parameterType="questionAnswerVO">
+	insert into QUESTION_ANSWER(qa_num, normal_id, job_posting_num, question) 
+	values(qa_num_seq.nextval, #{normalId}, #{jobPostingNum}, #{question})
+	</insert>
 </mapper>

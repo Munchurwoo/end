@@ -15,6 +15,7 @@ import join.us.GoodJob.model.mapper.NormalMapper;
 import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PortfolioVO;
+import join.us.GoodJob.model.vo.QuestionAnswerVO;
 
 @Service
 public class NormalServiceImpl implements NormalService {
@@ -155,6 +156,11 @@ public class NormalServiceImpl implements NormalService {
 	@Override
 	public void interviewApply(InterviewVO interviewVO) {
 		normalMapper.interviewApply(interviewVO);
+	}
+
+	@Override
+	public void registerQuestion(QuestionAnswerVO qaVO) {
+		normalMapper.registerQuestion(qaVO);
 	}
 
 
