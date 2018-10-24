@@ -1,6 +1,5 @@
 package join.us.GoodJob.controller;
 
-import java.awt.print.Pageable;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,7 +18,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import join.us.GoodJob.model.service.MemberService;
 import join.us.GoodJob.model.service.NormalService;
-import join.us.GoodJob.model.service.PagingBean;
 import join.us.GoodJob.model.vo.DevCatVO;
 import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.MemberVO;

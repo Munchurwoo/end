@@ -71,18 +71,20 @@ public class NormalServiceImpl implements NormalService {
 		String workspaceUploadPath = "C:\\java-kosta\\framework-workspace2\\goodjob\\src\\main\\webapp\\resources\\upload\\memberPortfolio\\";
 		
 		//181023 MIRI 수정폼에 포트폴리오 파일 업로드 없어서 NullPointError 발생, 포트폴리오 수정시 포트폴리오 파일 업로드 안해도 수정 되게끔 조건문 추가
-		if(fileList != null) {
+		//if(fileList != null) {
 			for(MultipartFile currentMultipartFile : fileList) {
-				File file = new File(workspaceUploadPath+currentMultipartFile.getOriginalFilename());
-				try {
-					currentMultipartFile.transferTo(file);
-					map.put("filePath", currentMultipartFile.getOriginalFilename());
-					normalMapper.insertPortfolioFile(map);
-				} catch (IllegalStateException | IOException e) {
-					e.printStackTrace();
-				};
+				if(currentMultipartFile.getSize()!=0) { //파일이 있으면
+					File file = new File(workspaceUploadPath+currentMultipartFile.getOriginalFilename());
+					try {
+						currentMultipartFile.transferTo(file);
+						map.put("filePath", currentMultipartFile.getOriginalFilename());
+						normalMapper.insertPortfolioFile(map);
+					} catch (IllegalStateException | IOException e) {
+						e.printStackTrace();
+					};
+				}
 			}		
-		}
+		//}
 				
 		//포트폴리오 학력 분류 등록(PORTFOLIO_ACADEMIC)
 		for(String academicNum :portfolioVO.getAcaCatNumList()) {
