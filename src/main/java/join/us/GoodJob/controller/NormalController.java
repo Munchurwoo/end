@@ -257,7 +257,6 @@ public class NormalController {
 			devCatList.add(memberService.getDevCatVOListByNormalId(postListVO.getNmList().get(i).getNormalId()));
 			povo.add(normalService.normalDetailPortfolio(postListVO.getNmList().get(i).getNormalId()));
 		}
-		System.out.println(devCatList.get(2));
 		//페이징처리 
 		model.addAttribute("postListVO",postListVO);
 		//개발분야 출력 

@@ -251,12 +251,13 @@ public class CompanyController {
 	 */
 	@RequestMapping("user-getAllJobPostingList.do")
 	public String getAllJobPostingList(Model model,String pageNum) {
+		PostListVO postListVO = companyService.getAllJobPostingList(pageNum);
+		
 		model.addAttribute("allRecruitCatList", memberService.getRecruitCatVOList());
 		model.addAttribute("allDevCatList", memberService.getDevCatVOListByrcNum("101"));
 		model.addAttribute("allEmpTypeCatList", memberService.getEmpTypeCatVOList());
 		model.addAttribute("allLocCatList", memberService.getLocCatVOList());
 		model.addAttribute("allAcaCatList", memberService.getAcaCatVOList());
-		PostListVO postListVO = companyService.getAllJobPostingList(pageNum);
 		model.addAttribute("postListVO", postListVO);
 		return "company/company_get_all_jobPosting_list.company_search_tiles";
 	}
@@ -271,12 +272,12 @@ public class CompanyController {
 	@RequestMapping("user-company_detail_search_list.do")
 	public String findJobPostingByCatNumList(Model model, CatNumParamVO catNumParamVO,String pageNum) {
 		// 아래 6줄은 상세조건 폼
-		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
-		model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));
-		model.addAttribute("empTypeCatList", memberService.getEmpTypeCatVOList());
-		model.addAttribute("locCatList", memberService.getLocCatVOList());
-		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
-		model.addAttribute("jobPostingList", companyService.getAllJobPostingList(pageNum));
+		model.addAttribute("allRecruitCatList", memberService.getRecruitCatVOList());
+		model.addAttribute("allDevCatList", memberService.getDevCatVOListByrcNum("101"));
+		model.addAttribute("allEmpTypeCatList", memberService.getEmpTypeCatVOList());
+		model.addAttribute("allLocCatList", memberService.getLocCatVOList());
+		model.addAttribute("allAcaCatList", memberService.getAcaCatVOList());
+		model.addAttribute("allJobPostingList", companyService.getAllJobPostingList(pageNum));
 		//System.out.println(catNumParamVO);
 
 		//카테고리 번호들로 기업 게시글 리스트 불러옴
