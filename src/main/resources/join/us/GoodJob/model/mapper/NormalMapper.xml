@@ -221,4 +221,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	)where rnum between #{startRowNumber} and #{endRowNumber}
 	 	
 	 </select>
+	 
+	 <select id="getMyQuestionList" resultType="questionAnswerVO" parameterType="string">
+		select question,answer from question_answer
+		where normal_id=#{normalId}
+	</select>
 </mapper>

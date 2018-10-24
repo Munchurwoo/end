@@ -90,4 +90,7 @@ public interface NormalMapper {
 	
 	//질의응답 질문등록
 	void registerQuestion(QuestionAnswerVO qaVO);
+	
+	//질의응답 나의 질문 리스트
+	List<QuestionAnswerVO> getMyQuestionList(String normalId);
 }

@@ -419,4 +419,13 @@ public class NormalController {
 			
 		}
 		
+		//질의응답 나의질문리스트 
+		@RequestMapping("getMyQuestionList.do")
+		public String getMyQuestionList(String normalId,Model model) {
+			List<QuestionAnswerVO> qavo=normalService.getMyQuestionList(normalId);
+			model.addAttribute("qavo", qavo);
+			return "normal/normal_my_question.tiles2";
+			
+		}
+		
 }
