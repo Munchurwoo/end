@@ -1,5 +1,6 @@
 package join.us.GoodJob.controller;
 
+import java.awt.print.Pageable;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,12 +20,17 @@ import org.springframework.web.multipart.MultipartFile;
 import join.us.GoodJob.model.service.CompanyService;
 import join.us.GoodJob.model.service.MemberService;
 import join.us.GoodJob.model.service.NormalService;
+import join.us.GoodJob.model.service.PagingBean;
 import join.us.GoodJob.model.vo.DevCatVO;
 import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PortfolioVO;
+
 import join.us.GoodJob.model.vo.QuestionAnswerVO;
+
+import join.us.GoodJob.model.vo.PostListVO;
+
 
 @Controller
 public class NormalController {
@@ -187,7 +193,7 @@ public class NormalController {
 		return uploadPicture.getOriginalFilename();
 	}
 
-	// 인재검색 섹션에서 인재검색 결과를 나타냄
+	// 인재검색 섹션에서 인재검색 결과를 나타냄 
 	@RequestMapping("user-normalDetailPortfolioList.do")
 	public String normalDetailPortfolioList(String normalId, Model model) {
 		model.addAttribute("devCatList", memberService.getDevCatVOListByNormalId(normalId));
@@ -197,7 +203,7 @@ public class NormalController {
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNormalId(normalId));
 		// 181019 MIRI normalDetailPortfolio와 중복되어 normalDetailPortfolio로 수정
 		model.addAttribute("povo", normalService.normalDetailPortfolio(normalId));
-
+		
 		NormalMemberVO nmvo = normalService.selectNormalMember(normalId);
 		model.addAttribute("nmvo", nmvo);
 
@@ -222,7 +228,6 @@ public class NormalController {
 	@RequestMapping("normalDetailPortfolio.do")
 
 	public String normalDetailPortfolio(String normalId, Model model) {
-		System.out.println(normalId);
 		model.addAttribute("nmvo", normalService.selectNormalMember(normalId));
 		model.addAttribute("povo",normalService.normalDetailPortfolio(normalId));
 		model.addAttribute("devCatList", memberService.getDevCatVOListByNormalId(normalId));
@@ -235,22 +240,34 @@ public class NormalController {
 
 	}
 
-	// 인재검색 header 클릭시 이동
+	/**
+	 * 인재검색 header 클릭시 이동 10-22 cherwoo 
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("user-portfolioAllList.do")
-	public String portfolioAllList(Model model, HttpSession session) {
+	public String portfolioAllList(Model model, HttpSession session,String pageNum) {
 		// normal 맴버 모두 조회
-		List<NormalMemberVO> list = normalService.AllFindNomarMember();
+		//페이징 처리 하기 위한 페이징빈 
+		//pageNum 옆에 숫자 5는 postCountPerPage을 의미 ->> 1페이지에 표시할 게시물 수
+		PostListVO postListVO =	normalService.portfolioAllListAndPagingProcess(pageNum,5);
+		//List<NormalMemberVO> list = normalService.AllFindNomarMember();
 		List<List<DevCatVO>> devCatList = new ArrayList<List<DevCatVO>>();
 		List<PortfolioVO> povo = new ArrayList<PortfolioVO>();
-		model.addAttribute("list", list);
-		model.addAttribute("devCatList", devCatList);
-		model.addAttribute("povo", povo);
-
-		for (int i = 0; i < list.size(); i++) {
-			devCatList.add(memberService.getDevCatVOListByNormalId(list.get(i).getNormalId()));
-			povo.add(normalService.normalDetailPortfolio(list.get(i).getNormalId()));
+		for (int i = 0; i < postListVO.getNmList().size(); i++) {
+			devCatList.add(memberService.getDevCatVOListByNormalId(postListVO.getNmList().get(i).getNormalId()));
+			povo.add(normalService.normalDetailPortfolio(postListVO.getNmList().get(i).getNormalId()));
 		}
-
+		System.out.println(devCatList.get(2));
+		//페이징처리 
+		model.addAttribute("postListVO",postListVO);
+		//개발분야 출력 
+		model.addAttribute("devCatList", devCatList);
+		//개인 포트폴리오 (title, content, 사진 출력용)
+		model.addAttribute("povo", povo);
+		//설정 bean 파일  list로 보냄 
+		//상세검색 카테고리 제공 
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
 		model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));
 		model.addAttribute("empTypeCatList", memberService.getEmpTypeCatVOList());
@@ -304,7 +321,8 @@ public class NormalController {
 		normalService.updatePortfolio(portfolioVO); // 포트폴리오 수정
 		normalService.deletePortfolioMulti(portfolioVO.getNormalId()); // 포트폴리오 관련 복합 table 전부 삭제
 		normalService.registerPortfolio(portfolioVO, false); // flag 넣어주어 포트폴리오 등록 없이 복합 table에만 데이터 추가
-		return "redirect:normalDetailPortfolio.do";
+		//181023 MIRI return값에 parameter value 넘기기
+		return "redirect:normalDetailPortfolio.do?normalId="+portfolioVO.getNormalId();	
 	}
 
 	/**

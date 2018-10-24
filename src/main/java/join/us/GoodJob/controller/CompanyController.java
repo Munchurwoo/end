@@ -1,7 +1,10 @@
 package join.us.GoodJob.controller;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -13,16 +16,17 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import join.us.GoodJob.model.service.CompanyService;
 import join.us.GoodJob.model.service.MemberService;
 import join.us.GoodJob.model.service.NormalService;
 import join.us.GoodJob.model.vo.CatNumParamVO;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
+import join.us.GoodJob.model.vo.DevCatVO;
 import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.JobPostingVO;
 import join.us.GoodJob.model.vo.MemberVO;
+import join.us.GoodJob.model.vo.PortfolioVO;
 import join.us.GoodJob.model.vo.PostListVO;
 import join.us.GoodJob.model.vo.QuestionAnswerVO;
 
@@ -286,14 +290,38 @@ public class CompanyController {
 		model.addAttribute("interviewerList", companyService.getAllInterviewerList());
 		return "company/company_InterviewApplyList.tiles2";
 	}
+	
 	/**
-	 * 181020 MIRI 구인 공고별 면접자 리스트
+	 * 181024 MIRI 구인 공고별 면접자 리스트
 	 * @param jobPostingNum
 	 * @return
 	 */
 	@PostMapping("getJobPostingInterviewerList.do")
-	public String getJobPostingInterviewerList(int jobPostingNum) {
-		//작업중
+	public String getJobPostingInterviewerList(String jobPostingNum, Model model) {
+		List<InterviewVO> ivvoList = companyService.getJobPostingInterviewerList(jobPostingNum);
+		if(ivvoList.isEmpty() == false) {
+			List<PortfolioVO> povoList = new ArrayList<PortfolioVO>();
+			List<DevCatVO> dcvoList = new ArrayList<DevCatVO>();
+			List<String> dcnameList = null;
+			List<Map<String, Object>> mapList = new ArrayList<Map<String, Object>>();
+			for (InterviewVO ivvo : ivvoList) {
+				String id = ivvo.getNormalMemberVO().getId();
+				PortfolioVO povo = normalService.normalDetailPortfolio(id);
+				dcvoList = memberService.getDevCatVOListByNormalId(id);
+				dcnameList = new ArrayList<String>();
+				for (DevCatVO dcvo : dcvoList)
+					dcnameList.add(dcvo.getDevCatName());
+				Map<String, Object> map = new HashMap<String, Object>();
+				map.put("id", id);
+				map.put("dcnameList", dcnameList);
+				if(povo != null)
+					map.put("picturePath", povo.getPicturePath());
+				mapList.add(map);
+			}
+			model.addAttribute("povoList", povoList);
+			model.addAttribute("mapList", mapList);
+		}
+		model.addAttribute("ivvoList", ivvoList);
 		return "company/job_posting_interviewer_list.tiles2";
 	}
 	
@@ -308,6 +336,7 @@ public class CompanyController {
 		model.addAttribute("qavo", qavo);
 		return "company/job_posting_QA_list.tiles2";
 	}
+	
 	/**
 	 * 181022 MIRI Q&A 답변 수정
 	 * @param QANum
@@ -323,6 +352,7 @@ public class CompanyController {
 		model.addAttribute("qavo", qavo);
 		return qavo;
 	}
+	
 	/**
 	 * 181022 MIRI Q&A 답변 삭제
 	 * @param QANum
@@ -337,7 +367,6 @@ public class CompanyController {
 		model.addAttribute("qavo", qavo);
 		return qavo;
 	}
-	
 	
 	@RequestMapping("updateJobPostingForm.do")
 	public String updateJobPostingForm(String jobPostingNum,Model model) {
@@ -358,6 +387,7 @@ public class CompanyController {
 	
 		return "company/job_posting_update_form.tiles2";
 	}
+	
 	@RequestMapping("updateJobPosting.do")
 	public String updateJobPosting(JobPostingVO jobPostingVO) {
 			companyService.updateJobPosting(jobPostingVO);
@@ -383,8 +413,5 @@ public class CompanyController {
 		model.addAttribute("jobPostingList2", jobPostingList2);
 		
 		return "company/keywordSearch_result.company_search_tiles";
-				
-		
 	}
-	
 }

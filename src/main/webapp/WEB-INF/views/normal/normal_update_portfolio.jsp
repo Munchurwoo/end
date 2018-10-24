@@ -88,7 +88,8 @@
 		var dataString='';
 		$.ajax({
 			type:"get",
-			url:"getDevCatVOListAjax.do",
+			/* 181023 MIRI url 재수정 */
+			url:"user-getDevCatVOListAjax.do",
 			dataType:"json",
 			data:$("#updatePortfolioForm").serialize(),
 			success:function(catList){
@@ -118,7 +119,13 @@
 </script>
 <!-- normal_update_portfolio -->
 
-<h3>이력서 수정</h3>
+<h4 class="heading">
+	<div class="cta-text">
+		<h2>
+			<span>GoodJob</span> 이력서 수정
+		</h2>
+	</div>
+</h4>
 
 <form action="user-updatePortfolio.do" method="post" id="updatePortfolioForm">
 	제목 <input type="text" name="title" value="${requestScope.povo.title }" required="required"><br>
@@ -162,6 +169,11 @@
   <!--  <a class="photo_delete" href="##" style=""><span class="blind">사진 삭제</span></a> -->
 </div>
 <input type="file" name="uploadPicture" id="pictureUploadBtn"><br>
+	
+	<h5>포트폴리오</h5>
+	<input type="file" name="fileList[0]" >
+	<input type="file" name="fileList[1]" >
+	<input type="file" name="fileList[2]" ><br>
 
 </form>
 

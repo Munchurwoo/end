@@ -191,11 +191,17 @@ public class CompanyServiceImpl implements CompanyService {
 	public QuestionAnswerVO getJobPostingQAByQANum(String qaNum) {
 		return companyMapper.getJobPostingQAByQANum(qaNum);
 	}
-
+	
+	@Override
 	public List<InterviewVO> getAllInterviewerList() {
 		return companyMapper.getAllInterviewerList();
 	}
 
+	@Override
+	public List<InterviewVO> getJobPostingInterviewerList(String jobPostingNum) {
+		return companyMapper.getJobPostingInterviewerList(jobPostingNum);
+	}
+	
 	@Override
 	public void updateJobPosting(JobPostingVO jobPostingVO) {
 		companyMapper.updateJobPosting(jobPostingVO);
@@ -231,6 +237,4 @@ public class CompanyServiceImpl implements CompanyService {
 		postListVO.setPagingBean(pagingBean);
 		return postListVO;
 	}
-
-
 }
