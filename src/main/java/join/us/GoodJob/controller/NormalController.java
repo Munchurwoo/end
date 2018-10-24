@@ -249,11 +249,11 @@ public class NormalController {
 		//List<NormalMemberVO> list = normalService.AllFindNomarMember();
 		List<List<DevCatVO>> devCatList = new ArrayList<List<DevCatVO>>();
 		List<PortfolioVO> povo = new ArrayList<PortfolioVO>();
-
 		for (int i = 0; i < postListVO.getNmList().size(); i++) {
 			devCatList.add(memberService.getDevCatVOListByNormalId(postListVO.getNmList().get(i).getNormalId()));
 			povo.add(normalService.normalDetailPortfolio(postListVO.getNmList().get(i).getNormalId()));
 		}
+		System.out.println(devCatList.get(2));
 		//페이징처리 
 		model.addAttribute("postListVO",postListVO);
 		//개발분야 출력 
