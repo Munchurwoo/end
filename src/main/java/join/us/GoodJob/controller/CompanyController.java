@@ -300,7 +300,6 @@ public class CompanyController {
 	public String getJobPostingInterviewerList(String jobPostingNum, Model model) {
 		List<InterviewVO> ivvoList = companyService.getJobPostingInterviewerList(jobPostingNum);
 		if(ivvoList.isEmpty() == false) {
-			List<PortfolioVO> povoList = new ArrayList<PortfolioVO>();
 			List<DevCatVO> dcvoList = new ArrayList<DevCatVO>();
 			List<String> dcnameList = null;
 			List<Map<String, Object>> mapList = new ArrayList<Map<String, Object>>();
@@ -318,7 +317,6 @@ public class CompanyController {
 					map.put("picturePath", povo.getPicturePath());
 				mapList.add(map);
 			}
-			model.addAttribute("povoList", povoList);
 			model.addAttribute("mapList", mapList);
 		}
 		model.addAttribute("ivvoList", ivvoList);
