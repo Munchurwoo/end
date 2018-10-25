@@ -103,7 +103,7 @@ insert into PORTFOLIO(normal_id, title, content, picture_path) values('MCW', '�
 
 select * from portfolio;
 
-update PORTFOLIO set picture_path='miri.png' where normal_id='miri'
+update PORTFOLIO set picture_path='miri.png' where normal_id='miri';
 ---------------------------------------------------------------------
 
 -- 포트폴리오 파일 경로 

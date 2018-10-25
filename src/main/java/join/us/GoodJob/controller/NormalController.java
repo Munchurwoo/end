@@ -1,6 +1,5 @@
 package join.us.GoodJob.controller;
 
-import java.awt.print.Pageable;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,7 +19,6 @@ import org.springframework.web.multipart.MultipartFile;
 import join.us.GoodJob.model.service.CompanyService;
 import join.us.GoodJob.model.service.MemberService;
 import join.us.GoodJob.model.service.NormalService;
-import join.us.GoodJob.model.service.PagingBean;
 import join.us.GoodJob.model.vo.DevCatVO;
 import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.MemberVO;
@@ -259,7 +257,6 @@ public class NormalController {
 			devCatList.add(memberService.getDevCatVOListByNormalId(postListVO.getNmList().get(i).getNormalId()));
 			povo.add(normalService.normalDetailPortfolio(postListVO.getNmList().get(i).getNormalId()));
 		}
-		System.out.println(devCatList.get(2));
 		//페이징처리 
 		model.addAttribute("postListVO",postListVO);
 		//개발분야 출력 
