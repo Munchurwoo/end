@@ -39,9 +39,8 @@ public class SungjinUnitTest {
 		String normalId="hsj";
 		InterviewVO interviewVO=new InterviewVO();
 		interviewVO.setCompanyId(companyId);
-		interviewVO.setJobPostingNum(jobPostingNum);
-		interviewVO.setNormalId(normalId);
-	System.out.println(companyMapper.interviewInfo(interviewVO));
+		
+	System.out.println(companyMapper.getAllInterviewerList(companyId));
 		
 	}
 }

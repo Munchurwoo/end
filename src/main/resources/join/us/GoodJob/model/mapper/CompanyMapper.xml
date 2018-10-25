@@ -253,7 +253,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<resultMap type="interviewVO" id="interviewVORM">
 		<result column="name" property="normalMemberVO.name"/>
-		<result column="normal_id" property="normalMemberVO.id"/> 
+		<result column="normal_id" property="normalMemberVO.normalId"/> 
 	</resultMap>
 	
 	<select id="getAllInterviewerList" resultMap="interviewVORM">
@@ -357,7 +357,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*)
 		from job_posting_keyword where keyword_name like '%'|| #{keyword} ||'%'
 	</select>
-	
+
+	<select id="jobPostingInterviewerTotalCount" parameterType="string" resultType="int">
+		select count(*) from interview where job_posting_num=#{value}
+	</select>
+
 	<select id="findCompanyIdByNum" resultType="interviewVO">
 		select company_id,job_posting_num from job_posting where job_posting_num=#{value}
 	</select>

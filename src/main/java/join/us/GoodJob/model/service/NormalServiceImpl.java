@@ -15,8 +15,8 @@ import join.us.GoodJob.model.mapper.NormalMapper;
 import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PortfolioVO;
-import join.us.GoodJob.model.vo.QuestionAnswerVO;
 import join.us.GoodJob.model.vo.PostListVO;
+import join.us.GoodJob.model.vo.QuestionAnswerVO;
 
 
 @Service
@@ -119,6 +119,7 @@ public class NormalServiceImpl implements NormalService {
 	}
 		
 	public PortfolioVO normalDetailPortfolio(String normalId) {
+		//181025 yosep 포트폴리오 파일 경로 추가
 		return normalMapper.normalDetailPortfolio(normalId);
 	}
 	

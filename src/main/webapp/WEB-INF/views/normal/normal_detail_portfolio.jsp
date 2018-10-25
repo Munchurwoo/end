@@ -150,7 +150,10 @@
 					<!-- <input type="file" name="fileList[0]" >
 					<input type="file" name="fileList[1]" >
 					<input type="file" name="fileList[2]" > -->
-					파일 리스트
+					<c:forEach items="${povo.fileNameList}" var="fileName">
+					<a href="fileDownload.do?fileName=memberPortfolio/${fileName}">${fileName}</a><br>
+					</c:forEach>
+					
 					
 		      	</td>
 		      </tr>
@@ -161,10 +164,12 @@
 	</div>		
 	<h5>내용</h5>
 	<textarea rows="8" cols="90" name="content" readonly="readonly" >${povo.content }</textarea><br>
-	<input type="button" onclick="javascript:location.href='user-updatePortfolioForm.do?id=${requestScope.nmvo.id}'" value="수정">
-	<input type="button" onclick="deletePortfolio('${requestScope.nmvo.id}', '${requestScope.povo.picturePath }')" value="삭제">
+	<!-- 기업회원이 개인포트폴리오 조회시 수정/삭제 할수 없게 if조건 적용 -->
+	<c:if test="${sessionScope.mvo.id==requestScope.nmvo.id}">	
+		<input type="button" onclick="javascript:location.href='user-updatePortfolioForm.do?id=${requestScope.nmvo.id}'" value="수정">
+		<input type="button" onclick="deletePortfolio('${requestScope.nmvo.id}', '${requestScope.povo.picturePath }')" value="삭제">
+	</c:if>	
 </div>	
-		
 	
 
 	

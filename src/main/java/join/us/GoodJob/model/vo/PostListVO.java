@@ -17,21 +17,26 @@ public class PostListVO {
 	
 	//normal 회원 리스트 <다 가지고 올 필요없어서 normal id 값만 불러옴 
 	private List<NormalMemberVO> nmList;
+	
+	//인터뷰 게시물 리스트
+	private List<InterviewVO> ivList;
+	
 	public PostListVO() {
 		super();
 	}
 	public PostListVO(PagingBean pagingBean, List<MemberVO> cmvoList, List<CompanyMemberVO> jobPostingList,
-			List<NormalMemberVO> nmList) {
+			List<NormalMemberVO> nmList, List<InterviewVO> ivList) {
 		super();
 		this.pagingBean = pagingBean;
 		this.cmvoList = cmvoList;
 		this.jobPostingList = jobPostingList;
 		this.nmList = nmList;
+		this.setIvList(ivList);
 	}
 	@Override
 	public String toString() {
 		return "PostListVO [pagingBean=" + pagingBean + ", cmvoList=" + cmvoList + ", jobPostingList=" + jobPostingList
-				+ ", nmList=" + nmList + "]";
+				+ ", nmList=" + nmList + ", ivList=" + ivList + "]";
 	}
 	public PagingBean getPagingBean() {
 		return pagingBean;
@@ -56,5 +61,11 @@ public class PostListVO {
 	}
 	public void setNmList(List<NormalMemberVO> nmList) {
 		this.nmList = nmList;
+	}
+	public List<InterviewVO> getIvList() {
+		return ivList;
+	}
+	public void setIvList(List<InterviewVO> ivList) {
+		this.ivList = ivList;
 	}
 }

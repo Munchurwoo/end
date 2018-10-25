@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 181018 MIRI normal_member picture_path 삭제 -->
 	<select id="selectNormalMember" parameterType="string" resultType="normalMemberVO">
-		select m.id, m.password, m.email, m.name, m.address, m.tel,
+		select m.id, m.password, m.email, m.name, m.address, m.tel,m.member_type,
 		nm.gender, nm.career_status
 		from normal_member nm, member m
 		where nm.normal_id=m.id and m.id=#{normalId}
@@ -93,10 +93,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		normal_id=#{normalId}
 	</select> -->
 	
+	<select id="getPortfolioFileList" resultType="String">
+		select file_path from portfolio_file where normal_id=#{value}
+	</select>
+	
+	<resultMap type="portfolioVO" id="portfolioVORM">
+		<id column="normal_id" property="normalId"/>
+		<collection column="normal_id" property="fileNameList" ofType="String" javaType="java.util.List" select="getPortfolioFileList"></collection>	
+	</resultMap>
+	
 	<!-- 181018 MIRI normalId->value로 수정 -->
-	<select id="normalDetailPortfolio" resultType="portfolioVO" parameterType="string">
+	<!-- 	181025 yosep 포트폴리오 파일 경로 추가 -->	
+	<select id="normalDetailPortfolio" resultMap="portfolioVORM" parameterType="string">
 		select normal_id,title, content, picture_path from portfolio where normal_id=#{value}
 	</select>
+	
+	
+	
 	<select id="getAllPortfolioList" resultType="portfolioVO">
 
 	</select>
