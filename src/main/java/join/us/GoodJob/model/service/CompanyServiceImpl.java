@@ -258,4 +258,10 @@ public class CompanyServiceImpl implements CompanyService {
 		}
 		return postListVO;
 	}
+
+	@Override
+	public List<InterviewVO> getAllInterviewerList2() {
+		
+		return companyMapper.getAllInterviewerList2();
+	}
 }
