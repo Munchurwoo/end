@@ -15,6 +15,7 @@ import join.us.GoodJob.model.mapper.CompanyMapper;
 import join.us.GoodJob.model.service.PagingBean;
 import join.us.GoodJob.model.vo.CatNumParamVO;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
+import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.JobPostingVO;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring-model.xml"})
@@ -33,11 +34,13 @@ public class SungjinUnitTest {
 	CompanyMapper companyMapper;
 	@Test
 	public void test() {
-		PagingBean pagingBean=new PagingBean(4);
-		Map<String,Object> map=new HashMap<String,Object>();
-		map.put("keyword","Java");
-		map.put("pagingBean",pagingBean);
-		System.out.println(companyMapper.findJobPostingBytitle(map));
-		// 리턴타입변경
+		String companyId="NHNuser";
+		String jobPostingNum="1003";
+		String normalId="hsj";
+		InterviewVO interviewVO=new InterviewVO();
+		interviewVO.setCompanyId(companyId);
+		
+	System.out.println(companyMapper.getAllInterviewerList(companyId));
+		
 	}
 }

@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.ui.Model;
 
 import join.us.GoodJob.model.service.PagingBean;
 import join.us.GoodJob.model.vo.InterviewVO;
@@ -92,5 +91,5 @@ public interface NormalMapper {
 	void registerQuestion(QuestionAnswerVO qaVO);
 	
 	//질의응답 나의 질문 리스트
-	List<QuestionAnswerVO> getMyQuestionList(String normalId);
+	List<QuestionAnswerVO> getMyQuestionList(QuestionAnswerVO qaVO);
 }

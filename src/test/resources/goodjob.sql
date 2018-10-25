@@ -195,19 +195,21 @@ select * from job_posting_keyword;
 create table interview(
 	interview_num number primary key,
 	normal_id varchar2(100),
+	company_id varchar2(100),
 	job_posting_num number,
 	title varchar2(100) not null,
 	content varchar2(100) not null,
 	constraint fk_member_interview foreign key(normal_id) references normal_member(normal_id) on delete set null,
-    constraint fk_job_posting_interview_num foreign key(job_posting_num) references job_posting(job_posting_num) on delete cascade
+	constraint fk_comapny foreign key(company_id) references company_member(company_id) on delete set null,
+	constraint fk_job_posting_interview_num foreign key(job_posting_num) references job_posting(job_posting_num) on delete cascade
 );
 create sequence interview_num_seq start with 2001;
 
 
-insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'hsj',1001 ,'면접신청합니다', '언제갈까요?');
-insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'qqqq',1001 ,'면접보러갈게요', '불러주세요~!~!~!');
-insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'miri', 1002,'포트폴리오확인하시고 연락주세요', '내일가겠습니다~');
-insert into interview(interview_num, normal_id, job_posting_num, title, content) values(interview_num_seq.nextval, 'yosep', 1002,'꼭 가고싶습니다~!', '전화번호로 연락주세요~');
+insert into interview(interview_num, normal_id ,job_posting_num, title, content) values(interview_num_seq.nextval, 'hsj',1003 ,'면접신청합니다', '언제갈까요?');
+insert into interview(interview_num, normal_id ,job_posting_num, title, content) values(interview_num_seq.nextval, 'qqqq',1003 ,'면접보러갈게요', '불러주세요~!~!~!');
+insert into interview(interview_num, normal_id ,job_posting_num, title, content) values(interview_num_seq.nextval, 'miri', 1002,'포트폴리오확인하시고 연락주세요', '내일가겠습니다~');
+insert into interview(interview_num, normal_id ,job_posting_num, title, content) values(interview_num_seq.nextval, 'yosep', 1002,'꼭 가고싶습니다~!', '전화번호로 연락주세요~');
 
 
 
@@ -674,18 +676,37 @@ select row_number() over(order by job_posting_num) as rnum ,job_posting_num, com
 from job_posting where title like '%Java%'
 )
 where rnum between 1 and 3
+
+
 -- 키워드로 검색하기
 select
-		job_posting_num,title,company_id,career_status,content
+		job_posting_num,title,company_id,career_status,content,keyword_name
 from(
-select row_number() over(order by k.job_posting_num) as rnum, j.job_posting_num ,j.title,j.company_id,j.career_status,j.content
-from job_posting_keyword k , job_posting j
-where k.job_posting_num = j.job_posting_num
+select row_number() over(order by k.job_posting_num) as rnum, k.job_posting_num ,j.title,j.company_id,j.career_status,j.content,k.keyword_name
+from job_posting j, JOB_POSTING_KEYWORD k
+where j.job_posting_num=k.job_posting_num
 and k.keyword_name like '%워라밸%'
 )
 where rnum between 1 and 3
+
+
 -- 키워드로 검색하기 페이징
 select count(*)
 from job_posting_keyword k , job_posting j
 where k.job_posting_num = j.job_posting_num
 and k.keyword_name like '%수평적문화%'
+<<<<<<< HEAD
+
+-- 기업 마이페이지 -> 면접신청자명단조회 시
+-- 최신순으로 조회하기 위해 rnum 추가했고
+-- 마지막 and 조건절을 넣지 않으면 Tmaxuser 와 NHNuser가 구분되지 않고 그냥 다 나와서 id조건을 주어야함	
+select row_number() over(order by i.interview_num) as rnum ,
+i.interview_num ,i.job_posting_num,i.title , nm.normal_id , cm.company_id , m.name
+from interview i , normal_member nm , company_member cm ,member m
+where i.normal_id = nm.normal_id and i.company_id = cm.company_id and i.normal_id = m.id
+and cm.company_id='NHNuser' 
+order by rnum desc
+
+
+=======
+>>>>>>> branch 'master' of https://github.com/Munchurwoo/goodjob

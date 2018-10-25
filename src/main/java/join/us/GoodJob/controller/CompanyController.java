@@ -278,7 +278,7 @@ public class CompanyController {
 		model.addAttribute("allEmpTypeCatList", memberService.getEmpTypeCatVOList());
 		model.addAttribute("allLocCatList", memberService.getLocCatVOList());
 		model.addAttribute("allAcaCatList", memberService.getAcaCatVOList());
-		model.addAttribute("allJobPostingList", companyService.getAllJobPostingList(pageNum));
+		model.addAttribute("jobPostingList", companyService.getAllJobPostingList(pageNum));
 		//System.out.println(catNumParamVO);
 
 		//카테고리 번호들로 기업 게시글 리스트 불러옴
@@ -289,8 +289,8 @@ public class CompanyController {
 	} 
 	
 	@RequestMapping("getAllInterviewerList.do")
-	public String getAllInterviewerList(Model model) {
-		model.addAttribute("interviewerList", companyService.getAllInterviewerList());
+	public String getAllInterviewerList(Model model, String companyId) {
+		model.addAttribute("interviewerList", companyService.getAllInterviewerList(companyId));
 		return "company/company_InterviewApplyList.tiles2";
 	}
 	
@@ -405,14 +405,16 @@ public class CompanyController {
 			companyService.deleteJobPostingByNum(jobPostingNum);
 		return "redirect:home.do";
 	}
-	@RequestMapping("user-findJobPostingByKeyword.do")
-	public String findJobPostingByKeyword(String keyword,Model model,String pageNum) {
+	@RequestMapping("user-findJobPostingByTitle.do")
+	public String findJobPostingByTitle(String searchText,String searchType,Model model,String pageNum) {
 		model.addAttribute("allRecruitCatList", memberService.getRecruitCatVOList());
 		model.addAttribute("allDevCatList", memberService.getDevCatVOListByrcNum("101"));
 		model.addAttribute("allEmpTypeCatList", memberService.getEmpTypeCatVOList());
 		model.addAttribute("allLocCatList", memberService.getLocCatVOList());
 		model.addAttribute("allAcaCatList", memberService.getAcaCatVOList());
-		PostListVO jobPostingList2 = companyService.findJobPostingBytitle(keyword,pageNum);
+
+		PostListVO jobPostingList2 = companyService.findJobPostingBytitle(searchText,searchType,pageNum);
+
 		System.out.println(jobPostingList2);
 		model.addAttribute("jobPostingList2", jobPostingList2);
 		

@@ -196,14 +196,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		   and jl.job_posting_num=ja.job_posting_num
 		 )
 	
-	<if test="locCatNumList != null">
+	<if test="locCatNumList != null ">
 	where loc_num in
 	<foreach collection="locCatNumList" item="locCatNum" separator="," open="(" close=")">
 		#{locCatNum}
 	</foreach>
 	</if>
 	
-	<if test="devCatNumList != null">
+	<if test="devCatNumList != null ">
 	and dev_cat_num in
 	<foreach collection="devCatNumList" item="devCatNum" separator="," open="(" close=")">
 		#{devCatNum}
@@ -253,15 +253,34 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<resultMap type="interviewVO" id="interviewVORM">
 		<result column="name" property="normalMemberVO.name"/>
-		<result column="normal_id" property="normalMemberVO.id"/> 
+		<result column="normal_id" property="normalMemberVO.normalId"/> 
 	</resultMap>
+	
+	<select id="getAllInterviewerList" resultMap="interviewVORM">
+		select row_number() over(order by i.interview_num) as rnum ,
+		i.interview_num ,i.job_posting_num,i.title ,i.content, nm.normal_id , cm.company_id , m.name
+		from interview i , normal_member nm , company_member cm ,member m
+		where i.normal_id = nm.normal_id and i.company_id = cm.company_id and i.normal_id = m.id
+		and cm.company_id=#{value} 
+		order by rnum desc
+	</select>
+		
+		
 	<!-- 181023 MIRI 반복되는 sql 묶기 -->
 	<sql id="getInterviewerInfo">
 		select i.interview_num,i.job_posting_num,i.title,i.content,nm.normal_id,m.name
 		from interview i, normal_member nm , member m
 		where i.normal_id = nm.normal_id and nm.normal_id = m.id
 	</sql>
-	<select id="getAllInterviewerList" resultMap="interviewVORM">
+	<select id="interviewInfo" resultType="interviewVO" parameterType="interviewVO">
+		select i.interview_num,i.job_posting_num,i.title,i.content,nm.normal_id,cm.company_id
+		from interview i , normal_member nm , company_member cm
+		where i.normal_id = nm.normal_id and i.company_id = cm.company_id
+		and cm.company_id=#{companyId} and i.job_posting_num=#{jobPostingNum}
+		and i.normal_id=#{normalId}
+	</select>
+	
+	<select id="getAllInterviewerList2" resultMap="interviewVORM">
 		<include refid="getInterviewerInfo"/>
 	</select>
 	<select id="getJobPostingInterviewerList" parameterType="string" resultMap="interviewVORM">
@@ -289,32 +308,66 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		delete from job_posting where job_posting_num=#{value}
 	</delete>
 	
+	<!-- 제목으로 구인공고검색 resultMap -->
 	<resultMap type="companyMemberVO" id="companyMemberVORM3">
 		<result column="job_posting_num" property="jobPostingVO.jobPostingNum"/>
 		<result column="career_status" property="jobPostingVO.careerStatus"/>
 		<result column="title" property="jobPostingVO.title"/>
 		<result column="content" property="jobPostingVO.content"/>
 	</resultMap>
-	<select id="findJobPostingBytitle" parameterType="map" resultMap="companyMemberVORM3">
+	<!-- 제목으로 구인공고 검색 -->
+	<select id="findJobPostingBytitle" parameterType="map" resultMap="companyMemberVORM3" >
 		select
-		job_posting_num,company_id,career_status,title,content
+		job_posting_num,title,company_id,career_status,content
 		from(
-		select row_number() over(order by job_posting_num) as rnum ,job_posting_num, company_id,career_status,title,content
-		from job_posting where title like '%'||#{keyword}||'%'
+		select row_number() over(order by job_posting_num) as rnum, job_posting_num ,title,company_id,career_status,content
+		from job_posting 
+		where title like '%'|| #{title} ||'%'
 		)
 		where rnum between #{pagingBean.startRowNumber} and #{pagingBean.endRowNumber}	
 	</select>
 	
-	
+	<!-- 제목으로 구인공고검색 페이징빈 -->
 	<select id="findJobPostingBytitleCount" resultType="int">
 		select count(*)
-		from job_posting where title like '%'||#{keyword}||'%'
+		from job_posting where title like '%'|| #{title} ||'%'
+	</select>
+	<!-- 키워드로 구인공고 검색 resultMap -->
+	<resultMap type="companyMemberVO" id="companyMemberVORM4">
+		<result column="job_posting_num" property="jobPostingVO.jobPostingNum"/>
+		<result column="career_status" property="jobPostingVO.careerStatus"/>
+		<result column="title" property="jobPostingVO.title"/>
+		<result column="content" property="jobPostingVO.content"/>
+		<result column="keyword_name" property="jobPostingVO.keywordName"/>
+	</resultMap>
+	<!-- 키워드로 구인공고 검색 -->
+	<select id="findJobPostingByKeyword" parameterType="map" resultMap="companyMemberVORM4" >
+		select 
+		job_posting_num, title, company_id, career_status, content, keyword_name 
+		from(
+		select row_number() over(order by j.job_posting_num) as rnum, k.job_posting_num, j.title, j.company_id, j.career_status, j.content, k.keyword_name 
+		from job_posting j, job_posting_keyword k
+		where j.job_posting_num = k.job_posting_num 
+		and k.keyword_name like '%'|| #{keyword} ||'%'
+		)
+		where rnum between #{pagingBean.startRowNumber} and #{pagingBean.endRowNumber}	
+	</select>
+	<!-- 키워드로 구인공고 검색 페이징빈 -->
+	<select id="findJobPostingByKeywordCount" resultType="int">
+		select count(*)
+		from job_posting_keyword where keyword_name like '%'|| #{keyword} ||'%'
 	</select>
 	
+<<<<<<< HEAD
 	<select id="jobPostingInterviewerTotalCount" parameterType="string" resultType="int">
 		select count(*) from interview where job_posting_num=#{value}
 	</select>
 	
+=======
+	<select id="findCompanyIdByNum" resultType="interviewVO">
+		select company_id,job_posting_num from job_posting where job_posting_num=#{value}
+	</select>
+>>>>>>> branch 'master' of https://github.com/Munchurwoo/goodjob.git
 </mapper> 		
  
  

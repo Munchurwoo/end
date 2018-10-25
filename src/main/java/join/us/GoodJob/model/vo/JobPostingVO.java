@@ -8,6 +8,7 @@ public class JobPostingVO {
 	private String title;
 	private String careerStatus;
 	private String content;
+	private String keywordName;
 	private List<QuestionAnswerVO> questionAnswerVOList;
 	private List<String> keywordNameList;
 	private List<LocCatVO> locCatVOList;
@@ -24,6 +25,15 @@ public class JobPostingVO {
 		super();
 		
 	}
+	
+	public String getKeywordName() {
+		return keywordName;
+	}
+
+	public void setKeywordName(String keywordName) {
+		this.keywordName = keywordName;
+	}
+
 	public int getJobPostingNum() {
 		return jobPostingNum;
 	}
@@ -158,7 +168,7 @@ public class JobPostingVO {
 				+ ", recruitCatVOList=" + recruitCatVOList + ", empTypeCatVOList=" + empTypeCatVOList
 				+ ", devCatVOList=" + devCatVOList + ", acaCatVOList=" + acaCatVOList + ", locCatNumList="
 				+ locCatNumList + ", recruitCatNumList=" + recruitCatNumList + ", empTypeCatNumList="
-				+ empTypeCatNumList + ", devCatNumList=" + devCatNumList + ", acaCatNumList=" + acaCatNumList + "]";
+				+ empTypeCatNumList + ", devCatNumList=" + devCatNumList + ", acaCatNumList=" + acaCatNumList + " , keywordName="+keywordName + "]";
 	}
 	
 	/**
