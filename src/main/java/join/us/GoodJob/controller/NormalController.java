@@ -422,5 +422,12 @@ public class NormalController {
 			return "normal/normal_my_question.tiles2";
 			
 		}
+		
+		//파일 다운로드 컨트롤러
+		@RequestMapping("fileDownload.do")
+		public String fileDownload(String fileName){		
+			System.out.println(fileName+" download!");
+			return "downloadView";
+		}
 
 }

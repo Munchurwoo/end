@@ -92,4 +92,7 @@ public interface NormalMapper {
 	
 	//질의응답 나의 질문 리스트
 	List<QuestionAnswerVO> getMyQuestionList(String normalId);
+	
+	//개인회원id로 포트폴리오 파일 경로 찾기
+	List<String> getPortfolioFileList(String normalId);
 }

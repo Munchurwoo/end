@@ -150,7 +150,10 @@
 					<!-- <input type="file" name="fileList[0]" >
 					<input type="file" name="fileList[1]" >
 					<input type="file" name="fileList[2]" > -->
-					파일 리스트
+					<c:forEach items="${povo.fileNameList}" var="fileName">
+					<a href="fileDownload.do?fileName=memberPortfolio/${fileName}">${fileName}</a><br>
+					</c:forEach>
+					
 					
 		      	</td>
 		      </tr>

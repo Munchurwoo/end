@@ -64,6 +64,9 @@ public class YosepUnitTest {
 		for(MemberVO memberVO : companyMapper.getAllCompanyList(pagingBean)) {
 			System.out.println(memberVO);
 		}*/
+		String normalId="hsj";
+		//System.out.println(normalMapper.getPortfolioFileList(normalId));
+		System.out.println(normalMapper.normalDetailPortfolio(normalId));
 		
 		
 	}
