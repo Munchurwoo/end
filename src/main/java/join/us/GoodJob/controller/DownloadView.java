@@ -28,12 +28,15 @@ public class DownloadView extends AbstractView{
  @Override
  protected void renderMergedOutputModel(Map<String, Object> map,
    HttpServletRequest request, HttpServletResponse response) throws Exception {
-  String path=request.getSession().getServletContext().getRealPath("/resources/upload/");
+	 //String path=request.getSession().getServletContext().getRealPath("/resources/upload/");
   String filename=request.getParameter("fileName");
-  request.getSession().getServletContext().getRealPath("/resources/upload/");
-  System.out.println("DownloadView 실행 "+path+filename);
+  String foldername=(String) request.getAttribute("foldername");
+//개발시에는 워크스페이스 업로드 경로로 준다
+  String workspaceUploadPath = "C:\\java-kosta\\framework-workspace2\\goodjob\\src\\main\\webapp\\resources\\upload\\";    
+  //request.getSession().getServletContext().getRealPath("/resources/upload/");
+  System.out.println("DownloadView 실행 "+workspaceUploadPath+foldername+"/"+filename);
   // 업로드 파일 객체 
-  File file=new File(path+filename);
+  File file=new File(workspaceUploadPath+foldername+File.pathSeparator+filename);
   // 파일 다운로드 
      response.setContentType(this.getContentType());
      response.setContentLength((int)file.length());//파일 크기 설정 
