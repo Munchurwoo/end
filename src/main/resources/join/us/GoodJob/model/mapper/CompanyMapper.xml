@@ -253,7 +253,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<resultMap type="interviewVO" id="interviewVORM">
 		<result column="name" property="normalMemberVO.name"/>
-		<result column="normal_id" property="normalMemberVO.id"/> 
+		<result column="normal_id" property="normalMemberVO.normalId"/> 
 	</resultMap>
 	
 	<select id="getAllInterviewerList" resultMap="interviewVORM">

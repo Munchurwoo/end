@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 181018 MIRI normal_member picture_path 삭제 -->
 	<select id="selectNormalMember" parameterType="string" resultType="normalMemberVO">
-		select m.id, m.password, m.email, m.name, m.address, m.tel,
+		select m.id, m.password, m.email, m.name, m.address, m.tel,m.member_type,
 		nm.gender, nm.career_status
 		from normal_member nm, member m
 		where nm.normal_id=m.id and m.id=#{normalId}
@@ -236,7 +236,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 </select>
 	 
 	 <select id="getMyQuestionList" resultType="questionAnswerVO" parameterType="string">
-		select question,answer from question_answer
-		where normal_id=#{normalId}
+		select qa.question,qa.answer,jm.name,jm.title,qa.normal_id,qa.job_posting_num
+		from (select jp.job_posting_num,m.name,jp.title from job_posting jp,member m where jp.company_id=m.id) jm, question_answer qa
+		where qa.job_posting_num=jm.job_posting_num
+		and qa.normal_id=#{normalId}
+		
 	</select>
 </mapper>

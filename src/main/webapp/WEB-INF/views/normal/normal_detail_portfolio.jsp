@@ -167,8 +167,48 @@
 	<input type="button" onclick="javascript:location.href='user-updatePortfolioForm.do?id=${requestScope.nmvo.id}'" value="수정">
 	<input type="button" onclick="deletePortfolio('${requestScope.nmvo.id}', '${requestScope.povo.picturePath }')" value="삭제">
 </div>	
-		
-	
+	<table class="table table-bordered">
+		<colgroup>
+		        <col width="92px">
+		       <%--  <col width="320px"> --%>
+		      </colgroup>
+		<tbody>
+		  <tr height="50px">
+		      	<th>모집직군</th>
+		        <td>
+					<%-- <c:forEach items="${requestScope.recruitCatList}" var="recruitCat" varStatus="i" >
+						<input type="checkbox" class = "recruit" name="recruitCatNumList" value="${recruitCat.rcNum}" >${recruitCat.rcName}  &thinsp;&thinsp;
+						<c:if test="${(i.index+1)%4==0}">
+							<br>
+						</c:if>
+					</c:forEach> --%>
+					<c:forEach items="${recruitCatList}" var="recruitCatList">
+					${recruitCatList.rcName }
+					</c:forEach>
+		        </td>      
+		      </tr>
+		      
+		      <tr height="50px" >
+		        <th>개발분야</th>
+		        <td style="padding-top:5px;">
+		        	<!-- <div id="empTypeArea">		
+					</div>		 -->	
+					<c:forEach items="${devCatList }" var="devCatList">
+					${devCatList.devCatName }
+					</c:forEach>							
+		        </td>        
+		      </tr>      
+		      </tbody>
+	</table>
+	<br><br>
+	<textarea rows="8" cols="90" name="content" readonly="readonly" value="${povo.content }"></textarea><br><br>
+	</div>	
+	<!-- 기업회원이 개인포트폴리오 조회시 수정/삭제 할수 없게 if조건 적용 -->
+	<c:if test="${sessionScope.mvo.id==requestScope.nmvo.id}">
+		<input type="button" onclick="javascript:location.href='user-updatePortfolioForm.do?id=${requestScope.nmvo.id}'" value="수정하기">
+		<input type="button" onclick="deletePortfolio('${requestScope.nmvo.id}', '${requestScope.povo.picturePath }')" value="삭제하기">
+	</c:if>
+	<button type="reset" onclick="location.href='home.do'">홈으로</button>
 
 	
 
