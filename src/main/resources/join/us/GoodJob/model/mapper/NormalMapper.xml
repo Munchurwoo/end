@@ -19,7 +19,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<!-- 181018 MIRI normal_member picture_path 삭제 -->
 	<select id="selectNormalMember" parameterType="string" resultType="normalMemberVO">
-		select m.id, m.password, m.email, m.name, m.address, m.tel,
+		select m.id, m.password, m.email, m.name, m.address, m.tel,m.member_type,
 		nm.gender, nm.career_status
 		from normal_member nm, member m
 		where nm.normal_id=m.id and m.id=#{normalId}

@@ -217,9 +217,11 @@
 	<br><br>
 	<textarea rows="8" cols="90" name="content" readonly="readonly" value="${povo.content }"></textarea><br><br>
 	</div>	
+	<!-- 기업회원이 개인포트폴리오 조회시 수정/삭제 할수 없게 if조건 적용 -->
+	<c:if test="${sessionScope.mvo.id==requestScope.nmvo.id}">
 		<input type="button" onclick="javascript:location.href='user-updatePortfolioForm.do?id=${requestScope.nmvo.id}'" value="수정하기">
 		<input type="button" onclick="deletePortfolio('${requestScope.nmvo.id}', '${requestScope.povo.picturePath }')" value="삭제하기">
-	
+	</c:if>
 	<button type="reset" onclick="location.href='home.do'">홈으로</button>	
 
 	
