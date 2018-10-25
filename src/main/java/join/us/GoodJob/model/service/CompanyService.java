@@ -51,7 +51,7 @@ public interface CompanyService {
 	//구인등록 181023 MIRI가 만든것 재사용 포트폴리오 등록/수정 동시에 활용하기위해 flag를 줌
 	void registerJobPosting(JobPostingVO jobPostingVO,boolean registerFlag);
 	// 면접신청자 전체 조회
-	List<InterviewVO> getAllInterviewerList();
+	List<InterviewVO> getAllInterviewerList(String companyId);
 	//구인 공고별 질답 리스트
 	List<QuestionAnswerVO> getJobPostingQAList(String jobPostingNum);
 	// 채용정보 페이징처리
@@ -68,8 +68,7 @@ public interface CompanyService {
 
 	void deleteJobPostingByNum(int jobPostingNum);
 
-
-	PostListVO findJobPostingBytitle(String keyword, String pageNum);
+	PostListVO findJobPostingBytitle(String title,String keyword, String pageNum);
 
 
 	void updateQAToAnswer(QuestionAnswerVO qavo);

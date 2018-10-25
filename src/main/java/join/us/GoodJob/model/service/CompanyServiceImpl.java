@@ -90,6 +90,7 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	public PostListVO getAllJobPostingList(String pageNum) {
 			PagingBean pagingBean;
+			System.out.println("전체구인공고 조회시 pageNum : "+pageNum);
 			int totalJobPostingCount=companyMapper.getAlljobPostingCount();
 			if (pageNum != null) { // 페이지 번호 주면
 				pagingBean = new PagingBean(totalJobPostingCount, Integer.parseInt(pageNum));
@@ -192,8 +193,8 @@ public class CompanyServiceImpl implements CompanyService {
 		return companyMapper.getJobPostingQAByQANum(qaNum);
 	}
 
-	public List<InterviewVO> getAllInterviewerList() {
-		return companyMapper.getAllInterviewerList();
+	public List<InterviewVO> getAllInterviewerList(String companyId) {
+		return companyMapper.getAllInterviewerList(companyId);
 	}
 
 	@Override
@@ -212,23 +213,45 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	public PostListVO findJobPostingBytitle(String keyword,String pageNum) {
-		PagingBean pagingBean;
-		int totalJobPostingCount=companyMapper.findJobPostingBytitleCount(keyword);
-		if (pageNum != null) { // 페이지 번호 주면
-			pagingBean = new PagingBean(totalJobPostingCount, Integer.parseInt(pageNum));
-		} else { // 페이지 번호 안주면 1페이지
-			pagingBean = new PagingBean(totalJobPostingCount);
-		}
-		Map<String,Object> map=new HashMap<String,Object>();
-		map.put("keyword",keyword);
-		map.put("pagingBean",pagingBean);
-		System.out.println("서비스임플 타이틀:"+map);
-		List<CompanyMemberVO> jobPostingList = companyMapper.findJobPostingBytitle(map);
-		
+	public PostListVO findJobPostingBytitle(String searchText,String searchType,String pageNum) {
+		PagingBean pagingBean;	
 		PostListVO postListVO=new PostListVO();
-		postListVO.setJobPostingList(jobPostingList);
-		postListVO.setPagingBean(pagingBean);
+		Map<String,Object> map=new HashMap<String,Object>();
+
+		System.out.println("검색조건 : "+searchType);
+		if(searchType.equals("title")) {
+			System.out.println("타이틀로 찾기 실행");
+			int totalJobPostingCount=companyMapper.findJobPostingBytitleCount(searchText);
+			if (pageNum != null) { // 페이지 번호 주면
+				pagingBean = new PagingBean(totalJobPostingCount, Integer.parseInt(pageNum));
+			} else { // 페이지 번호 안주면 1페이지
+				pagingBean = new PagingBean(totalJobPostingCount);
+			}
+				map.put("title",searchText);
+				map.put("pagingBean",pagingBean);
+				System.out.println("서비스임플/받아온 searchText:"+map);
+				List<CompanyMemberVO> jobPostingList = companyMapper.findJobPostingBytitle(map);
+				postListVO.setJobPostingList(jobPostingList);
+				postListVO.setPagingBean(pagingBean);
+				System.out.println("postListVO : "+postListVO);
+				return postListVO;
+	
+		}else if(searchType.equals("keyword")){
+			System.out.println("키워드로 찾기 실행");
+			int totalJobPostingCount = companyMapper.findJobPostingByKeywordCount(searchText);
+			if (pageNum != null) { // 페이지 번호 주면
+				pagingBean = new PagingBean(totalJobPostingCount, Integer.parseInt(pageNum));
+			} else { // 페이지 번호 안주면 1페이지
+				pagingBean = new PagingBean(totalJobPostingCount);
+			}
+			map.put("keyword",searchText);
+			map.put("pagingBean",pagingBean);
+			System.out.println("서비스임플/받아온 searchText:"+map);
+			List<CompanyMemberVO> jobPostingList = companyMapper.findJobPostingByKeyword(map);
+			postListVO.setJobPostingList(jobPostingList);
+			postListVO.setPagingBean(pagingBean);
+
+		}
 		return postListVO;
 	}
 

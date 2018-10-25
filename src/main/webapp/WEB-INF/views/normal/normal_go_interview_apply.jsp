@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 	<c:choose>
 		<c:when test="${sessionScope.mvo==null}">
 		</c:when>
 		<c:otherwise>
-			<form action="submitInterviewForm.do?id=normalId">
-				<input type="hidden" name="jobPostingNum" value="${requestScope.jobPostingNum}">
+			<form action="submitInterviewForm.do">
+				<input type="hidden" name="jobPostingNum" value="${requestScope.jobPosting.jobPostingNum}">
+				<input type="hidden" name="companyId" value="${requestScope.jobPosting.companyId}">
 				<input type="hidden" name="normalId" value="${sessionScope.mvo.id}"> 제목 <input
 					type="text" name="title" placeholder="제목을 입력하세요."
 					required="required"> <br>

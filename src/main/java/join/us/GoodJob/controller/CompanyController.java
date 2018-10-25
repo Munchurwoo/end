@@ -266,11 +266,11 @@ public class CompanyController {
 	@RequestMapping("user-company_detail_search_list.do")
 	public String findJobPostingByCatNumList(Model model, CatNumParamVO catNumParamVO,String pageNum) {
 		// 아래 6줄은 상세조건 폼
-		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
-		model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));
-		model.addAttribute("empTypeCatList", memberService.getEmpTypeCatVOList());
-		model.addAttribute("locCatList", memberService.getLocCatVOList());
-		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
+		model.addAttribute("allRecruitCatList", memberService.getRecruitCatVOList());
+		model.addAttribute("allDevCatList", memberService.getDevCatVOListByrcNum("101"));
+		model.addAttribute("allEmpTypeCatList", memberService.getEmpTypeCatVOList());
+		model.addAttribute("allLocCatList", memberService.getLocCatVOList());
+		model.addAttribute("allAcaCatList", memberService.getAcaCatVOList());
 		model.addAttribute("jobPostingList", companyService.getAllJobPostingList(pageNum));
 		//System.out.println(catNumParamVO);
 
@@ -282,8 +282,8 @@ public class CompanyController {
 	} 
 	
 	@RequestMapping("getAllInterviewerList.do")
-	public String getAllInterviewerList(Model model) {
-		model.addAttribute("interviewerList", companyService.getAllInterviewerList());
+	public String getAllInterviewerList(Model model, String companyId) {
+		model.addAttribute("interviewerList", companyService.getAllInterviewerList(companyId));
 		return "company/company_InterviewApplyList.tiles2";
 	}
 	/**
@@ -371,14 +371,14 @@ public class CompanyController {
 			companyService.deleteJobPostingByNum(jobPostingNum);
 		return "redirect:home.do";
 	}
-	@RequestMapping("user-findJobPostingByKeyword.do")
-	public String findJobPostingByKeyword(String keyword,Model model,String pageNum) {
+	@RequestMapping("user-findJobPostingByTitle.do")
+	public String findJobPostingByTitle(String searchText,String searchType,Model model,String pageNum) {
 		model.addAttribute("allRecruitCatList", memberService.getRecruitCatVOList());
 		model.addAttribute("allDevCatList", memberService.getDevCatVOListByrcNum("101"));
 		model.addAttribute("allEmpTypeCatList", memberService.getEmpTypeCatVOList());
 		model.addAttribute("allLocCatList", memberService.getLocCatVOList());
 		model.addAttribute("allAcaCatList", memberService.getAcaCatVOList());
-		PostListVO jobPostingList2 = (PostListVO) companyService.findJobPostingBytitle(keyword,pageNum);
+		PostListVO jobPostingList2 = companyService.findJobPostingBytitle(searchText,searchType,pageNum);
 		System.out.println(jobPostingList2);
 		model.addAttribute("jobPostingList2", jobPostingList2);
 		

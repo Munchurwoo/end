@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import join.us.GoodJob.model.mapper.CompanyMapper;
 import join.us.GoodJob.model.service.MemberService;
 import join.us.GoodJob.model.service.NormalService;
 import join.us.GoodJob.model.vo.DevCatVO;
@@ -30,7 +31,9 @@ public class NormalController {
 	NormalService normalService;
 	@Resource
 	MemberService memberService;
-
+	
+	@Resource
+	CompanyMapper companyMapper;
 	// private String serverUploadPath; //삭제하지마 ㅠㅠ
 	private String workspaceUploadPath;
 	private String workspaceDeletePath;
@@ -326,18 +329,6 @@ public class NormalController {
 
 		return "redirect:home.do";
 	}
-
-	/**
-	 * 2018-10-19 성진 구인공고 조회 후 면접신청 폼으로 이동하기
-	 * 
-	 * @return
-	 */
-	@RequestMapping("goInterviewApply.do")
-	public String goInterviewApply(Model model,String jobPostingNum) {
-		System.out.println("구인공고 "+jobPostingNum+"번 글에 면접신청합니다.");
-		model.addAttribute("jobPostingNum", jobPostingNum);
-		return "normal/normal_go_interview_apply.tiles2";
-	}
 	
 	/**
 	 * 181021 yosep 이력서 등록 폼에서 X버튼클릭시 사진 삭제
@@ -384,5 +375,16 @@ public class NormalController {
 		public String submitInterviewForm(InterviewVO interviewVO) {
 			normalService.interviewApply(interviewVO);
 			return "redirect:home.do";
+		}
+		/**
+		 * 2018-10-19 성진 구인공고 조회 후 면접신청 폼으로 이동하기
+		 * 
+		 * @return
+		 */
+		@RequestMapping("goInterviewApply.do")
+		public String goInterviewApply(Model model,String jobPostingNum) {
+			System.out.println(companyMapper.findCompanyIdByNum(jobPostingNum));
+			model.addAttribute("jobPosting", companyMapper.findCompanyIdByNum(jobPostingNum));
+			return "normal/normal_go_interview_apply.tiles2";
 		}
 }

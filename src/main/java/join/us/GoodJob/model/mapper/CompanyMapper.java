@@ -95,7 +95,7 @@ public interface CompanyMapper {
 	//구인공고 상세보기
 	CompanyMemberVO jobPostingDetail(String jobPostingNum);
 	// 면접신청자 조회 ->
-	List<InterviewVO> getAllInterviewerList();
+	List<InterviewVO> getAllInterviewerList(String companyId);
 	//구인공고 키워드 등록	
 	// 헤더/채용정보 페이징처리
 	int getAlljobPostingCount();
@@ -109,8 +109,17 @@ public interface CompanyMapper {
 	void deleteJobPostingMulti(int jobPostingNum);
 	// 구인공고 삭제
 	void deleteJobPostingByNum(int jobPostingNum);
+	// 제목으로 구인공고 검색
 	List<CompanyMemberVO> findJobPostingBytitle(Map<String, Object> map);
-	int findJobPostingBytitleCount(String keyword);
+	// 제목으로 구인공고 검색 페이징빈
+	int findJobPostingBytitleCount(String title);
+	// 키워드로 구인공고 검색 페이징빈
+	int findJobPostingByKeywordCount(String searchText);
+	// 키워드로 구인공고 검색
+	List<CompanyMemberVO> findJobPostingByKeyword(Map<String, Object> map);
+	// 구인공고번호로 기업아이디 찾기
+		InterviewVO findCompanyIdByNum(String jobPostingNum);
+	
 	
 	
 	//구인 분류 등록	

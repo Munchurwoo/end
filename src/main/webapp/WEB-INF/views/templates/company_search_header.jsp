@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
   <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+  <body> <!--나중에 바디 지우기  -->
 	<script type="text/javascript">	
 	$(document).ready(function(){	
-		
 		$("input[name='recruitCatNumList']").change(function() {
 			$("#empTypeArea").html('');
 			var dataString='';				
@@ -24,8 +24,26 @@
 				}//success					
 			});//ajax 			
 		});//change
+		
+		/* $("#searchBtn").click(function() {
+				var search = $("#search").val();
+				var message= $(":input[name=message]:checked").val();
+					alert(search);
+						alert(message);
+						alert($("#searchForm").serialize());
+				  $.ajax({
+						type : "get",
+						url : "",
+						data : $("#searchForm").serialize(),
+						success:function(result){
+							alert(result);
+						}
+					});
+		});//click */
+		
 	});//ready
 </script>
+</body> <!-- 나중에 바디 지우기 -->
 
 <div class="row">
 	<div class="col-lg-12">
@@ -75,10 +93,11 @@
 	<button type="reset" onclick="location.href='home.do'">홈으로</button>	
 </form>
 <br>
-				<form action="user-findJobPostingByKeyword.do">
-					<input type="text" name="keyword" required="required">
-					
-					<button type="submit">키워드로 검색하기</button>
+				<form action="user-findJobPostingByTitle.do" >
+					<input type="radio" name="searchType" value="keyword">키워드 
+					<input type="radio" name="searchType" value="title">제목
+					<input type="text" name="searchText" required="required">
+					<input type="submit" id="searchBtn" value="검색하기">
 				</form>
 			</div>
 		</div>
@@ -88,3 +107,4 @@
 		</div>
 	</div>
 </div>
+

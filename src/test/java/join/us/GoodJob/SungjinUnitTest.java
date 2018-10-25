@@ -33,11 +33,12 @@ public class SungjinUnitTest {
 	CompanyMapper companyMapper;
 	@Test
 	public void test() {
-		PagingBean pagingBean=new PagingBean(4);
+		PagingBean pagingBean= new PagingBean(2);
 		Map<String,Object> map=new HashMap<String,Object>();
-		map.put("keyword","Java");
+		map.put("keyword", null);
+		map.put("title", "Java");
 		map.put("pagingBean",pagingBean);
 		System.out.println(companyMapper.findJobPostingBytitle(map));
-		// 리턴타입변경
+		
 	}
 }

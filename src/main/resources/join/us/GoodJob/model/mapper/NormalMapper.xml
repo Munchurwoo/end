@@ -206,7 +206,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<insert id="interviewApply" parameterType="interviewVO">
-		insert into interview(interview_num, normal_id, job_posting_num, title, content) 
-		values (interview_num_seq.nextval, #{normalId},#{jobPostingNum},#{title},#{content})
+		insert into interview(interview_num, normal_id,company_id ,job_posting_num, title, content) 
+		values (interview_num_seq.nextval,#{normalId},#{companyId},#{jobPostingNum},#{title},#{content})
 	</insert>
 </mapper>
