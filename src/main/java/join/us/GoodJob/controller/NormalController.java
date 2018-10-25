@@ -416,9 +416,13 @@ public class NormalController {
 		
 		//질의응답 나의질문리스트 
 		@RequestMapping("getMyQuestionList.do")
-		public String getMyQuestionList(String normalId,Model model) {
-			List<QuestionAnswerVO> qavo=normalService.getMyQuestionList(normalId);
+		public String getMyQuestionList(Model model,QuestionAnswerVO qaVO,HttpSession session) {			
+			MemberVO mvo = (MemberVO) session.getAttribute("mvo");
+			qaVO.setJobPostingNum(mvo.getId());
+			qaVO.setNormalId(mvo.getId());
+			List<QuestionAnswerVO> qavo=normalService.getMyQuestionList(qaVO);
 			model.addAttribute("qavo", qavo);
+	
 			return "normal/normal_my_question.tiles2";
 			
 		}

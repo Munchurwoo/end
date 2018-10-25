@@ -66,10 +66,8 @@
 
 	<h5>제목</h5>
 	 <input size="90px"  height="50px" type="text" name="title" value="${povo.title }" readonly="readonly"><br>
-	
-	<div>
 	<br>
-	
+	<div>	
 		<div style="float:left; width:180px;">
 			<h5>사진</h5>	
 			 <div class="resume_photo" style="width:120px;">
@@ -103,10 +101,7 @@
 		      
 		      <tr>
 		        <th>지역</th>	
-		        <td colspan="3">
-		        	<%-- <c:forEach items="${requestScope.locCatList}" var="locCat" varStatus="i">
-						<input type="checkbox" name="locCatNumList" value="${locCat.locNum}" >${locCat.locName}&nbsp;
-					</c:forEach> --%>
+		        <td colspan="3">		        	
 					<c:forEach items="${locCatList }" var="locCatList">
 					${locCatList.locName }&nbsp;/ 
 					</c:forEach>
@@ -115,11 +110,7 @@
 		      
 		      <tr>
 		        <th>학력</th>
-		        <td colspan="3">
-		        <%-- 	<c:forEach items="${requestScope.acaCatList}" var="acaCat" varStatus="i">	
-						<input type="radio" name="acaCatNumList" value="${acaCat.academicNum}" required="required">${acaCat.academicName}&nbsp;
-					</c:forEach>  --%>
-					
+		        <td colspan="3">					
 					<c:forEach items="${acaCatList }" var="acaCatList">
 					${acaCatList.academicName }&nbsp;/ 
 					</c:forEach>
@@ -167,20 +158,12 @@
 		    
 		    </tbody>
 		</table>	
-	</div>
-	<div>
-	<h5>제목</h5>
-	
-	
-
-	
+	</div>		
 	<h5>내용</h5>
-	<textarea rows="8" cols="90" name="content" readonly="readonly" value=""></textarea><br><br>
-	
-	</div>
-		
-	
-	
+	<textarea rows="8" cols="90" name="content" readonly="readonly" >${povo.content }</textarea><br>
+	<input type="button" onclick="javascript:location.href='user-updatePortfolioForm.do?id=${requestScope.nmvo.id}'" value="수정">
+	<input type="button" onclick="deletePortfolio('${requestScope.nmvo.id}', '${requestScope.povo.picturePath }')" value="삭제">
+</div>	
 	<table class="table table-bordered">
 		<colgroup>
 		        <col width="92px">
@@ -222,7 +205,7 @@
 		<input type="button" onclick="javascript:location.href='user-updatePortfolioForm.do?id=${requestScope.nmvo.id}'" value="수정하기">
 		<input type="button" onclick="deletePortfolio('${requestScope.nmvo.id}', '${requestScope.povo.picturePath }')" value="삭제하기">
 	</c:if>
-	<button type="reset" onclick="location.href='home.do'">홈으로</button>	
+	<button type="reset" onclick="location.href='home.do'">홈으로</button>
 
 	
 
