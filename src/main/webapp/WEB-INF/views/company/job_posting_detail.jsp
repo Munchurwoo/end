@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript">
 $(document).ready(function(){	
+	$("#detail").hide();
 	var jobPostingNum=${jpvo.jobPostingVO.jobPostingNum};
 	$("#registerQuestionBtn").click(function(){
 		 $.ajax({
@@ -138,9 +139,22 @@ $(document).ready(function(){
 	</tr>
 	
 	<tr>
-	<th colspan="2" id="questionTable">질의응답</th>
+	<th colspan="2" id="questionTable"><a href="##">질의응답</a></th>
 	</tr>	
-	
+	<tr>
+	<th colspan="2">
+	<c:choose>
+<c:when test="${sessionScope.mvo.memberType==1}">
+
+		<input type="text" name="questionArea" id="questionArea" required="required"  style="height:30px; width:500px;">
+		<input type="hidden" name="jobPostingNum" id="jobPostingNum">
+		<input type="button" value="질문등록" id="registerQuestionBtn" name="registerQuestionBtn">
+		</c:when>
+		<c:otherwise>		
+		</c:otherwise>
+		</c:choose>
+<th>
+	</tr>
 		
 		<tr><td colspan="2" id="detail">
 		<c:forEach items="${qaList}" var="qaList">질문 : ${qaList.question }<br>답 : ${qaList.answer }<br><br></c:forEach></td></tr>
@@ -148,18 +162,6 @@ $(document).ready(function(){
 
 	</tbody>
 </table>
-<c:choose>
-<c:when test="${sessionScope.mvo.memberType==1}">
-<!-- <form id="registerQuestion">
- -->		<input type="text" name="questionArea" id="questionArea" required="required">
-		<input type="hidden" name="jobPostingNum" id="jobPostingNum">
-		<input type="button" value="질문등록" id="registerQuestionBtn" name="registerQuestionBtn">
-<!-- 		</form>
- -->		</c:when>
-		<c:otherwise>
-		
-		</c:otherwise>
-</c:choose>
 </div>
 <!-- 세션에 있는 회원이 normalMember 이면 면접신청 을 할수있는 기능을 추가하려고 함 -->
 <c:choose>
