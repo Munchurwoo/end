@@ -89,7 +89,7 @@ public class CompanyController {
 	@PostMapping("updateCompanyMember.do")
 	public String updateCompanyMember(CompanyMemberVO companyMemberVO) {
 		companyService.updateCompanyMember(companyMemberVO);
-		return "redirect:home.do";
+		return "redirect:company_mypage.do";
 	}
 	@ResponseBody
 	@PostMapping("user-updateCompanyLogo.do")
@@ -163,7 +163,7 @@ public class CompanyController {
 		//jobPostingVO.setJobPostingNum(jobPostingVO.getJobPostingNum());
 		System.out.println(jobPostingVO);
 		companyService.registerJobPosting(jobPostingVO,true);
-		return "redirect:home.do";
+		return "redirect:job_posting_detail.do?jobPostingNum="+jobPostingVO.getJobPostingNum();
 	}
 
 

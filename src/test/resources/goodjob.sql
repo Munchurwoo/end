@@ -190,7 +190,7 @@ insert into JOB_POSTING_KEYWORD(job_posting_num, keyword_name) values(1002, '열
 insert into JOB_POSTING_KEYWORD(job_posting_num, keyword_name) values(1002, '수평적 문화');
 insert into JOB_POSTING_KEYWORD(job_posting_num, keyword_name) values(1002, '야근 없음');
 
-select * from job_posting_keyword;
+select * from interview;
 ---------------------------------------------------------------------
 create table interview(
 	interview_num number primary key,
@@ -364,7 +364,7 @@ create table job_loc(
    constraint pk_jobposting_jobloc primary key(loc_num,job_posting_num)
 );
 
-insert into JOB_LOC(job_posting_num, loc_num) values(1001, 501);
+insert into JOB_LOC(job_posting_num, loc_num) values(1003, 501);
 insert into JOB_LOC(job_posting_num, loc_num) values(1002, 502);
 
 select * from job_loc;

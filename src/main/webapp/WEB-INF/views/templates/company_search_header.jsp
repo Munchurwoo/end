@@ -23,11 +23,19 @@
 				}//success					
 			});//ajax 			
 		});//change
+		
+		$("#SearchBtn").click(function(){
+			$("#master").submit();
+		});
+		
 	});//ready
+	
+	
+	
 </script>
 
 
-<div class="row">
+<%-- <div class="row">
 	<div class="col-lg-12">
 		<div class="row">
 			<h4 class="heading">
@@ -88,4 +96,97 @@
 
 		</div>
 	</div>
+</div> --%>
+
+<div class="cta-text">
+	<h2>
+		<span>GoodJob</span> 채용 정보 검색
+	</h2>
+</div>
+<div class="container"
+	style="padding-left: 120px; padding-right: 120px;">
+	<form action="user-portfolioSearchList.do" method="get"
+		id="master">
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">지역</h3>
+			</div>
+			<div class="panel-body">
+				<c:forEach items="${requestScope.allLocCatList}" var="locCat"
+					varStatus="i">
+					<input type="checkbox" id="locCatNumList" name="locCatNumList"
+						value="${locCat.locNum}">${locCat.locName}&nbsp;
+				</c:forEach>
+			</div>
+		</div>
+
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">학력</h3>
+			</div>
+			<div class="panel-body">
+				<c:forEach items="${requestScope.allAcaCatList}" var="acaCat"
+					varStatus="i">
+					<input type="checkbox" id="acaCatNumList" name="acaCatNumList"
+						value="${acaCat.academicNum}" required="required">${acaCat.academicName}&nbsp;
+	</c:forEach>
+			</div>
+		</div>
+
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">고용 형태</h3>
+			</div>
+			<div class="panel-body">
+				<c:forEach items="${requestScope.allEmpTypeCatList}" var="empTypeCat"
+					varStatus="i">
+					<input type="checkbox" name="empTypeCatNumList"
+						id="empTypeCatNumList" value="${empTypeCat.empTypeNum}">${empTypeCat.empTypeName}&nbsp;
+	</c:forEach>
+			</div>
+		</div>
+
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">모집 직군</h3>
+			</div>
+			<div class="panel-body">
+				<c:forEach items="${requestScope.allRecruitCatList}" var="recruitCat"
+					varStatus="i">
+					<input type="checkbox" class="recruit" name="recruitCatNumList"
+						id="recruitCatNumList" value="${recruitCat.rcNum}">${recruitCat.rcName}  &thinsp;&thinsp;
+			<c:if test="${(i.index+1)%3==0}">
+						<br>
+					</c:if>
+				</c:forEach>
+			</div>
+		</div>
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<h3 class="panel-title">개발 분야</h3>
+			</div>
+			<div class="panel-body">
+				<input type="hidden" name="a" value="b">
+				<div id="empTypeArea"></div>
+
+			</div>
+		</div>
+	<span id="enter"></span>
+	<div class="cta-text">
+		<button type="reset" class="btn btn-default" id="reset">초기화</button>
+
+		<button type="submit" id="SearchBtn" class="btn btn-default">상세
+			검색</button>
+		<button type="reset" onclick="location.href='home.do'"
+			class="btn btn-default">홈으로</button>
+	</div>
+	</form>
+	
+	<form action="user-findJobPostingByTitle.do" >
+		<input type="radio" name="searchType" value="keyword">키워드 
+		<input type="radio" name="searchType" value="title">제목
+		<input type="text" name="searchText" required="required">
+		<input type="submit" id="searchBtn" value="검색하기">
+	</form>
+
 </div>

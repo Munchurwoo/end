@@ -84,12 +84,12 @@
 			<span id="passwordView"> </span><br><br>
 			비밀번호 확인  <input type="password" id="checkPass" name="checkPass" required="required"style="height:40px; width:500px;"><br>
 			<span id="checkPassView"> </span><br><br>
-			이메일 주소 * <input type="text" value="${requestScope.nmvo.email }" name="email" required="required"><br><br>
-			이름 * <input type="text" value="${requestScope.nmvo.name }" name="name" readonly="readonly"><br><br>
-			주소 * <input type="text" value="${requestScope.nmvo.address }" name="address" required="required"><br><br>
-			연락처 * <input type="text" value="${requestScope.nmvo.tel }" name="tel" required="required"><br><br>
-			경력사항 * <input type="text" value="${requestScope.nmvo.careerStatus }" name="careerStatus" required="required"><br><br>
-			성별 * &nbsp;
+			이메일 주소  <input type="text" value="${requestScope.nmvo.email }" name="email" required="required"><br><br>
+			이름  <input type="text" value="${requestScope.nmvo.name }" name="name" readonly="readonly"><br><br>
+			주소  <input type="text" value="${requestScope.nmvo.address }" name="address" required="required"><br><br>
+			연락처  <input type="text" value="${requestScope.nmvo.tel }" name="tel" required="required"><br><br>
+			경력사항  <input type="text" value="${requestScope.nmvo.careerStatus }" name="careerStatus" required="required"><br><br>
+			성별  &nbsp;
 			<input type="radio" name="gender" value="male" disabled="disabled">남자 &nbsp;&nbsp;&nbsp;&nbsp;
 		    <input type="radio" name="gender" value="female" disabled="disabled">여자<br><br>
 		</div>
