@@ -150,12 +150,12 @@ $(document).ready(function(){
 </table>
 <c:choose>
 <c:when test="${sessionScope.mvo.memberType==1}">
-<form id="registerQuestion">
-		<input type="text" name="questionArea" id="questionArea" required="required">
+<!-- <form id="registerQuestion">
+ -->		<input type="text" name="questionArea" id="questionArea" required="required">
 		<input type="hidden" name="jobPostingNum" id="jobPostingNum">
 		<input type="button" value="질문등록" id="registerQuestionBtn" name="registerQuestionBtn">
-		</form>
-		</c:when>
+<!-- 		</form>
+ -->		</c:when>
 		<c:otherwise>
 		
 		</c:otherwise>

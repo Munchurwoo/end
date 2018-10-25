@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.ui.Model;
 
 import join.us.GoodJob.model.service.PagingBean;
 import join.us.GoodJob.model.vo.InterviewVO;

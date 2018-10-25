@@ -12,11 +12,10 @@
 <c:forEach items="${requestScope.interviewerList}" var="ivList">
 <tr>
 <td>${ivList.interviewNum}</td>
-<td><a href="normalDetailPortfolio.do?normalId=${ivList.normalMemberVO.id}">${ivList.title}</a></td>
+<td><a href="normalDetailPortfolio.do?jobPostingNum=${ivList.jobPostingNum}&normalId=${ivList.normalMemberVO.id}&companyId=${ivList.companyId}">${ivList.title}</a></td>
 <td>${ivList.normalMemberVO.name}</td>
 </tr>
 </c:forEach>
 </tbody>	
 </table>
 </div>
-포트폴리오 상세보기로 보내낼때 사진경로 불러오기 추가해야함

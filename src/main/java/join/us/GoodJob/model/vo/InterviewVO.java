@@ -3,6 +3,7 @@ package join.us.GoodJob.model.vo;
 public class InterviewVO {
 	private String interviewNum;
 	private String normalId;
+	private String companyId;
 	private String jobPostingNum;
 	private String title;
 	private String content;
@@ -11,11 +12,12 @@ public class InterviewVO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public InterviewVO(String interviewNum, String normalId, String jobPostingNum, String title, String content,
-			NormalMemberVO normalMemberVO) {
+	public InterviewVO(String interviewNum, String normalId, String companyId, String jobPostingNum, String title,
+			String content, NormalMemberVO normalMemberVO) {
 		super();
 		this.interviewNum = interviewNum;
 		this.normalId = normalId;
+		this.companyId = companyId;
 		this.jobPostingNum = jobPostingNum;
 		this.title = title;
 		this.content = content;
@@ -32,6 +34,12 @@ public class InterviewVO {
 	}
 	public void setNormalId(String normalId) {
 		this.normalId = normalId;
+	}
+	public String getCompanyId() {
+		return companyId;
+	}
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
 	}
 	public String getJobPostingNum() {
 		return jobPostingNum;
@@ -59,9 +67,10 @@ public class InterviewVO {
 	}
 	@Override
 	public String toString() {
-		return "InterviewVO [interviewNum=" + interviewNum + ", normalId=" + normalId + ", jobPostingNum="
-				+ jobPostingNum + ", title=" + title + ", content=" + content + ", normalMemberVO=" + normalMemberVO
-				+ "]";
+		return "InterviewVO [interviewNum=" + interviewNum + ", normalId=" + normalId + ", companyId=" + companyId
+				+ ", jobPostingNum=" + jobPostingNum + ", title=" + title + ", content=" + content + ", normalMemberVO="
+				+ normalMemberVO + "]";
 	}
+	
 	
 }

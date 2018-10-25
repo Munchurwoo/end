@@ -24,7 +24,7 @@
 		<table class="table table-hover">
 			<tr>
 				<th>아이디</th>
-				<td>${requestScope.cmvo.companyId }</td>
+				<td>${requestScope.cmvo.companyId}</td>
 			</tr>
 			<tr>
 				<th>기업로고</th>
@@ -76,8 +76,7 @@
 	</div>
 	<div class="col-sm-3"></div>
 </div>
-
-<a href="getAllInterviewerList.do">면접신청자 명단조회</a>
+<a href="getAllInterviewerList.do?companyId=${requestScope.cmvo.companyId}">면접신청자 명단조회</a>
 <br>
 <br>
 <a href="updateCompanyMemberForm.do">회원정보수정</a>
