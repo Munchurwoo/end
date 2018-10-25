@@ -32,6 +32,9 @@
 	padding : 5px;
 }
 
+.detailPortfolioTable tr{
+	height:30px;
+}
 
 
 </style>
@@ -47,37 +50,7 @@
 			return;
 		}
 	}
-</script>
-
-<%-- <h3 align="center">이력서 상세보기</h3><br><br>
-
-	제목 :${povo.title }<br>
-	이름 : ${nmvo.name }<br>
-	<img src="/GoodJob/resources/upload/memberPicture/${povo.picturePath}" height="100px" width="100px" ><br>
-	이메일 : ${nmvo.email }<br>
-	전화번호 : ${nmvo.tel }<br>
-	내용 : ${povo.content }<br>
-	성별 : ${nmvo.gender }<br>
-	<br>
-	모집직군 : <c:forEach items="${recruitCatList}" var="recruitCatList">
-	${recruitCatList.rcName }
-	</c:forEach><br><br>
-	개발분야 : <c:forEach items="${devCatList }" var="devCatList">
-	${devCatList.devCatName }
-	</c:forEach><br><br>
-	고용형태 : <c:forEach items="${empTypeCatList}" var="empTypeCatList">
-	${empTypeCatList.empTypeName }
-	</c:forEach><br><br>
-	근무지역 : <c:forEach items="${locCatList }" var="locCatList">
-	${locCatList.locName }
-	</c:forEach><br><br>
-	학력 : <c:forEach items="${acaCatList }" var="acaCatList">
-	${acaCatList.academicName }
-	</c:forEach><br><br> --%>
-	
-
-	
-	
+</script>	
 	
 <div id="registerPortfolio" >
 
@@ -103,7 +76,7 @@
 			 		<img id="normal-picture"  src="/GoodJob/resources/upload/memberPicture/${povo.picturePath}" border="0" width="120" height="160"  >
 			</div>
 		</div>
-		<table>
+		<table class="detailPortfolioTable">
 		      <colgroup>
 		        <col width="90px">
 		        <col width="320px">
@@ -128,19 +101,19 @@
 		      	<td>${nmvo.gender }</td>
 		      </tr>      
 		      
-		      <tr height="50px">
+		      <tr>
 		        <th>지역</th>	
 		        <td colspan="3">
 		        	<%-- <c:forEach items="${requestScope.locCatList}" var="locCat" varStatus="i">
 						<input type="checkbox" name="locCatNumList" value="${locCat.locNum}" >${locCat.locName}&nbsp;
 					</c:forEach> --%>
 					<c:forEach items="${locCatList }" var="locCatList">
-					${locCatList.locName }
+					${locCatList.locName }&nbsp;/ 
 					</c:forEach>
 		         </td>
 		      </tr>
 		      
-		      <tr height="50px">
+		      <tr>
 		        <th>학력</th>
 		        <td colspan="3">
 		        <%-- 	<c:forEach items="${requestScope.acaCatList}" var="acaCat" varStatus="i">	
@@ -148,21 +121,39 @@
 					</c:forEach>  --%>
 					
 					<c:forEach items="${acaCatList }" var="acaCatList">
-					${acaCatList.academicName }
+					${acaCatList.academicName }&nbsp;/ 
 					</c:forEach>
 		        </td>
 		      </tr>
 		      
-		      <tr height="50px">
+		      <tr>
 		        <th>고용형태</th>
 		        <td>
 		        	<c:forEach items="${empTypeCatList}" var="empTypeCatList">
-					${empTypeCatList.empTypeName }
+					${empTypeCatList.empTypeName }	&nbsp;/ 
 					</c:forEach>
 		        </td>        
 		      </tr>
 		      
-		      <tr height="110px">
+		       <tr>
+		        <th>모집직군</th>
+		        <td>
+		       		 <c:forEach items="${recruitCatList}" var="recruitCatList">
+						${recruitCatList.rcName }	&nbsp;/ 
+					</c:forEach>		        	
+		        </td>        
+		      </tr>
+		      
+		       <tr>
+		        <th>개발분야</th>
+		        <td>		        
+		        	<c:forEach items="${devCatList }" var="devCatList">
+					${devCatList.devCatName }&nbsp;/
+					</c:forEach>				        	
+		        </td>        
+		      </tr>
+		      
+		      <tr style="height:50px;">
 		      	<th>포트폴리오</th>
 		      	<td>
 					<!-- <input type="file" name="fileList[0]" >
@@ -226,11 +217,13 @@
 		      </tbody>
 	</table>
 	<br><br>
+	<textarea rows="8" cols="90" name="content" readonly="readonly" value="${povo.content }"></textarea><br><br>
+	</div>	
 		<input type="button" onclick="javascript:location.href='user-updatePortfolioForm.do?id=${requestScope.nmvo.id}'" value="수정하기">
 		<input type="button" onclick="deletePortfolio('${requestScope.nmvo.id}', '${requestScope.povo.picturePath }')" value="삭제하기">
 	
 	<button type="reset" onclick="location.href='home.do'">홈으로</button>	
-</div>
+
 	
 
 	
