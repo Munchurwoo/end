@@ -11,8 +11,8 @@
 </tr>
 <c:forEach items="${requestScope.interviewerList}" var="ivList">
 <tr>
-<td>${ivList.interviewNum}${ivList.jobPostingNum}</td>
-<td><a href="normalDetailPortfolio.do?jobPostingNum=${ivList.interviewNum}${ivList.jobPostingNum}&normalId=${ivList.normalMemberVO.id}&companyId=${ivList.companyId}">${ivList.title}</a></td>
+<td>${ivList.interviewNum}</td>
+<td><a href="normalDetailPortfolio.do?jobPostingNum=${ivList.jobPostingNum}&normalId=${ivList.normalMemberVO.id}&companyId=${ivList.companyId}">${ivList.title}</a></td>
 <td>${ivList.normalMemberVO.name}</td>
 </tr>
 </c:forEach>
