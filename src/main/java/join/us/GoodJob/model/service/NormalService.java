@@ -55,5 +55,5 @@ public interface NormalService {
 	void registerQuestion(QuestionAnswerVO qaVO);
 	
 	//질의응답 나의 질문 리스트
-	List<QuestionAnswerVO> getMyQuestionList(String normalId);
+	List<QuestionAnswerVO> getMyQuestionList(QuestionAnswerVO qaVO);
 }

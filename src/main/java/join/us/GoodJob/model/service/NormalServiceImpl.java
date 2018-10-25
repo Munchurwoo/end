@@ -185,8 +185,8 @@ public class NormalServiceImpl implements NormalService {
 	}
 
 	@Override
-	public List<QuestionAnswerVO> getMyQuestionList(String normalId) {
-		return normalMapper.getMyQuestionList(normalId);
+	public List<QuestionAnswerVO> getMyQuestionList(QuestionAnswerVO qaVO) {
+		return normalMapper.getMyQuestionList(qaVO);
 	}
 
 
