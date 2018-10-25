@@ -1,5 +1,7 @@
 package join.us.GoodJob.model.service;
 
+import java.awt.print.Pageable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -198,8 +200,20 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	public List<InterviewVO> getJobPostingInterviewerList(String jobPostingNum) {
-		return companyMapper.getJobPostingInterviewerList(jobPostingNum);
+	public PostListVO getJobPostingInterviewerList(String jobPostingNum, String pageNum) {
+		PagingBean pagingBean = null;
+		int interviewerTotCnt = jobPostingInterviewerTotalCount(jobPostingNum);
+		if(pageNum == null)
+			pagingBean = new PagingBean(interviewerTotCnt);
+		else
+			pagingBean = new PagingBean(interviewerTotCnt, Integer.parseInt(pageNum), 2);
+		List<InterviewVO> ivList = companyMapper.getJobPostingInterviewerList(jobPostingNum, pageNum);
+		
+		PostListVO postListVO = new PostListVO();
+		postListVO.setPagingBean(pagingBean);
+		postListVO.setIvList(ivList);
+		
+		return postListVO;
 	}
 	
 	@Override
@@ -236,5 +250,10 @@ public class CompanyServiceImpl implements CompanyService {
 		postListVO.setJobPostingList(jobPostingList);
 		postListVO.setPagingBean(pagingBean);
 		return postListVO;
+	}
+
+	@Override
+	public int jobPostingInterviewerTotalCount(String jobPostingNum) {
+		return companyMapper.jobPostingInterviewerTotalCount(jobPostingNum);
 	}
 }

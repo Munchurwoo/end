@@ -311,6 +311,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from job_posting where title like '%'||#{keyword}||'%'
 	</select>
 	
+	<select id="jobPostingInterviewerTotalCount" parameterType="string" resultType="int">
+		select count(*) from interview where job_posting_num=#{value}
+	</select>
 	
 </mapper> 		
  

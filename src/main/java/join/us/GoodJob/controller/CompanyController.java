@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import join.us.GoodJob.model.service.CompanyService;
 import join.us.GoodJob.model.service.MemberService;
 import join.us.GoodJob.model.service.NormalService;
+import join.us.GoodJob.model.service.PagingBean;
 import join.us.GoodJob.model.vo.CatNumParamVO;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
 import join.us.GoodJob.model.vo.DevCatVO;
@@ -299,8 +300,11 @@ public class CompanyController {
 	 * @return
 	 */
 	@PostMapping("getJobPostingInterviewerList.do")
-	public String getJobPostingInterviewerList(String jobPostingNum, Model model) {
-		List<InterviewVO> ivvoList = companyService.getJobPostingInterviewerList(jobPostingNum);
+	public String getJobPostingInterviewerList(String jobPostingNum, Model model, String pageNum) {
+		PostListVO plvo = companyService.getJobPostingInterviewerList(jobPostingNum, pageNum);
+		model.addAttribute("plvo", plvo);
+		
+		List<InterviewVO> ivvoList = plvo.getIvList();
 		if(ivvoList.isEmpty() == false) {
 			List<DevCatVO> dcvoList = new ArrayList<DevCatVO>();
 			List<String> dcnameList = null;
@@ -408,7 +412,7 @@ public class CompanyController {
 		model.addAttribute("allEmpTypeCatList", memberService.getEmpTypeCatVOList());
 		model.addAttribute("allLocCatList", memberService.getLocCatVOList());
 		model.addAttribute("allAcaCatList", memberService.getAcaCatVOList());
-		PostListVO jobPostingList2 = (PostListVO) companyService.findJobPostingBytitle(keyword,pageNum);
+		PostListVO jobPostingList2 = companyService.findJobPostingBytitle(keyword,pageNum);
 		System.out.println(jobPostingList2);
 		model.addAttribute("jobPostingList2", jobPostingList2);
 		

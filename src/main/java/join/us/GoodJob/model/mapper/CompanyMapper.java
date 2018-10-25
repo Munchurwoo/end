@@ -11,6 +11,7 @@ import join.us.GoodJob.model.vo.CompanyMemberVO;
 import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.JobPostingVO;
 import join.us.GoodJob.model.vo.MemberVO;
+import join.us.GoodJob.model.vo.PostListVO;
 import join.us.GoodJob.model.vo.QuestionAnswerVO;
 
 @Mapper
@@ -99,7 +100,7 @@ public interface CompanyMapper {
 	int getAllJobPostingListByJobPostingNumCount(List<String> jobPostingNumList);
 	List<CompanyMemberVO> getAllJobPostingListByJobPostingNum(Map<String, Object> map2);
 	//181023 MIRI 구인 공고별 면접자 리스트
-	List<InterviewVO> getJobPostingInterviewerList(String jobPostingNum);
+	List<InterviewVO> getJobPostingInterviewerList(String jobPostingNum, String pageNum);
 	
 	// 구인공고 수정등록 
 	void updateJobPosting(JobPostingVO jobPostingVO);
@@ -109,6 +110,8 @@ public interface CompanyMapper {
 	void deleteJobPostingByNum(int jobPostingNum);
 	List<CompanyMemberVO> findJobPostingBytitle(Map<String, Object> map);
 	int findJobPostingBytitleCount(String keyword);
+	//181025 MIRI 구인 공고별 면접자 리스트 카운트
+	int jobPostingInterviewerTotalCount(String jobPostingNum);
 	
 	
 	//구인 분류 등록	
