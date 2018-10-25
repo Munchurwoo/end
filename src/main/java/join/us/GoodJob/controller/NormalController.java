@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import join.us.GoodJob.model.mapper.CompanyMapper;
 import join.us.GoodJob.model.service.CompanyService;
+//github.com/Munchurwoo/goodjob
 import join.us.GoodJob.model.service.MemberService;
 import join.us.GoodJob.model.service.NormalService;
 import join.us.GoodJob.model.vo.DevCatVO;
@@ -24,10 +26,8 @@ import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PortfolioVO;
-
-import join.us.GoodJob.model.vo.QuestionAnswerVO;
-
 import join.us.GoodJob.model.vo.PostListVO;
+import join.us.GoodJob.model.vo.QuestionAnswerVO;
 
 
 @Controller
@@ -37,8 +37,9 @@ public class NormalController {
 	@Resource
 	MemberService memberService;
 	@Resource
+	CompanyMapper companyMapper;
+	@Resource
 	CompanyService companyService;
-
 	// private String serverUploadPath; //삭제하지마 ㅠㅠ
 	private String workspaceUploadPath;
 	private String workspaceDeletePath;
@@ -345,18 +346,6 @@ public class NormalController {
 
 		return "redirect:home.do";
 	}
-
-	/**
-	 * 2018-10-19 성진 구인공고 조회 후 면접신청 폼으로 이동하기
-	 * 
-	 * @return
-	 */
-	@RequestMapping("goInterviewApply.do")
-	public String goInterviewApply(Model model,String jobPostingNum) {
-		System.out.println("구인공고 "+jobPostingNum+"번 글에 면접신청합니다.");
-		model.addAttribute("jobPostingNum", jobPostingNum);
-		return "normal/normal_go_interview_apply.tiles2";
-	}
 	
 	/**
 	 * 181021 yosep 이력서 등록 폼에서 X버튼클릭시 사진 삭제
@@ -404,6 +393,17 @@ public class NormalController {
 			normalService.interviewApply(interviewVO);
 			return "redirect:home.do";
 		}
+		/**
+		 * 2018-10-19 성진 구인공고 조회 후 면접신청 폼으로 이동하기
+		 * 
+		 * @return
+		 */
+		@RequestMapping("goInterviewApply.do")
+		public String goInterviewApply(Model model,String jobPostingNum) {
+			System.out.println(companyMapper.findCompanyIdByNum(jobPostingNum));
+			model.addAttribute("jobPosting", companyMapper.findCompanyIdByNum(jobPostingNum));
+			return "normal/normal_go_interview_apply.tiles2";
+		}
 		//질의응답 질문 등록(구인공고 상세보기에서)
 		@RequestMapping("registerQuestion.do")
 		@ResponseBody
@@ -424,5 +424,5 @@ public class NormalController {
 			return "normal/normal_my_question.tiles2";
 			
 		}
-		
+
 }
