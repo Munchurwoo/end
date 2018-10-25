@@ -4,6 +4,9 @@ import java.util.List;
 import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PortfolioVO;
+import join.us.GoodJob.model.vo.QuestionAnswerVO;
+import join.us.GoodJob.model.vo.PostListVO;
+
 
 public interface NormalService {
 	
@@ -44,5 +47,13 @@ public interface NormalService {
 	void deletePortfolioMulti(String normalId);
 	
 	void interviewApply(InterviewVO interviewVO);
+	//1023 Cherwoo 
+	//포트폴리오 normalMember 리스트와  페이징처리 처리 
+	PostListVO portfolioAllListAndPagingProcess(String pageNum, int postCountPerPage );
 	
+	//질의응답 질문 등록
+	void registerQuestion(QuestionAnswerVO qaVO);
+	
+	//질의응답 나의 질문 리스트
+	List<QuestionAnswerVO> getMyQuestionList(String normalId);
 }

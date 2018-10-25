@@ -386,8 +386,9 @@ section.callaction {
 .box-gray  {
 	box-sizing: border-box;
 	background: #f8f8f8;
-	padding: 20px 30px 30px;
-	height: 200px;
+	padding: 20px 10px 5px;
+	height: auto;
+	min-height: 185px;
 }
 .box-gray  h4,.box-gray  i {
 	margin-bottom: 20px;

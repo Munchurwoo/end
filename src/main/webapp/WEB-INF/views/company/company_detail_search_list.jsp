@@ -23,7 +23,9 @@
 				</div>
 			</div>
 			</c:forEach>
-			
+			<!-- 이부분 class 속성 col-lg-12 주셔야 리스트가 망가지지 않습니다. 10-23 cherwoo -->
+			<div class="col-lg-12">
+			<!--  -->
 			<div align="center">
 			<ul class="pagination">
 				<c:if test="${pb.previousPageGroup }">
@@ -48,5 +50,6 @@
 				</c:if>
 			</ul>
 		</div>	
+	</div>
 			
 		

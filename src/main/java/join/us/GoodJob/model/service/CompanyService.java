@@ -1,6 +1,7 @@
 package join.us.GoodJob.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import join.us.GoodJob.model.vo.CatNumParamVO;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
@@ -38,14 +39,15 @@ public interface CompanyService {
 	PostListVO getAllCompanyList(String pageNum);
 
 	// 기업정보 상세보기
-	CompanyMemberVO detailCompanyInfo(String companyId);
+ 	CompanyMemberVO detailCompanyInfo(String companyId);
+	 	
+ 	// 기업정보 상세보기 후 해당 기업 구인공고리스트 바로가기
+ 	List<JobPostingVO> companyJobPostingList(String companyId);	
+ 	
+ 	// 구인 상세
+ 	CompanyMemberVO jobPostingDetail(String jobPostingNum);
 	
-	// 기업정보 상세보기 후 해당 기업 구인공고리스트 바로가기
-	List<JobPostingVO> companyJobPostingList(String companyId);	
-	
-	// 구인 상세
-	CompanyMemberVO jobPostingDetail(String jobPostingNum);
-	// 상세조건 검색
+ 	// 상세조건 검색
 	PostListVO findJobPostingByCatNumList(CatNumParamVO catNumParamVO, String pageNum);
 	
 	//구인등록 181023 MIRI가 만든것 재사용 포트폴리오 등록/수정 동시에 활용하기위해 flag를 줌
@@ -53,11 +55,16 @@ public interface CompanyService {
 	// 면접신청자 전체 조회
 	List<InterviewVO> getAllInterviewerList(String companyId);
 	//구인 공고별 질답 리스트
+	//181022 MIRI 구인 공고별 질답 리스트
 	List<QuestionAnswerVO> getJobPostingQAList(String jobPostingNum);
-	// 채용정보 페이징처리
-
+	
+	//181022 MIRI QA번호로 Q&A 검색
 	QuestionAnswerVO getJobPostingQAByQANum(String qaNum);
-
+	
+ 	//181022 MIRI Q&A 답변 수정
+	void updateQAToAnswer(QuestionAnswerVO qavo);
+	
+	//181022 MIRI Q&A 답변 삭제
 	void deleteQAToAnswer(String QANum);
 	
 	// 구인공고 수정
@@ -70,6 +77,6 @@ public interface CompanyService {
 
 	PostListVO findJobPostingBytitle(String title,String keyword, String pageNum);
 
-
-	void updateQAToAnswer(QuestionAnswerVO qavo);
+	//181023 MIRI 구인 공고별 면접자 리스트
+	List<InterviewVO> getJobPostingInterviewerList(String jobPostingNum);
 }

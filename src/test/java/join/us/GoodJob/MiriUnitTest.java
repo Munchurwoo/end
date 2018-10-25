@@ -1,5 +1,7 @@
 package join.us.GoodJob;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import join.us.GoodJob.model.mapper.CompanyMapper;
 import join.us.GoodJob.model.mapper.ManagerMapper;
 import join.us.GoodJob.model.mapper.MemberMapper;
 import join.us.GoodJob.model.mapper.NormalMapper;
+import join.us.GoodJob.model.vo.DevCatVO;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring-model.xml"})
 public class MiriUnitTest {
@@ -24,6 +27,9 @@ public class MiriUnitTest {
 	
 	@Test
 	public void test() {
-		System.out.println(companyMapper.getJobPostingQAList("1001"));
+		List<DevCatVO> dcvoList = memberMapper.getDevCatVOListByNormalId("miri");
+		for (DevCatVO vo : dcvoList) {
+			System.out.println(vo);
+		}
 	}
 }

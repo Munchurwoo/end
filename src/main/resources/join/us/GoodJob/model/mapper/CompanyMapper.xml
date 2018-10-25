@@ -42,10 +42,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="getAllCompanyList" resultType="companyMemberVO" parameterType="pagingBean">	
 		select company_id, name, introduction, picture_path
-		from(select row_number() over(order by cm.company_id) as rnum, cm.company_id, m.name, cm.introduction, cm.picture_path
+		from(select row_number() over(order by cm.company_id) as rnum, 
+		cm.company_id, m.name, cm.introduction, cm.picture_path
 		from member m , company_member cm
 		where m.id=cm.company_id
-		) where rnum between #{startRowNumber} and #{endRowNumber}		
+		) where rnum between #{startRowNumber} and #{endRowNumber}	
 	</select>
 	
 	<select id="getAllCompanyListCount" resultType="int">
@@ -129,13 +130,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="career_status" property="jobPostingVO.careerStatus"/>
 		<result column="title" property="jobPostingVO.title"/>
 		<result column="content" property="jobPostingVO.content"/>
+		<result column="picture_path" property="picturePath"/>
 	</resultMap>
 	<select id="getAllJobPostingList" resultMap="companyMemberVORM2">
 	select company_id, introduction, company_type, industry, sales, date_of_establishment, num_of_employees,
-	job_posting_num, career_status, title, content, address, tel, email , name 
+	job_posting_num, career_status, title, content, address, tel, email , name , picture_path
 	from
 	(select row_number() over(order by j.job_posting_num) as rnum,
-	cm.company_id, cm.introduction, cm.company_type, cm.industry, cm.sales, cm.date_of_establishment, cm.num_of_employees,
+	cm.company_id, cm.introduction, cm.company_type, cm.industry, cm.sales, cm.date_of_establishment, cm.num_of_employees,cm.picture_path,
 	j.job_posting_num, j.career_status, j.title, j.content, m.address, m.tel, m.email , m.name
 	from job_posting j , company_member cm, member m
 	where j.company_id = cm.company_id and cm.company_id=m.id) 
@@ -253,6 +255,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="name" property="normalMemberVO.name"/>
 		<result column="normal_id" property="normalMemberVO.id"/> 
 	</resultMap>
+	
 	<select id="getAllInterviewerList" resultMap="interviewVORM">
 		select row_number() over(order by i.interview_num) as rnum ,
 		i.interview_num ,i.job_posting_num,i.title , nm.normal_id , cm.company_id , m.name
@@ -260,6 +263,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		where i.normal_id = nm.normal_id and i.company_id = cm.company_id and i.normal_id = m.id
 		and cm.company_id=#{value} 
 		order by rnum desc
+		</select>
+		
+		
+	<!-- 181023 MIRI 반복되는 sql 묶기 -->
+	<sql id="getInterviewerInfo">
+		select i.interview_num,i.job_posting_num,i.title,i.content,nm.normal_id,m.name
+		from interview i, normal_member nm , member m
+		where i.normal_id = nm.normal_id and nm.normal_id = m.id
+	</sql>
+	
+	
+	<select id="getAllInterviewerList" resultMap="interviewVORM">
+		<include refid="getInterviewerInfo"/>
+	</select>
+	<select id="getJobPostingInterviewerList" parameterType="string" resultMap="interviewVORM">
+		<include refid="getInterviewerInfo"/>
+		and i.job_posting_num=#{value}
 	</select>
 	
 	<update id="updateJobPosting" parameterType="jobPostingVO">
@@ -335,10 +355,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="findCompanyIdByNum" resultType="interviewVO">
 		select company_id,job_posting_num from job_posting where job_posting_num=#{value}
 	</select>
-	
-	
-	
-	
 </mapper> 		
  
  

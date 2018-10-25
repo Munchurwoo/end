@@ -196,7 +196,11 @@ public class CompanyServiceImpl implements CompanyService {
 	public List<InterviewVO> getAllInterviewerList(String companyId) {
 		return companyMapper.getAllInterviewerList(companyId);
 	}
-
+	@Override
+	public List<InterviewVO> getJobPostingInterviewerList(String jobPostingNum) {
+		return companyMapper.getJobPostingInterviewerList(jobPostingNum);
+	}
+	
 	@Override
 	public void updateJobPosting(JobPostingVO jobPostingVO) {
 		companyMapper.updateJobPosting(jobPostingVO);
@@ -254,6 +258,4 @@ public class CompanyServiceImpl implements CompanyService {
 		}
 		return postListVO;
 	}
-
-
 }

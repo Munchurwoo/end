@@ -7,13 +7,10 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import join.us.GoodJob.model.service.PagingBean;
-import join.us.GoodJob.model.vo.CatNumParamVO;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
 import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.JobPostingVO;
 import join.us.GoodJob.model.vo.MemberVO;
-import join.us.GoodJob.model.vo.NormalMemberVO;
-import join.us.GoodJob.model.vo.PostListVO;
 import join.us.GoodJob.model.vo.QuestionAnswerVO;
 
 @Mapper
@@ -69,11 +66,10 @@ public interface CompanyMapper {
 	CompanyMemberVO detailCompanyInfo(String companyId);
 	// 기업정보 상세보기 후 해당기업 구인공고 리스트 바로가기
 	List<JobPostingVO> companyJobPostingList(String companyId);
-	//구인공고 상세보기
-	CompanyMemberVO jobPostringDetail(String jobPostingNum);	
-	
-	//구인공고 등록
-	void registerJobPosting(JobPostingVO jobPostingVO);
+ 	//구인공고 상세보기
+ 	CompanyMemberVO jobPostringDetail(String jobPostingNum);	
+ 	//구인공고 등록
+ 	void registerJobPosting(JobPostingVO jobPostingVO);
 	//구인 학력 분류 등록	
 	void registerJobPostingAcademic(Map<String,Object> map);
 	//구인공고 개발분야 분류 등록	
@@ -84,7 +80,7 @@ public interface CompanyMapper {
 	void registerJobPostingLoc(Map<String,Object> map);
 	//구인 모집직군 분류 등록
 	void registerJobPostingRecuitment(Map<String,Object> map);
-	//구인 공고별 질답 리스트
+	//181022 MIRI 구인 공고별 질답 리스트
 	List<QuestionAnswerVO> getJobPostingQAList(String jobPostingNum);
 	//181022 MIRI QA번호로 Q&A 검색
 	QuestionAnswerVO getJobPostingQAByQANum(String qaNum);
@@ -93,15 +89,22 @@ public interface CompanyMapper {
 	//181022 MIRI Q&A 답변 삭제
 	void deleteQAToAnswer(String QANum);
 	//구인공고 상세보기
+
 	CompanyMemberVO jobPostingDetail(String jobPostingNum);
 	// 면접신청자 조회 ->
 	List<InterviewVO> getAllInterviewerList(String companyId);
 	//구인공고 키워드 등록	
 	// 헤더/채용정보 페이징처리
+ 	// 면접신청자 조회 ->
+ 	List<InterviewVO> getAllInterviewerList();
+ 	//구인공고 키워드 등록	
+ 	// 헤더/채용정보 페이징처리
 	int getAlljobPostingCount();
 	// 채용정보 상세검색 페이징처리
 	int getAllJobPostingListByJobPostingNumCount(List<String> jobPostingNumList);
 	List<CompanyMemberVO> getAllJobPostingListByJobPostingNum(Map<String, Object> map2);
+	//181023 MIRI 구인 공고별 면접자 리스트
+	List<InterviewVO> getJobPostingInterviewerList(String jobPostingNum);
 	
 	// 구인공고 수정등록 
 	void updateJobPosting(JobPostingVO jobPostingVO);
@@ -123,17 +126,8 @@ public interface CompanyMapper {
 	
 	
 	//구인 분류 등록	
+
 	//구인공고 전체보기
+	
 	//구인공고 검색결과 보기
-	
-	
-	
-	//질의응답 답변 등록
-	
-	
-	
-	
-	
-	
-	
 }
