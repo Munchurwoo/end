@@ -412,9 +412,7 @@ public class CompanyController {
 		model.addAttribute("allEmpTypeCatList", memberService.getEmpTypeCatVOList());
 		model.addAttribute("allLocCatList", memberService.getLocCatVOList());
 		model.addAttribute("allAcaCatList", memberService.getAcaCatVOList());
-
 		PostListVO jobPostingList2 = companyService.findJobPostingBytitle(searchText,searchType,pageNum);
-
 		System.out.println(jobPostingList2);
 		model.addAttribute("jobPostingList2", jobPostingList2);
 		

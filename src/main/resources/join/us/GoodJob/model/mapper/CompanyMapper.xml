@@ -357,17 +357,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		select count(*)
 		from job_posting_keyword where keyword_name like '%'|| #{keyword} ||'%'
 	</select>
-	
-<<<<<<< HEAD
+
 	<select id="jobPostingInterviewerTotalCount" parameterType="string" resultType="int">
 		select count(*) from interview where job_posting_num=#{value}
 	</select>
-	
-=======
+
 	<select id="findCompanyIdByNum" resultType="interviewVO">
 		select company_id,job_posting_num from job_posting where job_posting_num=#{value}
 	</select>
->>>>>>> branch 'master' of https://github.com/Munchurwoo/goodjob.git
 </mapper> 		
  
  
