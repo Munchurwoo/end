@@ -178,8 +178,16 @@
 		</table>	
 	</div>
 	<div>
+	<h5>면접신청 제목</h5>
+	<c:forEach items="${ivo}" var="info">
+		${info}
+	</c:forEach>
+	
+
+	
 	<h5>내용</h5>
-	<textarea rows="8" cols="90" name="content" readonly="readonly" value="${povo.content }"></textarea><br><br>
+	<textarea rows="8" cols="90" name="content" readonly="readonly" value=""></textarea><br><br>
+	
 	</div>
 		
 	

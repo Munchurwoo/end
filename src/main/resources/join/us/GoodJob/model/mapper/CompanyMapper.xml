@@ -258,12 +258,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="getAllInterviewerList" resultMap="interviewVORM">
 		select row_number() over(order by i.interview_num) as rnum ,
-		i.interview_num ,i.job_posting_num,i.title , nm.normal_id , cm.company_id , m.name
+		i.interview_num ,i.job_posting_num,i.title ,i.content, nm.normal_id , cm.company_id , m.name
 		from interview i , normal_member nm , company_member cm ,member m
 		where i.normal_id = nm.normal_id and i.company_id = cm.company_id and i.normal_id = m.id
 		and cm.company_id=#{value} 
 		order by rnum desc
-		</select>
+	</select>
 		
 		
 	<!-- 181023 MIRI 반복되는 sql 묶기 -->
@@ -272,9 +272,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from interview i, normal_member nm , member m
 		where i.normal_id = nm.normal_id and nm.normal_id = m.id
 	</sql>
+	<select id="interviewInfo" resultType="interviewVO" parameterType="interviewVO">
+		select i.interview_num,i.job_posting_num,i.title,i.content,nm.normal_id,cm.company_id
+		from interview i , normal_member nm , company_member cm
+		where i.normal_id = nm.normal_id and i.company_id = cm.company_id
+		and cm.company_id=#{companyId} and i.job_posting_num=#{jobPostingNum}
+		and i.normal_id=#{normalId}
+	</select>
 	
-	
-	<select id="getAllInterviewerList" resultMap="interviewVORM">
+	<select id="getAllInterviewerList2" resultMap="interviewVORM">
 		<include refid="getInterviewerInfo"/>
 	</select>
 	<select id="getJobPostingInterviewerList" parameterType="string" resultMap="interviewVORM">

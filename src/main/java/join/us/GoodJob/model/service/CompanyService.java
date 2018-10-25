@@ -54,6 +54,8 @@ public interface CompanyService {
 	void registerJobPosting(JobPostingVO jobPostingVO,boolean registerFlag);
 	// 면접신청자 전체 조회
 	List<InterviewVO> getAllInterviewerList(String companyId);
+	// 미리 인재검색
+	List<InterviewVO> getAllInterviewerList2();
 	//구인 공고별 질답 리스트
 	//181022 MIRI 구인 공고별 질답 리스트
 	List<QuestionAnswerVO> getJobPostingQAList(String jobPostingNum);

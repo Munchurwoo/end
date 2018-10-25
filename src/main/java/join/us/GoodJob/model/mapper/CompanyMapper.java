@@ -93,6 +93,8 @@ public interface CompanyMapper {
 	CompanyMemberVO jobPostingDetail(String jobPostingNum);
 	// 면접신청자 조회 ->
 	List<InterviewVO> getAllInterviewerList(String companyId);
+	// 미리 인재검색
+	List<InterviewVO> getAllInterviewerList2();
  	//구인공고 키워드 등록	
  	// 헤더/채용정보 페이징처리
 	int getAlljobPostingCount();
@@ -101,7 +103,8 @@ public interface CompanyMapper {
 	List<CompanyMemberVO> getAllJobPostingListByJobPostingNum(Map<String, Object> map2);
 	//181023 MIRI 구인 공고별 면접자 리스트
 	List<InterviewVO> getJobPostingInterviewerList(String jobPostingNum);
-	
+	InterviewVO interviewInfo(InterviewVO interviewVO);
+
 	// 구인공고 수정등록 
 	void updateJobPosting(JobPostingVO jobPostingVO);
 	// 구인공고 수정 전 전체 삭제 학력/개발분야/고용형태/지역/모집직군
