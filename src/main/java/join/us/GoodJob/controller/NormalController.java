@@ -225,7 +225,7 @@ public class NormalController {
 
 	@RequestMapping("normalDetailPortfolio.do")
 
-	public String normalDetailPortfolio(String normalId,InterviewVO interviewVO, Model model) {
+	public String normalDetailPortfolio(String normalId, Model model) {
 		model.addAttribute("nmvo", normalService.selectNormalMember(normalId));
 		model.addAttribute("povo",normalService.normalDetailPortfolio(normalId));
 		model.addAttribute("devCatList", memberService.getDevCatVOListByNormalId(normalId));
@@ -233,9 +233,6 @@ public class NormalController {
 		model.addAttribute("locCatList", memberService.getLocCatVOListByNormalId(normalId));
 		model.addAttribute("acaCatList", memberService.getAcaCatVOListByNormalId(normalId));
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOListByNormalId(normalId));
-		// 리스트<인터뷰> 말고 그냥 인터뷰VO로 수정해야함
-		//model.addAttribute("ivo", companyMapper.getAllInterviewerList(companyId));
-		model.addAttribute("ivo", companyMapper.interviewInfo(interviewVO));
 		return "normal/normal_detail_portfolio.tiles2";
 
 	}
