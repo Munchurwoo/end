@@ -93,10 +93,6 @@ public interface CompanyMapper {
 	CompanyMemberVO jobPostingDetail(String jobPostingNum);
 	// 면접신청자 조회 ->
 	List<InterviewVO> getAllInterviewerList(String companyId);
-	//구인공고 키워드 등록	
-	// 헤더/채용정보 페이징처리
- 	// 면접신청자 조회 ->
- 	List<InterviewVO> getAllInterviewerList();
  	//구인공고 키워드 등록	
  	// 헤더/채용정보 페이징처리
 	int getAlljobPostingCount();
