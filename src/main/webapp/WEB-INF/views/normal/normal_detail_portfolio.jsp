@@ -169,10 +169,8 @@
 		</table>	
 	</div>
 	<div>
-	<h5>면접신청 제목</h5>
-	<c:forEach items="${ivo}" var="info">
-		${info}
-	</c:forEach>
+	<h5>제목</h5>
+	
 	
 
 	
