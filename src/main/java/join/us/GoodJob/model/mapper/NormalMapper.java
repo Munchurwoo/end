@@ -95,4 +95,6 @@ public interface NormalMapper {
 	//개인회원id로 포트폴리오 파일 경로 찾기
 	List<String> getPortfolioFileList(String normalId);
 	List<QuestionAnswerVO> getMyQuestionList(QuestionAnswerVO qaVO);
+	
+	List<PortfolioVO> getNormalMember(PagingBean pagingBean);
 }

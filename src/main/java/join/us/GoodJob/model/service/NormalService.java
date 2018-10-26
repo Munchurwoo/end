@@ -56,4 +56,6 @@ public interface NormalService {
 	
 	//질의응답 나의 질문 리스트
 	List<QuestionAnswerVO> getMyQuestionList(QuestionAnswerVO qaVO);
+	
+	List<PortfolioVO> getNormalMember(String pageNum);
 }

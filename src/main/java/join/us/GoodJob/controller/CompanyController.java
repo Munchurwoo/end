@@ -176,6 +176,11 @@ public class CompanyController {
 	@RequestMapping("user-allCompanyInfo.do")
 	public String allCompanyInfo(Model model, String pageNum) {
 		PostListVO postListVO = companyService.getAllCompanyList(pageNum);
+		model.addAttribute("allRecruitCatList", memberService.getRecruitCatVOList());
+		model.addAttribute("allDevCatList", memberService.getDevCatVOListByrcNum("101"));
+		model.addAttribute("allEmpTypeCatList", memberService.getEmpTypeCatVOList());
+		model.addAttribute("allLocCatList", memberService.getLocCatVOList());
+		model.addAttribute("allAcaCatList", memberService.getAcaCatVOList());
 		model.addAttribute("postListVO", postListVO);		
 		return "company/company_info.tiles2";
 	}
@@ -219,6 +224,7 @@ public class CompanyController {
 	@RequestMapping("companyJobPostingList.do")
 	public String companyJobPostingList(String companyId,Model model) {
 		model.addAttribute("jobPostingList", companyService.companyJobPostingList(companyId));
+		model.addAttribute("cmvo",companyService.detailCompanyInfo(companyId));
 		return "company/company_job_postingList.tiles2";
 	}
 	/**
