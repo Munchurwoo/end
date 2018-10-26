@@ -121,7 +121,8 @@ $(document).ready(function(){
 	style="height: 40px; width: 150px;">회원탈퇴</button>
 <br>
 <br>
-<button class="btn-1"style="height: 40px; width: 150px;" onclick="companyJobPostingList.do?companyId=${requestScope.cmvo.companyId}">내 구인공고 리스트</button>
+<button class="btn-1" style="height: 40px; width: 150px;"
+	onclick="javascript:location.href='companyJobPostingList.do?companyId=${requestScope.cmvo.companyId}'">내 구인공고 리스트</button>
 <br>
 <br>
 
