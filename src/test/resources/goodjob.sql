@@ -709,4 +709,12 @@ where i.normal_id = nm.normal_id and i.company_id = cm.company_id and i.normal_i
 and cm.company_id='NHNuser' 
 order by rnum desc
 
+select qa.question, qa.answer, jm.name, jm.title, qa.normal_id, qa.job_posting_num
+from (
+select jp.job_posting_num, m.name, jp.title 
+from job_posting jp, member m 
+where jp.company_id=m.id
+) jm, question_answer qa
+where qa.job_posting_num = jm.job_posting_num
+and qa.normal_id='qqqq'
 

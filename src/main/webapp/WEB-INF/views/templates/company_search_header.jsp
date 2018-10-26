@@ -184,8 +184,8 @@
 	</form>
 	
 	<form action="user-findJobPostingByTitle.do" >
-		<input type="radio" name="searchType" value="keyword">키워드 
-		<input type="radio" name="searchType" value="title">제목
+		<input type="radio" name="searchType" value="keyword" required="required">키워드 
+		<input type="radio" name="searchType" value="title" required="required">제목
 		<input type="text" name="searchText" required="required">
 		<input type="submit" id="searchBtn" value="검색하기">
 	</form>

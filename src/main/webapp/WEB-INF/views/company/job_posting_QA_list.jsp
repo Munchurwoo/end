@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+${requestScope.qvo}
 <div class="row">
 	<div class="col-lg-12">
 		<div class="row">
@@ -13,14 +13,14 @@
 				</div>
 			</h4>
 			<div class="panel-group" id="faqAccordion">
-				<c:forEach items="${requestScope.qavo }" var="qavo" varStatus="status">
+				<c:forEach items="${qavo}" var="qvo" varStatus="status">
 					<div class="panel panel-default ">
 						<div
 							class="panel-heading accordion-toggle question-toggle collapsed"
 							data-toggle="collapse" data-parent="#faqAccordion"
-							data-target="#question${status.index }">
+							data-target="#question${status.index}">
 							<h4 class="panel-title">
-								<a href="#" class="ing">Q: ${qavo.question }</a>
+								<a href="#" class="ing">Q: ${qvo.question }</a>
 							</h4>
 						</div>
 						<div id="question${status.index }" class="panel-collapse collapse"

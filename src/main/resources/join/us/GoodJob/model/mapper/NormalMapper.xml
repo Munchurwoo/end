@@ -210,11 +210,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values (interview_num_seq.nextval,#{normalId},#{companyId},#{jobPostingNum},#{title},#{content})
 	</insert>
 	
-
-	<insert id="registerQuestion" parameterType="questionAnswerVO">
-	insert into QUESTION_ANSWER(qa_num, normal_id, job_posting_num, question) 
-	values(qa_num_seq.nextval, #{normalId}, #{jobPostingNum}, #{question})
-	</insert>
+	
 
 	<!-- 1023 CHERWOO 
 	인재검색 페이징 처리를 위한 게시물수 출력
@@ -233,7 +229,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 	)where rnum between #{startRowNumber} and #{endRowNumber}
 	 	
 	 </select>
-	 
+	 <!-- 구직자가 질의응답 글 등록 -->
+	<insert id="registerQuestion" parameterType="questionAnswerVO">
+	insert into QUESTION_ANSWER(qa_num, normal_id, job_posting_num, question) 
+	values(qa_num_seq.nextval, #{normalId}, #{jobPostingNum}, #{question})
+	</insert>
+	
 	 <select id="getMyQuestionList" resultType="questionAnswerVO" parameterType="string">
 		select qa.question,qa.answer,jm.name,jm.title,qa.normal_id,qa.job_posting_num
 		from (select jp.job_posting_num,m.name,jp.title from job_posting jp,member m where jp.company_id=m.id) jm, question_answer qa

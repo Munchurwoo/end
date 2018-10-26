@@ -360,6 +360,7 @@ public class CompanyController {
 		companyService.updateQAToAnswer(qavo);
 		qavo = companyService.getJobPostingQAByQANum(QANum);
 		model.addAttribute("qavo", qavo);
+		System.out.println(qavo);
 		return qavo;
 	}
 	
