@@ -165,14 +165,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from(
 		select pa.normal_id, pa.academic_num,
 		pd.dev_cat_num, pe.emp_type_num,
-		pl.loc_num
+		pl.loc_num, pr.rc_num
 		from portfolio_academic pa,
 		portfolio_dev pd, portfolio_emp pe,
-		portfolio_loc pl, member m
+		portfolio_loc pl, member m, portfolio_recruitment pr
 		where pa.normal_id
 		= pd.normal_id
 		and pd.normal_id = pe.normal_id
 		and pe.normal_id = pl.normal_id
+		and pl.normal_id=pr.normal_id
 		)
 		<where>
 			<if test="locCatNumList != null">
@@ -200,6 +201,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	   		 and emp_type_num in
 			<foreach item="empTypeCatNumList" collection="empTypeCatNumList" open="(" separator="," close=")">
 				#{empTypeCatNumList}
+			</foreach>
+	 		 </if>
+	 		 
+	 		 
+	 		 <if test="recruitCatNumList != null">
+	   		 and rc_num in
+			<foreach item="recruitCatNumList" collection="recruitCatNumList" open="(" separator="," close=")">
+				#{recruitCatNumList}
 			</foreach>
 	 		 </if>
 		
