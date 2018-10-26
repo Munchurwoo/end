@@ -182,26 +182,35 @@
 	</div>
 </h4>
 
-<c:forEach items="${normalId}" var="normalId" varStatus="status">
-	<div class="media">
-		<a class="pull-left" href="#"> <img class="media-object"
-			src="${pageContext.request.contextPath}/
-									resources/upload/memberPicture/${povo[status.index].picturePath}"
-			width="130px" height="130px">
-		</a>
-		<div class="media-body">
-			<h4 class="media-heading">${normalId}</h4>
-			<h5>${povo[status.index].title}</h5>
-			<h6>${povo[status.index].content}</h6>
-			<!-- Nested media object -->
+<c:choose>
+	<c:when test="${empty normalId}">
+		없습니다
+	</c:when>
+	
+	<c:otherwise>
+		<c:forEach items="${normalId}" var="normalId" varStatus="status">
 			<div class="media">
-				<a href="user-normalDetailPortfolioList.do?normalId=${normalId }">
-					개발분야 : ${devCatList[status.index].devCatName} -> 인재상세 보기 </a>
+				<a class="pull-left" href="#"> <img class="media-object"
+					src="${pageContext.request.contextPath}/
+											resources/upload/memberPicture/${povo[status.index].picturePath}"
+					width="130px" height="130px">
+				</a>
+				<div class="media-body">
+					<h4 class="media-heading">${normalId}</h4>
+					<h5>${povo[status.index].title}</h5>
+					<h6>${povo[status.index].content}</h6>
+					<!-- Nested media object -->
+					<div class="media">
+						<a href="user-normalDetailPortfolioList.do?normalId=${normalId }">
+							개발분야 : ${devCatList[status.index].devCatName} -> 인재상세 보기 </a>
+					</div>
+				</div>
 			</div>
-		</div>
-	</div>
-	<hr>
-</c:forEach>
+			<hr>
+		</c:forEach>		
+	</c:otherwise>
+</c:choose>
+
 
 
 
