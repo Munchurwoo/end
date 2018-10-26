@@ -171,6 +171,7 @@
 
 			</div>
 		</div>
+	
 	<span id="enter"></span>
 	<div class="cta-text">
 		<button type="reset" class="btn btn-default" id="reset">초기화</button>

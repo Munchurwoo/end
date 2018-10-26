@@ -179,7 +179,7 @@ public class NormalServiceImpl implements NormalService {
 			pagingBean = new PagingBean(totalPostCount);
 		}
 		pagingBean.setPostCountPerPage(postCountPerPage);
-		//normalMember list 이름만 찾음.
+		//normalMember list 아이디, 이름만 찾음.
 		List<NormalMemberVO> nmList= normalMapper.getNormalMemberId(pagingBean);
 		PostListVO postListVO = new PostListVO();
 		postListVO.setNmList(nmList);
@@ -192,7 +192,19 @@ public class NormalServiceImpl implements NormalService {
 		return normalMapper.getMyQuestionList(qaVO);
 	}
 
+	@Override
+	public List<PortfolioVO> getNormalMember(String pageNum) {
+		PagingBean pagingBean;
+		int totalPostCount=normalMapper.getAllMemberListCount();
+		if (pageNum != null) { // 페이지 번호 주면
+			pagingBean = new PagingBean(totalPostCount, Integer.parseInt(pageNum));
+		} else { // 페이지 번호 안주면 1페이지
+			pagingBean = new PagingBean(totalPostCount);
+		}
+		List<PortfolioVO> pvo=normalMapper.getNormalMember(pagingBean);
+		return pvo;
+	}
 
-	
+		
+	}
 
-}
