@@ -4,7 +4,27 @@
 
 <!-- company_register_form -->
 
-<style>
+<style type="text/css">
+.resume_photo{
+	position : relative;
+	width : 120px;
+	height : 160px;
+}
+
+#company-picture{
+	position : absolute;
+	width : 120px;
+	height : 160px;
+}
+
+#pictureDeleteBtn{	
+	position: absolute;
+	z-index: 1;
+	right:0;
+	top:0;
+	width:27px;
+}
+
 .container {
   padding: 2px;
 }
@@ -155,7 +175,13 @@ button:hover {
 				return false;
 			}
 		});//submit
-		$("#uploadLogoBtn").change(function(){
+		 
+		$("#pictureUploadBtn").change(function(){
+			var deletePictureName=$("#company-picture").attr('alt');
+			if( (!deletePictureName) == false){ //기존 사진 있으면 
+				pictureDelete(deletePictureName); //삭제
+			}		
+			//사진 업로드	
 			var form = $("#companyRegisterForm")[0];	
 			var formData = new FormData(form);
 			$.ajax({
@@ -163,17 +189,43 @@ button:hover {
 				url:"user-uploadCompanyLogo.do",
 				data:formData,				
 				enctype: 'multipart/form-data',
+				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 				processData: false,
 		        contentType: false,
 		        cache: false,
 				success:function(path){	
-					$("#normal-picture").attr('src', "/GoodJob/resources/upload/companyLogo/"+path);
-					$("#aaa").append("<input type='hidden' name='picturePath' value='"+path+"'>");	
-					
+					$("#company-picture").attr('src', "/GoodJob/resources/upload/companyLogo/"+path);
+					$("#company-picture").attr('alt', path);
+					$("#pictureInputArea").html("<input type='hidden' name='picturePath' value='"+path+"'>");	
 				}
 			});//ajax
-			});//change
+			$("#pictureDeleteBtn").css('display', 'block');
+		});//change
+		
+		$("#pictureDeleteBtn").click(function() {
+			//사진파일 삭제
+			pictureDelete($("#company-picture").attr('alt'));			
+			//src변경
+			$("#company-picture").attr('src', "/GoodJob/resources/upload/etc/company_picture_add.png");
+			//alt변경
+			$("#company-picture").attr('alt', "");
+			//display변경
+			$("#pictureDeleteBtn").css('display', 'none');
+			//input value비움
+			$("#pictureUploadBtn").val("");		
+		});	//click
 	});//ready
+	
+	function pictureDelete(deletePicturename){
+		$.ajax({
+			type:"post",
+			url:"user-companyPictureDelete.do",
+			data:"deletePicturename="+deletePicturename,
+			success:function(result){
+				//alert("사진삭제완료");
+			}
+		});//ajax			
+	}
 </script>
 
 <form id="companyRegisterForm" action="user-registerCompanyMember.do" method="post" enctype="multipart/form-data">
@@ -205,13 +257,16 @@ button:hover {
 	매출액  <br><input type="number" name="sales"style="height:40px; width:500px;"><br><br>
 	설립일 <br><input type="text" name="dateOfEstablishment"style="height:40px; width:500px;"><br><br>
 	사원수 <br><input type="number" name="numOfEmployees"style="height:40px; width:500px;"><br><br>
-	회사로고<br><input type="file" id="uploadLogoBtn" required="required" name="uploadLogo">
-	 <a href="##" class="box_photo" data-api_type="layer" data-api_id="basic_photo" >
-	  <img id="normal-picture" src="" border="0" width="100" height="140" class="user_image" /></a>
-	<span id="aaa"></span>
+	회사로고<br>
+	<div class="resume_photo" style="width:120px;">
+		<img id="company-picture"  src="${pageContext.request.contextPath}/resources/upload/etc/company_picture_add.png" border="0" width="120" height="160"  >
+		<img id="pictureDeleteBtn" src="${pageContext.request.contextPath}/resources/upload/etc/x-button.jpg" class="button"  style="display: none; ">
+	</div>
+	<span id="pictureInputArea"></span>	<br>
+	<input type="file" name="uploadPicture" id="pictureUploadBtn" required="required"><br>
 	</div>	
-	  <div class="col-md-3"></div>
-	  </div>
+	<div class="col-md-3"></div>
+	</div>
 	<div class="container" style="text-align: center">
 	<input type="submit" value="회원가입" style="height:50px; width:150px;background: #81BEF7;font-size: 20px">
 	</div>
