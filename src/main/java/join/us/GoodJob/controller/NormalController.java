@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -378,7 +379,7 @@ public class NormalController {
 		}
 
 		model.addAttribute("recruitCatList", memberService.getRecruitCatVOList());
-		model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));
+		//model.addAttribute("devCatList", memberService.getDevCatVOListByrcNum("101"));
 		model.addAttribute("empTypeCatList", memberService.getEmpTypeCatVOList());
 		model.addAttribute("locCatList", memberService.getLocCatVOList());
 		model.addAttribute("acaCatList", memberService.getAcaCatVOList());
@@ -406,16 +407,18 @@ public class NormalController {
 		//질의응답 질문 등록(구인공고 상세보기에서)
 		@RequestMapping("registerQuestion.do")
 		@ResponseBody
-		public QuestionAnswerVO registerQuestion(QuestionAnswerVO qaVO,HttpSession session) {
-			MemberVO mvo = (MemberVO) session.getAttribute("mvo");
-			qaVO.setNormalId(mvo.getId());
-			qaVO.setAnswer(null);
-			normalService.registerQuestion(qaVO);
-			return qaVO;
-			
+		public List<QuestionAnswerVO> registerQuestion(Model model,QuestionAnswerVO qavo,HttpSession session) {
+			// 질의응답 등록
+			MemberVO mvo=(MemberVO) session.getAttribute("mvo");
+			qavo.setNormalId(mvo.getId());
+			normalService.registerQuestion(qavo);
+			// 질의응답 등록 후 바로 조회
+			qavo.setNormalId(mvo.getId());
+			List<QuestionAnswerVO> qvo=normalService.getMyQuestionList(qavo);
+			return qvo;
 		}
 		
-		//질의응답 나의질문리스트 
+/*		//질의응답 나의질문리스트 
 		@RequestMapping("getMyQuestionList.do")
 		public String getMyQuestionList(Model model,QuestionAnswerVO qaVO,HttpSession session) {			
 			MemberVO mvo = (MemberVO) session.getAttribute("mvo");
@@ -426,7 +429,7 @@ public class NormalController {
 	
 			return "normal/normal_my_question.tiles2";
 			
-		}
+		}*/
 		
 		//파일 다운로드 컨트롤러
 		@RequestMapping("fileDownload.do")

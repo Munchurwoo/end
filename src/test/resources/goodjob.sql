@@ -102,11 +102,8 @@ insert into PORTFOLIO(normal_id, title, content, picture_path) values('yosep', '
 insert into PORTFOLIO(normal_id, title, content, picture_path) values('MCW', '인재를 싸게 팝니다.', '주변 사람과 소통하며 혁신을 이뤄내는 사원이 되겠습니다.', '문철우.png');
 insert into PORTFOLIO(normal_id, title, content, picture_path) values('miri', 'Coder가 아닌 Developer가 되겠습니다.', '항상 배움의 자세로 새로운 분야에 도전하고 있으며, 매사에 도전하고 노력하는 인재입니다.', 'miri.png');
 insert into PORTFOLIO(normal_id, title, content, picture_path) values('hsj', '인재를 싸게 팝니다.', '주변 사람과 소통하며 혁신을 이뤄내는 사원이 되겠습니다.', '황성진.jpg');
-insert into PORTFOLIO(normal_id, title, content, picture_path) values('qqqq', 'Coder가 아닌 Developer가 되겠습니다.', '항상 배움의 자세로 새로운 분야에 도전하고 있으며, 매사에 도전하고 노력하는 인재입니다.', '엔시소.png');
-select * from interview;
-select * from normal_member;
-select * from company_member;
-select * from interview;
+insert into PORTFOLIO(normal_id, title, content, picture_path) values('qqqq', 'Coder가 아닌 Developer가 되겠습니다.', '항상 배움의 자세로 새로운 분야에 도전하고 있으며, 매사에 도전하고 노력하는 인재입니다.', '동규.png');
+
 
 update PORTFOLIO set picture_path='miri.png' where normal_id='miri';
 ---------------------------------------------------------------------
@@ -124,7 +121,6 @@ insert into PORTFOLIO_FILE(file_num, normal_id, file_path) values(portfolio_file
 insert into PORTFOLIO_FILE(file_num, normal_id, file_path) values(portfolio_file_seq.nextval, 'yosep', '소셜다이닝(sharebob).pptx');
 insert into PORTFOLIO_FILE(file_num, normal_id, file_path) values(portfolio_file_seq.nextval, 'MCW', 'GoodJob.pdf');
 
-select * from portfolio_dev;
 
 ---------------------------------------------------------------------
 
@@ -141,8 +137,8 @@ create table company_member(
    constraint fk_member_company_member foreign key(company_id) references member(id) on delete cascade
 );
 
-insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, sales, date_of_establishment, num_of_employees,picture_path) values('NHNuser', '더 넓은 세상, 더 많은 사람들이 더 큰 재미를 우리와 함께 나눕니다.', '대기업', '솔루션', 1813, '2015-11-18', 664,'로고로고');
-insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees, picture_path) values('Tmaxuser', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358,'로고로고');
+insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, sales, date_of_establishment, num_of_employees,picture_path) values('NHNuser', '더 넓은 세상, 더 많은 사람들이 더 큰 재미를 우리와 함께 나눕니다.', '대기업', '솔루션', 1813, '2015-11-18', 664,'maeil.jpg');
+insert into COMPANY_MEMBER(company_id, introduction, company_type, industry, num_of_employees, picture_path) values('Tmaxuser', '대한민국 S/W의 위상을 국내 및 전세계 시장에 알려나가고 있습니다.', '중견기업', 'SI/SM', 358,'로고로고.jpg');
 
 select * from company_member;
 ---------------------------------------------------------------------
@@ -160,7 +156,7 @@ create sequence job_posting_num_seq start with 1001;
 
 insert into JOB_POSTING(job_posting_num, company_id, career_status, title, content) values(job_posting_num_seq.nextval, 'NHNuser', '경력 3년4', 'NHN엔터테인먼트에서 Java 신입, 프리랜서 개발자 모집', 'Java 어플리케이션 개발 경험자, WAS 이해도가 높은 경험자 우대합니다.');
 insert into JOB_POSTING(job_posting_num, company_id, career_status, title, content) values(job_posting_num_seq.nextval, 'Tmaxuser', '경력 무관', '티맥스소프트 DBA 2018 하반기 공개채용', 'MS-SQL 서버 모니터링 및 트러블 슈팅경험 있으신 분, OLTP 업무 경험 있으신 분');
-insert into JOB_POSTING(job_posting_num, company_id, career_status, title, content) values(job_posting_num_seq.nextval, 'NHNuser', '경력 3년', 'NHN엔터테인먼트에서 Java 신입, 프리랜서 개발자 모집합니다  ', 'Java 어플리케이션 개발 경험자ㅎㅎㅎㅎㅎ, WAS 이해도가 높은 경험자 우대합니다테스트입니당.');
+insert into JOB_POSTING(job_posting_num, company_id, career_status, title, content) values(job_posting_num_seq.nextval, 'NHNuser', '경력 3년', 'C++경력 개발자 모집  ', 'C++에 대한 깊은 이해가 있으신분 열정을 가지신 분');
 
 select * from job_posting;
 ---------------------------------------------------------------------
@@ -193,7 +189,6 @@ insert into JOB_POSTING_KEYWORD(job_posting_num, keyword_name) values(1002, '열
 insert into JOB_POSTING_KEYWORD(job_posting_num, keyword_name) values(1002, '수평적 문화');
 insert into JOB_POSTING_KEYWORD(job_posting_num, keyword_name) values(1002, '야근 없음');
 
-select * from interview;
 ---------------------------------------------------------------------
 create table interview(
 	interview_num number primary key,
@@ -477,6 +472,15 @@ insert into PORTFOLIO_DEV(normal_id, dev_cat_num) values('yosep', 203);
 insert into PORTFOLIO_DEV(normal_id, dev_cat_num) values('yosep', 227);
 insert into PORTFOLIO_DEV(normal_id, dev_cat_num) values('MCW', 201);
 insert into PORTFOLIO_DEV(normal_id, dev_cat_num) values('MCW', 234);
+/**
+ insert into PORTFOLIO_DEV(normal_id, dev_cat_num) values('miri', 234);
+insert into PORTFOLIO_DEV(normal_id, dev_cat_num) values('miri', 234);
+insert into PORTFOLIO_DEV(normal_id, dev_cat_num) values('hsj', 234);
+insert into PORTFOLIO_DEV(normal_id, dev_cat_num) values('hsj', 234);
+ */
+
+
+
 
 select * from portfolio_dev;
 ----------------------------------------------------------------------
@@ -709,4 +713,12 @@ where i.normal_id = nm.normal_id and i.company_id = cm.company_id and i.normal_i
 and cm.company_id='NHNuser' 
 order by rnum desc
 
+select qa.question, qa.answer, jm.name, jm.title, qa.normal_id, qa.job_posting_num
+from (
+select jp.job_posting_num, m.name, jp.title 
+from job_posting jp, member m 
+where jp.company_id=m.id
+) jm, question_answer qa
+where qa.job_posting_num = jm.job_posting_num
+and qa.normal_id='qqqq'
 

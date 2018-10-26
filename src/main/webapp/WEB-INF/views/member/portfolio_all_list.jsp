@@ -26,9 +26,9 @@ $(document).ready(function(){
 			}//success					
 		});//ajax
 	});//change
-		$("#SearchBtn").click(function(){
+	/* 	$("#SearchBtn").click(function(){
 			$("#portfolioSearchList").submit();
-		});
+		}); */
 
 });//ready
 
@@ -65,7 +65,7 @@ $(document).ready(function(){
 				<c:forEach items="${requestScope.acaCatList}" var="acaCat"
 					varStatus="i">
 					<input type="checkbox" id="acaCatNumList" name="acaCatNumList"
-						value="${acaCat.academicNum}" required="required">${acaCat.academicName}&nbsp;
+						value="${acaCat.academicNum}" >${acaCat.academicName}&nbsp;
 	</c:forEach>
 			</div>
 		</div>
@@ -140,7 +140,7 @@ $(document).ready(function(){
 			width="130px" height="130px">
 		</a>
 		<div class="media-body">
-			<h4 class="media-heading"><span>${list.name}</span></h4>
+			<h4 class="media-heading"><span><a href="normalDetailPortfolio.do?normalId=${list.normalId }">${list.name}</a></span></h4>
 			<h5>${povo[status.index].title}</h5>
 			<h5>${povo[status.index].content}</h5>
 			<h5>개발분야 : 	

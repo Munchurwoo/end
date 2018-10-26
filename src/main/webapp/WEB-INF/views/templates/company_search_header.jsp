@@ -105,7 +105,7 @@
 </div>
 <div class="container"
 	style="padding-left: 120px; padding-right: 120px;">
-	<form action="user-portfolioSearchList.do" method="get"
+	<form action="user-company_detail_search_list.do" method="get"
 		id="master">
 		<div class="panel panel-info">
 			<div class="panel-heading">
@@ -128,7 +128,7 @@
 				<c:forEach items="${requestScope.allAcaCatList}" var="acaCat"
 					varStatus="i">
 					<input type="checkbox" id="acaCatNumList" name="acaCatNumList"
-						value="${acaCat.academicNum}" required="required">${acaCat.academicName}&nbsp;
+						value="${acaCat.academicNum}" >${acaCat.academicName}&nbsp;
 	</c:forEach>
 			</div>
 		</div>
@@ -184,8 +184,8 @@
 	</form>
 	
 	<form action="user-findJobPostingByTitle.do" >
-		<input type="radio" name="searchType" value="keyword">키워드 
-		<input type="radio" name="searchType" value="title">제목
+		<input type="radio" name="searchType" value="keyword" required="required">키워드 
+		<input type="radio" name="searchType" value="title" required="required">제목
 		<input type="text" name="searchText" required="required">
 		<input type="submit" id="searchBtn" value="검색하기">
 	</form>

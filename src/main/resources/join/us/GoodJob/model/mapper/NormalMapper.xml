@@ -165,43 +165,56 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		from(
 		select pa.normal_id, pa.academic_num,
 		pd.dev_cat_num, pe.emp_type_num,
-		pl.loc_num
+		pl.loc_num, pr.rc_num
 		from portfolio_academic pa,
 		portfolio_dev pd, portfolio_emp pe,
-		portfolio_loc pl
+		portfolio_loc pl, member m, portfolio_recruitment pr
 		where pa.normal_id
 		= pd.normal_id
 		and pd.normal_id = pe.normal_id
 		and pe.normal_id = pl.normal_id
+		and pl.normal_id=pr.normal_id
 		)
+		<where>
+			<if test="locCatNumList != null">
+	   		    loc_num in
+				<foreach item="locCatNumList" collection="locCatNumList" open="(" separator="," close=")">
+					#{locCatNumList}
+				</foreach>
+	 		 </if>
+	 		 
+			<if test="acaCatNumList != null">
+		   		 and academic_num in
+				<foreach item="acaCatNumList" collection="acaCatNumList" open="(" separator="," close=")">
+					#{acaCatNumList}
+				</foreach>
+	 		 </if>
+	
+			<if test="devCatNumList != null">
+		   		 and dev_cat_num in
+				<foreach item="devCatNumList" collection="devCatNumList" open="(" separator="," close=")">
+					#{devCatNumList}
+				</foreach>
+	 		 </if>
+	 		 
+	 		 <if test="empTypeCatNumList != null">
+	   		 and emp_type_num in
+			<foreach item="empTypeCatNumList" collection="empTypeCatNumList" open="(" separator="," close=")">
+				#{empTypeCatNumList}
+			</foreach>
+	 		 </if>
+	 		 
+	 		 
+	 		 <if test="recruitCatNumList != null">
+	   		 and rc_num in
+			<foreach item="recruitCatNumList" collection="recruitCatNumList" open="(" separator="," close=")">
+				#{recruitCatNumList}
+			</foreach>
+	 		 </if>
 		
-		<if test="locCatNumList != null">
-   		 where loc_num in
-		<foreach item="locCatNumList" collection="locCatNumList" open="(" separator="," close=")">
-			#{locCatNumList}
-		</foreach>
- 		 </if>
- 		 
-		<if test="acaCatNumList != null">
-   		 and academic_num in
-		<foreach item="acaCatNumList" collection="acaCatNumList" open="(" separator="," close=")">
-			#{acaCatNumList}
-		</foreach>
- 		 </if>
-
-		<if test="devCatNumList != null">
-   		 and dev_cat_num in
-		<foreach item="devCatNumList" collection="devCatNumList" open="(" separator="," close=")">
-			#{devCatNumList}
-		</foreach>
- 		 </if>
- 		 
- 		 <if test="empTypeCatNumList != null">
-   		 and emp_type_num in
-		<foreach item="empTypeCatNumList" collection="empTypeCatNumList" open="(" separator="," close=")">
-			#{empTypeCatNumList}
-		</foreach>
- 		 </if>
+		</where>
+		
+		
 
 	</select>
 	
@@ -210,11 +223,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		values (interview_num_seq.nextval,#{normalId},#{companyId},#{jobPostingNum},#{title},#{content})
 	</insert>
 	
-
-	<insert id="registerQuestion" parameterType="questionAnswerVO">
-	insert into QUESTION_ANSWER(qa_num, normal_id, job_posting_num, question) 
-	values(qa_num_seq.nextval, #{normalId}, #{jobPostingNum}, #{question})
-	</insert>
+	
 
 	<!-- 1023 CHERWOO 
 	인재검색 페이징 처리를 위한 게시물수 출력
@@ -225,15 +234,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 </select>
 	 
 	 <select id="getNormalMemberId" resultType="normalMemberVO" parameterType="pagingBean">
-	 	select normal_id
+	 	select normal_id, name
 	 	from (
-	 	select row_number() over(order by nm.normal_id) as rnum, nm.normal_id
+	 	select row_number() over(order by nm.normal_id) as rnum, nm.normal_id, m.name
 	 	from member m , normal_member nm , portfolio p
 	 	where m.id = nm.normal_id and nm.normal_id = p.normal_id
 	 	)where rnum between #{startRowNumber} and #{endRowNumber}
 	 	
 	 </select>
-	 
+	 <!-- 구직자가 질의응답 글 등록 -->
+	<insert id="registerQuestion" parameterType="questionAnswerVO">
+	insert into QUESTION_ANSWER(qa_num, normal_id, job_posting_num, question) 
+	values(qa_num_seq.nextval, #{normalId}, #{jobPostingNum}, #{question})
+	</insert>
+	
 	 <select id="getMyQuestionList" resultType="questionAnswerVO" parameterType="string">
 		select qa.question,qa.answer,jm.name,jm.title,qa.normal_id,qa.job_posting_num
 		from (select jp.job_posting_num,m.name,jp.title from job_posting jp,member m where jp.company_id=m.id) jm, question_answer qa
