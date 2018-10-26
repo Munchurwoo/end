@@ -28,6 +28,11 @@
 	});//ready
 </script>
 
+
+
+<div class="col-md-4"></div>
+<form action="registerJobPosting.do" method="get" id="registerForm">
+<div class="col-md-6" style="text-align: left">
 <h4 class="heading">
 	<div class="cta-text">
 		<h2>
@@ -35,11 +40,8 @@
 		</h2>
 	</div>
 </h4>	
-
-<form action="registerJobPosting.do" method="get" id="registerForm">
-	제목 <input type="text" name="title" placeholder="제목을 입력하세요" required="required"><br>
-	내용<br>&nbsp;&nbsp;&nbsp;<textarea rows="10" cols="60" name="content" placeholder="내용을 입력하세요" required="required"></textarea><br><br>
-		
+	<h5>제목</h5><br> <input type="text" name="title" placeholder="제목을 입력하세요" required="required" style="height:40px; width:400px;"><br>
+	<h5>내용</h5><br><textarea rows="10" cols="60" name="content" placeholder="내용을 입력하세요" required="required"></textarea><br>	
 	<h5>지역</h5>
 	<c:forEach items="${requestScope.locCatList}" var="locCat" varStatus="i">
 		<input type="checkbox" name="locCatNumList" value="${locCat.locNum}" >${locCat.locName}&nbsp;
@@ -66,10 +68,15 @@
 	<h5>개발분야</h5>
 	<div id="empTypeArea">		
 	</div>	
-		<button type="reset">초기화</button>	
-		<input type="submit" value="등록하기">
-		<button type="reset" onclick="location.href='home.do'">홈으로</button>	
+		
+		<div class="col-md-2"></div>
+		<div class="col-md-12">
+		<button type="reset"style="height:50px; width:150px;background: #81BEF7;font-size: 20px">초기화</button>	
+		<input type="submit" value="등록하기"style="height:50px; width:150px;background: #81BEF7;font-size: 20px">
+		</div>
+		</div>
 </form>	
+
 
 
 

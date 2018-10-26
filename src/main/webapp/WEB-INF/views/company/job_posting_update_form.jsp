@@ -72,8 +72,10 @@
 	</div>
 </h4>	
 <form action="updateJobPosting.do" method="post" id="updateForm">
-	제목 <input type="text" name="title" placeholder="${jpvo.jobPostingVO.title}" required="required"><br>
-	내용<br>&nbsp;&nbsp;&nbsp;<textarea rows="10" cols="60" name="content" placeholder="${jpvo.jobPostingVO.content}" required="required"></textarea><br><br>
+<div class="col-md-4"></div>
+<div class="col-md-6" style="text-align: left">
+	<h5>제목</h5><br> <input type="text" name="title" placeholder="${jpvo.jobPostingVO.title}" required="required"required="required" style="height:40px; width:400px;"><br>
+	<h5>내용</h5><br><textarea rows="10" cols="60" name="content" placeholder="${jpvo.jobPostingVO.content}" required="required"></textarea><br><br>
 		
 	<h5>지역</h5>
 	<c:forEach items="${requestScope.allLocCatList}" var="allLocCat" varStatus="i">
@@ -100,12 +102,16 @@
 		<input type="hidden" name="a" value="b">	
 	<h5>개발분야</h5>
 	<div id="empTypeArea">		
-	</div>	
-		<button type="reset">초기화</button>	
-		<input type="hidden" name="companyId" value="${jpvo.companyId}">
-		<input type="hidden" name="jobPostingNum" value="${jpvo.jobPostingVO.jobPostingNum}">
-		<input type="submit" value="수정하기">
-		<button type="reset" onclick="location.href='home.do'">홈으로</button>	
+	</div>
+
+<div class="col-md-2"></div>	
+<div class="col-md-12">	
+		<button type="reset" style="height:50px; width:150px;background: #81BEF7;font-size: 20px">초기화</button>	
+		<input type="hidden" name="companyId" value="${jpvo.companyId}" style="height:50px; width:150px;background: #81BEF7;font-size: 20px">
+		<input type="hidden" name="jobPostingNum" value="${jpvo.jobPostingVO.jobPostingNum}" style="height:50px; width:150px;background: #81BEF7;font-size: 20px">
+		<input type="submit" value="수정하기" style="height:50px; width:150px;background: #81BEF7;font-size: 20px">	
+	</div>
+</div>
 </form>	
 
 
