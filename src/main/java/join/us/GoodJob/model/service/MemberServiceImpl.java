@@ -1,10 +1,14 @@
 package join.us.GoodJob.model.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import join.us.GoodJob.model.mapper.MemberMapper;
 import join.us.GoodJob.model.vo.AcaCatVO;
@@ -16,6 +20,9 @@ import join.us.GoodJob.model.vo.RecruitCatVO;
 
 @Service
 public class MemberServiceImpl implements MemberService {
+	private String workspaceUploadPath;
+	private String workspaceDeletePath;
+	
 	@Resource
 	MemberMapper memberMapper;
 
@@ -107,5 +114,47 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public List<EmpTypeCatVO> getEmpCatVOListByNormalId(String normalId) {
 		return memberMapper.getEmpCatVOListByNormalId(normalId);
+	}
+	
+	@Override
+	public void pictureUpload(String member, MultipartFile uploadPicture,HttpServletRequest request) {
+		if(member.equals("normal"))
+			workspaceUploadPath="C:\\java-kosta\\framework-workspace2\\goodjob\\src\\main\\webapp\\resources\\upload\\memberPicture\\";
+		else if(member.equals("company"))
+			workspaceUploadPath="C:\\java-kosta\\framework-workspace2\\goodjob\\src\\main\\webapp\\resources\\upload\\companyLogo\\";
+		System.out.println("업로드 경로:"+workspaceUploadPath);
+		
+		if(uploadPicture.isEmpty()==false) {
+			System.out.println("파일명:"+uploadPicture.getOriginalFilename());
+			File uploadWorkspaceFile=new File(workspaceUploadPath+uploadPicture.getOriginalFilename());
+			try {
+				if(uploadWorkspaceFile.exists())
+					uploadWorkspaceFile.delete();
+				
+				uploadPicture.transferTo(uploadWorkspaceFile);
+				System.out.println("성공");
+			} catch (IllegalStateException | IOException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	@Override
+	public void pictureDelete(String member, String deletePicturename) {
+		if(member.equals("normal"))
+			workspaceDeletePath="C:/java-kosta/framework-workspace2/goodjob/src/main/webapp/resources/upload/memberPicture/"+deletePicturename;
+		else if(member.equals("company"))
+			workspaceDeletePath="C:/java-kosta/framework-workspace2/goodjob/src/main/webapp/resources/upload/companyLogo/"+deletePicturename;
+		
+		if (!deletePicturename.isEmpty()) {
+			File deleteWorkspaceFile = new File(workspaceDeletePath);
+			
+			try {
+				deleteWorkspaceFile.delete();
+				System.out.println(deletePicturename+"  사진 삭제 완료");
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 }

@@ -4,7 +4,31 @@
 
 <!-- company_mypage -->
 
+<!-- <script type="text/javascript">
+$(document).ready(function(){
+	var companyId="${requestScope.cmvo.companyId}";
+	 var jobPostingTitle="${requestScope.jvo.title}";  */
+	$("#jpBtn").click(function(){
+		   $.ajax({
+			type:"get",
+			url:"companyJobPostingList.do",
+			data:"companyId="+companyId,
+			success:function(result) {
+			 	if(result.jobPostingTitle==null){
+					alert("등록된 구인공고가 없습니다")
+					return false
+				}else{
+					location.href = "companyJobPostingList.do?companyId=companyId";
+				} 
+			}//success
+		});//ajax  
+	});//click
+});//ready
+</script> -->
+
 <script>
+
+
 	function deleteCompanyMember() {
 		var delConfirm = confirm("${requestScope.cmvo.companyId}님 정말 회원 탈퇴를 하시겠습니까?");
 		if (delConfirm == true) {
@@ -13,9 +37,16 @@
 			return;
 		}
 	}
+	
 </script>
 
-<h3 align="center">${sessionScope.mvo.name }님마이페이지</h3>
+<h4 class="heading">
+	<div class="cta-text">
+		<h2>
+			<span>${sessionScope.mvo.name }</span>님 마이페이지
+		</h2>
+	</div>
+</h4>	
 <br>
 <br>
 <div class="container">
@@ -76,7 +107,7 @@
 	</div>
 	<div class="col-sm-3"></div>
 </div>
-<a href="getAllInterviewerList.do?companyId=${requestScope.cmvo.companyId}">면접신청자 명단조회</a>
+<%-- <a href="getAllInterviewerList.do?companyId=${requestScope.cmvo.companyId}">면접신청자 명단조회</a> --%>
 <br>
 <br>
 <a href="updateCompanyMemberForm.do">회원정보수정</a>
@@ -90,9 +121,8 @@
 	style="height: 40px; width: 150px;">회원탈퇴</button>
 <br>
 <br>
-<button class="btn-1"
-	onclick="location.href='companyJobPostingList.do?companyId=${requestScope.cmvo.companyId}'"
-	style="height: 40px; width: 150px;">내 구인공고 리스트</button>
+<button class="btn-1" style="height: 40px; width: 150px;"
+	onclick="javascript:location.href='companyJobPostingList.do?companyId=${requestScope.cmvo.companyId}'">내 구인공고 리스트</button>
 <br>
 <br>
 

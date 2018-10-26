@@ -42,7 +42,7 @@ public class CompanyController {
 	
 	/*실제 운영시에 사용
 	private String serverUploadPath;*/	
-	private String workspaceUploadPath;
+	//private String workspaceUploadPath;
 
 	/**
 	 * 기업회원 회원가입 폼으로 이동
@@ -91,7 +91,7 @@ public class CompanyController {
 		companyService.updateCompanyMember(companyMemberVO);
 		return "redirect:company_mypage.do";
 	}
-	@ResponseBody
+	/*@ResponseBody
 	@PostMapping("user-updateCompanyLogo.do")
 	public String updateCompanyLogo(MultipartFile updateLogo) {
 		workspaceUploadPath="C:\\java-kosta\\framework-workspace2\\goodjob\\src\\main\\webapp\\resources\\upload\\companyLogo\\";
@@ -105,8 +105,7 @@ public class CompanyController {
 			}
 		}
 		return updateLogo.getOriginalFilename();
-		
-	}
+	}*/
 
 	/**
 	 * 181015 MIRI 기업회원 마이페이지
@@ -119,6 +118,8 @@ public class CompanyController {
 		if (mvo != null) {
 			CompanyMemberVO cmvo = companyService.myPageCompanyMember(mvo.getId());
 			model.addAttribute("cmvo", cmvo);
+			/*List<JobPostingVO> jvo=(List<JobPostingVO>) companyService.companyJobPostingList(mvo.getId());
+			model.addAttribute("jvo",jvo);*/
 		}
 		return "company/company_mypage.tiles2";
 	}
@@ -228,11 +229,12 @@ public class CompanyController {
 		return "company/company_job_postingList.tiles2";
 	}
 	/**
+	 * 181026 MIRI 기업, 개인 register, update시 사진 업로드 공통으로 묶음
 	 * 기업로고사진 파일 등록 Ajax
 	 * @param uploadPicture
 	 * @param request
 	 * @return
-	 */
+	 *//*
 	@PostMapping("user-uploadCompanyLogo.do")
 	@ResponseBody
 	public String uploadCompanyLogo(MultipartFile uploadPicture,HttpServletRequest request) {
@@ -242,6 +244,8 @@ public class CompanyController {
 			System.out.println("파일명:"+uploadPicture.getOriginalFilename());
 			File uploadWorkspaceFile=new File(workspaceUploadPath+uploadPicture.getOriginalFilename());
 			try {
+				if(uploadWorkspaceFile.exists())
+					uploadWorkspaceFile.delete();
 				uploadPicture.transferTo(uploadWorkspaceFile);
 				System.out.println("성공");
 			} catch (IllegalStateException | IOException e) {
@@ -250,7 +254,7 @@ public class CompanyController {
 			}
 		}
 		return uploadPicture.getOriginalFilename();
-	}
+	}*/
 	/**
 	 * 채용정보 전체보기
 	 * @param model
@@ -294,11 +298,11 @@ public class CompanyController {
 		return "company/company_detail_search_list.company_search_tiles";
 	} 
 	
-	@RequestMapping("getAllInterviewerList.do")
+	/*@RequestMapping("getAllInterviewerList.do")
 	public String getAllInterviewerList(Model model, String companyId) {
 		model.addAttribute("interviewerList", companyService.getAllInterviewerList(companyId));
 		return "company/company_InterviewApplyList.tiles2";
-	}
+	}*/
 	
 	/**
 	 * 181024 MIRI 구인 공고별 면접자 리스트
@@ -431,18 +435,4 @@ public class CompanyController {
 		return "company/keywordSearch_result.company_search_tiles";
 	}
 	
-	/**
-	 * 181026 MIRI 기업 회원가입, 수정시 폼에서 X버튼클릭시 사진 삭제
-	 * @param deletePicturename
-	 * @return
-	 */
-	@RequestMapping("user-companyPictureDelete.do")	
-	@ResponseBody
-	public String companyPictureDelete(String deletePicturename) {	
-		String workspaceDeletePath="C:/java-kosta/framework-workspace2/goodjob/src/main/webapp/resources/upload/companyLogo/"+deletePicturename;
-		File file = new File(workspaceDeletePath);
-		file.delete();
-		System.out.println(deletePicturename+"  사진 삭제 완료");
-		return "success";
-	}
 }

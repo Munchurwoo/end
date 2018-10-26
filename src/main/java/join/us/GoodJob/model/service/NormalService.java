@@ -2,8 +2,6 @@ package join.us.GoodJob.model.service;
 
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PortfolioVO;

@@ -66,9 +66,10 @@
 			//사진 업로드
 			var form = $("#registerForm")[0];
 			var formData = new FormData(form);
+			formData.append('member', "normal");
 			$.ajax({
 				type:"post",
-				url:"normalPictureUpload.do",
+				url:"user-pictureUpload.do",
 				data:formData,				
 				enctype: 'multipart/form-data',
 				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
@@ -83,10 +84,6 @@
 			});//ajax
 			$("#pictureDeleteBtn").css('display', 'block');
 		});//change
-	/* 	
-		$("#registerBtn").click(function() {
-			$("#registerForm").submit();
-		});//click			 */	
 		
 		$("#pictureDeleteBtn").click(function() {
 			//사진파일 삭제
@@ -108,8 +105,8 @@
 	function pictureDelete(deletePicturename){
 		$.ajax({
 			type:"post",
-			url:"normalPictureDelete.do",
-			data:"deletePicturename="+deletePicturename,
+			url:"user-pictureDelete.do",
+			data:"member=normal&deletePicturename="+deletePicturename,
 			success:function(result){
 				//alert("사진삭제완료");
 			}
@@ -143,14 +140,14 @@
 
 <div id="registerPortfolio" >
 
-	<!-- normal_register_portfolio -->
-	<h4 class="heading">
-		<div class="cta-text">
-			<h2>
-				<span>GoodJob</span> 이력서 작성
-			</h2>
-		</div>
-	</h4>
+<!-- normal_register_portfolio -->
+<h4 class="heading">
+	<div class="cta-text">
+		<h2>
+			<span>GoodJob</span> 이력서 작성
+		</h2>
+	</div>
+</h4>
 
 
 	<form action="registerPortfolio.do" method="post" id="registerForm" enctype="multipart/form-data">

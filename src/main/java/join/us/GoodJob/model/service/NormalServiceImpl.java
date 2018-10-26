@@ -7,14 +7,12 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import join.us.GoodJob.model.mapper.NormalMapper;
 import join.us.GoodJob.model.vo.InterviewVO;
-import join.us.GoodJob.model.vo.MemberVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PortfolioVO;
 import join.us.GoodJob.model.vo.PostListVO;

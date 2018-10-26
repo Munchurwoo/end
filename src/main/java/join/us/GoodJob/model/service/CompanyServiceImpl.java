@@ -194,21 +194,21 @@ public class CompanyServiceImpl implements CompanyService {
 		return companyMapper.getJobPostingQAByQANum(qaNum);
 	}
 
-	public List<InterviewVO> getAllInterviewerList(String companyId) {
+	/*public List<InterviewVO> getAllInterviewerList(String companyId) {
 		return companyMapper.getAllInterviewerList(companyId);
-	}
+	}*/
 	@Override
-	public PostListVO getJobPostingInterviewerList(String jobPostingNum, String pageNum) {
-		PagingBean pagingBean = null;
+	public PostListVO getJobPostingInterviewerList(String jobPostingNum,String pageNum) {
+		/*PagingBean pagingBean = null;
 		int interviewerTotCnt = jobPostingInterviewerTotalCount(jobPostingNum);
 		if(pageNum == null)
 			pagingBean = new PagingBean(interviewerTotCnt);
 		else
-			pagingBean = new PagingBean(interviewerTotCnt, Integer.parseInt(pageNum), 2);
+			pagingBean = new PagingBean(interviewerTotCnt, Integer.parseInt(pageNum), 2);*/
 		List<InterviewVO> ivList = companyMapper.getJobPostingInterviewerList(jobPostingNum, pageNum);
 		
 		PostListVO postListVO = new PostListVO();
-		postListVO.setPagingBean(pagingBean);
+		//postListVO.setPagingBean(pagingBean);
 		postListVO.setIvList(ivList);
 		
 		return postListVO;
@@ -275,8 +275,8 @@ public class CompanyServiceImpl implements CompanyService {
 	public int jobPostingInterviewerTotalCount(String jobPostingNum) {
 		return companyMapper.jobPostingInterviewerTotalCount(jobPostingNum);
 	}
-	@Override
+	/*@Override
 	public List<InterviewVO> getAllInterviewerList2() {
 		return companyMapper.getAllInterviewerList2();
-	}
+	}*/
 }

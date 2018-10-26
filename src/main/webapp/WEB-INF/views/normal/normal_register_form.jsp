@@ -163,6 +163,14 @@ button:hover {
 	});//ready
 </script>
 
+<h4 class="heading">
+	<div class="cta-text">
+		<h2>
+			<span>GoodJob</span> 개인 회원 가입
+		</h2>
+	</div>
+</h4>	
+
 <form id="normalRegisterForm" action="user-registerNormalMember.do" method="post">
 <div class="container">
 	<div class="col-md-2"></div>

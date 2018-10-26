@@ -7,7 +7,7 @@
 			<h4 class="heading">
 				<div class="cta-text">
 					<h2>
-						<span>GoodJob</span>
+						<span>${requestScope.cmvo.companyId }</span> 공고 모두 보기
 					</h2>
 				</div>
 			</h4>	

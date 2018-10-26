@@ -4,7 +4,13 @@
 
 <!-- login_form -->
 
-
+<h4 class="heading">
+	<div class="cta-text">
+		<h2>
+			<span>GoodJob</span> 로그인
+		</h2>
+	</div>
+</h4>	
 
 <form action="user-login.do" method="post">
 	<div class="container">
@@ -23,7 +29,7 @@
 	</div>
 </form>
 
-<form class="form-horizontal" role="form">
+<!-- <form class="form-horizontal" role="form">
 	<div class="form-group">
 		<label for="inputEmail3" class="col-sm-2 control-label">Email</label>
 		<div class="col-sm-10">
@@ -52,3 +58,4 @@
 		</div>
 	</div>
 </form>
+ -->

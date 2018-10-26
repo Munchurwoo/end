@@ -184,9 +184,10 @@ button:hover {
 			//사진 업로드	
 			var form = $("#companyRegisterForm")[0];	
 			var formData = new FormData(form);
+			formData.append('member', "company");
 			$.ajax({
 				type:"post",
-				url:"user-uploadCompanyLogo.do",
+				url:"user-pictureUpload.do",
 				data:formData,				
 				enctype: 'multipart/form-data',
 				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
@@ -219,14 +220,22 @@ button:hover {
 	function pictureDelete(deletePicturename){
 		$.ajax({
 			type:"post",
-			url:"user-companyPictureDelete.do",
-			data:"deletePicturename="+deletePicturename,
+			url:"user-pictureDelete.do",
+			data:"member=company&deletePicturename="+deletePicturename,
 			success:function(result){
 				//alert("사진삭제완료");
 			}
 		});//ajax			
 	}
 </script>
+
+<h4 class="heading">
+	<div class="cta-text">
+		<h2>
+			<span>GoodJob</span> 기업 회원 가입
+		</h2>
+	</div>
+</h4>	
 
 <form id="companyRegisterForm" action="user-registerCompanyMember.do" method="post" enctype="multipart/form-data">
 	<div class="container">

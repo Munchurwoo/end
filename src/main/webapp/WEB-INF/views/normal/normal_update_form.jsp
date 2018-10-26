@@ -4,7 +4,13 @@
 
 <!-- normal_update_form -->
 
-<h3 align="center">회원 정보 수정</h3><br><br>
+<h4 class="heading">
+	<div class="cta-text">
+		<h2>
+			<span>${requestScope.nmvo.name }</span>님 회원 정보 수정
+		</h2>
+	</div>
+</h4>	
 
 <script type="text/javascript">
 	$(document).ready(function () {
