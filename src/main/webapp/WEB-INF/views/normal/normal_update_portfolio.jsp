@@ -395,7 +395,6 @@
 		<button type="submit"  onclick="return checkForm()">수정완료</button>	
 		<input type="button" value="취소" onclick="javascript:location.href='home.do'">		
 	</form >	
-	<button type="reset" onclick="location.href='home.do'">홈으로</button>	
 </div>
 
 

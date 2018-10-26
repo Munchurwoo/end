@@ -119,6 +119,8 @@ public class CompanyController {
 		if (mvo != null) {
 			CompanyMemberVO cmvo = companyService.myPageCompanyMember(mvo.getId());
 			model.addAttribute("cmvo", cmvo);
+			/*List<JobPostingVO> jvo=(List<JobPostingVO>) companyService.companyJobPostingList(mvo.getId());
+			model.addAttribute("jvo",jvo);*/
 		}
 		return "company/company_mypage.tiles2";
 	}
