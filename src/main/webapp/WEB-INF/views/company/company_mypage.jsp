@@ -4,27 +4,28 @@
 
 <!-- company_mypage -->
 
-<!-- <script type="text/javascript">
+<script type="text/javascript">
 $(document).ready(function(){
 	var companyId="${requestScope.cmvo.companyId}";
-	 var jobPostingTitle="${requestScope.jvo.title}";  */
+	
 	$("#jpBtn").click(function(){
 		   $.ajax({
 			type:"get",
-			url:"companyJobPostingList.do",
+			url:"isJobPosting.do",
 			data:"companyId="+companyId,
 			success:function(result) {
-			 	if(result.jobPostingTitle==null){
+				
+			 	if(result=="asd"){
 					alert("등록된 구인공고가 없습니다")
 					return false
 				}else{
-					location.href = "companyJobPostingList.do?companyId=companyId";
+					location.href = "companyJobPostingList.do?companyId="+companyId;
 				} 
 			}//success
 		});//ajax  
 	});//click
 });//ready
-</script> -->
+</script>
 
 <script>
 
@@ -121,8 +122,8 @@ $(document).ready(function(){
 	style="height: 40px; width: 150px;">회원탈퇴</button>
 <br>
 <br>
-<button class="btn-1" style="height: 40px; width: 150px;"
-	onclick="javascript:location.href='companyJobPostingList.do?companyId=${requestScope.cmvo.companyId}'">내 구인공고 리스트</button>
+<button class="btn-1" style="height: 40px; width: 150px;" id="jpBtn"
+	<%-- onclick="javascript:location.href='companyJobPostingList.do?companyId=${requestScope.cmvo.companyId}'" --%>>내 구인공고 리스트</button>
 <br>
 <br>
 

@@ -112,14 +112,13 @@ public class CompanyController {
 	 * 
 	 * @return
 	 */
+	
 	@RequestMapping("company_mypage.do")
 	public String myPageCompanyMember(String companyId, Model model, HttpSession session) {
 		MemberVO mvo = (MemberVO) session.getAttribute("mvo");
 		if (mvo != null) {
 			CompanyMemberVO cmvo = companyService.myPageCompanyMember(mvo.getId());
 			model.addAttribute("cmvo", cmvo);
-			/*List<JobPostingVO> jvo=(List<JobPostingVO>) companyService.companyJobPostingList(mvo.getId());
-			model.addAttribute("jvo",jvo);*/
 		}
 		return "company/company_mypage.tiles2";
 	}
@@ -431,6 +430,19 @@ public class CompanyController {
 		model.addAttribute("jobPostingList2", jobPostingList2);
 		
 		return "company/keywordSearch_result.company_search_tiles";
+	}
+	@ResponseBody
+	@RequestMapping("isJobPosting.do")
+	public String isJobPosting(String companyId) {
+		String result=null;
+		List<JobPostingVO> jpvo=companyService.companyJobPostingList(companyId);
+		if(jpvo.isEmpty()) {
+			result="asd";
+		}else {
+			result="dsa";
+		}
+		return result;
+		
 	}
 	
 }
