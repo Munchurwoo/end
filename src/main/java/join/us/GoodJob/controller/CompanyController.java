@@ -307,9 +307,11 @@ public class CompanyController {
 	 */
 	@PostMapping("getJobPostingInterviewerList.do")
 	public String getJobPostingInterviewerList(String jobPostingNum, Model model, String pageNum) {
+		System.out.println(jobPostingNum);
 		PostListVO plvo = companyService.getJobPostingInterviewerList(jobPostingNum, pageNum);
+		System.out.println(plvo);
 		model.addAttribute("plvo", plvo);
-		
+
 		List<InterviewVO> ivvoList = plvo.getIvList();
 		if(ivvoList.isEmpty() == false) {
 			List<DevCatVO> dcvoList = new ArrayList<DevCatVO>();
