@@ -1,10 +1,5 @@
 package join.us.GoodJob;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,19 +7,16 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import join.us.GoodJob.model.mapper.CompanyMapper;
-import join.us.GoodJob.model.service.PagingBean;
-import join.us.GoodJob.model.vo.CatNumParamVO;
-import join.us.GoodJob.model.vo.CompanyMemberVO;
-import join.us.GoodJob.model.vo.InterviewVO;
-import join.us.GoodJob.model.vo.JobPostingVO;
+import join.us.GoodJob.model.mapper.NormalMapper;
+import join.us.GoodJob.model.vo.QuestionAnswerVO;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring-model.xml"})
 public class SungjinUnitTest {
 	/*@Autowired
 	CompanyService companyService;
 */
-	/*@Autowired
-	NormalMapper normalMapper;*/
+	@Autowired
+	NormalMapper normalMapper;
 	
 	/*@Autowired
 	MemberMapper memberMapper;
@@ -34,13 +26,15 @@ public class SungjinUnitTest {
 	CompanyMapper companyMapper;
 	@Test
 	public void test() {
-		String companyId="NHNuser";
-		String jobPostingNum="1003";
-		String normalId="hsj";
-		InterviewVO interviewVO=new InterviewVO();
-		interviewVO.setCompanyId(companyId);
-		
-	System.out.println(companyMapper.getAllInterviewerList(companyId));
+		String question="하이엽";
+		String jobPostingNum="1002";
+		String normalId="qqqq";
+		QuestionAnswerVO qvo=new QuestionAnswerVO();
+		//qvo.setQuestion(question);
+		qvo.setNormalId(normalId);
+		//qvo.setJobPostingNum(jobPostingNum);
+		//System.out.println(normalMapper.registerQuestion(qvo));
+		System.out.println(normalMapper.getMyQuestionList(qvo));
 		
 	}
 }

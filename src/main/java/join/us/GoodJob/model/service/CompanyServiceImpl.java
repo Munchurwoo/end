@@ -91,7 +91,7 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	public PostListVO getAllJobPostingList(String pageNum) {
 			PagingBean pagingBean;
-			System.out.println("전체구인공고 조회시 pageNum : "+pageNum);
+			//System.out.println("전체구인공고 조회시 pageNum : "+pageNum);
 			int totalJobPostingCount=companyMapper.getAlljobPostingCount();
 			if (pageNum != null) { // 페이지 번호 주면
 				pagingBean = new PagingBean(totalJobPostingCount, Integer.parseInt(pageNum));

@@ -68,7 +68,9 @@ public interface MemberService {
 	// 포트폴리오 노말아이디로 고용형태 분류 리스트 받아오기
 	List<EmpTypeCatVO> getEmpCatVOListByNormalId(String normalId);
 	
+	//181026 MIRI 사진 업로드 공통
 	void pictureUpload(String member, MultipartFile uploadPicture, HttpServletRequest request);
-
+	
+	//181026 MIRI 사진 삭제 공통
 	void pictureDelete(String member, String deletePicturename);
 }

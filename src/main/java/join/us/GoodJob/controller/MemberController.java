@@ -1,9 +1,7 @@
 package join.us.GoodJob.controller;
 
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.List;	
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +20,6 @@ import join.us.GoodJob.model.vo.MemberVO;
 
 @Controller
 public class MemberController {
-	
 	@Resource
 	MemberService memberService;
 

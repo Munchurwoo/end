@@ -1,11 +1,12 @@
 package join.us.GoodJob.model.service;
 
 import java.util.List;
+
 import join.us.GoodJob.model.vo.InterviewVO;
 import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PortfolioVO;
-import join.us.GoodJob.model.vo.QuestionAnswerVO;
 import join.us.GoodJob.model.vo.PostListVO;
+import join.us.GoodJob.model.vo.QuestionAnswerVO;
 
 
 public interface NormalService {
@@ -52,10 +53,10 @@ public interface NormalService {
 	PostListVO portfolioAllListAndPagingProcess(String pageNum, int postCountPerPage );
 	
 	//질의응답 질문 등록
-	void registerQuestion(QuestionAnswerVO qaVO);
+	void registerQuestion(QuestionAnswerVO qavo);
 	
 	//질의응답 나의 질문 리스트
-	List<QuestionAnswerVO> getMyQuestionList(QuestionAnswerVO qaVO);
+	List<QuestionAnswerVO> getMyQuestionList(QuestionAnswerVO qavo);
 	
 	List<PortfolioVO> getNormalMember(String pageNum);
 }
