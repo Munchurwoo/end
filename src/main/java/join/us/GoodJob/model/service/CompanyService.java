@@ -81,7 +81,7 @@ public interface CompanyService {
 
 	//181023 MIRI 구인 공고별 면접자 리스트
 	//PostListVO getJobPostingInterviewerList(String jobPostingNum, String pageNum);
-	PostListVO getJobPostingInterviewerList(String jobPostingNum);
+	PostListVO getJobPostingInterviewerList(String jobPostingNum,String pageNum);
 	
 	//181025 MIRI 구인공고별 면접자 토탈 카운트
 	int jobPostingInterviewerTotalCount(String jobPostingNum);
