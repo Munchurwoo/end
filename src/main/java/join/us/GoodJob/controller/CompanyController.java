@@ -20,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import join.us.GoodJob.model.service.CompanyService;
 import join.us.GoodJob.model.service.MemberService;
 import join.us.GoodJob.model.service.NormalService;
+import join.us.GoodJob.model.service.PagingBean;
 import join.us.GoodJob.model.vo.CatNumParamVO;
 import join.us.GoodJob.model.vo.CompanyMemberVO;
 import join.us.GoodJob.model.vo.DevCatVO;
@@ -88,7 +89,7 @@ public class CompanyController {
 	@PostMapping("updateCompanyMember.do")
 	public String updateCompanyMember(CompanyMemberVO companyMemberVO) {
 		companyService.updateCompanyMember(companyMemberVO);
-		return "redirect:home.do";
+		return "redirect:company_mypage.do";
 	}
 	@ResponseBody
 	@PostMapping("user-updateCompanyLogo.do")
@@ -162,7 +163,7 @@ public class CompanyController {
 		//jobPostingVO.setJobPostingNum(jobPostingVO.getJobPostingNum());
 		System.out.println(jobPostingVO);
 		companyService.registerJobPosting(jobPostingVO,true);
-		return "redirect:home.do";
+		return "redirect:job_posting_detail.do?jobPostingNum="+jobPostingVO.getJobPostingNum();
 	}
 
 
@@ -299,8 +300,11 @@ public class CompanyController {
 	 * @return
 	 */
 	@PostMapping("getJobPostingInterviewerList.do")
-	public String getJobPostingInterviewerList(String jobPostingNum, Model model) {
-		List<InterviewVO> ivvoList = companyService.getJobPostingInterviewerList(jobPostingNum);
+	public String getJobPostingInterviewerList(String jobPostingNum, Model model, String pageNum) {
+		PostListVO plvo = companyService.getJobPostingInterviewerList(jobPostingNum, pageNum);
+		model.addAttribute("plvo", plvo);
+		
+		List<InterviewVO> ivvoList = plvo.getIvList();
 		if(ivvoList.isEmpty() == false) {
 			List<DevCatVO> dcvoList = new ArrayList<DevCatVO>();
 			List<String> dcnameList = null;

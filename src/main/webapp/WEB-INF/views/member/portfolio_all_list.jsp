@@ -37,7 +37,7 @@ $(document).ready(function(){
 
 <div class="cta-text">
 	<h2>
-		<span>인재 상세</span> 검색하기
+		<span>GoodJob </span>인재 상세 검색
 	</h2>
 </div>
 <div class="container"
@@ -134,21 +134,21 @@ $(document).ready(function(){
 
 <c:forEach items="${postListVO.nmList}" var="list" varStatus="status">
 	<div class="media">
-		<a class="pull-left" href="#"> <img class="media-object"
-			src="${pageContext.request.contextPath}/
-									resources/upload/memberPicture/${povo[status.index].picturePath}"
+		<a class="pull-left" href="normalDetailPortfolio.do?normalId=${list.normalId }">
+		<img class="media-object"	
+		src="${pageContext.request.contextPath}/resources/upload/memberPicture/${povo[status.index].picturePath}"
 			width="130px" height="130px">
 		</a>
 		<div class="media-body">
 			<h4 class="media-heading">${list.name}</h4>
 			<h5>${povo[status.index].title}</h5>
 			<h5>${povo[status.index].content}</h5>
-			<h5>개발분야 : 
-			<c:forEach items="${ devCatList}" var="devCatList">
+			<h5>개발분야 : 	
+			<c:forEach items="${devCatList}" var="devCatList">
 			${devCatList.devCatName}
 			</c:forEach>
-			<a href="user-normalDetailPortfolioList.do?normalId=${list.normalId }" style="font-weight: bold;">
-			인재상세 보기 
+			<a href="normalDetailPortfolio.do?normalId=${list.normalId }" style="font-weight: bold;">
+			이력서 보기 
 			</a>
 			</h5>
 		</div>
