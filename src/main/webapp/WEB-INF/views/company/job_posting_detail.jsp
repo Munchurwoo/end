@@ -18,7 +18,14 @@ $(document).ready(function(){
 		})//click	
 	})//ready
 </script>
-<h3>${jpvo.jobPostingVO.title }</h3>
+<h4 class="heading">
+	<div class="cta-text">
+		<h2>
+			<span>${jpvo.jobPostingVO.title }</span>
+		</h2>
+	</div>
+</h4>	
+
 <div class="container">
 <table class="table table-bordered">
 	<thead>	

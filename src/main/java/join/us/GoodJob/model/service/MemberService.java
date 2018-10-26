@@ -2,6 +2,10 @@ package join.us.GoodJob.model.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import join.us.GoodJob.model.vo.AcaCatVO;
 import join.us.GoodJob.model.vo.DevCatVO;
 import join.us.GoodJob.model.vo.EmpTypeCatVO;
@@ -63,4 +67,8 @@ public interface MemberService {
 
 	// 포트폴리오 노말아이디로 고용형태 분류 리스트 받아오기
 	List<EmpTypeCatVO> getEmpCatVOListByNormalId(String normalId);
+	
+	void pictureUpload(String member, MultipartFile uploadPicture, HttpServletRequest request);
+
+	void pictureDelete(String member, String deletePicturename);
 }

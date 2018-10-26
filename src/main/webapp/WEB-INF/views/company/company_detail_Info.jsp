@@ -1,7 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <div class="container">
-<h3><a href="companyJobPostingList.do?companyId=${requestScope.cmvo.companyId}">${requestScope.cmvo.name}</a></h3>
+<h4 class="heading">
+	<div class="cta-text">
+		<h2>
+			<span><a href="companyJobPostingList.do?companyId=${requestScope.cmvo.companyId}">${requestScope.cmvo.name}</a></span>
+		</h2>
+	</div>
+</h4>
 	<table class="table table-bordered">
 		<thead>
 			<tr>		

@@ -15,7 +15,14 @@
 	}
 </script>
 
-<h3 align="center">${sessionScope.mvo.name }님 마이페이지</h3><br><br>
+<h4 class="heading">
+	<div class="cta-text">
+		<h2>
+			<span>${sessionScope.mvo.name }</span>님 마이페이지
+		</h2>
+	</div>
+</h4>	
+
 <div class="container">
 <div class="col-sm-3"></div>
 <div class="col-sm-6" style="text-align: center">

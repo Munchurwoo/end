@@ -26,7 +26,13 @@
 }
 </style>
 
-<h3 align="center">회원 정보 수정</h3><br><br>
+<h4 class="heading">
+	<div class="cta-text">
+		<h2>
+			<span>${requestScope.cmvo.name }</span>님 회원 정보 수정
+		</h2>
+	</div>
+</h4>	
 
 <script type="text/javascript">
 	$(document).ready(function () {
@@ -89,8 +95,8 @@
 			}
 		});//submit
 		
-		$("#pictureUploadBtn").change(function(){
-			/* var form = $("#companyUpdateForm")[0];	
+		/* $("#pictureUploadBtn").change(function(){
+			var form = $("#companyUpdateForm")[0];	
 			var formData = new FormData(form);
 			$.ajax({
 				type:"post",
@@ -105,6 +111,7 @@
 					$("#aaa").append("<input type='hidden' name='picturePath' value='"+path+"'>");						
 				}
 			});//ajax */
+		$("#pictureUploadBtn").change(function(){
 			var deletePictureName=$("#company-picture").attr('alt');
 			if( (!deletePictureName) == false){ //기존 사진 있으면 
 				pictureDelete(deletePictureName); //삭제
@@ -112,16 +119,17 @@
 			//사진 업로드
 			var form = $("#companyUpdateForm")[0];
 			var formData = new FormData(form);
+			formData.append('member', "company");
 			$.ajax({
 				type:"post",
-				url:"user-updateCompanyLogo.do",
+				url:"user-pictureUpload.do",
 				data:formData,				
 				enctype: 'multipart/form-data',
 				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 				processData: false,
 		        contentType: false,
 		        cache: false,
-				success:function(path){
+				success:function(path){	
 					$("#company-picture").attr('src', "/GoodJob/resources/upload/companyLogo/"+path);
 					$("#company-picture").attr('alt', path);
 					$("#pictureInputArea").html("<input type='hidden' name='picturePath' value='"+path+"'>");	
@@ -147,8 +155,8 @@
 	function pictureDelete(deletePicturename){
 		$.ajax({
 			type:"post",
-			url:"user-companyPictureDelete.do",
-			data:"deletePicturename="+deletePicturename,
+			url:"user-pictureDelete.do",
+			data:"member=company&deletePicturename="+deletePicturename,
 			success:function(result){
 				//alert("사진삭제완료");
 			}
@@ -162,13 +170,6 @@
 	<span id="passwordView"> </span><br><br>
 	비밀번호 확인  <input type="password" id="checkPass" name="checkPass" required="required">
 	<span id="checkPassView"> </span><br><br>
-	회사로고<br>
-	<div class="resume_photo" style="width:120px;">
-		<img id="company-picture"  src="${pageContext.request.contextPath}/resources/upload/etc/company_picture_add.png" border="0" width="120" height="160"  >
-		<img id="pictureDeleteBtn" src="${pageContext.request.contextPath}/resources/upload/etc/x-button.jpg" class="button"  style="display: none; ">
-	</div>
-	<span id="pictureInputArea"></span>	<br>
-	<input type="file" name="uploadPicture" id="pictureUploadBtn" required="required"><br>
 	이메일 주소  <input type="text" value="${requestScope.cmvo.email }" name="email" required="required"><br><br>
 	기업 명  <input type="text" value="${requestScope.cmvo.name }" name="name" readonly="readonly"><br><br>
 	주소  <input type="text" value="${requestScope.cmvo.address }" name="address" required="required"><br><br>
@@ -179,6 +180,13 @@
 	매출액 <input type="number" value="${requestScope.cmvo.sales }" name="sales"><br><br>
 	설립일 <input type="text" value="${requestScope.cmvo.dateOfEstablishment }" name="dateOfEstablishment"><br><br>
 	사원수 <input type="number" value="${requestScope.cmvo.numOfEmployees }" name="numOfEmployees"><br><br>
+	회사로고<br>
+	<div class="resume_photo" style="width:120px;">
+		<img id="company-picture"  src="${pageContext.request.contextPath}/resources/upload/etc/company_picture_add.png" border="0" width="120" height="160"  >
+		<img id="pictureDeleteBtn" src="${pageContext.request.contextPath}/resources/upload/etc/x-button.jpg" class="button"  style="display: none; ">
+	</div>
+	<span id="pictureInputArea"></span>	<br>
+	<input type="file" name="uploadPicture" id="pictureUploadBtn" required="required"><br>
 	<input type="submit" value="회원정보수정">
 </form>
 

@@ -1,14 +1,19 @@
 package join.us.GoodJob.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import join.us.GoodJob.model.service.MemberService;
 import join.us.GoodJob.model.vo.CatNumParamVO;
@@ -17,6 +22,7 @@ import join.us.GoodJob.model.vo.MemberVO;
 
 @Controller
 public class MemberController {
+	
 	@Resource
 	MemberService memberService;
 
@@ -100,5 +106,32 @@ public class MemberController {
 			session.invalidate();
 		}
 		return "home.tiles";
+	}
+	
+	/**
+	 * 181026 MIRI 사진 업로드 (기업, 개인)
+	 * @param member
+	 * @param uploadPicture
+	 * @param request
+	 * @return
+	 */
+	@PostMapping("user-pictureUpload.do")
+	@ResponseBody
+	public String pictureUpload(String member, MultipartFile uploadPicture,HttpServletRequest request) {
+		memberService.pictureUpload(member, uploadPicture, request);
+		return uploadPicture.getOriginalFilename();
+	}
+	
+	/**
+	 * 181026 MIRI X버튼 클릭시 사진 삭제 (기업, 개인)
+	 * @param member
+	 * @param deletePicturename
+	 * @return
+	 */
+	@RequestMapping("user-pictureDelete.do")	
+	@ResponseBody
+	public String pictureDelete(String member, String deletePicturename) {
+		memberService.pictureDelete(member, deletePicturename);
+		return "success";
 	}
 }

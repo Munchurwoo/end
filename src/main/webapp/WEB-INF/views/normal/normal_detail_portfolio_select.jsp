@@ -2,11 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
 <!-- normal_detail_portfolio -->
 
-
-<h3 align="center">포트폴리오 상세보기</h3><br><br>
+<h4 class="heading">
+	<div class="cta-text">
+		<h2>
+			<span>GoodJob</span> 포트폴리오 상세보기
+		</h2>
+	</div>
+</h4>	
 
 	제목 :${povo.title }<br>
 	이름 : ${nmvo.name }<br>

@@ -64,7 +64,13 @@
 	});//ready
 </script>
 
-<h3>공고 작성</h3>
+<h4 class="heading">
+	<div class="cta-text">
+		<h2>
+			<span>GoodJob</span> 구인 공고 수정
+		</h2>
+	</div>
+</h4>	
 <form action="updateJobPosting.do" method="post" id="updateForm">
 	제목 <input type="text" name="title" placeholder="${jpvo.jobPostingVO.title}" required="required"><br>
 	내용<br>&nbsp;&nbsp;&nbsp;<textarea rows="10" cols="60" name="content" placeholder="${jpvo.jobPostingVO.content}" required="required"></textarea><br><br>

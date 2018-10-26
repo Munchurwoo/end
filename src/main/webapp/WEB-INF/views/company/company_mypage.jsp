@@ -15,7 +15,13 @@
 	}
 </script>
 
-<h3 align="center">${sessionScope.mvo.name }님마이페이지</h3>
+<h4 class="heading">
+	<div class="cta-text">
+		<h2>
+			<span>${sessionScope.mvo.name }</span>님 마이페이지
+		</h2>
+	</div>
+</h4>	
 <br>
 <br>
 <div class="container">
@@ -76,7 +82,7 @@
 	</div>
 	<div class="col-sm-3"></div>
 </div>
-<a href="getAllInterviewerList.do?companyId=${requestScope.cmvo.companyId}">면접신청자 명단조회</a>
+<%-- <a href="getAllInterviewerList.do?companyId=${requestScope.cmvo.companyId}">면접신청자 명단조회</a> --%>
 <br>
 <br>
 <a href="updateCompanyMemberForm.do">회원정보수정</a>

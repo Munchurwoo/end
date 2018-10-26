@@ -58,7 +58,7 @@
 	<h4 class="heading">
 		<div class="cta-text">
 			<h2>
-				<span>GoodJob</span> 이력서 상세보기
+				<span>${povo.title }</span>
 			</h2>
 		</div>
 	</h4>

@@ -28,8 +28,14 @@
 	});//ready
 </script>
 
+<h4 class="heading">
+	<div class="cta-text">
+		<h2>
+			<span>GoodJob</span> 구인 공고 작성
+		</h2>
+	</div>
+</h4>	
 
-<h3>공고 작성</h3>
 <form action="registerJobPosting.do" method="get" id="registerForm">
 	제목 <input type="text" name="title" placeholder="제목을 입력하세요" required="required"><br>
 	내용<br>&nbsp;&nbsp;&nbsp;<textarea rows="10" cols="60" name="content" placeholder="내용을 입력하세요" required="required"></textarea><br><br>

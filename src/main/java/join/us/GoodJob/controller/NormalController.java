@@ -41,8 +41,8 @@ public class NormalController {
 	@Resource
 	CompanyService companyService;
 	// private String serverUploadPath; //삭제하지마 ㅠㅠ
-	private String workspaceUploadPath;
-	private String workspaceDeletePath;
+	//private String workspaceUploadPath;
+	//private String workspaceDeletePath;
 
 	/**
 	 * 181015 MIRI 개인 회원가입 폼(NORMAL_MEMBER)
@@ -157,20 +157,21 @@ public class NormalController {
 	 */
 
 	/**
+	 * 181026 MIRI 기업, 개인 register, update시 사진 업로드 공통으로 묶음
 	 * 181017 요셉 사진 업로드 Ajax 컨트롤러
 	 * 
 	 * @param uploadPicture
 	 * @param request
 	 * @return
-	 */
+	 *//*
 	@PostMapping("normalPictureUpload.do")
 	@ResponseBody
 	public String uploadNormalPicture(MultipartFile uploadPicture, HttpServletRequest request) {
-		/*
+		
 		 * System.out.println("uploadNormalPicture시작"); //실제 운영시에 사용할 서버 업로드 경로
 		 * serverUploadPath
 		 * =request.getSession().getServletContext().getRealPath("/resources/upload/");
-		 */
+		 
 		// 개발시에는 워크스페이스 업로드 경로로 준다
 		workspaceUploadPath = "C:\\java-kosta\\framework-workspace2\\goodjob\\src\\main\\webapp\\resources\\upload\\memberPicture\\";
 		// System.out.println("서버 업로드 경로:"+serverUploadPath);
@@ -190,7 +191,7 @@ public class NormalController {
 			}
 		}
 		return uploadPicture.getOriginalFilename();
-	}
+	}*/
 
 	//181025 yosep - 기능 중복으로 주석처리
 	// 인재검색 섹션에서 인재검색 결과를 나타냄 
@@ -330,7 +331,7 @@ public class NormalController {
 	 */
 	@RequestMapping("deletePortfolio.do")
 	public String deletePortfolio(String id, String picturePath, HttpServletRequest request) {
-		workspaceDeletePath = "C:\\java-kosta\\framework-workspace2\\goodjob\\src\\main\\webapp\\resources\\upload\\memberPicture\\";
+		/*workspaceDeletePath = "C:\\java-kosta\\framework-workspace2\\goodjob\\src\\main\\webapp\\resources\\upload\\memberPicture\\";
 		if (picturePath.isEmpty() == false) {
 			File deleteWorkspaceFile = new File(workspaceDeletePath + picturePath);
 			try {
@@ -339,25 +340,26 @@ public class NormalController {
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 			}
-		}
-
+		}*/
+		memberService.pictureDelete("normal", picturePath);
 		normalService.deletePortfolio(id);
 
 		return "redirect:home.do";
 	}
 	
 	/**
+	 * 181026 MIRI 기업, 개인 register, update시 사진 삭제 공통으로 묶음
 	 * 181021 yosep 이력서 등록 폼에서 X버튼클릭시 사진 삭제
-	 */
+	 *//*
 	@RequestMapping("normalPictureDelete.do")	
 	@ResponseBody
-	public String normalPictureDelete(String deletePicturename) {	
+	public String normalPictureDelete(String member, String deletePicturename) {	
 		String workspaceDeletePath="C:/java-kosta/framework-workspace2/goodjob/src/main/webapp/resources/upload/memberPicture/"+deletePicturename;
 		File file = new File(workspaceDeletePath);
 		file.delete();
 		System.out.println(deletePicturename+"  사진 삭제 완료");
 		return "success";
-	}
+	}*/
 
 	/**
 	 * 2018-10-22 철우 인재검색 리스트에서 상세검색 버튼 클릭시 이동하는 컨트롤러
