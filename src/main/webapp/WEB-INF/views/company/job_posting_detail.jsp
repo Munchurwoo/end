@@ -16,9 +16,6 @@ $(document).ready(function(){
 				}	
 			})//ajax 
 		})//click	
-		$("#questionTable").click(function(){
-			$("#detail").toggle();
-		})
 	})//ready
 </script>
 <h3>${jpvo.jobPostingVO.title }</h3>
@@ -137,32 +134,115 @@ $(document).ready(function(){
 	${jpvo.email }
 	</td>
 	</tr>
-	
-	<tr>
-	<th colspan="2" id="questionTable"><a href="##">질의응답</a></th>
-	</tr>	
-	<tr>
-	<th colspan="2">
-	<c:choose>
-<c:when test="${sessionScope.mvo.memberType==1}">
-
-		<input type="text" name="questionArea" id="questionArea" required="required"  style="height:30px; width:500px;">
-		<input type="hidden" name="jobPostingNum" id="jobPostingNum">
-		<input type="button" value="질문등록" id="registerQuestionBtn" name="registerQuestionBtn">
-		</c:when>
-		<c:otherwise>		
-		</c:otherwise>
-		</c:choose>
-<th>
-	</tr>
-		
-		<tr><td colspan="2" id="detail">
-		<c:forEach items="${qaList}" var="qaList">질문 : ${qaList.question }<br>답 : ${qaList.answer }<br><br></c:forEach></td></tr>
-		
-
 	</tbody>
 </table>
 </div>
+	<div class="panel panel-default ">
+	<c:forEach items="컨트롤러에서 받아온 객체" var="변수명">
+		<div class="panel-heading accordion-toggle question-toggle collapsed"
+			data-toggle="collapse" data-parent="#faqAccordion"
+			data-target="#question${status.index }">
+			<h4 class="panel-title">
+				<a href="#" class="ing">Q: 질문데이터 출력</a>
+			</h4>
+		</div>
+		<div id="question${status.index }" class="panel-collapse collapse"
+			style="height: 0px;">
+			<div class="panel-body">
+				<h5>
+					<span class="label label-primary">Answer</span>
+				</h5>
+				<p id="qaText${qavo.qaNum }">답변데이터 출력</p>
+				<div id="buttonSubmit${qavo.qaNum }">	
+					<button type="submit" id="answerCancel${qavo.qaNum }" style="visibility: hidden;">취소</button>
+					<button type="submit" id="answerOK${qavo.qaNum }" style="visibility: hidden;">완료</button><br>
+					<button type="submit" id="answerUpdate${qavo.qaNum }" >수정</button>
+					<button type="submit" id="answerDelete${qavo.qaNum }" >삭제</button>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+		$(document).ready(function() {
+			var answer = "${qavo.answer}";
+			$("#answerUpdate"+${qavo.qaNum}).click(function() {
+				var qanum = ${qavo.qaNum};
+				var text = "<textarea rows=\"5\" cols=\"100\" id=\"qaTextArea"+qanum+"\">";
+				if(answer == null) {
+					text += "";
+				} else {
+					text += answer;
+				}
+				text += "</textarea>";
+				$("#qaText"+qanum).html(text);
+				$("#qaTextArea"+qanum).focus();
+				document.getElementById('answerOK'+qanum).style.visibility = 'visible';
+				document.getElementById('answerCancel'+qanum).style.visibility = 'visible';
+				document.getElementById('answerUpdate'+qanum).style.visibility = 'hidden';
+				document.getElementById('answerDelete'+qanum).style.visibility = 'hidden';
+			});
+			$("#answerDelete"+${qavo.qaNum}).click(function() {
+				var qanum = ${qavo.qaNum};
+				if(answer == null) {
+					alert("답변이 아직 등록되지 않았습니다.");
+					return false;
+				}
+				var delConfirm = confirm("정말 삭제하시겠습니까?");
+				if(delConfirm == false) {
+					return false;
+				} else {
+					$.ajax({
+						type:"get",
+						data:"QANum="+qanum,
+						url:"deleteQAToAnswer.do",
+						success:function(result) {
+							if(result.answer == null) {
+								alert("해당 답변이 삭제 되었습니다.");
+								answer = result.answer;
+								$("#qaText"+qanum).text(" ");
+							}
+						}
+					});
+				}
+			});
+			$("#answerOK"+${qavo.qaNum}).click(function() {
+				var qanum = ${qavo.qaNum};
+				$.ajax({
+					type:"get",
+					data:"QANum="+qanum+"&answer="+$("#qaTextArea"+qanum).val(),
+					url:"updateQAToAnswer.do",
+					success:function(result) {
+						if(result.answer != null) {
+							alert("해당 답변이 수정되었습니다.");
+							$("#qaText"+qanum).text(result.answer);
+							answer = result.answer;
+							document.getElementById('answerOK'+qanum).style.visibility = 'hidden';
+							document.getElementById('answerCancel'+qanum).style.visibility = 'hidden';
+							document.getElementById('answerUpdate'+qanum).style.visibility = 'visible';
+							document.getElementById('answerDelete'+qanum).style.visibility = 'visible';
+						} else {
+						}
+					}
+				});
+			});
+			$("#answerCancel"+${qavo.qaNum}).click(function() {
+				var qanum = ${qavo.qaNum};
+				$("#qaText"+qanum).html(answer);
+				document.getElementById('answerOK'+qanum).style.visibility = 'hidden';
+				document.getElementById('answerCancel'+qanum).style.visibility = 'hidden';
+				document.getElementById('answerUpdate'+qanum).style.visibility = 'visible';
+				document.getElementById('answerDelete'+qanum).style.visibility = 'visible';
+			});
+		})
+		</script>
+	</c:forEach>
+</div>
+	
+
+
+
+
+
+
 <!-- 세션에 있는 회원이 normalMember 이면 면접신청 을 할수있는 기능을 추가하려고 함 -->
 <c:choose>
 	<c:when test="${sessionScope.mvo.memberType==1}">
