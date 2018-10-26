@@ -144,7 +144,7 @@ public class NormalController {
 		// 181019 MIRI 포트폴리오 등록/수정 동시에 활용하기위해 flag를 줌
 		normalService.registerPortfolio(portfolioVO, true);
 		System.out.println("이력서 등록 성공");
-		return "redirect:home.do";
+		return "redirect:normalDetailPortfolio.do?normalId="+mvo.getId();
 	}
 
 	// 181018 MIRI 일반회원, 기업회원 회원탈퇴 공통으로 묶음
@@ -192,8 +192,9 @@ public class NormalController {
 		return uploadPicture.getOriginalFilename();
 	}
 
+	//181025 yosep - 기능 중복으로 주석처리
 	// 인재검색 섹션에서 인재검색 결과를 나타냄 
-	@RequestMapping("user-normalDetailPortfolioList.do")
+/*	@RequestMapping("user-normalDetailPortfolioList.do")
 	public String normalDetailPortfolioList(String normalId, Model model) {
 		model.addAttribute("devCatList", memberService.getDevCatVOListByNormalId(normalId));
 		model.addAttribute("empTypeCatList", memberService.getEmpCatVOListByNormalId(normalId));
@@ -207,7 +208,7 @@ public class NormalController {
 
 		return "normal/normal_detail_portfolio_select.tiles2";
 
-	}
+	}*/
 
 	/**
 	 * 동규 포트폴리오 상세보기

@@ -265,7 +265,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		order by rnum desc
 	</select>
 		
-		
 	<!-- 181023 MIRI 반복되는 sql 묶기 -->
 	<!-- <sql id="getInterviewerInfo">
 		select i.interview_num,i.job_posting_num,i.title,i.content,nm.normal_id,m.name
@@ -369,33 +368,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 </mapper> 		
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

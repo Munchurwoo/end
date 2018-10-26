@@ -176,7 +176,7 @@ button:hover {
 	<div class="col-md-3"></div>
 	<div class="col-md-6" style="text-align: left; font-size: 20px; font-weight: bold; " >
 	아이디  <br><input type="text" id="id" name="id" required="required" style="height:40px; width:400px;">
-	<input type="button" id="checkId" value="중복체크" style="height:40px; width:100px;">
+	<input type="button" id="checkId" value="중복체크" style="height:40px; width:100px;"><br>
 	<span id="idView"> </span><br><br>
 	비밀번호  <br><input type="password" id="password" name="password" required="required" style="height:40px; width:500px;"><br>
 	<span id="passwordView"> </span><br><br>
