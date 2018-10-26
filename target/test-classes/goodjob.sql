@@ -103,7 +103,10 @@ insert into PORTFOLIO(normal_id, title, content, picture_path) values('MCW', '�
 insert into PORTFOLIO(normal_id, title, content, picture_path) values('miri', 'Coder가 아닌 Developer가 되겠습니다.', '항상 배움의 자세로 새로운 분야에 도전하고 있으며, 매사에 도전하고 노력하는 인재입니다.', 'miri.png');
 insert into PORTFOLIO(normal_id, title, content, picture_path) values('hsj', '인재를 싸게 팝니다.', '주변 사람과 소통하며 혁신을 이뤄내는 사원이 되겠습니다.', '황성진.jpg');
 insert into PORTFOLIO(normal_id, title, content, picture_path) values('qqqq', 'Coder가 아닌 Developer가 되겠습니다.', '항상 배움의 자세로 새로운 분야에 도전하고 있으며, 매사에 도전하고 노력하는 인재입니다.', '엔시소.png');
-select * from portfolio;
+select * from interview;
+select * from normal_member;
+select * from company_member;
+select * from interview;
 
 update PORTFOLIO set picture_path='miri.png' where normal_id='miri';
 ---------------------------------------------------------------------
@@ -695,7 +698,6 @@ select count(*)
 from job_posting_keyword k , job_posting j
 where k.job_posting_num = j.job_posting_num
 and k.keyword_name like '%수평적문화%'
-<<<<<<< HEAD
 
 -- 기업 마이페이지 -> 면접신청자명단조회 시
 -- 최신순으로 조회하기 위해 rnum 추가했고
@@ -708,5 +710,3 @@ and cm.company_id='NHNuser'
 order by rnum desc
 
 
-=======
->>>>>>> branch 'master' of https://github.com/Munchurwoo/goodjob

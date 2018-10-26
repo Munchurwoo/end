@@ -266,12 +266,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 		
 		
-	<!-- 181023 MIRI 반복되는 sql 묶기 -->
-	<sql id="getInterviewerInfo">
+	 <!-- 181023 MIRI 반복되는 sql 묶기 -->
+	<!-- <sql id="getInterviewerInfo">
 		select i.interview_num,i.job_posting_num,i.title,i.content,nm.normal_id,m.name
 		from interview i, normal_member nm , member m
 		where i.normal_id = nm.normal_id and nm.normal_id = m.id
-	</sql>
+	</sql> -->
 	<select id="interviewInfo" resultType="interviewVO" parameterType="interviewVO">
 		select i.interview_num,i.job_posting_num,i.title,i.content,nm.normal_id,cm.company_id
 		from interview i , normal_member nm , company_member cm
@@ -280,11 +280,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		and i.normal_id=#{normalId}
 	</select>
 	
-	<select id="getAllInterviewerList2" resultMap="interviewVORM">
+	<!-- <select id="getAllInterviewerList" resultMap="interviewVORM">
 		<include refid="getInterviewerInfo"/>
-	</select>
+	</select> -->
 	<select id="getJobPostingInterviewerList" parameterType="string" resultMap="interviewVORM">
-		<include refid="getInterviewerInfo"/>
+		select i.interview_num,i.job_posting_num,i.title,i.content,nm.normal_id,m.name
+		from interview i, normal_member nm , member m
+		where i.normal_id = nm.normal_id and nm.normal_id = m.id
 		and i.job_posting_num=#{value}
 	</select>
 	
@@ -367,33 +369,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 </mapper> 		
  
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

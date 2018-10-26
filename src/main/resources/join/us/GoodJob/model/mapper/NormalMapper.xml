@@ -221,8 +221,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 -->
 	 <select id="getAllMemberListCount" resultType="int">
 		select count(*) 
-		from member m , normal_member nm, portfolio p
-		where m.id = nm.normal_id and nm.normal_id=p.normal_id
+		from portfolio 
 	 </select>
 	 
 	 <select id="getNormalMemberId" resultType="normalMemberVO" parameterType="pagingBean">
