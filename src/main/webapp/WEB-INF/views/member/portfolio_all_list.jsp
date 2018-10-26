@@ -147,10 +147,10 @@ $(document).ready(function(){
 			<c:forEach items="${devCatList}" var="devCatList">
 			${devCatList.devCatName}
 			</c:forEach>
-			<a href="normalDetailPortfolio.do?normalId=${list.normalId }" style="font-weight: bold;">
-			이력서 보기 
-			</a>
 			</h5>
+				<a href="normalDetailPortfolio.do?normalId=${list.normalId }" style="font-weight: bold;">
+				이력서 보기 
+				</a>
 		</div>
 	</div>
 	<hr>

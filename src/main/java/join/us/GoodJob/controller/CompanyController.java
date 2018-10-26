@@ -414,6 +414,9 @@ public class CompanyController {
 		model.addAttribute("allAcaCatList", memberService.getAcaCatVOList());
 		PostListVO jobPostingList2 = companyService.findJobPostingBytitle(searchText,searchType,pageNum);
 		System.out.println(jobPostingList2);
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("searchText", searchText);
+		System.out.println(searchType);
 		model.addAttribute("jobPostingList2", jobPostingList2);
 		
 		return "company/keywordSearch_result.company_search_tiles";

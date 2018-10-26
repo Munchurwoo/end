@@ -1,7 +1,5 @@
 package join.us.GoodJob.model.service;
 
-import java.awt.print.Pageable;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +7,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import join.us.GoodJob.model.mapper.CompanyMapper;
 import join.us.GoodJob.model.vo.CatNumParamVO;
@@ -234,6 +233,7 @@ public class CompanyServiceImpl implements CompanyService {
 	public PostListVO findJobPostingBytitle(String searchText,String searchType,String pageNum) {
 		PagingBean pagingBean;	
 		PostListVO postListVO=new PostListVO();
+		ModelAndView mav=new ModelAndView();
 		Map<String,Object> map=new HashMap<String,Object>();
 
 		System.out.println("검색조건 : "+searchType);
@@ -251,7 +251,6 @@ public class CompanyServiceImpl implements CompanyService {
 				List<CompanyMemberVO> jobPostingList = companyMapper.findJobPostingBytitle(map);
 				postListVO.setJobPostingList(jobPostingList);
 				postListVO.setPagingBean(pagingBean);
-				System.out.println("postListVO : "+postListVO);
 				return postListVO;
 	
 		}else if(searchType.equals("keyword")){
@@ -268,7 +267,6 @@ public class CompanyServiceImpl implements CompanyService {
 			List<CompanyMemberVO> jobPostingList = companyMapper.findJobPostingByKeyword(map);
 			postListVO.setJobPostingList(jobPostingList);
 			postListVO.setPagingBean(pagingBean);
-
 		}
 		return postListVO;
 	}
