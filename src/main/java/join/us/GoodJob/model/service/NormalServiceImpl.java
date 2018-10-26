@@ -179,7 +179,7 @@ public class NormalServiceImpl implements NormalService {
 			pagingBean = new PagingBean(totalPostCount);
 		}
 		pagingBean.setPostCountPerPage(postCountPerPage);
-		//normalMember list 이름만 찾음.
+		//normalMember list 아이디, 이름만 찾음.
 		List<NormalMemberVO> nmList= normalMapper.getNormalMemberId(pagingBean);
 		PostListVO postListVO = new PostListVO();
 		postListVO.setNmList(nmList);

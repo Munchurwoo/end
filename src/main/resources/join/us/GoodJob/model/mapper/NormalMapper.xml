@@ -221,14 +221,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 -->
 	 <select id="getAllMemberListCount" resultType="int">
 		select count(*) 
-		from member m , normal_member nm, portfolio p
-		where m.id = nm.normal_id and nm.normal_id=p.normal_id
+		from portfolio 
 	 </select>
 	 
 	 <select id="getNormalMemberId" resultType="normalMemberVO" parameterType="pagingBean">
-	 	select normal_id 
+	 	select normal_id, name
 	 	from (
-	 	select row_number() over(order by nm.normal_id) as rnum, nm.normal_id
+	 	select row_number() over(order by nm.normal_id) as rnum, nm.normal_id, m.name
 	 	from member m , normal_member nm , portfolio p
 	 	where m.id = nm.normal_id and nm.normal_id = p.normal_id
 	 	)where rnum between #{startRowNumber} and #{endRowNumber}
