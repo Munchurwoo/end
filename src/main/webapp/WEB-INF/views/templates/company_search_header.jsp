@@ -105,7 +105,7 @@
 </div>
 <div class="container"
 	style="padding-left: 120px; padding-right: 120px;">
-	<form action="user-portfolioSearchList.do" method="get"
+	<form action="user-company_detail_search_list.do" method="get"
 		id="master">
 		<div class="panel panel-info">
 			<div class="panel-heading">
@@ -128,7 +128,7 @@
 				<c:forEach items="${requestScope.allAcaCatList}" var="acaCat"
 					varStatus="i">
 					<input type="checkbox" id="acaCatNumList" name="acaCatNumList"
-						value="${acaCat.academicNum}" required="required">${acaCat.academicName}&nbsp;
+						value="${acaCat.academicNum}" >${acaCat.academicName}&nbsp;
 	</c:forEach>
 			</div>
 		</div>

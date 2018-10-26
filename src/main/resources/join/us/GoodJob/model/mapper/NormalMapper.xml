@@ -168,40 +168,44 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		pl.loc_num
 		from portfolio_academic pa,
 		portfolio_dev pd, portfolio_emp pe,
-		portfolio_loc pl
+		portfolio_loc pl, member m
 		where pa.normal_id
 		= pd.normal_id
 		and pd.normal_id = pe.normal_id
 		and pe.normal_id = pl.normal_id
 		)
+		<where>
+			<if test="locCatNumList != null">
+	   		    loc_num in
+				<foreach item="locCatNumList" collection="locCatNumList" open="(" separator="," close=")">
+					#{locCatNumList}
+				</foreach>
+	 		 </if>
+	 		 
+			<if test="acaCatNumList != null">
+		   		 and academic_num in
+				<foreach item="acaCatNumList" collection="acaCatNumList" open="(" separator="," close=")">
+					#{acaCatNumList}
+				</foreach>
+	 		 </if>
+	
+			<if test="devCatNumList != null">
+		   		 and dev_cat_num in
+				<foreach item="devCatNumList" collection="devCatNumList" open="(" separator="," close=")">
+					#{devCatNumList}
+				</foreach>
+	 		 </if>
+	 		 
+	 		 <if test="empTypeCatNumList != null">
+	   		 and emp_type_num in
+			<foreach item="empTypeCatNumList" collection="empTypeCatNumList" open="(" separator="," close=")">
+				#{empTypeCatNumList}
+			</foreach>
+	 		 </if>
 		
-		<if test="locCatNumList != null">
-   		 where loc_num in
-		<foreach item="locCatNumList" collection="locCatNumList" open="(" separator="," close=")">
-			#{locCatNumList}
-		</foreach>
- 		 </if>
- 		 
-		<if test="acaCatNumList != null">
-   		 and academic_num in
-		<foreach item="acaCatNumList" collection="acaCatNumList" open="(" separator="," close=")">
-			#{acaCatNumList}
-		</foreach>
- 		 </if>
-
-		<if test="devCatNumList != null">
-   		 and dev_cat_num in
-		<foreach item="devCatNumList" collection="devCatNumList" open="(" separator="," close=")">
-			#{devCatNumList}
-		</foreach>
- 		 </if>
- 		 
- 		 <if test="empTypeCatNumList != null">
-   		 and emp_type_num in
-		<foreach item="empTypeCatNumList" collection="empTypeCatNumList" open="(" separator="," close=")">
-			#{empTypeCatNumList}
-		</foreach>
- 		 </if>
+		</where>
+		
+		
 
 	</select>
 	
@@ -225,9 +229,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 </select>
 	 
 	 <select id="getNormalMemberId" resultType="normalMemberVO" parameterType="pagingBean">
-	 	select normal_id
+	 	select normal_id, name
 	 	from (
-	 	select row_number() over(order by nm.normal_id) as rnum, nm.normal_id
+	 	select row_number() over(order by nm.normal_id) as rnum, nm.normal_id, m.name
 	 	from member m , normal_member nm , portfolio p
 	 	where m.id = nm.normal_id and nm.normal_id = p.normal_id
 	 	)where rnum between #{startRowNumber} and #{endRowNumber}

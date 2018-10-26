@@ -41,7 +41,7 @@
 													});//ajax 			
 										});//change
 
-						$("#SearchBtn").click(
+						/* $("#SearchBtn").click(
 								function() {
 									$("input[name=locCatNumList]:checked")
 											.each(function() {
@@ -69,7 +69,7 @@
 												console.log(test);
 											});
 									$("#portfolioSearchList").submit();
-								});
+								}); */
 
 					});
 	//ready
@@ -79,7 +79,7 @@
 
 <div class="cta-text">
 	<h2>
-		<span>인재 상세</span> 검색하기
+		<span>GoodJob</span> 인재 상세 검색
 	</h2>
 </div>
 <div class="container"
@@ -107,7 +107,7 @@
 				<c:forEach items="${requestScope.acaCatList}" var="acaCat"
 					varStatus="i">
 					<input type="checkbox" id="acaCatNumList" name="acaCatNumList"
-						value="${acaCat.academicNum}" required="required">${acaCat.academicName}&nbsp;
+						value="${acaCat.academicNum}" >${acaCat.academicName}&nbsp;
 	</c:forEach>
 			</div>
 		</div>
@@ -150,30 +150,22 @@
 
 			</div>
 		</div>
-
+		<span id="enter"></span>
+		<div class="cta-text">
+			<button type="reset" class="btn btn-default">초기화</button>
+	
+			<button type="submit" id="SearchBtn" class="btn btn-default">상세
+				검색</button>
+			<button type="reset" onclick="location.href='home.do'"
+				class="btn btn-default">홈으로</button>
+		</div>
 
 	</form>
 
-	<span id="enter"></span>
-	<div class="cta-text">
-		<button type="reset" class="btn btn-default">초기화</button>
 
-		<button type="submit" id="SearchBtn" class="btn btn-default">상세
-			검색</button>
-		<button type="reset" onclick="location.href='home.do'"
-			class="btn btn-default">홈으로</button>
-	</div>
 </div>
 
 <!-- 구분선 -->
-
-
-<%-- <c:forEach items="${list }" var="list" varStatus="status">
-	${list.name}
-	${devCatList[status.index].devCatName}
-	${povo[status.index].content}<br>
-</c:forEach> --%>
-
 <h4 class="heading">
 	<div class="cta-text">
 		<h2>
@@ -184,26 +176,32 @@
 
 <c:choose>
 	<c:when test="${empty normalId}">
-		없습니다
+		<span align="center">		
+			<h3>검색 결과가 없습니다.</h3>
+		</span>
 	</c:when>
 	
 	<c:otherwise>
 		<c:forEach items="${normalId}" var="normalId" varStatus="status">
 			<div class="media">
-				<a class="pull-left" href="#"> <img class="media-object"
+				<a class="pull-left" href="normalDetailPortfolio.do?normalId=${normalId}"> <img class="media-object"
 					src="${pageContext.request.contextPath}/
 											resources/upload/memberPicture/${povo[status.index].picturePath}"
 					width="130px" height="130px">
 				</a>
 				<div class="media-body">
-					<h4 class="media-heading">${normalId}</h4>
+					<h4 class="media-heading"><a href="normalDetailPortfolio.do?normalId=${normalId}">${normalId}</a></h4>
 					<h5>${povo[status.index].title}</h5>
-					<h6>${povo[status.index].content}</h6>
+					<h5>${povo[status.index].content}</h5>
 					<!-- Nested media object -->
-					<div class="media">
-						<a href="user-normalDetailPortfolioList.do?normalId=${normalId }">
-							개발분야 : ${devCatList[status.index].devCatName} -> 인재상세 보기 </a>
-					</div>
+					<!-- <div class="media"> -->
+					<h5>개발분야 : 	
+					<c:forEach items="${devCatList[status.index]}" var="devCat">
+						${devCat.devCatName}
+					</c:forEach>
+					</h5>
+						<a href="normalDetailPortfolio.do?normalId=${normalId }">
+							이력서 보기 </a>
 				</div>
 			</div>
 			<hr>

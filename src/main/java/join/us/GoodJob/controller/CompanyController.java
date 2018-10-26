@@ -280,7 +280,7 @@ public class CompanyController {
 	public String findJobPostingByCatNumList(Model model, CatNumParamVO catNumParamVO,String pageNum) {
 		// 아래 6줄은 상세조건 폼
 		model.addAttribute("allRecruitCatList", memberService.getRecruitCatVOList());
-		model.addAttribute("allDevCatList", memberService.getDevCatVOListByrcNum("101"));
+		//model.addAttribute("allDevCatList", memberService.getDevCatVOListByrcNum("101"));
 		model.addAttribute("allEmpTypeCatList", memberService.getEmpTypeCatVOList());
 		model.addAttribute("allLocCatList", memberService.getLocCatVOList());
 		model.addAttribute("allAcaCatList", memberService.getAcaCatVOList());
