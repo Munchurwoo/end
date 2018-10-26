@@ -6,23 +6,34 @@
 <c:set var="pb"  value="${postListVO.pagingBean}"></c:set>
 
 <%--Controller에서 받아온 기업정보리스트를 아래 div 구간에 정보들을 집어 넣고 반복문을 돌려보기  --%>	
-			<c:forEach items="${jobPostingList}" var="cmvo">
-			<div class="col-lg-3">
-				<div class="box">
-					<div class="box-gray aligncenter">
-						<h4>${cmvo.jobPostingVO.title}</h4>
-						<div class="icon">
-							<i class="fa fa-desktop fa-3x"></i>
+			<c:choose>
+				<c:when test="${empty jobPostingList}">
+					<span align="center">		
+						<h3>검색 결과가 없습니다.</h3>
+					</span>
+				</c:when>
+				<c:otherwise>
+					<c:forEach items="${jobPostingList}" var="cmvo">
+						<div class="col-lg-3">
+							<div class="box">
+								<div class="box-gray aligncenter">
+									<h4>${cmvo.jobPostingVO.title}</h4>
+									<div class="icon">
+										<i class="fa fa-desktop fa-3x"></i>
+									</div>
+									<p></p>
+			
+								</div>
+								<div class="box-bottom">
+									<a href="job_posting_detail.do?jobPostingNum=${cmvo.jobPostingVO.jobPostingNum}">채용정보 확인하기</a>
+								</div>
+							</div>
 						</div>
-						<p></p>
-
-					</div>
-					<div class="box-bottom">
-						<a href="job_posting_detail.do?jobPostingNum=${cmvo.jobPostingVO.jobPostingNum}">채용정보 확인하기</a>
-					</div>
-				</div>
-			</div>
-			</c:forEach>
+					</c:forEach>
+				</c:otherwise>				
+			</c:choose>
+			
+		
 			<!-- 이부분 class 속성 col-lg-12 주셔야 리스트가 망가지지 않습니다. 10-23 cherwoo -->
 			<div class="col-lg-12">
 			<!--  -->

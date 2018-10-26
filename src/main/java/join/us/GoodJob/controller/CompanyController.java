@@ -229,27 +229,27 @@ public class CompanyController {
 	}
 	/**
 	 * 기업로고사진 파일 등록 Ajax
-	 * @param uploadLogo
+	 * @param uploadPicture
 	 * @param request
 	 * @return
 	 */
 	@PostMapping("user-uploadCompanyLogo.do")
 	@ResponseBody
-	public String uploadCompanyLogo(MultipartFile uploadLogo,HttpServletRequest request) {
+	public String uploadCompanyLogo(MultipartFile uploadPicture,HttpServletRequest request) {
 		workspaceUploadPath="C:\\java-kosta\\framework-workspace2\\goodjob\\src\\main\\webapp\\resources\\upload\\companyLogo\\";
-		System.out.println("업로드경로"+workspaceUploadPath);
-		if(uploadLogo.isEmpty()==false) {
-			System.out.println("파일명"+uploadLogo.getOriginalFilename());
-			File uploadWorkspaceFile=new File(workspaceUploadPath+uploadLogo.getOriginalFilename());
+		System.out.println("업로드 경로:"+workspaceUploadPath);
+		if(uploadPicture.isEmpty()==false) {
+			System.out.println("파일명:"+uploadPicture.getOriginalFilename());
+			File uploadWorkspaceFile=new File(workspaceUploadPath+uploadPicture.getOriginalFilename());
 			try {
-				uploadLogo.transferTo(uploadWorkspaceFile);
+				uploadPicture.transferTo(uploadWorkspaceFile);
 				System.out.println("성공");
 			} catch (IllegalStateException | IOException e) {
 				
 				e.printStackTrace();
 			}
 		}
-		return uploadLogo.getOriginalFilename();
+		return uploadPicture.getOriginalFilename();
 	}
 	/**
 	 * 채용정보 전체보기
@@ -280,7 +280,7 @@ public class CompanyController {
 	public String findJobPostingByCatNumList(Model model, CatNumParamVO catNumParamVO,String pageNum) {
 		// 아래 6줄은 상세조건 폼
 		model.addAttribute("allRecruitCatList", memberService.getRecruitCatVOList());
-		model.addAttribute("allDevCatList", memberService.getDevCatVOListByrcNum("101"));
+		//model.addAttribute("allDevCatList", memberService.getDevCatVOListByrcNum("101"));
 		model.addAttribute("allEmpTypeCatList", memberService.getEmpTypeCatVOList());
 		model.addAttribute("allLocCatList", memberService.getLocCatVOList());
 		model.addAttribute("allAcaCatList", memberService.getAcaCatVOList());
@@ -427,5 +427,20 @@ public class CompanyController {
 		model.addAttribute("jobPostingList2", jobPostingList2);
 		
 		return "company/keywordSearch_result.company_search_tiles";
+	}
+	
+	/**
+	 * 181026 MIRI 기업 회원가입, 수정시 폼에서 X버튼클릭시 사진 삭제
+	 * @param deletePicturename
+	 * @return
+	 */
+	@RequestMapping("user-companyPictureDelete.do")	
+	@ResponseBody
+	public String companyPictureDelete(String deletePicturename) {	
+		String workspaceDeletePath="C:/java-kosta/framework-workspace2/goodjob/src/main/webapp/resources/upload/companyLogo/"+deletePicturename;
+		File file = new File(workspaceDeletePath);
+		file.delete();
+		System.out.println(deletePicturename+"  사진 삭제 완료");
+		return "success";
 	}
 }

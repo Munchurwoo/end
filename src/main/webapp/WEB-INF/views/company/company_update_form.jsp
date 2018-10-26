@@ -4,6 +4,28 @@
 
 <!-- company_update_member_form -->
 
+<style type="text/css">
+.resume_photo{
+	position : relative;
+	width : 120px;
+	height : 160px;
+}
+
+#company-picture{
+	position : absolute;
+	width : 120px;
+	height : 160px;
+}
+
+#pictureDeleteBtn{	
+	position: absolute;
+	z-index: 1;
+	right:0;
+	top:0;
+	width:27px;
+}
+</style>
+
 <h3 align="center">회원 정보 수정</h3><br><br>
 
 <script type="text/javascript">
@@ -66,8 +88,9 @@
 				return false;
 			}
 		});//submit
-		$("#updateLogoBtn").change(function(){
-			var form = $("#companyUpdateForm")[0];	
+		
+		$("#pictureUploadBtn").change(function(){
+			/* var form = $("#companyUpdateForm")[0];	
 			var formData = new FormData(form);
 			$.ajax({
 				type:"post",
@@ -81,9 +104,56 @@
 					$("#company-logo").attr('src', "/GoodJob/resources/upload/companyLogo/"+path);
 					$("#aaa").append("<input type='hidden' name='picturePath' value='"+path+"'>");						
 				}
+			});//ajax */
+			var deletePictureName=$("#company-picture").attr('alt');
+			if( (!deletePictureName) == false){ //기존 사진 있으면 
+				pictureDelete(deletePictureName); //삭제
+			}			
+			//사진 업로드
+			var form = $("#companyUpdateForm")[0];
+			var formData = new FormData(form);
+			$.ajax({
+				type:"post",
+				url:"user-updateCompanyLogo.do",
+				data:formData,				
+				enctype: 'multipart/form-data',
+				contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+				processData: false,
+		        contentType: false,
+		        cache: false,
+				success:function(path){
+					$("#company-picture").attr('src', "/GoodJob/resources/upload/companyLogo/"+path);
+					$("#company-picture").attr('alt', path);
+					$("#pictureInputArea").html("<input type='hidden' name='picturePath' value='"+path+"'>");	
+				}
 			});//ajax
+			$("#pictureDeleteBtn").css('display', 'block');
 		});//change
+		
+		$("#pictureDeleteBtn").click(function() {
+			//사진파일 삭제
+			pictureDelete($("#company-picture").attr('alt'));			
+			//src변경
+			$("#company-picture").attr('src', "/GoodJob/resources/upload/etc/company_picture_add.png");
+			//alt변경
+			$("#company-picture").attr('alt', "");
+			//display변경
+			$("#pictureDeleteBtn").css('display', 'none');
+			//input value비움
+			$("#pictureUploadBtn").val("");		
+		});	//click
 	});//ready
+	
+	function pictureDelete(deletePicturename){
+		$.ajax({
+			type:"post",
+			url:"user-companyPictureDelete.do",
+			data:"deletePicturename="+deletePicturename,
+			success:function(result){
+				//alert("사진삭제완료");
+			}
+		});//ajax			
+	}
 </script>
 
 <form id="companyUpdateForm" action = "updateCompanyMember.do" method="post" enctype="multipart/form-data">
@@ -92,10 +162,13 @@
 	<span id="passwordView"> </span><br><br>
 	비밀번호 확인  <input type="password" id="checkPass" name="checkPass" required="required">
 	<span id="checkPassView"> </span><br><br>
-	기업로고
-	<input type="file" name="updateLogo" required="required" id="updateLogoBtn">
-	<img src="/GoodJob/resources/upload/companyLogo/${requestScope.cmvo.picturePath}" id="company-logo" height="100px" width="100px" ><br>
-	<span id="aaa"></span>
+	회사로고<br>
+	<div class="resume_photo" style="width:120px;">
+		<img id="company-picture"  src="${pageContext.request.contextPath}/resources/upload/etc/company_picture_add.png" border="0" width="120" height="160"  >
+		<img id="pictureDeleteBtn" src="${pageContext.request.contextPath}/resources/upload/etc/x-button.jpg" class="button"  style="display: none; ">
+	</div>
+	<span id="pictureInputArea"></span>	<br>
+	<input type="file" name="uploadPicture" id="pictureUploadBtn" required="required"><br>
 	이메일 주소  <input type="text" value="${requestScope.cmvo.email }" name="email" required="required"><br><br>
 	기업 명  <input type="text" value="${requestScope.cmvo.name }" name="name" readonly="readonly"><br><br>
 	주소  <input type="text" value="${requestScope.cmvo.address }" name="address" required="required"><br><br>

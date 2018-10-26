@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import join.us.GoodJob.model.service.CompanyService;
 import join.us.GoodJob.model.service.NormalService;
-import join.us.GoodJob.model.vo.NormalMemberVO;
 import join.us.GoodJob.model.vo.PortfolioVO;
 import join.us.GoodJob.model.vo.PostListVO;
 

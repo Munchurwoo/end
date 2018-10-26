@@ -94,7 +94,7 @@
 					success:function(path){
 						$("#normal-picture").attr('src', "/GoodJob/resources/upload/memberPicture/"+path);
 						$("#normal-picture").attr('alt', path);
-						$("#pictureInputArea").append("<input type='hidden' name='picturePath' value='"+path+"'>");	
+						$("#pictureInputArea").html("<input type='hidden' name='picturePath' value='"+path+"'>");	
 					}
 				});//ajax
 				$("#pictureDeleteBtn").css('display', 'block');
