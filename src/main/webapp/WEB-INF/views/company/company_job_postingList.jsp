@@ -18,9 +18,8 @@
 				<div class="box">
 					<div class="box-gray aligncenter">
 						<h4>${jobList.title}</h4>
-						<div class="icon">
-							<i class="fa fa-desktop fa-3x"></i>
-						</div>
+						<img src="/GoodJob/resources/upload/companyLogo/${requestScope.cmvo.picturePath}" height="100px" width="100px" >
+
 						<p></p>
 
 					</div>

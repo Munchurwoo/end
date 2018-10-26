@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<h3>${requestScope.cmvo.name}</h3>
 <div class="container">
+<h3><a href="companyJobPostingList.do?companyId=${requestScope.cmvo.companyId}">${requestScope.cmvo.name}</a></h3>
 	<table class="table table-bordered">
 		<thead>
 			<tr>		
@@ -53,7 +53,7 @@
 		</thead>
 	</table>
 	</div>
-	<h2><a href="companyJobPostingList.do?companyId=${requestScope.cmvo.companyId}">${requestScope.cmvo.name} 님의 구인공고 바로가기</a></h2>
+	
 	<br>
 	<h3>회사 위치</h3><br>
 

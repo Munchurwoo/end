@@ -10,6 +10,8 @@ import join.us.GoodJob.model.mapper.CompanyMapper;
 import join.us.GoodJob.model.mapper.ManagerMapper;
 import join.us.GoodJob.model.mapper.MemberMapper;
 import join.us.GoodJob.model.mapper.NormalMapper;
+import join.us.GoodJob.model.service.PagingBean;
+import join.us.GoodJob.model.vo.NormalMemberVO;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations={"file:src/main/webapp/WEB-INF/spring-model.xml"})
 public class YosepUnitTest {
@@ -64,9 +66,24 @@ public class YosepUnitTest {
 		for(MemberVO memberVO : companyMapper.getAllCompanyList(pagingBean)) {
 			System.out.println(memberVO);
 		}*/
-		String normalId="hsj";
+		/*String normalId="hsj";
 		//System.out.println(normalMapper.getPortfolioFileList(normalId));
-		System.out.println(normalMapper.normalDetailPortfolio(normalId));
+		System.out.println(normalMapper.normalDetailPortfolio(normalId));*/
+		String pageNum=null;
+		int postCountPerPage=0;
+		PagingBean pagingBean;
+		int totalPostCount = normalMapper.getAllMemberListCount();
+		System.out.println(totalPostCount);
+		if (pageNum != null) { // 페이지 번호 주면
+			pagingBean = new PagingBean(totalPostCount, Integer.parseInt(pageNum));
+		} else { // 페이지 번호 안주면 1페이지
+			pagingBean = new PagingBean(totalPostCount);
+		}
+		//System.out.println(normalMapper.getNormalMemberId(pagingBean));
+		pagingBean.setPostCountPerPage(postCountPerPage);
+		for(NormalMemberVO nm : normalMapper.getNormalMemberId(pagingBean)) {
+			System.out.println(nm);
+		}
 		
 		
 	}

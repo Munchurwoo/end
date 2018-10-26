@@ -140,12 +140,12 @@ $(document).ready(function(){
 			width="130px" height="130px">
 		</a>
 		<div class="media-body">
-			<h4 class="media-heading">${list.name}</h4>
+			<h4 class="media-heading"><span>${list.name}</span></h4>
 			<h5>${povo[status.index].title}</h5>
 			<h5>${povo[status.index].content}</h5>
 			<h5>개발분야 : 	
-			<c:forEach items="${devCatList}" var="devCatList">
-			${devCatList.devCatName}
+			<c:forEach items="${devCatList[status.index]}" var="devCat">
+			${devCat.devCatName}
 			</c:forEach>
 			</h5>
 				<a href="normalDetailPortfolio.do?normalId=${list.normalId }" style="font-weight: bold;">
